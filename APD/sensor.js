@@ -15,6 +15,13 @@ var adcEnv = 1;                  //ADC Channel 1
 var adcLight = 2;                  //ADC Channel 1
 
 
+    gpio.wiringPiSetup();
+    gpio.pinMode(ultraTRIG, gpio.OUTPUT);
+    gpio.pinMode(ultraECHO, gpio.INPUT);
+    gpio.pinMode(shutdownBtn, gpio.INPUT);
+
+
+
 //---------------------------------측정함수----------------------------------------------
 function getTemp() {
     temp.read(22, DHT22, function (err, temperature, humidity) {

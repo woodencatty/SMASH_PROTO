@@ -18,7 +18,6 @@ var adcLight = 2;                  //ADC Channel 1
     gpio.wiringPiSetup();
     gpio.pinMode(ultraTRIG, gpio.OUTPUT);
     gpio.pinMode(ultraECHO, gpio.INPUT);
-    gpio.pinMode(shutdownBtn, gpio.INPUT);
 
 
 

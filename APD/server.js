@@ -5,11 +5,6 @@ const app = express();
 var sensor = require('./sensor.js')
 
 app.listen(60001, () => {
-    gpio.wiringPiSetup();
-    gpio.pinMode(ultraTRIG, gpio.OUTPUT);
-    gpio.pinMode(ultraECHO, gpio.INPUT);
-    gpio.pinMode(shutdownBtn, gpio.INPUT);
-
     console.log("device enable");
 });
 

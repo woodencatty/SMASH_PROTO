@@ -15,8 +15,6 @@ var adcEnv = 1;                  //ADC Channel 1
 var adcLight = 2;                  //ADC Channel 1
 
 
-
-
 //---------------------------------측정함수----------------------------------------------
 function measureTmp() {
     temp.read(22, DHT22, function (err, temperature, humidity) {
@@ -60,41 +58,23 @@ function measureDist() {
     }
 }
 
-function measureSound() {
-    adc.readRawValue(adcSound, function (value) {
+function getAdcAudio() {
+    adc.readRawValue(adcAudio, function (value) {
         console.log("Sound:\t" + value);
         output_sound = value;
     });
 }
 
-function measureLight() {
+function getAdcEnv() {
+    adc.readRawValue(addEnv, function (value) {
+        console.log("Sound:\t" + value);
+        output_sound = value;
+    });
+}
+
+function getAdcLight() {
     adc.readRawValue(adcLight, function (value) {
         console.log("Light:\t" + value);
         output_light = value;
-    });
-}
-
-function measureFire() {
-    adc.readRawValue(adcFire, function (value) {
-        console.log("Fire:\t" + value);
-        output_fire = value;
-    });
-}
-
-function measureGas() {
-    adc.readRawValue(adcGas, function (value) {
-        console.log("Gas:\t" + value);
-        output_gas = value;
-    });
-}
-
-function measurejoystick() {
-    adc.readRawValue(adcJoyX, function (value) {
-        console.log("adcJoyX:\t" + value);
-        output_joyX = value;
-    });
-    adc.readRawValue(adcRain, function (value) {
-        console.log("adcRain:\t" + value);
-        output_joyY = value;
     });
 }

@@ -1,3 +1,4 @@
+const gpio = require('wiring-pi');
 const express = require('express');
 const app = express();
 

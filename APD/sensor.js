@@ -16,7 +16,7 @@ var adcLight = 2;                  //ADC Channel 1
 
 
 //---------------------------------측정함수----------------------------------------------
-function measureTmp() {
+function getTemp() {
     temp.read(22, DHT22, function (err, temperature, humidity) {
         if (!err) {
             console.log("temp :" + temperature.toFixed(1) + "C");
@@ -25,7 +25,7 @@ function measureTmp() {
     });
 }
 
-function measureHum() {
+function getHumi() {
     temp.read(22, DHT22, function (err, temperature, humidity) {
         if (!err) {
             console.log("humidity : " + humidity.toFixed(1) + "%");
@@ -34,7 +34,7 @@ function measureHum() {
     });
 }
 
-function measureDist() {
+function getDist() {
     var distance = 0;
     var pulse = 0;
     while (1) {
@@ -50,24 +50,22 @@ function measureDist() {
         var travelTime = microt.now();
         distance = (travelTime - startTime) / 58;
         output_dist = distance;
-        if (distance < 90) {
-            console.log("Someone's approach");
-            beep(1000);
-        }
+        console.log("Distance:\t" + distance);
+        
         sleep.msleep(300);
     }
 }
 
 function getAdcAudio() {
     adc.readRawValue(adcAudio, function (value) {
-        console.log("Sound:\t" + value);
+        console.log("Audio :\t" + value);
         output_sound = value;
     });
 }
 
 function getAdcEnv() {
     adc.readRawValue(addEnv, function (value) {
-        console.log("Sound:\t" + value);
+        console.log("Env:\t" + value);
         output_sound = value;
     });
 }

@@ -22,7 +22,7 @@ util.inherits(EchoCharacteristic, BlenoCharacteristic);
 EchoCharacteristic.prototype.onReadRequest = function(offset, callback) {
  this._value = 100;
 
-  console.log('EchoCharacteristic - onReadRequest: value = ' + this._value.toString('utf8'));
+  console.log('EchoCharacteristic - onReadRequest: value = ' + this._value);
 
   callback(this.RESULT_SUCCESS, this._value);
 };

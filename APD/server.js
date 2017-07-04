@@ -9,7 +9,7 @@ app.listen(60001, () => {
     console.log("device enable");
 });
 
-app.get('/', (req, res) => {
+app.get('/', (req, res) => 
 });
 
 app.get('/audio', (req, res) => {
@@ -22,7 +22,7 @@ app.get('/env', (req, res) => {
 });
 
 app.get('/temp', (req, res) => {
-  res.send(sensor.getTemp());
+  res.send(123);
 
 });
 

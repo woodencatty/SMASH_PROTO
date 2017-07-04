@@ -1,5 +1,5 @@
-var sensor = require('/home/pi/SMASH_Project/source/test/SMASH_PROTO/APD/sensor.js')
+var sensor = require('./sensor.js')
 
 setTimeout(function(){
-  sensor.getTemp();
-}, 10000);
+  sensor.getPower();
+}, 2000);

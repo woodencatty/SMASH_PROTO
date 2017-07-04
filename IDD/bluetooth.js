@@ -13,7 +13,7 @@ console.log('bleno');
 
 var StaticReadOnlyCharacteristic = function() {
   StaticReadOnlyCharacteristic.super_.call(this, {
-    uuid: '001101',
+    uuid: '00111',
     properties: ['read'],
     value: new Buffer('MyAccelvalue'),
     descriptors: [

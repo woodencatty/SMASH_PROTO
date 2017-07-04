@@ -22,7 +22,8 @@ noble.on('discover', function(peripheral) {
 
 if(peripheral.advertisement.localName == 'IDD'){
     console.log(peripheral.advertisement.localName);
-   peripheral.discoverServices();
+    peripheral.connect();
+   //peripheral.discoverServices();
 
 
 }

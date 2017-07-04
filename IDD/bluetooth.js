@@ -11,20 +11,28 @@ var BlenoDescriptor = bleno.Descriptor;
 
 console.log('bleno');
 
-var StaticReadOnlyCharacteristic = function() {
-  StaticReadOnlyCharacteristic.super_.call(this, {
-    uuid: '001101',
-    properties: ['read'],
-    value: new Buffer('MyAccelvalue'),
-    descriptors: [
-      new BlenoDescriptor({
-        uuid: '2901',
-        value: 'Specify Patient'
-      })
-    ]
+var DynamicReadOnlyCharacteristic = function() {
+  DynamicReadOnlyCharacteristic.super_.call(this, {
+    uuid: 'fffffffffffffffffffffffffffffff2',
+    properties: ['read']
   });
 };
-util.inherits(StaticReadOnlyCharacteristic, BlenoCharacteristic);
+
+util.inherits(DynamicReadOnlyCharacteristic, BlenoCharacteristic);
+
+DynamicReadOnlyCharacteristic.prototype.onReadRequest = function(offset, callback) {
+  var result = this.RESULT_SUCCESS;
+  var data = new Buffer('dynamic value');
+
+  if (offset > data.length) {
+    result = this.RESULT_INVALID_OFFSET;
+    data = null;
+  } else {
+    data = data.slice(offset);
+  }
+
+  callback(result, data);
+};
 
 function SampleService() {
   SampleService.super_.call(this, {

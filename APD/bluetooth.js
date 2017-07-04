@@ -1,8 +1,13 @@
+//APD
+
 var noble = require('noble');
 
 console.log('noble');
 
 noble.on('stateChange', function(state) {
+console.log('..is on');
+
+
   console.log('on -> stateChange: ' + state);
 
   if (state === 'poweredOn') {
@@ -11,6 +16,7 @@ noble.on('stateChange', function(state) {
     noble.stopScanning();
   }
 });
+
 
 noble.on('scanStart', function() {
   console.log('on -> scanStart');
@@ -21,7 +27,6 @@ noble.on('scanStop', function() {
 });
 
 
-
 noble.on('discover', function(peripheral) {
   console.log('on -> discover: ' + peripheral);
 
@@ -29,7 +34,7 @@ noble.on('discover', function(peripheral) {
 
   peripheral.on('connect', function() {
     console.log('on -> connect');
-    this.discoverServices();
+    this.updateRssi();
   });
 
   peripheral.on('disconnect', function() {
@@ -38,7 +43,7 @@ noble.on('discover', function(peripheral) {
 
   peripheral.on('rssiUpdate', function(rssi) {
     console.log('on -> RSSI update ' + rssi);
-    
+    this.discoverServices();
   });
 
   peripheral.on('servicesDiscover', function(services) {
@@ -63,24 +68,6 @@ noble.on('discover', function(peripheral) {
         peripheral.disconnect();
       });
 
-      characteristics[characteristicIndex].on('write', function() {
-        console.log('on -> characteristic write ');
-
-        peripheral.disconnect();
-      });
-
-      characteristics[characteristicIndex].on('broadcast', function(state) {
-        console.log('on -> characteristic broadcast ' + state);
-
-        peripheral.disconnect();
-      });
-
-      characteristics[characteristicIndex].on('notify', function(state) {
-        console.log('on -> characteristic notify ' + state);
-
-        peripheral.disconnect();
-      });
-
       characteristics[characteristicIndex].on('descriptorsDiscover', function(descriptors) {
         console.log('on -> descriptors discover ' + descriptors);
 
@@ -91,12 +78,7 @@ noble.on('discover', function(peripheral) {
           console.log(data);
           peripheral.disconnect();
         });
-
-        descriptors[descriptorIndex].on('valueWrite', function() {
-          console.log('on -> descriptor value write ');
-          peripheral.disconnect();
-        });
-
+        
         descriptors[descriptorIndex].readValue();
         //descriptors[descriptorIndex].writeValue(new Buffer([0]));
       });

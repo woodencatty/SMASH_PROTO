@@ -3,6 +3,10 @@
 
 var bleno = require('bleno');
 
+var BlenoPrimaryService = bleno.PrimaryService;
+
+var EchoCharacteristic = require('./characteristic.js');
+
 bleno.on('stateChange', function(state) {
   console.log('on -> stateChange: ' + state);
 

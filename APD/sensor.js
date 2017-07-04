@@ -7,7 +7,6 @@ const McpAdc = require('mcp-adc');
 var sensor = require('./sensor.js');
 
 const DHT22 = 22;                    //wPi GPIO 7
-const PIEZO = 17;                   //wPi GPIO 17
 const ultraTRIG = 17;               //wPi GPIO 22
 const ultraECHO = 27;               //wPi GPIO 27
 

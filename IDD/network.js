@@ -1,10 +1,14 @@
 //IDD
 var btSerial = new (require('bluetooth-serial-port')).BluetoothSerialPort();
 
+btSerial.inquire();
+console.log('finding..');
 btSerial.on('found', function(address, name) {
     console.log(address);
     console.log(name);
 	btSerial.findSerialPortChannel(address, function(channel) {
+        console.log('channel finding..');
+
 		btSerial.connect(address, channel, function() {
 			console.log('connected');
 
@@ -26,4 +30,3 @@ btSerial.on('found', function(address, name) {
 	});
 });
 
-btSerial.inquire();

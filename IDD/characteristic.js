@@ -2,6 +2,8 @@ var util = require('util');
 
 var bleno = require('bleno');
 
+var sensor = require('./sensor.js')
+
 var BlenoCharacteristic = bleno.Characteristic;
 
 var EchoCharacteristic = function() {
@@ -11,7 +13,7 @@ var EchoCharacteristic = function() {
     value: null
   });
 
-  this._value = new Buffer(0);
+  this._value = 100;
   this._updateValueCallback = null;
 };
 

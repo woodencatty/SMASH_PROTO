@@ -7,6 +7,7 @@ var BlenoPrimaryService = bleno.PrimaryService;
 
 var EchoCharacteristic = require('./characteristic.js');
 
+
 bleno.on('stateChange', function(state) {
   console.log('on -> stateChange: ' + state);
 
@@ -19,8 +20,6 @@ bleno.on('stateChange', function(state) {
 
 bleno.on('advertisingStart', function(error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
-
-
 
   if (!error) {
     bleno.setServices([

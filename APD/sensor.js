@@ -79,5 +79,8 @@ module.exports.getAdcLight = function() {
     });
 };
 
-    
+sensor.getTemp();
 sensor.getHumi();
+sensor.getAdcAudio();
+sensor.getAdcEnv();
+sensor.getAdcLight();

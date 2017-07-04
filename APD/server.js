@@ -4,9 +4,7 @@ const gpio = require('wiring-pi');
 const express = require('express');
 const app = express();
 
-  sensor.getTemp();
 
-  
 app.listen(60001, () => {
     console.log("device enable");
 });

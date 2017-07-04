@@ -21,6 +21,7 @@ noble.on('discover', function(peripheral) {
 */
 
 if(peripheral.advertisement.localName == 'IDD'){
+       noble.stopScanning();
     console.log(peripheral.advertisement.localName);
     peripheral.connect();
     setTimeout(function(){

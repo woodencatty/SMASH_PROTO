@@ -1,8 +1,9 @@
+var sensor = require('./sensor.js')
+
 const gpio = require('wiring-pi');
 const express = require('express');
 const app = express();
 
-var sensor = require('./sensor.js')
 
 app.listen(60001, () => {
     console.log("device enable");
@@ -21,7 +22,10 @@ app.get('/env', (req, res) => {
 });
 
 app.get('/temp', (req, res) => {
- sensor.getTemp();
+  Temp_callback = function(value){
+    console.log(value);
+  }
+  sensor.getTemp(Temp_callback);
 
 });
 

@@ -41,9 +41,17 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
   var buttonStatusCharacteristic = characteristics[0];
 
   buttonStatusCharacteristic.on('data', function (data, isNotification) {
-   
-      console.log(data);
-     
+    if (data.length === 1) {
+      // read one byte from the buffer
+      var result = data.readUInt8(0);
+      if (result) { // result !== 0
+        console.log('Button is pressed');
+      } else {
+        console.log('Button is released');
+      }
+    } else {
+      console.log('Data length is incorrect. Expecting 1 byte got', data.length);
+    }
   });
   buttonStatusCharacteristic.subscribe(function (err) {
     if (err) {

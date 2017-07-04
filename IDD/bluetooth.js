@@ -3,7 +3,7 @@
 var bleno = require('bleno');
 var util = require('util');
 
-var sensor = require('./sensor.js')
+
 
 var IDDCharacteristic = function () {
   IDDCharacteristic.super_.call(this, {
@@ -22,10 +22,10 @@ util.inherits(IDDCharacteristic, bleno.Characteristic);
 IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
   console.log('IDDCharacteristic subscribe');
 
-  var value1 = 100;
+  var value1 = 0;
     console.log('button ' + value1);
-    var data = new Buffer(10);
-    data = value1;
+    var data = new Buffer(1);
+    data[0] = value1;
     updateValueCallback(data);
 
 };

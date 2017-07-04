@@ -1,23 +1,29 @@
-const BluetoothSerialPort = require('bluetooth-serial-port');
+//IDD
 
-const rfcomm = new BluetoothSerialPort.BluetoothSerialPort();
 
-rfcomm.on('found', function (address, name) {
-	console.log('found device:', name, 'with address:', address);
+var bleno = require('bleno');
 
-    if(name == 'raspberrypi'){
-        rfcomm.connect(address, 10, function(){
-            console.log('connection success');
-        });
-        rfcomm.close();
-        console.log('connection close');
-    }
+bleno.on('stateChange', function(state) {
+  console.log('on -> stateChange: ' + state);
+
+  if (state === 'poweredOn') {
+    bleno.startAdvertising('echo', ['ec00']);
+  } else {
+    bleno.stopAdvertising();
+  }
 });
 
-rfcomm.on('finished', function () {
-  console.log('inquiry finished');
-});
+bleno.on('advertisingStart', function(error) {
+  console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
 
-console.log('start inquiry');
-rfcomm.inquire();
-console.log('should be displayed before the end of inquiry');
+  if (!error) {
+    bleno.setServices([
+      new BlenoPrimaryService({
+        uuid: 'ec00',
+        characteristics: [
+          new EchoCharacteristic()
+        ]
+      })
+    ]);
+  }
+});

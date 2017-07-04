@@ -11,31 +11,26 @@ var BlenoDescriptor = bleno.Descriptor;
 
 console.log('bleno');
 
-var EchoCharacteristic = function() {
-  EchoCharacteristic.super_.call(this, {
+var StaticReadOnlyCharacteristic = function() {
+  StaticReadOnlyCharacteristic.super_.call(this, {
     uuid: '001101',
     properties: ['read'],
-    value: null
+    value: new Buffer('MyAccelvalue'),
+    descriptors: [
+      new BlenoDescriptor({
+        uuid: '2901',
+        value: 'Specify Patient'
+      })
+    ]
   });
-
-  this._value = new Buffer(0);
-  this._updateValueCallback = null;
 };
-
-util.inherits(EchoCharacteristic, BlenoCharacteristic);
-
-EchoCharacteristic.prototype.onReadRequest = function(offset, callback) {
-   this._value = 100;
-  console.log('EchoCharacteristic - onReadRequest: value = ' + this._value.toString('utf8'));
-
-  callback(this.RESULT_SUCCESS, this._value);
-};
+util.inherits(StaticReadOnlyCharacteristic, BlenoCharacteristic);
 
 function SampleService() {
   SampleService.super_.call(this, {
     uuid: '0011',
     characteristics: [
-       new EchoCharacteristic()
+      new StaticReadOnlyCharacteristic()
     ]
   });
 }

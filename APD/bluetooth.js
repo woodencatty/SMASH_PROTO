@@ -68,7 +68,9 @@ noble.on('discover', function(peripheral) {
         peripheral.disconnect();
       });
 
-      characteristics[characteristicIndex].read();
+      characteristics[characteristicIndex].read(function(error, data){
+        console.log(data);
+      });
       //characteristics[characteristicIndex].write(new Buffer('hello'));
       //characteristics[characteristicIndex].broadcast(true);
       //characteristics[characteristicIndex].notify(true);

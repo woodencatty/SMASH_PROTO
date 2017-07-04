@@ -87,12 +87,6 @@ module.exports = {
 }
 };
 
-sensor.getTemp();
-sensor.getHumi();
-sensor.getDist();
-sensor.getadcAudio();
-sensor.getadc();
-sensor.getadcAudio();
 
 
 

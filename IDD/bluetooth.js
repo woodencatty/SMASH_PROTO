@@ -22,7 +22,7 @@ util.inherits(IDDCharacteristic, bleno.Characteristic);
 IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
   console.log('IDDCharacteristic subscribe');
 
-  var value1 = 0;
+  var value1 = 100;
     console.log('button ' + value1);
     var data = new Buffer(1);
     data[0] = value1;

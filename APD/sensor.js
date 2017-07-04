@@ -67,7 +67,7 @@ module.exports.getAdcAudio = function() {
 };
 
 module.exports.getAdcEnv= function() {
-   adc.readRawValue(addEnv, function (value) {
+   adc.readRawValue(adcEnv, function (value) {
         console.log("Env:\t" + value);
     });
 };

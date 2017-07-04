@@ -1,42 +1,67 @@
-// Connect to Thermometer Service 0xBBB0
-// and display notification for temperature changes
+// Attach to a button peripheral 0xFFE0 and 
+// subscribe for button status notifications
+// Log button presses to the console
 var noble = require('noble');
 
 noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {
-    noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
+    noble.startScanning(['ffe0']);
   } else {
     noble.stopScanning();
   }
 });
 
 noble.on('discover', function (peripheral) {
-  console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
+  console.log(peripheral);
   connectAndSetUp(peripheral);
-  // TODO should stop scanning otherwise we connect to ALL the thermometers
 });
 
 function connectAndSetUp(peripheral) {
 
   peripheral.connect(function (error) {
-    var serviceUUIDs = ['bbb0'];
-    var characteristicUUIDs = ['bbb1'];
+
+    var serviceUUIDs = ['ffe0'];
+    var characteristicUUIDs = ['ffe1']; // buttonStatus characteristic
 
     peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
   });
 
+  // attach disconnect handler
+  peripheral.on('disconnect', onDisconnect);
+}
+
+function onDisconnect() {
+  console.log('Peripheral disconnected!');
 }
 
 function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
 
-  var temperatureCharacteristic = characteristics[0];
+  if (error) {
+    console.log('Error discovering services and characteristics ' + error);
+    return;
+  }
 
-  temperatureCharacteristic.on('data', function (data, isNotification) {
-    var celsius = data.readFloatLE(0);
-    var fahrenheit = (celsius * 1.8 + 32.0).toFixed(1);
-    console.log('Temperature is', celsius.toFixed(1) + '°C', fahrenheit + '°F');
+  var buttonStatusCharacteristic = characteristics[0];
+
+  buttonStatusCharacteristic.on('data', function (data, isNotification) {
+    if (data.length === 1) {
+      // read one byte from the buffer
+      var result = data.readUInt8(0);
+      if (result) { // result !== 0
+        console.log('Button is pressed');
+      } else {
+        console.log('Button is released');
+      }
+    } else {
+      console.log('Data length is incorrect. Expecting 1 byte got', data.length);
+    }
+  });
+  buttonStatusCharacteristic.subscribe(function (err) {
+    if (err) {
+      console.log('Error subscribing to button notifications', err);
+    } else {
+      console.log('Subscribed for button notifications');
+    }
   });
 
-  temperatureCharacteristic.subscribe(); // ignore callback
-  temperatureCharacteristic.read();      // ignore callback
 }

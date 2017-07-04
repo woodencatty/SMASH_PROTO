@@ -1,61 +1,34 @@
+// Button Service 0xFFE0
 var bleno = require('bleno');
 var util = require('util');
 
-var Characteristic = bleno.Characteristic;
-var Descriptor = bleno.Descriptor;
-var PrimaryService = bleno.PrimaryService;
-
-var temperatureSensorId;
-var lastTemp;
-
-var TemperatureCharacteristic = function () {
-  TemperatureCharacteristic.super_.call(this, {
-    uuid: 'bbb1',
-    properties: ['read', 'notify'],
+var ButtonCharacteristic = function () {
+  ButtonCharacteristic.super_.call(this, {
+    uuid: 'ffe1',
+    properties: ['notify'],
     descriptors: [
-      new Descriptor({
+      new bleno.Descriptor({
         uuid: '2901',
-        value: 'Temperature'
-      })]
+        value: 'Button'
+      })
+    ]
   });
 };
-util.inherits(TemperatureCharacteristic, Characteristic);
+util.inherits(ButtonCharacteristic, bleno.Characteristic);
 
-TemperatureCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
-  console.log('TemperatureCharacteristic subscribe');
+ButtonCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
+  console.log('ButtonCharacteristic subscribe');
 
-  this.changeInterval = setInterval(function () {
-
-        result = 14.21;
-          var data = new Buffer(4);
-          data.writeFloatLE(result, 0);
-
-          console.log('TemperatureCharacteristic update value: ' + result);
-          updateValueCallback(data);
-          result++;
-  }.bind(this), 2000);
+    value = 1;
+    var data = new Buffer(1);
+    data[0] = value;
+    updateValueCallback(data);
 };
 
-TemperatureCharacteristic.prototype.onUnsubscribe = function () {
-  console.log('TemperatureCharacteristic unsubscribe');
-
-  if (this.changeInterval) {
-    clearInterval(this.changeInterval);
-    this.changeInterval = null;
-  }
-};
-
-TemperatureCharacteristic.prototype.onReadRequest = function (offset, callback) {
-   result = 14.21;
-    var data = new Buffer(4);
-    data.writeFloatLE(result, 0);
-    callback(Characteristic.RESULT_SUCCESS, data);
-};
-
-var thermometerService = new PrimaryService({
-  uuid: 'bbb0',
+var buttonService = new bleno.PrimaryService({
+  uuid: 'ffe0',
   characteristics: [
-    new TemperatureCharacteristic()
+    new ButtonCharacteristic()
   ]
 });
 
@@ -63,7 +36,7 @@ bleno.on('stateChange', function (state) {
   console.log('on -> stateChange: ' + state);
 
   if (state === 'poweredOn') {
-    bleno.startAdvertising('Thermometer', [thermometerService.uuid]);
+    bleno.startAdvertising('Button', [buttonService.uuid]);
   } else {
     bleno.stopAdvertising();
   }
@@ -73,6 +46,13 @@ bleno.on('advertisingStart', function (error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
 
   if (!error) {
-    bleno.setServices([thermometerService]);
+    bleno.setServices([buttonService]);
   }
 });
+
+// cleanup GPIO on exit
+function exit() {
+  button.unexport();
+  process.exit();
+}
+process.on('SIGINT', exit);

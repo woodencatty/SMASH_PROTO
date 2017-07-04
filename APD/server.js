@@ -22,7 +22,7 @@ app.get('/env', (req, res) => {
 });
 
 app.get('/temp', (req, res) => {
-  sensor.getTemp();
+  res.send(sensor.getTemp());
 
 });
 

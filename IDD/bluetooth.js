@@ -26,12 +26,16 @@ var StaticReadOnlyCharacteristic = function() {
 };
 util.inherits(StaticReadOnlyCharacteristic, BlenoCharacteristic);
 
-DynamicReadOnlyCharacteristic.prototype.onReadRequest = function(offset, callback) {
-  var result = this.RESULT_SUCCESS;
-  var data = new Buffer('dynamic value');
+function SampleService() {
+  SampleService.super_.call(this, {
+    uuid: '0011',
+    characteristics: [
+      new StaticReadOnlyCharacteristic()
+    ]
+  });
+}
+util.inherits(SampleService, BlenoPrimaryService);
 
-  callback(result, data);
-};
 bleno.on('stateChange', function(state) {
     console.log('...is on');
 
@@ -44,7 +48,6 @@ bleno.on('stateChange', function(state) {
   }
 });
 
-// Linux only events /////////////////
 bleno.on('accept', function(clientAddress) {
   console.log('on -> accept, client: ' + clientAddress);
 
@@ -53,15 +56,6 @@ bleno.on('accept', function(clientAddress) {
 
 bleno.on('disconnect', function(clientAddress) {
   console.log('on -> disconnect, client: ' + clientAddress);
-});
-
-bleno.on('rssiUpdate', function(rssi) {
-  console.log('on -> rssiUpdate: ' + rssi);
-});
-//////////////////////////////////////
-
-bleno.on('mtuChange', function(mtu) {
-  console.log('on -> mtuChange: ' + mtu);
 });
 
 bleno.on('advertisingStart', function(error) {

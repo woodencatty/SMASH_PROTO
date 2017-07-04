@@ -25,13 +25,9 @@ if(peripheral.advertisement.localName == 'IDD'){
     console.log(peripheral.advertisement.localName);
     peripheral.connect();
     setTimeout(function(){
- peripheral.discoverAllServicesAndCharacteristics(function(error, services, characteristics){
-
-console.log(services);
-
-console.log(characteristics);
-
-    })}, 2000);
+ peripheral.discoverServices();
+ 
+}, 2000);
 
 }
 

@@ -4,6 +4,9 @@ const temp = require('node-dht-sensor');
 const microt = require('microtime-nodejs');
 const McpAdc = require('mcp-adc');
 
+var sensor = require('./sensor.js')
+
+
 const DHT22 = 22;                    //wPi GPIO 7
 const PIEZO = 17;                   //wPi GPIO 17
 const ultraTRIG = 17;               //wPi GPIO 22
@@ -18,6 +21,8 @@ var adcLight = 2;                  //ADC Channel 1
     gpio.wiringPiSetup();
     gpio.pinMode(ultraTRIG, gpio.OUTPUT);
     gpio.pinMode(ultraECHO, gpio.INPUT);
+
+sensor.getTemp();
 
 module.exports.getTemp = function() {
     temp.read(22, DHT22, function (err, temperature, humidity) {

@@ -76,15 +76,3 @@ bleno.on('advertisingStart', function (error) {
     bleno.setServices([thermometerService]);
   }
 });
-
-// scan sensors and store our id in the global
-sensor.sensors(function (err, ids) {
-  if (err) {
-    console.log('Can not get sensor IDs', err);
-    process.exit(-1);
-  } else {
-    console.log(ids);
-    temperatureSensorId = ids[0];
-    console.log('Found temperatureSensorId ' + temperatureSensorId);
-  }
-});

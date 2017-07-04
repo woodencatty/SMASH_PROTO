@@ -13,7 +13,7 @@ console.log('bleno');
 
 var DynamicReadOnlyCharacteristic = function() {
   DynamicReadOnlyCharacteristic.super_.call(this, {
-    uuid: 'fffffffffffffffffffffffffffffff2',
+    uuid: '001101',
     properties: ['read']
   });
 };
@@ -38,9 +38,7 @@ function SampleService() {
   SampleService.super_.call(this, {
     uuid: '0011',
     characteristics: [
-      new StaticReadOnlyCharacteristic(),
-            new DynamicReadOnlyCharacteristic()
-
+      new DynamicReadOnlyCharacteristic()
     ]
   });
 }

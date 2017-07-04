@@ -2,6 +2,8 @@
 var btSerial = new (require('bluetooth-serial-port')).BluetoothSerialPort();
 
 btSerial.on('found', function(address, name) {
+    console.log(address);
+    console.log(name);
 	btSerial.findSerialPortChannel(address, function(channel) {
 		btSerial.connect(address, channel, function() {
 			console.log('connected');

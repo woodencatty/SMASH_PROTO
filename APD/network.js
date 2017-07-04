@@ -24,13 +24,9 @@ if(peripheral.advertisement.localName == 'IDD'){
        noble.stopScanning();
     console.log(peripheral.advertisement.localName);
     peripheral.connect();
-    setTimeout(function(){
- 
-var serviceUUIDs = ['bc00'];
-peripheral.discoverServices(serviceUUIDs, function(error, services){
-    console.log(services);
-});
 
+    
+    setTimeout(function(){
 
 }, 2000);
 

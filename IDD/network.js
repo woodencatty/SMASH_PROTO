@@ -33,3 +33,7 @@ bleno.on('advertisingStart', function(error) {
     ]);
   }
 });
+
+bleno.on('accept', function(clientAddress){
+    console.log('connected! with..' + clientAddress);
+});

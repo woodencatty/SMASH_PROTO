@@ -4,4 +4,8 @@ const gpio = require('wiring-pi');
 const express = require('express');
 const app = express();
 
-sensor.getTemp();
+
+
+setTimeout(function(){
+  sensor.getTemp();
+}, 2000);

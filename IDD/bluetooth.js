@@ -3,22 +3,24 @@
 var bleno = require('bleno');
 var util = require('util');
 
-var ButtonCharacteristic = function () {
-  ButtonCharacteristic.super_.call(this, {
+var sensor = require('./sensor.js')
+
+var IDDCharacteristic = function () {
+  IDDCharacteristic.super_.call(this, {
     uuid: 'ffe1',
     properties: ['notify'],
     descriptors: [
       new bleno.Descriptor({
         uuid: '2901',
-        value: 'Button'
+        value: 'IDD'
       })
     ]
   });
 };
-util.inherits(ButtonCharacteristic, bleno.Characteristic);
+util.inherits(IDDCharacteristic, bleno.Characteristic);
 
-ButtonCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
-  console.log('ButtonCharacteristic subscribe');
+IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
+  console.log('IDDCharacteristic subscribe');
 
   var value1 = 0;
     console.log('button ' + value1);
@@ -31,7 +33,7 @@ ButtonCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValue
 var buttonService = new bleno.PrimaryService({
   uuid: 'ffe0',
   characteristics: [
-    new ButtonCharacteristic()
+    new IDDCharacteristic()
   ]
 });
 

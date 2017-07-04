@@ -9,7 +9,7 @@ noble.on('stateChange', function (state) {
 });
 
 noble.on('discover', function (peripheral) {
-  console.log(peripheral);
+  //console.log(peripheral);
   connectAndSetUp(peripheral);
 });
 

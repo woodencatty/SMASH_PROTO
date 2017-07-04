@@ -11,13 +11,6 @@ app.listen(60001, () => {
 });
 
 app.get('/', (req, res) => {
-    
-sensor.getTemp();
-sensor.getHumi();
-sensor.getDist();
-sensor.getAdcAudio();
-sensor.getAdcEnv();
-sensor.getAdcLight();
 
 
 });

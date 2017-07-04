@@ -11,34 +11,31 @@ var BlenoDescriptor = bleno.Descriptor;
 
 console.log('bleno');
 
-var DynamicReadOnlyCharacteristic = function() {
-  DynamicReadOnlyCharacteristic.super_.call(this, {
+var EchoCharacteristic = function() {
+  EchoCharacteristic.super_.call(this, {
     uuid: '001101',
-    properties: ['read']
+    properties: ['read'],
+    value: null
   });
+
+  this._value = new Buffer(0);
+  this._updateValueCallback = null;
 };
 
-util.inherits(DynamicReadOnlyCharacteristic, BlenoCharacteristic);
+util.inherits(EchoCharacteristic, BlenoCharacteristic);
 
-DynamicReadOnlyCharacteristic.prototype.onReadRequest = function(offset, callback) {
-  var result = this.RESULT_SUCCESS;
-  var data = new Buffer('dynamic value');
+EchoCharacteristic.prototype.onReadRequest = function(offset, callback) {
+   this._value = 100;
+  console.log('EchoCharacteristic - onReadRequest: value = ' + this._value.toString('utf8'));
 
-  if (offset > data.length) {
-    result = this.RESULT_INVALID_OFFSET;
-    data = null;
-  } else {
-    data = data.slice(offset);
-  }
-
-  callback(result, data);
+  callback(this.RESULT_SUCCESS, this._value);
 };
 
 function SampleService() {
   SampleService.super_.call(this, {
     uuid: '0011',
     characteristics: [
-      new DynamicReadOnlyCharacteristic()
+       new EchoCharacteristic()
     ]
   });
 }

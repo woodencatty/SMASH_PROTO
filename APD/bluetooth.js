@@ -41,9 +41,9 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
     return;
   }
 
-  var buttonStatusCharacteristic = characteristics[0];
+  var IDDStatusCharacteristic = characteristics[0];
 
-  buttonStatusCharacteristic.on('data', function (data, isNotification) {
+  IDDStatusCharacteristic.on('data', function (data, isNotification) {
     if (data.length === 1) {
       // read one byte from the buffer
       var result = data.readUInt8(0);
@@ -56,7 +56,7 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
       console.log('Data length is incorrect. Expecting 1 byte got', data.length);
     }
   });
-  buttonStatusCharacteristic.subscribe(function (err) {
+  IDDStatusCharacteristic.subscribe(function (err) {
     if (err) {
       console.log('Error subscribing to button notifications', err);
     } else {

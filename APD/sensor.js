@@ -20,21 +20,18 @@ var adcLight = 2;                  //ADC Channel 1
     gpio.pinMode(ultraTRIG, gpio.OUTPUT);
     gpio.pinMode(ultraECHO, gpio.INPUT);
 
-module.exports = {
-    getTemp: function() {
+module.exports = { 
+     getTemp: function() {
     temp.read(22, DHT22, function (err, temperature, humidity) {
         if (!err) {
-            console.log("temp :" + temperature.toFixed(1) + "C");
-            output_temp = temperature.toFixed(1);
+            console.log("temperature : " + temperature.toFixed(1) + "C");
         }
     });
-    },
-
+},
   getHumi: function() {
     temp.read(22, DHT22, function (err, temperature, humidity) {
         if (!err) {
             console.log("humidity : " + humidity.toFixed(1) + "%");
-            output_humi = humidity.toFixed(1);
         }
     });
 },
@@ -63,21 +60,18 @@ module.exports = {
     getAdcAudio:function () {
     adc.readRawValue(adcAudio, function (value) {
         console.log("Audio :\t" + value);
-        output_sound = value;
     });
 },
 
     getAdcEnv: function () {
     adc.readRawValue(addEnv, function (value) {
         console.log("Env:\t" + value);
-        output_sound = value;
     });
 },
 
     getAdcLight: function () {
     adc.readRawValue(adcLight, function (value) {
         console.log("Light:\t" + value);
-        output_light = value;
     });
 }
 };

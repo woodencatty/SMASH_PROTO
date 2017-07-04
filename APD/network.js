@@ -7,6 +7,7 @@ var peripheralIdOrAddress = process.argv[2];
 noble.on('stateChange', function(state) {
   if (state === 'poweredOn') {
     noble.startScanning();
+    console.log('searching');
   } else {
     noble.stopScanning();
   }

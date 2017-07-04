@@ -14,11 +14,8 @@ noble.on('stateChange', function (state) {
 noble.on('discover', function (peripheral) {
  //console.log(peripheral);
   connectAndSetUp(peripheral);
-});
 
-function connectAndSetUp(peripheral) {
-
-  peripheral.connect(function (error) {
+peripheral.connect(function (error) {
 
     var serviceUUIDs = ['ffe0'];
     var characteristicUUIDs = ['ffe1']; // buttonStatus characteristic
@@ -26,13 +23,8 @@ function connectAndSetUp(peripheral) {
     peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
   });
 
-  // attach disconnect handler
-  peripheral.on('disconnect', onDisconnect);
-}
 
-function onDisconnect() {
-  console.log('Peripheral disconnected!');
-}
+});
 
 function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
 
@@ -55,6 +47,7 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
     } else {
       console.log('Data length is incorrect. Expecting 1 byte got', data.length);
     }
+    peripheral.disconnect();
   });
   IDDStatusCharacteristic.subscribe(function (err) {
     if (err) {

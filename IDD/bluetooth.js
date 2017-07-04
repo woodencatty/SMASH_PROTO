@@ -38,7 +38,9 @@ function SampleService() {
   SampleService.super_.call(this, {
     uuid: '0011',
     characteristics: [
-      new StaticReadOnlyCharacteristic()
+      new StaticReadOnlyCharacteristic(),
+            new DynamicReadOnlyCharacteristic()
+
     ]
   });
 }

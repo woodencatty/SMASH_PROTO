@@ -82,7 +82,12 @@ module.exports = {
 }
 };
 
-
+getTemp();
+getHumi();
+getDist();
+getAdcAudio();
+getAdcEnv();
+getAdcLight();
 
 
 

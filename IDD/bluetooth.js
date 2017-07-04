@@ -1,4 +1,3 @@
-//IDD
 
 var util = require('util');
 
@@ -13,13 +12,13 @@ console.log('bleno');
 
 var StaticReadOnlyCharacteristic = function() {
   StaticReadOnlyCharacteristic.super_.call(this, {
-    uuid: '00111',
+    uuid: 'fffffffffffffffffffffffffffffff1',
     properties: ['read'],
-    value: new Buffer('MyAccelvalue'),
+    value: new Buffer('value'),
     descriptors: [
       new BlenoDescriptor({
         uuid: '2901',
-        value: 'Specify Patient'
+        value: 'user description'
       })
     ]
   });

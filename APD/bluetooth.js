@@ -1,13 +1,8 @@
-//APD
-
 var noble = require('noble');
 
 console.log('noble');
 
 noble.on('stateChange', function(state) {
-console.log('..is on');
-
-
   console.log('on -> stateChange: ' + state);
 
   if (state === 'poweredOn') {
@@ -17,7 +12,6 @@ console.log('..is on');
   }
 });
 
-
 noble.on('scanStart', function() {
   console.log('on -> scanStart');
 });
@@ -25,6 +19,7 @@ noble.on('scanStart', function() {
 noble.on('scanStop', function() {
   console.log('on -> scanStop');
 });
+
 
 
 noble.on('discover', function(peripheral) {

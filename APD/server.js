@@ -1,4 +1,4 @@
-var sensor = require('./sensor.js')
+var sensor = require('../APD/sensor.js')
 
 setTimeout(function(){
   sensor.getTemp();

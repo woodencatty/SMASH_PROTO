@@ -20,14 +20,17 @@ var adcLight = 2;                  //ADC Channel 1
     gpio.pinMode(ultraTRIG, gpio.OUTPUT);
     gpio.pinMode(ultraECHO, gpio.INPUT);
 
-module.exports = { 
-     getTemp: function() {
+module.exports.getTemp = function() {
     temp.read(22, DHT22, function (err, temperature, humidity) {
         if (!err) {
-            console.log("temperature : " + temperature.toFixed(1) + "C");
+            console.log("temp :" + temperature.toFixed(1) + "C");
+            output_temp = temperature.toFixed(1);
         }
     });
-},
+};
+
+
+module.exports = { 
   getHumi: function() {
     temp.read(22, DHT22, function (err, temperature, humidity) {
         if (!err) {
@@ -78,8 +81,3 @@ module.exports = {
 
     
 sensor.getTemp();
-sensor.getHumi();
-sensor.getDist();
-sensor.getAdcAudio();
-sensor.getAdcEnv();
-sensor.getAdcLight();

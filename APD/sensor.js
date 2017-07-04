@@ -24,7 +24,7 @@ var adcLight = 2;                  //ADC Channel 1
 module.exports.getTemp = function() {
     console.log('get');
     temp.read(22, DHT22, function (err, temperature, humidity) {
-        if (!err) {}
+        if (!err) {
             console.log("temp :" + temperature.toFixed(1) + "C");
             output_temp = temperature.toFixed(1);
         }

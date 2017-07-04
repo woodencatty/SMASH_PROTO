@@ -15,9 +15,9 @@ app.get('/audio', (req, res) => {
   sensor.getAdcAudio();
 });
 
+
 app.get('/env', (req, res) => {
  sensor.getAdcEnv();
-
 });
 
 app.get('/temp', (req, res) => {

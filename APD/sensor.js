@@ -28,6 +28,8 @@ module.exports.getTemp = function() {
         }
     });
 };
+
+
 module.exports = {
   getHumi: function() {
     temp.read(22, DHT22, function (err, temperature, humidity) {

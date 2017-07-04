@@ -20,7 +20,7 @@ var EchoCharacteristic = function() {
 util.inherits(EchoCharacteristic, BlenoCharacteristic);
 
 EchoCharacteristic.prototype.onReadRequest = function(offset, callback) {
- this._value = sensor.getAccel();
+ this._value = 100;
 
   console.log('EchoCharacteristic - onReadRequest: value = ' + this._value);
 

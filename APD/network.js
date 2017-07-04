@@ -23,14 +23,14 @@ noble.on('discover', function(peripheral) {
 if(peripheral.advertisement.localName == 'IDD'){
     console.log(peripheral.advertisement.localName);
     peripheral.connect();
-   peripheral.discoverAllServicesAndCharacteristics(function(error, services, characteristics){
+    setTimeout(function(){
+ peripheral.discoverAllServicesAndCharacteristics(function(error, services, characteristics){
 
 console.log(services);
 
 console.log(characteristics);
 
-   });
-
+    })}, 2000);
 
 }
 

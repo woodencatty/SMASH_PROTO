@@ -10,7 +10,7 @@ noble.on('stateChange', function(state) {
 });
 
 noble.on('discover', function(peripheral) {
-  if (peripheral.id == 'test') {
+
     noble.stopScanning();
 
     console.log('peripheral with ID ' + peripheral.id + ' found');
@@ -45,7 +45,7 @@ noble.on('discover', function(peripheral) {
     console.log();
 
     explore(peripheral);
-  }
+  
 });
 
 function explore(peripheral) {

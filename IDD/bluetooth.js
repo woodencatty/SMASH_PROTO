@@ -26,16 +26,12 @@ var StaticReadOnlyCharacteristic = function() {
 };
 util.inherits(StaticReadOnlyCharacteristic, BlenoCharacteristic);
 
-function SampleService() {
-  SampleService.super_.call(this, {
-    uuid: '0011',
-    characteristics: [
-      new StaticReadOnlyCharacteristic()
-    ]
-  });
-}
-util.inherits(SampleService, BlenoPrimaryService);
+DynamicReadOnlyCharacteristic.prototype.onReadRequest = function(offset, callback) {
+  var result = this.RESULT_SUCCESS;
+  var data = new Buffer('dynamic value');
 
+  callback(result, data);
+};
 bleno.on('stateChange', function(state) {
     console.log('...is on');
 

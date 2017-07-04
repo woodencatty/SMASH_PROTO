@@ -2,63 +2,37 @@ var noble = require('noble');
 
 noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {
-    noble.startScanning(['ffe0']);
+    noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
   } else {
     noble.stopScanning();
   }
 });
 
 noble.on('discover', function (peripheral) {
-  //console.log(peripheral);
+  console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
   connectAndSetUp(peripheral);
+  // TODO should stop scanning otherwise we connect to ALL the thermometers
 });
 
 function connectAndSetUp(peripheral) {
 
   peripheral.connect(function (error) {
-
-    var serviceUUIDs = ['ffe0'];
-    var characteristicUUIDs = ['ffe1']; // buttonStatus characteristic
+    var serviceUUIDs = ['bbb0'];
+    var characteristicUUIDs = ['bbb1'];
 
     peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
   });
 
-  // attach disconnect handler
-  peripheral.on('disconnect', onDisconnect);
-}
-
-function onDisconnect() {
-  console.log('Peripheral disconnected!');
 }
 
 function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
 
-  if (error) {
-    console.log('Error discovering services and characteristics ' + error);
-    return;
-  }
+  var temperatureCharacteristic = characteristics[0];
 
-  var buttonStatusCharacteristic = characteristics[0];
-
-  buttonStatusCharacteristic.on('data', function (data, isNotification) {
-    if (data.length === 1) {
-      // read one byte from the buffer
-      var result = data.readUInt8(0);
-      if (result) { // result !== 0
-        console.log('Button is pressed');
-      } else {
-        console.log('Button is released');
-      }
-    } else {
-      console.log('Data length is incorrect. Expecting 1 byte got', data.length);
-    }
-  });
-  buttonStatusCharacteristic.subscribe(function (err) {
-    if (err) {
-      console.log('Error subscribing to button notifications', err);
-    } else {
-      console.log('Subscribed for button notifications');
-    }
+  temperatureCharacteristic.on('data', function (data, isNotification) {
+    console.log(data);
   });
 
+  temperatureCharacteristic.subscribe(); // ignore callback
+  temperatureCharacteristic.read();      // ignore callback
 }

@@ -3,37 +3,48 @@
 var bleno = require('bleno');
 var util = require('util');
 
+var Characteristic = bleno.Characteristic;
+var Descriptor = bleno.Descriptor;
+var PrimaryService = bleno.PrimaryService;
 
+var temperatureSensorId;
+var lastTemp;
 
-var IDDCharacteristic = function () {
-  IDDCharacteristic.super_.call(this, {
-    uuid: 'ffe1',
-    properties: ['notify'],
+var TemperatureCharacteristic = function () {
+  TemperatureCharacteristic.super_.call(this, {
+    uuid: 'bbb1',
+    properties: ['read', 'notify'],
     descriptors: [
-      new bleno.Descriptor({
+      new Descriptor({
         uuid: '2901',
-        value: 'IDD'
-      })
-    ]
+        value: 'Temperature'
+      })]
   });
 };
-util.inherits(IDDCharacteristic, bleno.Characteristic);
+util.inherits(TemperatureCharacteristic, Characteristic);
 
-IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
-  console.log('IDDCharacteristic subscribe');
-
-  var value1 = 0;
-    console.log('button ' + value1);
-    var data = new Buffer(1);
-    data[0] = value1;
-    updateValueCallback(data);
+TemperatureCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
+  console.log('TemperatureCharacteristic subscribe');
 
 };
 
-var buttonService = new bleno.PrimaryService({
-  uuid: 'ffe0',
+TemperatureCharacteristic.prototype.onUnsubscribe = function () {
+  console.log('TemperatureCharacteristic unsubscribe');
+
+};
+
+TemperatureCharacteristic.prototype.onReadRequest = function (offset, callback) {
+  
+    var data = new Buffer(4);
+    data = 100
+    callback(Characteristic.RESULT_SUCCESS, data);
+ 
+};
+
+var thermometerService = new PrimaryService({
+  uuid: 'bbb0',
   characteristics: [
-    new IDDCharacteristic()
+    new TemperatureCharacteristic()
   ]
 });
 
@@ -41,7 +52,7 @@ bleno.on('stateChange', function (state) {
   console.log('on -> stateChange: ' + state);
 
   if (state === 'poweredOn') {
-    bleno.startAdvertising('Button', [buttonService.uuid]);
+    bleno.startAdvertising('Thermometer', [thermometerService.uuid]);
   } else {
     bleno.stopAdvertising();
   }
@@ -51,6 +62,18 @@ bleno.on('advertisingStart', function (error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
 
   if (!error) {
-    bleno.setServices([buttonService]);
+    bleno.setServices([thermometerService]);
+  }
+});
+
+// scan sensors and store our id in the global
+sensor.sensors(function (err, ids) {
+  if (err) {
+    console.log('Can not get sensor IDs', err);
+    process.exit(-1);
+  } else {
+    console.log(ids);
+    temperatureSensorId = ids[0];
+    console.log('Found temperatureSensorId ' + temperatureSensorId);
   }
 });

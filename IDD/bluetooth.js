@@ -24,8 +24,8 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
 
   var value1 = 100;
     console.log('button ' + value1);
-    var data = new Buffer(1);
-    data[0] = value1;
+    var data = new Buffer(10);
+    data = value1;
     updateValueCallback(data);
 
 };

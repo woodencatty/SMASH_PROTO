@@ -19,7 +19,7 @@ var adcLight = 2;                  //ADC Channel 1
     gpio.pinMode(ultraTRIG, gpio.OUTPUT);
     gpio.pinMode(ultraECHO, gpio.INPUT);
 
-
+getTemp();
 module.exports.getTemp = function() {
   
     temp.read(22, DHT22, function (err, temperature, humidity) {

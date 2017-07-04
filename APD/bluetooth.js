@@ -1,15 +1,6 @@
-//APD
-
 var noble = require('noble');
 
-console.log('noble');
-
 noble.on('stateChange', function(state) {
-console.log('..is on');
-
-
-  console.log('on -> stateChange: ' + state);
-
   if (state === 'poweredOn') {
     noble.startScanning();
   } else {
@@ -17,81 +8,31 @@ console.log('..is on');
   }
 });
 
-
-noble.on('scanStart', function() {
-  console.log('on -> scanStart');
-});
-
-noble.on('scanStop', function() {
-  console.log('on -> scanStop');
-});
-
-
 noble.on('discover', function(peripheral) {
-  console.log('on -> discover: ' + peripheral);
+  console.log('peripheral discovered (' + peripheral.id +
+              ' with address <' + peripheral.address +  ', ' + peripheral.addressType + '>,' +
+              ' connectable ' + peripheral.connectable + ',' +
+              ' RSSI ' + peripheral.rssi + ':');
+  console.log('\thello my local name is:');
+  console.log('\t\t' + peripheral.advertisement.localName);
+  console.log('\tcan I interest you in any of the following advertised services:');
+  console.log('\t\t' + JSON.stringify(peripheral.advertisement.serviceUuids));
 
-  noble.stopScanning();
+  var serviceData = peripheral.advertisement.serviceData;
+  if (serviceData && serviceData.length) {
+    console.log('\there is my service data:');
+    for (var i in serviceData) {
+      console.log('\t\t' + JSON.stringify(serviceData[i].uuid) + ': ' + JSON.stringify(serviceData[i].data.toString('hex')));
+    }
+  }
+  if (peripheral.advertisement.manufacturerData) {
+    console.log('\there is my manufacturer data:');
+    console.log('\t\t' + JSON.stringify(peripheral.advertisement.manufacturerData.toString('hex')));
+  }
+  if (peripheral.advertisement.txPowerLevel !== undefined) {
+    console.log('\tmy TX power level is:');
+    console.log('\t\t' + peripheral.advertisement.txPowerLevel);
+  }
 
-  peripheral.on('connect', function() {
-    console.log('on -> connect');
-    this.updateRssi();
-  });
-
-  peripheral.on('disconnect', function() {
-    console.log('on -> disconnect');
-  });
-
-  peripheral.on('rssiUpdate', function(rssi) {
-    console.log('on -> RSSI update ' + rssi);
-    this.discoverServices();
-  });
-
-  peripheral.on('servicesDiscover', function(services) {
-    console.log('on -> peripheral services discovered ' + services);
-
-    var serviceIndex = 0;
-
-    services[serviceIndex].on('includedServicesDiscover', function(includedServiceUuids) {
-      console.log('on -> service included services discovered ' + includedServiceUuids);
-      this.discoverCharacteristics();
-    });
-
-    services[serviceIndex].on('characteristicsDiscover', function(characteristics) {
-      console.log('on -> service characteristics discovered ' + characteristics);
-
-      var characteristicIndex = 0; 
-      
-      characteristics[characteristicIndex].on('descriptorsDiscover', function(descriptors) {
-        console.log('on -> descriptors discover ' + descriptors);
-
-        var descriptorIndex = 0;
-
-        descriptors[descriptorIndex].on('valueRead', function(data) {
-          console.log('on -> descriptor value read ' + data);
-          console.log(data);
-          peripheral.disconnect();
-        });
-
-        descriptors[descriptorIndex].on('valueWrite', function() {
-          console.log('on -> descriptor value write ');
-          peripheral.disconnect();
-        });
-
-        descriptors[descriptorIndex].readValue();
-        //descriptors[descriptorIndex].writeValue(new Buffer([0]));
-      });
-
-
-      characteristics[characteristicIndex].read();
-      //characteristics[characteristicIndex].write(new Buffer('hello'));
-      //characteristics[characteristicIndex].broadcast(true);
-      //characteristics[characteristicIndex].notify(true);
-      // characteristics[characteristicIndex].discoverDescriptors();
-    });
-
-    
-    services[serviceIndex].discoverIncludedServices();
-  });
-
-  peripheral.connect();
+  console.log();
 });

@@ -13,8 +13,6 @@ noble.on('stateChange', function (state) {
 
 noble.on('discover', function (peripheral) {
  //console.log(peripheral);
-  connectAndSetUp(peripheral);
-
 peripheral.connect(function (error) {
 
     var serviceUUIDs = ['ffe0'];

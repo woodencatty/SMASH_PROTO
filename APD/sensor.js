@@ -24,22 +24,20 @@ module.exports.getTemp = function() {
     temp.read(22, DHT22, function (err, temperature, humidity) {
         if (!err) {
             console.log("temp :" + temperature.toFixed(1) + "C");
-            output_temp = temperature.toFixed(1);
         }
     });
 };
 
-
-module.exports = { 
-  getHumi: function() {
+module.exports.getHumi = function() {
     temp.read(22, DHT22, function (err, temperature, humidity) {
         if (!err) {
             console.log("humidity : " + humidity.toFixed(1) + "%");
         }
     });
-},
-    getDist: function () {
-    var distance = 0;
+};
+
+module.exports.getDist = function() {
+   var distance = 0;
     var pulse = 0;
     while (1) {
         gpio.digitalWrite(ultraTRIG, 0);
@@ -58,25 +56,27 @@ module.exports = {
         
         sleep.msleep(300);
     }
-},
 
-    getAdcAudio:function () {
-    adc.readRawValue(adcAudio, function (value) {
+};
+
+module.exports.getAdcAudio = function() {
+  adc.readRawValue(adcAudio, function (value) {
         console.log("Audio :\t" + value);
     });
-},
+  
+};
 
-    getAdcEnv: function () {
-    adc.readRawValue(addEnv, function (value) {
+module.exports.getAdcEnv= function() {
+   adc.readRawValue(addEnv, function (value) {
         console.log("Env:\t" + value);
     });
-},
+};
 
-    getAdcLight: function () {
+module.exports.getAdcLight = function() {
+  
     adc.readRawValue(adcLight, function (value) {
         console.log("Light:\t" + value);
     });
-}
 };
 
     

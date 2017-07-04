@@ -63,7 +63,7 @@ noble.on('discover', function(peripheral) {
 
       characteristics[characteristicIndex].on('read', function(data, isNotification) {
         console.log('on -> characteristic read ' + data + ' ' + isNotification);
-        console.log(data);
+        console.log(data.toString('utf8'));
 
         peripheral.disconnect();
       });
@@ -75,7 +75,7 @@ noble.on('discover', function(peripheral) {
 
         descriptors[descriptorIndex].on('valueRead', function(data) {
           console.log('on -> descriptor value read ' + data);
-          console.log(data);
+          console.log(data.toString('utf8'));
           peripheral.disconnect();
         });
         

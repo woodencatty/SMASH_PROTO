@@ -21,7 +21,7 @@ noble.on('discover', function(peripheral) {
 */
 
 if(peripheral.advertisement.localName == 'IDD'){
-
+    console.log(peripheral.advertisement.localName);
     peripheral.discoverAllServicesAndCharacteristics(function(error, services, characteristics){
         console.log(services);
         console.log(characteristics);
@@ -29,7 +29,7 @@ if(peripheral.advertisement.localName == 'IDD'){
     });
 }
 
-
+/*
   var serviceData = peripheral.advertisement.serviceData;
   if (serviceData && serviceData.length) {
     console.log('\there is my service data:');
@@ -45,6 +45,6 @@ if(peripheral.advertisement.localName == 'IDD'){
     console.log('\tmy TX power level is:');
     console.log('\t\t' + peripheral.advertisement.txPowerLevel);
   }
-
+*/
   console.log();
 });

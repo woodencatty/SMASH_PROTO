@@ -17,10 +17,6 @@ var adcEnv = 1;                  //ADC Channel 1
 var adcLight = 2;                  //ADC Channel 1
 
 
-    gpio.wiringPiSetup();
-    gpio.pinMode(ultraTRIG, gpio.OUTPUT);
-    gpio.pinMode(ultraECHO, gpio.INPUT);
-
 module.exports.getTemp = function() {
     console.log('get');
     temp.read(22, DHT22, function (err, temperature, humidity) {
@@ -87,10 +83,7 @@ module.exports = {
 
 
 
-
-
-
-
-
-
+    gpio.wiringPiSetup();
+    gpio.pinMode(ultraTRIG, gpio.OUTPUT);
+    gpio.pinMode(ultraECHO, gpio.INPUT);
 

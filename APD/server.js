@@ -13,35 +13,29 @@ app.get('/', (req, res) => {
 
 app.get('/audio', (req, res) => {
   sensor.getAdcAudio();
-    res.redirect('/');
 });
 
 app.get('/env', (req, res) => {
  sensor.getAdcEnv();
-     res.redirect('/');
 
 });
 
 app.get('/temp', (req, res) => {
  sensor.getTemp();
-    res.redirect('/');
 
 });
 
 app.get('/humi', (req, res) => {
  sensor.getHumi();
-     res.redirect('/');
 
 });
 
 app.get('/dist', (req, res) => {
  sensor.getDist();
-     res.redirect('/');
 
 });
 
 app.get('/light', (req, res) => {
  sensor.getAdcLight();
-     res.redirect('/');
 
 });

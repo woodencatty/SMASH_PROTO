@@ -19,28 +19,25 @@ var adcLight = 2;                  //ADC Channel 1
     gpio.pinMode(ultraTRIG, gpio.OUTPUT);
     gpio.pinMode(ultraECHO, gpio.INPUT);
 
-
-
-//---------------------------------측정함수----------------------------------------------
-function getTemp() {
+module.exports.getTemp = function() {
+  
     temp.read(22, DHT22, function (err, temperature, humidity) {
         if (!err) {
             console.log("temp :" + temperature.toFixed(1) + "C");
             output_temp = temperature.toFixed(1);
         }
     });
-}
-
-function getHumi() {
+};
+module.exports = {
+  getHumi: function() {
     temp.read(22, DHT22, function (err, temperature, humidity) {
         if (!err) {
             console.log("humidity : " + humidity.toFixed(1) + "%");
             output_humi = humidity.toFixed(1);
         }
     });
-}
-
-function getDist() {
+},
+    getDist: function () {
     var distance = 0;
     var pulse = 0;
     while (1) {
@@ -60,25 +57,34 @@ function getDist() {
         
         sleep.msleep(300);
     }
-}
+},
 
-function getAdcAudio() {
+    getAdcAudio:function () {
     adc.readRawValue(adcAudio, function (value) {
         console.log("Audio :\t" + value);
         output_sound = value;
     });
-}
+},
 
-function getAdcEnv() {
+    getAdcEnv: function () {
     adc.readRawValue(addEnv, function (value) {
         console.log("Env:\t" + value);
         output_sound = value;
     });
-}
+},
 
-function getAdcLight() {
+    getAdcLight: function () {
     adc.readRawValue(adcLight, function (value) {
         console.log("Light:\t" + value);
         output_light = value;
     });
 }
+};
+
+
+
+
+
+
+
+

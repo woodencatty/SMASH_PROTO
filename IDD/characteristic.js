@@ -20,7 +20,7 @@ var EchoCharacteristic = function() {
 util.inherits(EchoCharacteristic, BlenoCharacteristic);
 
 EchoCharacteristic.prototype.onReadRequest = function(offset, callback) {
- this._value = 100;
+ this._value = sensor.getAccel();
 
   console.log('EchoCharacteristic - onReadRequest: value = ' + this._value);
 
@@ -30,7 +30,7 @@ EchoCharacteristic.prototype.onReadRequest = function(offset, callback) {
 EchoCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
   this._value = data;
 
-  console.log('EchoCharacteristic - onWriteRequest: value = ' + this._value.toString('utf8'));
+  console.log('EchoCharacteristic - onWriteRequest: value = ' + this._value);
 
   if (this._updateValueCallback) {
     console.log('EchoCharacteristic - onWriteRequest: notifying');

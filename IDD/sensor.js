@@ -23,6 +23,7 @@ const getAcceleration = () => {
 adxl345.getAcceleration(true) // true for g-force units, else false for m/s²
     .then((acceleration) => {
       console.log(`acceleration = ${JSON.stringify(acceleration, null, 2)}`);
+      return 100;
     })
     .catch((err) => {
       console.log(`ADXL345 read error: ${err}`);

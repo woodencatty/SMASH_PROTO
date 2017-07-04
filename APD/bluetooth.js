@@ -58,8 +58,8 @@ noble.on('discover', function(peripheral) {
 
     services[serviceIndex].on('characteristicsDiscover', function(characteristics) {
      // console.log('on -> service characteristics discovered ' + characteristics);
-for(var i = 0; i<10; i++){
-      var characteristicIndex = i;
+
+      var characteristicIndex = 1;
 
       characteristics[characteristicIndex].on('read', function(data, isNotification) {
         console.log('on -> characteristic read ' + data + ' ' + isNotification);
@@ -67,7 +67,7 @@ for(var i = 0; i<10; i++){
 
         peripheral.disconnect();
       });
-}
+
       characteristics[characteristicIndex].read();
     });
 

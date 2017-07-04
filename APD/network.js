@@ -14,7 +14,7 @@ noble.on('stateChange', function(state) {
 });
 
 noble.on('discover', function(peripheral) {
- console.log('peripheral with ID ' + peripheral.advertisement + ' found'); 
+ console.log(peripheral.advertisement + '\n' +peripheral.address + '\n' +advertisement.localName + '\n' + advertisement.manufacturerData + '\n' +advertisement.serviceData + '\n\n\n'); 
  if(peripheral.advertisement == '201333558'){
          noble.stopScanning();
          console.log('jobs done');

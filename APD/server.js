@@ -9,7 +9,7 @@ app.listen(60001, () => {
     console.log("device enable");
 });
 
-app.get('/', (req, res) => 
+app.get('/', (req, res) => {
 });
 
 app.get('/audio', (req, res) => {

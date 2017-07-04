@@ -65,24 +65,8 @@ noble.on('discover', function(peripheral) {
         console.log('on -> characteristic read ' + data + ' ' + isNotification);
         console.log(data.toString('utf8'));
 
-        //peripheral.disconnect();
+        peripheral.disconnect();
       });
-
-      characteristics[characteristicIndex].on('descriptorsDiscover', function(descriptors) {
-        console.log('on -> descriptors discover ' + descriptors);
-
-        var descriptorIndex = 0;
-
-        descriptors[descriptorIndex].on('valueRead', function(data) {
-          console.log('on -> descriptor value read ' + data);
-          console.log(data.toString('utf8'));
-          peripheral.disconnect();
-        });
-        
-        descriptors[descriptorIndex].readValue();
-        //descriptors[descriptorIndex].writeValue(new Buffer([0]));
-      });
-
 
       characteristics[characteristicIndex].read();
       //characteristics[characteristicIndex].write(new Buffer('hello'));

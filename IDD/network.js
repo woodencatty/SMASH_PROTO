@@ -1,4 +1,4 @@
-const BluetoothSerialPort = require('../lib/bluetooth-serial-port');
+const BluetoothSerialPort = require('bluetooth-serial-port');
 
 const rfcomm = new BluetoothSerialPort.BluetoothSerialPort();
 

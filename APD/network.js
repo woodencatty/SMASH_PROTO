@@ -15,8 +15,8 @@ noble.on('stateChange', function(state) {
 
 noble.on('discover', function(peripheral) {
         var advertisement = peripheral.advertisement;
- console.log(peripheral.advertisement + '\n' +peripheral.address + '\n' +advertisement.localName + '\n' + advertisement.manufacturerData + '\n' +advertisement.serviceData + '\n\n\n'); 
- if(peripheral.advertisement == '201333558'){
+ console.log(peripheral.advertisement + '\n' +peripheral.address + '\n' +advertisement.localName + '\n\n\n'); 
+ if(advertisement.localName == '201333558'){
          noble.stopScanning();
          console.log('jobs done');
  }

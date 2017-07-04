@@ -25,9 +25,12 @@ if(peripheral.advertisement.localName == 'IDD'){
     console.log(peripheral.advertisement.localName);
     peripheral.connect();
     setTimeout(function(){
- peripheral.discoverServices(function(){
-     console.log(services);
- });
+ 
+var serviceUUIDs = ['bc00'];
+peripheral.discoverServices(serviceUUIDs, function(error, services){
+    console.log(services);
+});
+
 
 }, 2000);
 

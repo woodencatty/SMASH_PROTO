@@ -1,24 +1,43 @@
-var server = new(require('bluetooth-serial-port')).BluetoothSerialPortServer();
+(function() {
+    "use strict";
 
-var CHANNEL = 3; // My service channel. Defaults to 1 if omitted.
-var UUID = 'be01'; // My own service UUID. Defaults to '1101' if omitted
+    var util = require('util');
+    var BluetoothSerialPortServer = require("../lib/bluetooth-serial-port.js").BluetoothSerialPortServer;
+    var server = new BluetoothSerialPortServer();
 
-server.listen(function (clientAddress) {
-    console.log('Client: ' + clientAddress + ' connected!');
-    server.on('data', function(buffer) {
-        console.log('Received data from client: ' + buffer);
+    const CHANNEL = 10;
 
-        // ...
+    server.on('data', function(buffer){
+        console.log("Received data from client: " + buffer);
+        if(buffer == "END"){
+            console.log("Finishing connection!");
+            server.close();
+            return;
+        }
 
-        console.log('Sending data to the client');
-        server.write(new Buffer('...'), function (err, bytesWritten) {
-            if (err) {
-                console.log('Error!');
-            } else {
-                console.log('Send ' + bytesWritten + ' to the client!');
+        var buf = new Buffer("PONG");
+        console.log("Sending a PONG to the client...");
+            server.write(buf, function(error, bytesWritten){
+            if(error){
+                console.error("Something went wrong sending the PONG message: bytesWritten = " + error);
+            }else{
+                console.log("PONG sent! (" + bytesWritten + " bytes)");
             }
         });
     });
-}, function(error){
-	console.error("Something wrong happened!:" + error);
-}, {uuid: UUID, channel: CHANNEL} );
+
+    server.on('closed', function(){
+      console.log("Client closed the connection!");
+    });
+
+    server.on('failure', function(err){
+      console.log("Something wrong happened!: " + err);
+    });
+
+    server.listen(function(clientAddress){
+        console.log("Client: " + clientAddress + " connected!");
+    }, function(error){
+        console.log("Something wrong happened while setting up the server for listening: error = " + error);
+    }, { /*uuid: UUID,*/ channel: CHANNEL });
+
+})();

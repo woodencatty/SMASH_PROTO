@@ -8,6 +8,13 @@ var sensor = require('./sensor.js')
 
 app.listen(60001, () => {
     console.log("device enable");
+    
+sensor.getTemp();
+sensor.getHumi();
+sensor.getDist();
+sensor.getAdcAudio();
+sensor.getAdcEnv();
+sensor.getAdcLight();
 });
 
 app.get('/', (req, res) => {

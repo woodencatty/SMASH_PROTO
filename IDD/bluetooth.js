@@ -19,7 +19,7 @@ var StaticReadOnlyCharacteristic = function() {
     descriptors: [
       new BlenoDescriptor({
         uuid: '2901',
-        value: 'Specify Patient'
+        value: 'SpecifyPatient'
       })
     ]
   });

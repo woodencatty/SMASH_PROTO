@@ -59,26 +59,8 @@ noble.on('discover', function(peripheral) {
     services[serviceIndex].on('characteristicsDiscover', function(characteristics) {
       console.log('on -> service characteristics discovered ' + characteristics);
 
-      var characteristicIndex = 0;
-
-      characteristics[characteristicIndex].on('write', function() {
-        console.log('on -> characteristic write ');
-
-        peripheral.disconnect();
-      });
-
-      characteristics[characteristicIndex].on('broadcast', function(state) {
-        console.log('on -> characteristic broadcast ' + state);
-
-        peripheral.disconnect();
-      });
-
-      characteristics[characteristicIndex].on('notify', function(state) {
-        console.log('on -> characteristic notify ' + state);
-
-        peripheral.disconnect();
-      });
-
+      var characteristicIndex = 0; 
+      
       characteristics[characteristicIndex].on('descriptorsDiscover', function(descriptors) {
         console.log('on -> descriptors discover ' + descriptors);
 

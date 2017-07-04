@@ -69,7 +69,7 @@ noble.on('discover', function(peripheral) {
       });
 
       characteristics[characteristicIndex].read(function(error, data){
-        console.log(data);
+        console.log(data.toString('utf8'));
       });
       //characteristics[characteristicIndex].write(new Buffer('hello'));
       //characteristics[characteristicIndex].broadcast(true);

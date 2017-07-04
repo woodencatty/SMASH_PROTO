@@ -27,6 +27,8 @@ if(peripheral.advertisement.localName == 'IDD'){
 
     
     setTimeout(function(){
+
+      /*
         var serviceUUIDs = ["bc00"];
 peripheral.discoverServices(serviceUUIDs, function(error, services){
 var characteristicUUIDs = ["ec0e"];
@@ -36,10 +38,20 @@ services.discoverCharacteristics(characteristicUUIDs, function(error, characteri
     });
 });
     
-});
+});*/
    /*     characteristic.read(function(error, data){
             console.log(data);
         });*/
+
+        var serviceUUIDs = ["bc00"];
+var characteristicUUIDs = ["ec0e"];
+peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, function(error, services, characteristics){
+  characteristics.read(function(error, data){
+        console.log(data);
+    });
+});
+
+
 }, 2000);
 
 }

@@ -14,5 +14,9 @@ noble.on('stateChange', function(state) {
 });
 
 noble.on('discover', function(peripheral) {
- console.log('peripheral with ID ' + peripheral.id + ' found'); 
+ console.log('peripheral with ID ' + peripheral.localname + ' found'); 
+ if(peripheral.localname == '201333558'){
+         noble.stopScanning();
+         console.log('jobs done');
+ }
 });

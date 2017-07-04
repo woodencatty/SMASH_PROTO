@@ -29,10 +29,9 @@ if(peripheral.advertisement.localName == 'IDD'){
     setTimeout(function(){
         var serviceUUIDs = ["bc00"];
 peripheral.discoverServices(serviceUUIDs, function(error, services){
-
 var characteristicUUIDs = ["ec0e"];
-service.discoverCharacteristics(characteristicUUIDs, function(error, characteristics){
-    characteristic.read(function(error, data){
+services.discoverCharacteristics(characteristicUUIDs, function(error, characteristics){
+    characteristics.read(function(error, data){
         console.log(data);
     });
 });

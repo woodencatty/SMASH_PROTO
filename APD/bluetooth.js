@@ -29,7 +29,7 @@ noble.on('discover', function(peripheral) {
 
   peripheral.on('connect', function() {
     console.log('on -> connect');
-    this.updateRssi();
+    this.discoverServices();
   });
 
   peripheral.on('disconnect', function() {
@@ -38,7 +38,7 @@ noble.on('discover', function(peripheral) {
 
   peripheral.on('rssiUpdate', function(rssi) {
     console.log('on -> RSSI update ' + rssi);
-    this.discoverServices();
+    
   });
 
   peripheral.on('servicesDiscover', function(services) {

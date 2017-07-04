@@ -1,43 +1,42 @@
-(function() {
-    "use strict";
+// Connect to Thermometer Service 0xBBB0
+// and display notification for temperature changes
+var noble = require('noble');
 
-    var util = require('util');
-    var BluetoothSerialPortServer = require("../lib/bluetooth-serial-port.js").BluetoothSerialPortServer;
-    var server = new BluetoothSerialPortServer();
+noble.on('stateChange', function (state) {
+  if (state === 'poweredOn') {
+    noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
+  } else {
+    noble.stopScanning();
+  }
+});
 
-    const CHANNEL = 10;
+noble.on('discover', function (peripheral) {
+  console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
+  connectAndSetUp(peripheral);
+  // TODO should stop scanning otherwise we connect to ALL the thermometers
+});
 
-    server.on('data', function(buffer){
-        console.log("Received data from client: " + buffer);
-        if(buffer == "END"){
-            console.log("Finishing connection!");
-            server.close();
-            return;
-        }
+function connectAndSetUp(peripheral) {
 
-        var buf = new Buffer("PONG");
-        console.log("Sending a PONG to the client...");
-            server.write(buf, function(error, bytesWritten){
-            if(error){
-                console.error("Something went wrong sending the PONG message: bytesWritten = " + error);
-            }else{
-                console.log("PONG sent! (" + bytesWritten + " bytes)");
-            }
-        });
-    });
+  peripheral.connect(function (error) {
+    var serviceUUIDs = ['bbb0'];
+    var characteristicUUIDs = ['bbb1'];
 
-    server.on('closed', function(){
-      console.log("Client closed the connection!");
-    });
+    peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
+  });
 
-    server.on('failure', function(err){
-      console.log("Something wrong happened!: " + err);
-    });
+}
 
-    server.listen(function(clientAddress){
-        console.log("Client: " + clientAddress + " connected!");
-    }, function(error){
-        console.log("Something wrong happened while setting up the server for listening: error = " + error);
-    }, { /*uuid: UUID,*/ channel: CHANNEL });
+function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
 
-})();
+  var temperatureCharacteristic = characteristics[0];
+
+  temperatureCharacteristic.on('data', function (data, isNotification) {
+    var celsius = data.readFloatLE(0);
+    var fahrenheit = (celsius * 1.8 + 32.0).toFixed(1);
+    console.log('Temperature is', celsius.toFixed(1) + '°C', fahrenheit + '°F');
+  });
+
+  temperatureCharacteristic.subscribe(); // ignore callback
+  temperatureCharacteristic.read();      // ignore callback
+}

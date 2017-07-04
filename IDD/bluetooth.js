@@ -1,64 +1,90 @@
-(function() {
-    "use strict";
+var bleno = require('bleno');
+var util = require('util');
 
-    var util = require('util');
-    var DeviceINQ = require("../lib/device-inquiry.js").DeviceINQ;
-    var BluetoothSerialPort = require("../lib/bluetooth-serial-port.js").BluetoothSerialPort;
-    var serial = new BluetoothSerialPort();
+var Characteristic = bleno.Characteristic;
+var Descriptor = bleno.Descriptor;
+var PrimaryService = bleno.PrimaryService;
 
-    serial.on('found', function (address, name) {
-        console.log('Found: ' + address + ' with name ' + name);
+var temperatureSensorId;
+var lastTemp;
 
-        serial.findSerialPortChannel(address, function(channel) {
-            console.log('Found RFCOMM channel for serial port on ' + name + ': ' + channel);
+var TemperatureCharacteristic = function () {
+  TemperatureCharacteristic.super_.call(this, {
+    uuid: 'bbb1',
+    properties: ['read', 'notify'],
+    descriptors: [
+      new Descriptor({
+        uuid: '2901',
+        value: 'Temperature'
+      })]
+  });
+};
+util.inherits(TemperatureCharacteristic, Characteristic);
 
-            if (name !== 'linvor') return;
+TemperatureCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
+  console.log('TemperatureCharacteristic subscribe');
 
-            console.log('Attempting to connect...');
+  this.changeInterval = setInterval(function () {
 
-            serial.connect(address, channel, function() {
-                console.log('Connected. Sending data...');
-                var buf = new Buffer('10011010101s');
-                console.log('Size of buf = ' + buf.length);
+        result = 14.21;
+          var data = new Buffer(4);
+          data.writeFloatLE(result, 0);
 
-                serial.on('data', function(buffer) {
-                    console.log('Size of data buf = ' + buffer.length);
-                    console.log(buffer.toString('utf-8'));
-                });
+          console.log('TemperatureCharacteristic update value: ' + result);
+          updateValueCallback(data);
+          result++;
+  }.bind(this), 2000);
+};
 
-                serial.write(buf, function(err, count) {
-                    if (err) {
-                        console.log('Error received: ' + err);
-                    } else {
-                        console.log('Bytes writen is: ' + count);
-                    }
+TemperatureCharacteristic.prototype.onUnsubscribe = function () {
+  console.log('TemperatureCharacteristic unsubscribe');
 
-                    setTimeout(function() {
-                        serial.write(buf, function (err, count) {
-                            if (err) {
-                                console.log('Error received: ' + err);
-                            } else {
-                                console.log('Bytes writen is: ' + count);
-                            }
+  if (this.changeInterval) {
+    clearInterval(this.changeInterval);
+    this.changeInterval = null;
+  }
+};
 
-                            setTimeout(function() {
-                                serial.close();
-                                console.log('Closed and ready');
-                            }, 5000);
-                        });
-                    }, 5000);
-                });
-            });
-        });
-    });
+TemperatureCharacteristic.prototype.onReadRequest = function (offset, callback) {
+   result = 14.21;
+    var data = new Buffer(4);
+    data.writeFloatLE(result, 0);
+    callback(Characteristic.RESULT_SUCCESS, data);
+};
 
-    serial.on('close', function() {
-        console.log('connection has been closed (remotely?)');
-    });
+var thermometerService = new PrimaryService({
+  uuid: 'bbb0',
+  characteristics: [
+    new TemperatureCharacteristic()
+  ]
+});
 
-    serial.on('finished', function() {
-        console.log('scan did finish');
-    });
+bleno.on('stateChange', function (state) {
+  console.log('on -> stateChange: ' + state);
 
-    serial.inquire();
-})();
+  if (state === 'poweredOn') {
+    bleno.startAdvertising('Thermometer', [thermometerService.uuid]);
+  } else {
+    bleno.stopAdvertising();
+  }
+});
+
+bleno.on('advertisingStart', function (error) {
+  console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
+
+  if (!error) {
+    bleno.setServices([thermometerService]);
+  }
+});
+
+// scan sensors and store our id in the global
+sensor.sensors(function (err, ids) {
+  if (err) {
+    console.log('Can not get sensor IDs', err);
+    process.exit(-1);
+  } else {
+    console.log(ids);
+    temperatureSensorId = ids[0];
+    console.log('Found temperatureSensorId ' + temperatureSensorId);
+  }
+});

@@ -80,4 +80,4 @@ module.exports = {
 };
 
     
-sensor.getTemp();
+sensor.getHumi();

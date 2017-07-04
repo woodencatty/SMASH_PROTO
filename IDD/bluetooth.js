@@ -49,10 +49,3 @@ bleno.on('advertisingStart', function (error) {
     bleno.setServices([buttonService]);
   }
 });
-
-// cleanup GPIO on exit
-function exit() {
-  button.unexport();
-  process.exit();
-}
-process.on('SIGINT', exit);

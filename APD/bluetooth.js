@@ -67,10 +67,29 @@ noble.on('discover', function(peripheral) {
 
         peripheral.disconnect();
       });
+characteristics[characteristicIndex].on('descriptorsDiscover', function(descriptors) {
+        console.log('on -> descriptors discover ' + descriptors);
+        descriptor.readValue(function(error, data){
+                  console.log(data.toString('utf8'));
 
-      characteristics[characteristicIndex].read(function(error, data){
-        console.log(data.toString('utf8'));
+        });
+        var descriptorIndex = 0;
+
+        descriptors[descriptorIndex].on('valueRead', function(data) {
+          console.log('on -> descriptor value read ' + data);
+          console.log(data);
+          peripheral.disconnect();
+        });
+
+        descriptors[descriptorIndex].on('valueWrite', function() {
+          console.log('on -> descriptor value write ');
+          peripheral.disconnect();
+        });
+
+        descriptors[descriptorIndex].readValue();
+        //descriptors[descriptorIndex].writeValue(new Buffer([0]));
       });
+      characteristics[characteristicIndex].read();
       //characteristics[characteristicIndex].write(new Buffer('hello'));
       //characteristics[characteristicIndex].broadcast(true);
       //characteristics[characteristicIndex].notify(true);

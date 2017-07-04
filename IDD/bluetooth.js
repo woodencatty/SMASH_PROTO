@@ -1,7 +1,11 @@
 var btSerial = new (require('bluetooth-serial-port')).BluetoothSerialPort();
 
+
 btSerial.on('found', function(address, name) {
+  console.log(name);
+  console.log(address);
 	btSerial.findSerialPortChannel(address, function(channel) {
+      console.log(channel);
 		btSerial.connect(address, channel, function() {
 			console.log('connected');
 
@@ -23,4 +27,9 @@ btSerial.on('found', function(address, name) {
 	});
 });
 
-btSerial.inquire();
+btSerial.on('finished', function () {
+  console.log('inquiry finished');
+});
+
+
+btSerial.inquireSync();

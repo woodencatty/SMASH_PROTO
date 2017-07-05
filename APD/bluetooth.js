@@ -1,4 +1,4 @@
-var noble = require('bleno');
+var noble = require('noble');
 
 console.log('noble');
 

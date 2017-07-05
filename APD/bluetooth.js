@@ -38,7 +38,7 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 
   IDDCharacteristic.on('data', function (data, isNotification) {
     console.log('reading..');
-    var Accel = data.readFloatBE(0);
+    var Accel = data.readFloatLE(0);
     console.log('Accel is', Accel.toFixed(1));
   count ++;
   /*  if(count > 10){

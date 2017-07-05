@@ -6,7 +6,7 @@ const adxl345 = new ADXL345(); // defaults to i2cBusNo 1, i2cAddress 0x53
 //
 adxl345.init()
   .then(() => {
-   // console.log('ADXL345 initialization succeeded');
+    console.log('ADXL345 initialization succeeded');
   })
   .catch((err) => console.error(`ADXL345 initialization failed: ${err} `));
 
@@ -18,13 +18,13 @@ const getAcceleration = () => {
   
 };
 
-  module.exports.getAccel = function(callback) {
+  module.exports.getAccel = function() {
 
 adxl345.getAcceleration(true) // true for g-force units, else false for m/s²
     .then((acceleration) => {
      console.log(acceleration);
-     var x = 10;
-     callback(x);
+     var x = 10.10;
+     return x;
     })
     .catch((err) => {
       console.log(`ADXL345 read error: ${err}`);

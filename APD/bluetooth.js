@@ -31,6 +31,7 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 
   var IDDCharacteristic = characteristics[0];
 
+  console.log(characteristics);
 
 
   IDDCharacteristic.subscribe(); // ignore callback

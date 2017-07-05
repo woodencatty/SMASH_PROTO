@@ -2,6 +2,7 @@
 // and display notification for temperature changes
 var noble = require('noble');
 
+var count = 0;
 noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {
     noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
@@ -37,6 +38,10 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
     var celsius = data.readFloatLE(0);
     var fahrenheit = (celsius * 1.8 + 32.0).toFixed(1);
     console.log('Temperature is', celsius.toFixed(1) + '°C', fahrenheit + '°F');
+  count ++;
+    if(count > 10){
+      IDDCharacteristic.unsubscribe();
+    }
   });
  
   IDDCharacteristic.subscribe(); // ignore callback

@@ -8,7 +8,9 @@ var Characteristic = bleno.Characteristic;
 var Descriptor = bleno.Descriptor;
 var PrimaryService = bleno.PrimaryService;
 
-var result;
+var AccelX;
+var AccelY;
+var AccelZ;
 
 var IDDCharacteristic = function () {
   IDDCharacteristic.super_.call(this, {
@@ -27,19 +29,21 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
   console.log('IDDCharacteristic subscribe');
 
   this.changeInterval = setInterval(function () {
-AccelCallback = function(value){
-    result = value;
+AccelCallback = function(x, y, z){
+  AccelX = x;
+  AccelY = y;
+  AccelZ = z;
   }
 
     Accel.getAccel(AccelCallback);
   
           var data = new Buffer(30);
-          data.writeFloatLE(result, 0);
+          data.writeFloatLE(AccelY, 0);
 
-          console.log('IDDCharacteristic update value: ' + result);
+          console.log('IDDCharacteristic update value: ' + AccelY);
           updateValueCallback(data);
   
-  }.bind(this), 2000);
+  }.bind(this), 500);
 };
 
 IDDCharacteristic.prototype.onUnsubscribe = function () {

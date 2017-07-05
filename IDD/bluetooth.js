@@ -33,7 +33,7 @@ AccelCallback = function(value){
 
     Accel.getAccel(AccelCallback);
   
-          var data = new Buffer(4);
+          var data = new Buffer(30);
           data.writeFloatLE(result, 0);
 
           console.log('IDDCharacteristic update value: ' + result);
@@ -53,8 +53,13 @@ IDDCharacteristic.prototype.onUnsubscribe = function () {
 
 IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
 
-   result = 10.11;
-          var data = new Buffer(4);
+AccelCallback = function(value){
+    result = value;
+  }
+
+    Accel.getAccel(AccelCallback);
+    
+              var data = new Buffer(30);
           data.writeFloatLE(result, 0);
     callback(Characteristic.RESULT_SUCCESS, data);
 };

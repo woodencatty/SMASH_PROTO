@@ -7,7 +7,7 @@ var sensor = require('./sensor.js')
 
 
 app.listen(60001, () => {
-    console.log("device enable");
+  console.log("device enable");
 });
 
 app.get('/', (req, res) => {
@@ -20,21 +20,21 @@ app.get('/audio', (req, res) => {
 });
 
 app.get('/env', (req, res) => {
- sensor.getAdcEnv();
+  sensor.getAdcEnv();
 });
 
 app.get('/temp', (req, res) => {
- sensor.getTemp();
+  sensor.getTemp();
 });
 
 app.get('/humi', (req, res) => {
- sensor.getHumi();
+  sensor.getHumi();
 });
 
 app.get('/dist', (req, res) => {
- sensor.getDist();
+  sensor.getDist();
 });
 
 app.get('/light', (req, res) => {
- sensor.getAdcLight();
+  sensor.getAdcLight();
 });

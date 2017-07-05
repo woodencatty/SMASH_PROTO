@@ -1,16 +1,14 @@
 var bleno = require('bleno');
 var util = require('util');
 
-var Accel = require('./sensor.js');
+var Move = require('./calculator.js');
 
 
 var Characteristic = bleno.Characteristic;
 var Descriptor = bleno.Descriptor;
 var PrimaryService = bleno.PrimaryService;
 
-var AccelX;
-var AccelY;
-var AccelZ;
+var Value;
 
 var IDDCharacteristic = function () {
   IDDCharacteristic.super_.call(this, {
@@ -29,21 +27,19 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
   console.log('IDDCharacteristic subscribe');
 
   this.changeInterval = setInterval(function () {
-AccelCallback = function(x, y, z){
-  AccelX = x;
-  AccelY = y;
-  AccelZ = z;
-  }
+    MoveCallback = function (MoveValue) {
+      Value = MoveValue;
+    }
 
-    Accel.getAccel(AccelCallback);
-  
-      AccelY = 10;
+    Move.getMoveValue(MoveCallback)
 
-          var data = new Buffer(4);
-          data.writeUInt8(AccelY, 0);
-          console.log('IDDCharacteristic update value: ' + AccelY);
-          updateValueCallback(data);
-  
+    Value = 10;
+
+    var data = new Buffer(4);
+    data.writeUInt8(Value, 0);
+    console.log('IDDCharacteristic update value: ' + Value);
+    updateValueCallback(data);
+
   }.bind(this), 500);
 };
 
@@ -58,19 +54,19 @@ IDDCharacteristic.prototype.onUnsubscribe = function () {
 
 IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
 
-AccelCallback = function(x, y, z){
-  AccelX = x;
-  AccelY = y;
-  AccelZ = z;
+  AccelCallback = function (x, y, z) {
+    AccelX = x;
+    AccelY = y;
+    AccelZ = z;
   }
 
-    Accel.getAccel(AccelCallback);
-    
-    AccelY = 10;
-            var data = new Buffer(4);
-          data.writeUInt8(AccelY, 0);
+  Accel.getAccel(AccelCallback);
 
-    callback(Characteristic.RESULT_SUCCESS, data);
+  AccelY = 10;
+  var data = new Buffer(4);
+  data.writeUInt8(AccelY, 0);
+
+  callback(Characteristic.RESULT_SUCCESS, data);
 };
 
 var thermometerService = new PrimaryService({

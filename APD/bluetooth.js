@@ -40,12 +40,12 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
     console.log('reading..');
     var Accel = data.readUInt8(0);
     console.log('Accel is', Accel.toFixed(1));
-  count ++;
-  /*  if(count > 10){
-      IDDCharacteristic.unsubscribe();
-    }*/
+    count++;
+    /*  if(count > 10){
+        IDDCharacteristic.unsubscribe();
+      }*/
   });
- 
+
   IDDCharacteristic.subscribe(); // ignore callback
   IDDCharacteristic.read();      // ignore callback
 }

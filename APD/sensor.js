@@ -16,11 +16,11 @@ var adcEnv = 1;                  //ADC Channel 1
 var adcLight = 2;                  //ADC Channel 1
 
 
-    gpio.wiringPiSetup();
-    gpio.pinMode(ultraTRIG, gpio.OUTPUT);
-    gpio.pinMode(ultraECHO, gpio.INPUT);
+gpio.wiringPiSetup();
+gpio.pinMode(ultraTRIG, gpio.OUTPUT);
+gpio.pinMode(ultraECHO, gpio.INPUT);
 
-module.exports.getTemp = function() {
+module.exports.getTemp = function () {
     temp.read(22, DHT22, function (err, temperature, humidity) {
         if (!err) {
             console.log("temp :" + temperature.toFixed(1) + "C");
@@ -28,7 +28,7 @@ module.exports.getTemp = function() {
     });
 };
 
-module.exports.getHumi = function() {
+module.exports.getHumi = function () {
     temp.read(22, DHT22, function (err, temperature, humidity) {
         if (!err) {
             console.log("humidity : " + humidity.toFixed(1) + "%");
@@ -36,8 +36,8 @@ module.exports.getHumi = function() {
     });
 };
 
-module.exports.getDist = function() {
-   var distance = 0;
+module.exports.getDist = function () {
+    var distance = 0;
     var pulse = 0;
     while (1) {
         gpio.digitalWrite(ultraTRIG, 0);
@@ -53,27 +53,27 @@ module.exports.getDist = function() {
         distance = (travelTime - startTime) / 58;
         output_dist = distance;
         console.log("Distance:\t" + distance);
-        
+
         sleep.msleep(300);
     }
 
 };
 
-module.exports.getAdcAudio = function() {
-  adc.readRawValue(adcAudio, function (value) {
+module.exports.getAdcAudio = function () {
+    adc.readRawValue(adcAudio, function (value) {
         console.log("Audio :\t" + value);
     });
-  
+
 };
 
-module.exports.getAdcEnv= function() {
-   adc.readRawValue(adcEnv, function (value) {
+module.exports.getAdcEnv = function () {
+    adc.readRawValue(adcEnv, function (value) {
         console.log("Env:\t" + value);
     });
 };
 
-module.exports.getAdcLight = function() {
-  
+module.exports.getAdcLight = function () {
+
     adc.readRawValue(adcLight, function (value) {
         console.log("Light:\t" + value);
     });

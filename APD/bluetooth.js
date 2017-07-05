@@ -60,6 +60,12 @@ noble.on('discover', function(peripheral) {
         console.log('on -> characteristic read ' + data + ' ' + isNotification);
         console.log(data);
 
+      });
+
+       characteristics[characteristicIndex].read(function(data, isNotification) {
+        console.log('on -> characteristic read ' + data + ' ' + isNotification);
+        console.log(data);
+
         peripheral.disconnect();
       });
 

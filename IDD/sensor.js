@@ -24,7 +24,7 @@ adxl345.getAcceleration(true) // true for g-force units, else false for m/s²
     .then((acceleration) => {
     // console.log(acceleration);
     var x = 23.21;
-    callback(acceleration);
+    callback(acceleration.x);
     })
     .catch((err) => {
       console.log(`ADXL345 read error: ${err}`);

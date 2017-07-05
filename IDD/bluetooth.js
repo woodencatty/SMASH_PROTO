@@ -31,6 +31,8 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
   this.changeInterval = setInterval(function () {
 
    result = Accel.getAccel();
+   console.log(Accel.getAccel());
+   result = 10.11;
           var data = new Buffer(4);
           data.writeFloatLE(result, 0);
 
@@ -52,6 +54,7 @@ IDDCharacteristic.prototype.onUnsubscribe = function () {
 IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
 
    result = Accel.getAccel();
+      result = 10.11;
           var data = new Buffer(4);
           data.writeFloatLE(result, 0);
     callback(Characteristic.RESULT_SUCCESS, data);

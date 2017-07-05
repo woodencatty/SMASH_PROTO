@@ -39,7 +39,7 @@ AccelCallback = function(x, y, z){
   
       AccelY = 10.42124124;
 
-          var data = new Buffer(30);
+          var data = new Buffer(4);
           data.writeFloatLE(AccelY, 0);
 
           console.log('IDDCharacteristic update value: ' + data);
@@ -68,7 +68,7 @@ AccelCallback = function(x, y, z){
     Accel.getAccel(AccelCallback);
     
     AccelY = 10.42;
-            var data = new Buffer(30);
+            var data = new Buffer(4);
           data.writeFloatLE(AccelY, 0);
 
     callback(Characteristic.RESULT_SUCCESS, data);

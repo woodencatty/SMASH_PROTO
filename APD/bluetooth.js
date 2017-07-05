@@ -19,6 +19,7 @@ noble.on('discover', function (peripheral) {
 
 function connectAndSetUp(peripheral) {
 
+  console.log('setting up');
   peripheral.connect(function (error) {
     var serviceUUIDs = ['bbb0'];
     var characteristicUUIDs = ['bbb1'];
@@ -29,6 +30,7 @@ function connectAndSetUp(peripheral) {
 }
 
 function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
+  console.log('service discover');
 
   var IDDCharacteristic = characteristics[0];
 

@@ -57,14 +57,17 @@ IDDCharacteristic.prototype.onUnsubscribe = function () {
 
 IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
 
-AccelCallback = function(value){
-    result = value;
+AccelCallback = function(x, y, z){
+  AccelX = x;
+  AccelY = y;
+  AccelZ = z;
   }
 
     Accel.getAccel(AccelCallback);
     
-              var data = new Buffer(30);
-          data.writeFloatLE(result, 0);
+            var data = new Buffer(30);
+          data.writeFloatLE(AccelY, 0);
+
     callback(Characteristic.RESULT_SUCCESS, data);
 };
 

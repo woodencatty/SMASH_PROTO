@@ -35,9 +35,6 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
     var celsius = data.readFloatLE(0);
     var fahrenheit = (celsius * 1.8 + 32.0).toFixed(1);
     console.log('Temperature is', celsius.toFixed(1) + '°C', fahrenheit + '°F');
-      
-      IDDCharacteristic.unsubscribe(); // ignore callback
-    peripheral.disconnect();
   });
 
   IDDCharacteristic.subscribe(); // ignore callback

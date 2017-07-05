@@ -35,13 +35,12 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
   console.log(characteristics);
 
   IDDCharacteristic.on('data', function (data, isNotification) {
-    var celsius = data.readFloatLE(0);
-    var fahrenheit = (celsius * 1.8 + 32.0).toFixed(1);
-    console.log('Temperature is', celsius.toFixed(1) + '°C', fahrenheit + '°F');
+    var Accel = data.readFloatLE(0);
+    console.log('Accel is', Accel.toFixed(1));
   count ++;
-    if(count > 10){
+  /*  if(count > 10){
       IDDCharacteristic.unsubscribe();
-    }
+    }*/
   });
  
   IDDCharacteristic.subscribe(); // ignore callback

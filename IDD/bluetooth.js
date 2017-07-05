@@ -8,6 +8,8 @@ var Characteristic = bleno.Characteristic;
 var Descriptor = bleno.Descriptor;
 var PrimaryService = bleno.PrimaryService;
 
+var result;
+
 var temperatureSensorId;
 
 var IDDCharacteristic = function () {
@@ -17,7 +19,7 @@ var IDDCharacteristic = function () {
     descriptors: [
       new Descriptor({
         uuid: '2901',
-        value: 'Temperature'
+        value: 'IDD'
       })]
   });
 };
@@ -27,7 +29,7 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
   console.log('IDDCharacteristic subscribe');
 
   this.changeInterval = setInterval(function () {
-    
+
    result = Accel.getAccel();
           var data = new Buffer(4);
           data.writeFloatLE(result, 0);
@@ -66,7 +68,7 @@ bleno.on('stateChange', function (state) {
   console.log('on -> stateChange: ' + state);
 
   if (state === 'poweredOn') {
-    bleno.startAdvertising('Thermometer', [thermometerService.uuid]);
+    bleno.startAdvertising('IDD', [thermometerService.uuid]);
   } else {
     bleno.stopAdvertising();
   }

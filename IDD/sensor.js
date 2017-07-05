@@ -22,7 +22,7 @@ const getAcceleration = () => {
 
 adxl345.getAcceleration(true) // true for g-force units, else false for m/s²
     .then((acceleration) => {
-     console.log(acceleration);
+    // console.log(acceleration);
      var x = acceleration.x;
      return x;
     })

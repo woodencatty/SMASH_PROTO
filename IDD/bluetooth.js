@@ -1,6 +1,9 @@
 var bleno = require('bleno');
 var util = require('util');
 
+var Accel = require('./sensor.js');
+
+
 var Characteristic = bleno.Characteristic;
 var Descriptor = bleno.Descriptor;
 var PrimaryService = bleno.PrimaryService;
@@ -24,8 +27,11 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
   console.log('IDDCharacteristic subscribe');
 
   this.changeInterval = setInterval(function () {
-      result = 29.1;
-          var data = new Buffer(4);
+     Accel.getAccel(Accel_callback);
+  Accal_callback = function(value){
+    result = value;
+  }
+          var data = new Buffer(20);
           data.writeFloatLE(result, 0);
 
           console.log('IDDCharacteristic update value: ' + result);
@@ -44,8 +50,11 @@ IDDCharacteristic.prototype.onUnsubscribe = function () {
 };
 
 IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
-   result = 29.1;
-          var data = new Buffer(4);
+  Accel.getAccel(Accel_callback);
+  Accal_callback = function(value){
+    result = value;
+  }
+          var data = new Buffer(20);
           data.writeFloatLE(result, 0);
     callback(Characteristic.RESULT_SUCCESS, data);
 };

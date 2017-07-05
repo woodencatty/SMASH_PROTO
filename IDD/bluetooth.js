@@ -37,7 +37,7 @@ AccelCallback = function(x, y, z){
 
     Accel.getAccel(AccelCallback);
   
-      AccelY = 10.4;
+      AccelY = 10.42;
 
           var data = new Buffer(4);
           data.writeFloatLE(AccelY, 0);
@@ -66,7 +66,7 @@ AccelCallback = function(x, y, z){
 
     Accel.getAccel(AccelCallback);
     
-    AccelY = 10.4;
+    AccelY = 10.42;
             var data = new Buffer(4);
           data.writeFloatLE(AccelY, 0);
 

@@ -18,13 +18,13 @@ const getAcceleration = () => {
   
 };
 
-  module.exports.getAccel = function() {
+  module.exports.getAccel = function(callback) {
 
 adxl345.getAcceleration(true) // true for g-force units, else false for m/s²
     .then((acceleration) => {
     // console.log(acceleration);
-     var x = 10.11;
-     return x;
+    var x = 10.1;
+    callback(x);
     })
     .catch((err) => {
       console.log(`ADXL345 read error: ${err}`);

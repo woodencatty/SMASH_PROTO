@@ -31,12 +31,20 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 
   var IDDCharacteristic = characteristics[0];
 
+  console.log(characteristics);
+
+  console.log(characteristics[0]);
+  console.log(characteristics[1]);
+
+
+  IDDCharacteristic.subscribe(); // ignore callback
+  IDDCharacteristic.read();      // ignore callback
+
   IDDCharacteristic.on('data', function (data, isNotification) {
     var celsius = data.readFloatLE(0);
     var fahrenheit = (celsius * 1.8 + 32.0).toFixed(1);
     console.log('Temperature is', celsius.toFixed(1) + '°C', fahrenheit + '°F');
   });
 
-  IDDCharacteristic.subscribe(); // ignore callback
-  IDDCharacteristic.read();      // ignore callback
+ 
 }

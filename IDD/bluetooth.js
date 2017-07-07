@@ -38,7 +38,7 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
   console.log('IDDCharacteristic subscribe');
 setTimeout(function(){
  this.SubsInterval = setInterval(function () {
-
+   console.log(Value);
     var data = new Buffer(4);
     data.writeUInt8(Value, 0);
     console.log('IDDCharacteristic update value: ' + Value);

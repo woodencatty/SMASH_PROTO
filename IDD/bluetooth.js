@@ -66,7 +66,7 @@ IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
   var data = new Buffer(0);
   data.writeUInt8(AccelY, 0);
 
-  callback(Characteristic.RESULT_SUCCESS, data);
+  callback(Characteristic.RESULT_SUCCESS, AccelY);
 };
 
 var thermometerService = new PrimaryService({

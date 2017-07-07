@@ -9,7 +9,7 @@ var Descriptor = bleno.Descriptor;
 var PrimaryService = bleno.PrimaryService;
 
 var Value;
-
+var data = new Buffer(4);
 
   this.ValueInterval = setInterval(function () {
     MoveCallback = function (MoveValue) {
@@ -18,6 +18,7 @@ var Value;
 
     Move.getMoveValue(MoveCallback)
 
+    data.writeUInt8(Value, 0);
 
   }.bind(this), 500);
 
@@ -38,9 +39,6 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
   console.log('IDDCharacteristic subscribe');
 setTimeout(function(){
  this.SubsInterval = setInterval(function () {
-   console.log(Value);
-    var data = new Buffer(4);
-    data.writeUInt8(Value, 0);
     console.log('IDDCharacteristic update value: ' + Value);
     updateValueCallback(data);
 

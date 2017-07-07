@@ -36,6 +36,6 @@ module.exports.getMoveValue = function (callback) {
       Value = MoveValue;
     }
 
-    Move.getMoveValue(MoveCallback)
+    getMoveValue(MoveCallback)
 
     console.log(Value);

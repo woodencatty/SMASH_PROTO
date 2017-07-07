@@ -31,9 +31,9 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
       Value = MoveValue;
     }
 
-    Move.getMoveValue(MoveCallback)
+    //Move.getMoveValue(MoveCallback)
 
-    Value = 125.235;
+    Value = 12.23;
 
     var data = new Buffer(4);
     data.writeFloatLE(Value, 0);
@@ -62,7 +62,7 @@ IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
 
   //Move.getAccel(AccelCallback);
 
-  AccelY = 1253.125;
+  AccelY = 12.12;
   var data = new Buffer(4);
   data.writeFloatLE(AccelY, 0);
 

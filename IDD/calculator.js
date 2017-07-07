@@ -7,6 +7,8 @@ var AccelZ;
 
 var MoveValue
 
+var Value
+
 module.exports.getMoveValue = function (callback) {
 
     AccelCallback = function (x, y, z) {
@@ -23,7 +25,17 @@ module.exports.getMoveValue = function (callback) {
 
     MoveValue = (AccelX + AccelY + AccelZ) * 3;
     
+    comsole.log(MoveValue);
+
     callback(MoveValue);
 
 
 };
+
+   MoveCallback = function (MoveValue) {
+      Value = MoveValue;
+    }
+
+    Move.getMoveValue(MoveCallback)
+
+    console.log(Value);

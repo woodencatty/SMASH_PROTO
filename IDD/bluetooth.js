@@ -60,7 +60,7 @@ IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
     AccelZ = z;
   }
 
-  Accel.getAccel(AccelCallback);
+  Move.getAccel(AccelCallback);
 
   AccelY = 10;
   var data = new Buffer(0);

@@ -38,7 +38,7 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
   console.log('IDDCharacteristic subscribe');
 
  this.SubsInterval = setInterval(function () {
-
+Value = 10;
     var data = new Buffer(4);
     data.writeUInt8(Value, 0);
     console.log('IDDCharacteristic update value: ' + Value);
@@ -69,7 +69,7 @@ IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
 
     Move.getMoveValue(MoveCallback)
 
-  Value = 30;
+  Value = 10;
   var data = new Buffer(4);
   data.writeUInt8(Value, 0);
 

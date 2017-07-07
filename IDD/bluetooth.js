@@ -36,7 +36,7 @@ util.inherits(IDDCharacteristic, Characteristic);
 
 IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
   console.log('IDDCharacteristic subscribe');
-
+setTimeout(function(){
  this.SubsInterval = setInterval(function () {
 Value = 10;
     var data = new Buffer(4);
@@ -45,6 +45,7 @@ Value = 10;
     updateValueCallback(data);
 
   }.bind(this), 500);
+}, 2000);
 };
 
 IDDCharacteristic.prototype.onUnsubscribe = function () {

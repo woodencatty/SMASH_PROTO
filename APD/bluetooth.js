@@ -21,6 +21,7 @@ function connectAndSetUp(peripheral) {
 
   console.log('setting up');
   peripheral.connect(function (error) {
+      console.log('connect');
     var serviceUUIDs = ['bbb0'];
     var characteristicUUIDs = ['bbb1'];
 

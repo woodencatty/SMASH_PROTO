@@ -43,7 +43,8 @@ module.exports.getMoveValue = function (callback) {
    MoveCallback = function (MoveValue) {
       Value = MoveValue;
     }
-
+this.changeInterval = setInterval(function () {
     Move.getMoveValue(MoveCallback)
 
     console.log(Value);
+     }.bind(this), 500);

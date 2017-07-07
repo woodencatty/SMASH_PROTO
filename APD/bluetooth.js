@@ -5,7 +5,7 @@ var noble = require('noble');
 var count = 0;
 noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {
-    noble.startScanning();
+    noble.startScanning(['bbb0']);
   } else {
     noble.stopScanning();
   }

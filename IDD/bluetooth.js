@@ -69,7 +69,7 @@ IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
 
     Move.getMoveValue(MoveCallback)
 
-  Value = 9392;
+  Value = 30;
   var data = new Buffer(4);
   data.writeUInt8(Value, 0);
 

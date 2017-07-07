@@ -33,7 +33,7 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
 
     //Move.getMoveValue(MoveCallback)
 
-    Value = 12.23;
+    Value = 12.2;
 
     var data = new Buffer(4);
     data.writeFloatLE(Value, 0);
@@ -54,19 +54,17 @@ IDDCharacteristic.prototype.onUnsubscribe = function () {
 
 IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
 
-  AccelCallback = function (x, y, z) {
-    AccelX = x;
-    AccelY = y;
-    AccelZ = z;
-  }
+   MoveCallback = function (MoveValue) {
+      Value = MoveValue;
+    }
 
-  //Move.getAccel(AccelCallback);
+    //Move.getMoveValue(MoveCallback)
 
-  AccelY = 12.12;
+  Value = 12.1;
   var data = new Buffer(4);
-  data.writeFloatLE(AccelY, 0);
+  data.writeFloatLE(Value, 0);
 
-  callback(Characteristic.RESULT_SUCCESS, AccelY);
+  callback(Characteristic.RESULT_SUCCESS, Value);
 };
 
 var thermometerService = new PrimaryService({

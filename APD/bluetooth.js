@@ -37,9 +37,6 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 
   console.log(characteristics);
 
-  IDDCharacteristic.subscribe(); // ignore callback
-  IDDCharacteristic.read();      // ignore callback
-
   IDDCharacteristic.on('data', function (data, isNotification) {
     console.log('reading..');
     var Accel = data.readFloatLE(0);
@@ -49,5 +46,8 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
         IDDCharacteristic.unsubscribe();
       }*/
   });
+
+  IDDCharacteristic.subscribe(); // ignore callback
+  IDDCharacteristic.read();      // ignore callback
 
 }

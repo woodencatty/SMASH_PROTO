@@ -1,5 +1,7 @@
 var Accel = require('./sensor.js');
 
+var Move = require('./calculator.js');
+
 
 var AccelX;
 var AccelY;
@@ -36,6 +38,6 @@ module.exports.getMoveValue = function (callback) {
       Value = MoveValue;
     }
 
-    getMoveValue(MoveCallback)
+    Move.getMoveValue(MoveCallback)
 
     console.log(Value);

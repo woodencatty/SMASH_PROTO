@@ -23,6 +23,12 @@ module.exports.getAccel = function (callback) {
   adxl345.getAcceleration(true) // true for g-force units, else false for m/s²
     .then((acceleration) => {
       // console.log(acceleration);
+
+
+    console.log(acceleration.x);
+    console.log(acceleration.y);
+    console.log(acceleration.z);
+
       callback(acceleration.x, acceleration.y, acceleration.z);
     })
     .catch((err) => {

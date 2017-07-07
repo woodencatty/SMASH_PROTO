@@ -21,12 +21,6 @@ module.exports.getMoveValue = function (callback) {
 
     Accel.getAccel(AccelCallback);
 
-
-    console.log(AccelX);
-    console.log(AccelY);
-    console.log(AccelZ);
-
-
     if(AccelX < 0){ AccelX = AccelX * -1;}
     if(AccelY < 0){ AccelY = AccelY * -1;}
     if(AccelZ < 0){ AccelZ = AccelZ * -1;}

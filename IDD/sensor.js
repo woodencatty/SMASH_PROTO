@@ -24,11 +24,6 @@ module.exports.getAccel = function (callback) {
     .then((acceleration) => {
       // console.log(acceleration);
 
-
-    console.log(acceleration.x);
-    console.log(acceleration.y);
-    console.log(acceleration.z);
-
       callback(acceleration.x, acceleration.y, acceleration.z);
     })
     .catch((err) => {

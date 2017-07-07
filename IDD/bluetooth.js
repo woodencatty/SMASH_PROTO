@@ -10,6 +10,17 @@ var PrimaryService = bleno.PrimaryService;
 
 var Value;
 
+
+  this.ValueInterval = setInterval(function () {
+    MoveCallback = function (MoveValue) {
+      Value = MoveValue;
+    }
+
+    Move.getMoveValue(MoveCallback)
+
+
+  }.bind(this), 500);
+
 var IDDCharacteristic = function () {
   IDDCharacteristic.super_.call(this, {
     uuid: 'bbb1',
@@ -26,15 +37,7 @@ util.inherits(IDDCharacteristic, Characteristic);
 IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
   console.log('IDDCharacteristic subscribe');
 
-  this.changeInterval = setInterval(function () {
-    MoveCallback = function (MoveValue) {
-      Value = MoveValue;
-    }
-
-    Value = 10;
-
-    Move.getMoveValue(MoveCallback)
-
+ this.SubsInterval = setInterval(function () {
 
     var data = new Buffer(4);
     data.writeUInt8(Value, 0);
@@ -47,9 +50,14 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
 IDDCharacteristic.prototype.onUnsubscribe = function () {
   console.log('IDDCharacteristic unsubscribe');
 
-  if (this.changeInterval) {
-    clearInterval(this.changeInterval);
-    this.changeInterval = null;
+  if (this.ValueInterval) {
+    clearInterval(this.ValueInterval);
+    this.ValueInterval = null;
+  }
+
+    if (this.SubsInterval) {
+    clearInterval(this.SubsInterval);
+    this.SubsInterval = null;
   }
 };
 

@@ -63,7 +63,7 @@ IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
   Accel.getAccel(AccelCallback);
 
   AccelY = 10;
-  var data = new Buffer(4);
+  var data = new Buffer(0);
   data.writeUInt8(AccelY, 0);
 
   callback(Characteristic.RESULT_SUCCESS, data);

@@ -6,17 +6,6 @@ var count = 0;
 
 
 module.exports.startScan = function () {
-  console.log('scan start')
-noble.on('stateChange', function (state) {
-   console.log(state)
-  if (state === 'poweredOn') {
-    noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
-      console.log('scanning..')
-  } else {
-    noble.stopScanning();
-          console.log('scan stop')
-  }
-});
 
 noble.on('discover', function(peripheral) {
   peripheral.connect(function(error) {

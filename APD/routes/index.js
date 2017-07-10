@@ -35,12 +35,12 @@ var light = 0;
       light = LightValue;
     }
     
-
+  console.log("device enable");
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log("device enable");
-  /*
-    sensor.getDist(DistCallback);
+ 
+    sensor.getDist(DistCallback); /*
     sensor.getTemp(TempCallback);
     sensor.getHumi(HumiCallback);
     sensor.getAdcAudio(AudCallback);

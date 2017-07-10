@@ -11,7 +11,6 @@ var audio = 0;
 var enviorment = 0;
 var light = 0;
 
-this.SensorInterval = setInterval(function () {
 
   DistCallback = function (DistValue) {
     distance = DistValue;
@@ -37,24 +36,35 @@ this.SensorInterval = setInterval(function () {
     light = LightValue;
   }
 
-  sensor.getDist(DistCallback);
+
+this.SensorInterval = setInterval(function () {
   sensor.getTemp(TempCallback);
   sensor.getHumi(HumiCallback); 
   sensor.getAdcAudio(AudCallback);
   sensor.getAdcEnv(EnvCallback);
   sensor.getAdcLight(LightCallback);
+}.bind(this), 1000);
 
+
+this.DistanceInterval = setInterval(function () {
+  sensor.getDist(DistCallback);
 }.bind(this), 500);
-console.log("device enable");
+
 /* GET home page. */
 router.get('/main', function (req, res, next) {
-  console.log("device enable");
+  console.log("Directed to Main Page");
+
+this.DistanceInterval = setInterval(function () {
+  console.log(distance);
+}.bind(this), 500);
+
 
   res.render('index', { title: '대기화면' });
 });
 
 
 router.get('/identify', function (req, res, next) {
+    console.log("Directed to ID Page");
   res.render('identify', { title: '인식화면' });
 
 });

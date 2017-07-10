@@ -30,9 +30,7 @@ noble.on('discover', function(peripheral) {
         IDDCharacteristic.subscribe(function(error) {
           console.log('battery level notification on');
         });
-        IDDCharacteristic.read(function(error){
-          console.log('READon');
-        })
+        
       });
     });
   });

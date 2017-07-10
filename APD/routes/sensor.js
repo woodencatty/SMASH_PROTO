@@ -49,10 +49,10 @@ module.exports.getDist = function (callback) {
         gpio.digitalWrite(ultraTRIG, 0);
         console.log('Trig off');
 
-        while (gpio.digitalRead(ultraECHO) == 0){        console.log('waiting');}
+        while (gpio.digitalRead(ultraECHO) == 1);
         var startTime = microt.now();
         console.log('Echo go');
-        while (gpio.digitalRead(ultraECHO) == 1);
+        while (gpio.digitalRead(ultraECHO) == 0);
         var travelTime = microt.now();
         console.log('Echo get');
         distance = (travelTime - startTime) / 58;

@@ -8,8 +8,8 @@ var usonic = require('mmm-usonic');
 
 
 const DHT22 = 22;                    //wPi GPIO 7
-const ultraTRIG = 13;               //wPi GPIO 22
-const ultraECHO = 15;               //wPi GPIO 27
+const ultraTRIG = 22;               //wPi GPIO 22
+const ultraECHO = 27;               //wPi GPIO 27
 
 var adc = new McpAdc.Mcp3208();
 var adcAudio = 0;                  //ADC Channel 0

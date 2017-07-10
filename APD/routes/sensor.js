@@ -1,15 +1,12 @@
 const gpio = require('wiring-pi');
-
+const sleep = require('sleep');
 const temp = require('node-dht-sensor');
-
+const microt = require('microtime-nodejs');
 const McpAdc = require('mcp-adc');
 
-var usonic = require('mmm-usonic');
-
-
 const DHT22 = 22;                    //wPi GPIO 7
-const ultraTRIG = 13;               //wPi GPIO 22
-const ultraECHO = 15;               //wPi GPIO 27
+const ultraTRIG = 0;               //wPi GPIO 22
+const ultraECHO = 2;               //wPi GPIO 27
 
 var adc = new McpAdc.Mcp3208();
 var adcAudio = 0;                  //ADC Channel 0
@@ -17,14 +14,9 @@ var adcEnv = 1;                  //ADC Channel 1
 var adcLight = 2;                  //ADC Channel 1
 
 
-usonic.init(function (error) {
-    if (error) {
-        console.log('ERROR : Distance sensor Failed');
-    } else {
-                console.log('Distance sensor initialized');
-    var sensor = usonic.createSensor(ultraECHO, ultraTRIG, 450);
-    }
-});
+gpio.wiringPiSetup();
+gpio.pinMode(ultraTRIG, gpio.OUTPUT);
+gpio.pinMode(ultraECHO, gpio.INPUT);
 
 module.exports.getTemp = function (callback) {
     temp.read(22, DHT22, function (err, temperature, humidity) {
@@ -45,10 +37,31 @@ module.exports.getHumi = function (callback) {
 };
 
 module.exports.getDist = function (callback) {
-       var sensor = usonic.createSensor(ultraECHO, ultraTRIG, 750);
-       var distance = sensor();
-       console.log(distance);
-       callback(distance);
+    var distance = 0;
+    var pulse = 0;
+    while (1) {
+        gpio.digitalWrite(ultraTRIG, 0);
+        console.log('Trig off');
+        sleep.msleep(2);
+        gpio.digitalWrite(ultraTRIG, 1);
+                console.log('Trig on');
+        sleep.msleep(20);
+        gpio.digitalWrite(ultraTRIG, 0);
+        console.log('Trig off');
+        while (gpio.digitalRead(ultraECHO) == 0);
+        var startTime = microt.now();
+        console.log('Echo go');
+        while (gpio.digitalRead(ultraECHO) == 1);
+        var travelTime = microt.now();
+        console.log('Echo get');
+        distance = (travelTime - startTime) / 58;
+        output_dist = distance;
+        console.log("Distance:\t" + distance);
+
+         callback(distance);
+        sleep.msleep(300);
+    }
+
 };
 
 module.exports.getAdcAudio = function (callback) {

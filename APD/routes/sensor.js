@@ -40,11 +40,11 @@ module.exports.getHumi = function (callback) {
 };
 
 module.exports.getDist = function (callback) {
-var sensor = usonic.createSensor(ultraECHO, ultraTRIG, 450);
 usonic.init(function (error) {
     if (error) {
         console.log('ERROR : Distance sensor Failed');
     } else {
+    var sensor = usonic.createSensor(ultraECHO, ultraTRIG, 450);
        var distance = sensor();
        callback(distance);
     }

@@ -80,26 +80,11 @@ if(distance < 50){
 
 router.get('/identify', function (req, res, next) {
     console.log("Directed to ID Page");
-  res.render('identify', { title: '인식화면', name:'김환자' });
+  //res.render('identify', { title: '인식화면', name:'김환자' });
   
- // bluetooth.startScan();
+  bluetooth.startScan();
  // bluetooth.getID(IDCallback);
  //  console.log(ID);
-
-
-   console.log('scan start')
-noble.on('stateChange', function (state) {
-   console.log(state)
-  if (state === 'poweredOn') {
-    noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
-      console.log('scanning..')
-  } else {
-    noble.stopScanning();
-          console.log('scan stop')
-  }
-  
-});
-
 });
 
 module.exports = router;

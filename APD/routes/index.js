@@ -40,13 +40,17 @@ var light = 0;
 router.get('/', function(req, res, next) {
   console.log("device enable");
  
-    sensor.getDist(DistCallback); /*
+  /*  sensor.getDist(DistCallback); 
     sensor.getTemp(TempCallback);
     sensor.getHumi(HumiCallback);
     sensor.getAdcAudio(AudCallback);
     sensor.getAdcEnv(EnvCallback);
     sensor.getAdcLight(LightCallback);
 */
+
+sensor.getTemp(TempCallback);
+
+
 console.log(distance);
 console.log(temperature);
 console.log(humidity);

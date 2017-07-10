@@ -4,8 +4,6 @@ const temp = require('node-dht-sensor');
 const microt = require('microtime-nodejs');
 const McpAdc = require('mcp-adc');
 
-var sensor = require('./sensor.js');
-
 const DHT22 = 22;                    //wPi GPIO 7
 const ultraTRIG = 17;               //wPi GPIO 22
 const ultraECHO = 27;               //wPi GPIO 27
@@ -25,7 +23,7 @@ module.exports.getTemp = function (callback) {
         if (!err) {
             console.log("temp :" + temperature.toFixed(1) + "C");
             callback(temperature.toFixed(1));
-        }
+        }else {console.log("Error detected");}
     });
 };
 
@@ -34,7 +32,7 @@ module.exports.getHumi = function (callback) {
         if (!err) {
             console.log("humidity : " + humidity.toFixed(1) + "%");
             callback(humidity.toFixed(1));
-        }
+        }else {console.log("Error detected");}
     });
 };
 

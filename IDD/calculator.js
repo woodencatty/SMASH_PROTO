@@ -1,8 +1,5 @@
 var Accel = require('./sensor.js');
 
-var Move = require('./calculator.js');
-
-
 var AccelX;
 var AccelY;
 var AccelZ;

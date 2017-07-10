@@ -36,8 +36,13 @@ var light = 0;
     LightCallback = function (LightValue) {
       light = LightValue;
     }
-
-    Move.getMoveValue(MoveCallback)
+    
+    sensor.getDist(DistCallback);
+    sensor.getTemp(TempCallback);
+    sensor.getHumi(HumiCallback);
+    sensor.getAdcAudio(AudCallback);
+    sensor.getAdcEnv(EnvCallback);
+    sensor.getAdcLight(LightCallback);
 
   }.bind(this), 500);
 

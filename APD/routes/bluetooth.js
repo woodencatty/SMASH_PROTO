@@ -10,8 +10,10 @@ module.exports.startScan = function () {
 noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {
     noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
+      console.log('scanning..')
   } else {
     noble.stopScanning();
+          console.log('scan stop')
   }
 });
 

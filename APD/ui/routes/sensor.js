@@ -20,23 +20,25 @@ gpio.wiringPiSetup();
 gpio.pinMode(ultraTRIG, gpio.OUTPUT);
 gpio.pinMode(ultraECHO, gpio.INPUT);
 
-module.exports.getTemp = function () {
+module.exports.getTemp = function (callback) {
     temp.read(22, DHT22, function (err, temperature, humidity) {
         if (!err) {
             console.log("temp :" + temperature.toFixed(1) + "C");
+            callback(temperature.toFixed(1));
         }
     });
 };
 
-module.exports.getHumi = function () {
+module.exports.getHumi = function (callback) {
     temp.read(22, DHT22, function (err, temperature, humidity) {
         if (!err) {
             console.log("humidity : " + humidity.toFixed(1) + "%");
+            callback(humidity.toFixed(1));
         }
     });
 };
 
-module.exports.getDist = function () {
+module.exports.getDist = function (callback) {
     var distance = 0;
     var pulse = 0;
     while (1) {
@@ -54,33 +56,33 @@ module.exports.getDist = function () {
         output_dist = distance;
         console.log("Distance:\t" + distance);
 
+         callback(distance);
         sleep.msleep(300);
     }
 
 };
 
-module.exports.getAdcAudio = function () {
+module.exports.getAdcAudio = function (callback) {
     adc.readRawValue(adcAudio, function (value) {
         console.log("Audio :\t" + value);
+        callback(value);
     });
 
 };
 
-module.exports.getAdcEnv = function () {
+module.exports.getAdcEnv = function (callback) {
     adc.readRawValue(adcEnv, function (value) {
         console.log("Env:\t" + value);
+        callback(value);
+
     });
 };
 
-module.exports.getAdcLight = function () {
+module.exports.getAdcLight = function (callback) {
 
     adc.readRawValue(adcLight, function (value) {
         console.log("Light:\t" + value);
+        callback(value);
+
     });
 };
-
-sensor.getTemp();
-sensor.getHumi();
-sensor.getAdcAudio();
-sensor.getAdcEnv();
-sensor.getAdcLight();

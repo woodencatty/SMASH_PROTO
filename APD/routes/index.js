@@ -11,6 +11,8 @@ var audio = 0;
 var enviorment = 0;
 var light = 0;
 
+  this.SensorInterval = setInterval(function () {
+
     DistCallback = function (DistValue) {
       distance = DistValue;
     }
@@ -35,20 +37,26 @@ var light = 0;
       light = LightValue;
     }
     
-  console.log("device enable");
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  console.log("device enable");
- 
    sensor.getDist(DistCallback); 
-
-
 sensor.getTemp(TempCallback);
 sensor.getHumi(HumiCallback);
     sensor.getAdcAudio(AudCallback);
     sensor.getAdcEnv(EnvCallback);
     sensor.getAdcLight(LightCallback);
 
+console.log(distance);
+console.log(temperature);
+console.log(humidity);
+console.log(audio);
+console.log(enviorment);
+console.log(light);
+
+  }.bind(this), 500);
+  console.log("device enable");
+/* GET home page. */
+router.get('/main', function(req, res, next) {
+  console.log("device enable");
+ 
     res.render('index', { title: '대기화면' });
 });
 
@@ -62,9 +70,5 @@ module.exports = router;
 
 
 /*
-
-  this.SensorInterval = setInterval(function () {
-
-  }.bind(this), 500);
 
   */

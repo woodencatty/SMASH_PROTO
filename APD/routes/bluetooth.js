@@ -5,7 +5,6 @@ var noble = require('noble');
 var count = 0;
 
 
-module.exports.startScan = function () {
   console.log('scan start')
 noble.on('stateChange', function (state) {
    console.log('scanning..')
@@ -34,11 +33,6 @@ noble.on('discover', function(peripheral) {
   });
 });
 
-};
-
-
-
-module.exports.getID = function (callback) {
   console.log('getting ID')
 
         IDDCharacteristic.on('data', function(data, isNotification) {
@@ -50,21 +44,7 @@ module.exports.getID = function (callback) {
         IDDCharacteristic.read(function(error) {
           console.log('Reading ID');
         });
-};
-
-
-module.exports.getAccelValue = function (callback) {
-  console.log('subscribe')
-
-        IDDCharacteristic.on('data', function(data, isNotification) {
-          console.log('Data : ', data.readUInt8(0));
-          callback(data.readUInt8(0));
-        });
-
         // to enable notify
         IDDCharacteristic.subscribe(function(error) {
           console.log('Accel value notification on');
         });
-
-        
-};

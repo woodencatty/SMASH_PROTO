@@ -49,13 +49,6 @@ sensor.getHumi(HumiCallback);
     sensor.getAdcEnv(EnvCallback);
     sensor.getAdcLight(LightCallback);
 
-console.log(distance);
-console.log(temperature);
-console.log(humidity);
-console.log(audio);
-console.log(enviorment);
-console.log(light);
-
     res.render('index', { title: '대기화면' });
 });
 

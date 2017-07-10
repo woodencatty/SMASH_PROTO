@@ -10,8 +10,6 @@ var humidity = 0;
 var audio = 0;
 var enviorment = 0;
 var light = 0;
-/*
-  this.SensorInterval = setInterval(function () {
 
     DistCallback = function (DistValue) {
       distance = DistValue;
@@ -37,6 +35,11 @@ var light = 0;
       light = LightValue;
     }
     
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  console.log("device enable");
+  
     sensor.getDist(DistCallback);
     sensor.getTemp(TempCallback);
     sensor.getHumi(HumiCallback);
@@ -44,12 +47,14 @@ var light = 0;
     sensor.getAdcEnv(EnvCallback);
     sensor.getAdcLight(LightCallback);
 
-  }.bind(this), 500);
-*/
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  console.log("device enable");
-    res.render('index', { title: 'Express' });
+console.log(distance);
+console.log(temperature);
+console.log(humidity);
+console.log(audio);
+console.log(enviorment);
+console.log(light);
+
+    res.render('index', { title: '대기화면' });
   
   if(distance > 50){
     res.redirect('/identify');
@@ -58,8 +63,17 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/identify', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('identify', { title: '인식화면' });
 
 });
 
 module.exports = router;
+
+
+/*
+
+  this.SensorInterval = setInterval(function () {
+
+  }.bind(this), 500);
+
+  */

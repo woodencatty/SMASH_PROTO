@@ -8,8 +8,8 @@ var usonic = require('mmm-usonic');
 
 
 const DHT22 = 22;                    //wPi GPIO 7
-const ultraTRIG = 17;               //wPi GPIO 22
-const ultraECHO = 27;               //wPi GPIO 27
+const ultraTRIG = 13;               //wPi GPIO 22
+const ultraECHO = 15;               //wPi GPIO 27
 
 var adc = new McpAdc.Mcp3208();
 var adcAudio = 0;                  //ADC Channel 0
@@ -17,9 +17,13 @@ var adcEnv = 1;                  //ADC Channel 1
 var adcLight = 2;                  //ADC Channel 1
 
 
-gpio.wiringPiSetup();
-gpio.pinMode(ultraTRIG, gpio.OUTPUT);
-gpio.pinMode(ultraECHO, gpio.INPUT);
+usonic.init(function (error) {
+    if (error) {
+        console.log('ERROR : Distance sensor Failed');
+    } else {
+    var sensor = usonic.createSensor(ultraECHO, ultraTRIG, 450);
+    }
+});
 
 module.exports.getTemp = function (callback) {
     temp.read(22, DHT22, function (err, temperature, humidity) {
@@ -40,16 +44,10 @@ module.exports.getHumi = function (callback) {
 };
 
 module.exports.getDist = function (callback) {
-usonic.init(function (error) {
-    if (error) {
-        console.log('ERROR : Distance sensor Failed');
-    } else {
-    var sensor = usonic.createSensor(ultraECHO, ultraTRIG, 450);
        var distance = sensor();
+       console.log(distance);
        callback(distance);
-    }
-});
-
+       
 };
 
 module.exports.getAdcAudio = function (callback) {

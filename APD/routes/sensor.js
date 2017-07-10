@@ -1,8 +1,11 @@
 const gpio = require('wiring-pi');
-const sleep = require('sleep');
+
 const temp = require('node-dht-sensor');
-const microt = require('microtime-nodejs');
+
 const McpAdc = require('mcp-adc');
+
+var usonic = require('mmm-usonic');
+
 
 const DHT22 = 22;                    //wPi GPIO 7
 const ultraTRIG = 17;               //wPi GPIO 22
@@ -37,31 +40,15 @@ module.exports.getHumi = function (callback) {
 };
 
 module.exports.getDist = function (callback) {
-    var distance = 0;
-    var pulse = 0;
-    
-        gpio.digitalWrite(ultraTRIG, 0);
-        console.log('Trig off');
-        sleep.msleep(20);
-
-
-        gpio.digitalWrite(ultraTRIG, 1);
-                console.log('Trig on');
-        sleep.msleep(10);
-        gpio.digitalWrite(ultraTRIG, 0);
-        console.log('Trig off');
-
-       // while (gpio.digitalRead(ultraECHO) == 0);
-        var startTime = microt.now();
-        console.log('Echo go');
-        while (gpio.digitalRead(ultraECHO) == 1);
-        var travelTime = microt.now();
-        console.log('Echo get');
-        distance = (travelTime - startTime) / 58;
-        output_dist = distance;
-        console.log("Distance:\t" + distance);
-
-         callback(distance);
+var sensor = usonic.createSensor(ultraECHO, ultraTRIG, 450);
+usonic.init(function (error) {
+    if (error) {
+        console.log('ERROR : Distance sensor Failed');
+    } else {
+       var distance = sensor();
+       callback(distance);
+    }
+});
 
 };
 

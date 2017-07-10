@@ -57,10 +57,6 @@ console.log(enviorment);
 console.log(light);
 
     res.render('index', { title: '대기화면' });
-  
-  if(distance > 50){
-    res.redirect('/identify');
-  }
 });
 
 

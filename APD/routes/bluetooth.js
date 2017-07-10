@@ -3,6 +3,10 @@
 var noble = require('noble');
 
 var count = 0;
+
+
+module.exports.startScan = function () {
+
 noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {
     noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
@@ -22,15 +26,41 @@ noble.on('discover', function(peripheral) {
         var IDDCharacteristic = characteristics[0];
         console.log('discovered IDD Level characteristic');
 
-        IDDCharacteristic.on('data', function(data, isNotification) {
-          console.log('IDD level is now: ', data.readUInt8(0));
-        });
-
-        // to enable notify
-        IDDCharacteristic.subscribe(function(error) {
-          console.log('battery level notification on');
-        });
       });
     });
   });
 });
+
+};
+
+
+
+module.exports.getID = function (callback) {
+
+        IDDCharacteristic.on('data', function(data, isNotification) {
+          console.log('Data : ', data.readUInt8(0));
+          callback(data.readUInt8(0));
+
+        });
+
+        IDDCharacteristic.read(function(error) {
+          console.log('Reading ID');
+        });
+};
+
+
+module.exports.getAccelValue = function (callback) {
+
+
+        IDDCharacteristic.on('data', function(data, isNotification) {
+          console.log('Data : ', data.readUInt8(0));
+          callback(data.readUInt8(0));
+        });
+
+        // to enable notify
+        IDDCharacteristic.subscribe(function(error) {
+          console.log('Accel value notification on');
+        });
+
+        
+};

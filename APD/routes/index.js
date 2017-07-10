@@ -11,6 +11,9 @@ var audio = 0;
 var enviorment = 0;
 var light = 0;
 
+var ID = 0;
+var Accel = 0;
+//sensor callback
 
   DistCallback = function (DistValue) {
     distance = DistValue;
@@ -36,6 +39,15 @@ var light = 0;
     light = LightValue;
   }
 
+//bluetooth callback
+
+  IDCallback = function (IDValue) {
+    ID = IDValue;
+  }
+
+  AccelCallback = function (AccelValue) {
+    Accel = AccelValue;
+  }
 
 this.SensorInterval = setInterval(function () {
   sensor.getTemp(TempCallback);
@@ -66,12 +78,12 @@ if(distance < 50){
 router.get('/identify', function (req, res, next) {
     console.log("Directed to ID Page");
   res.render('identify', { title: '인식화면' });
+  bluetooth.startScan();
+  bluetooth.getID(IDCallback);
+  console.log(ID);
+
 
 });
 
 module.exports = router;
 
-
-/*
-
-  */

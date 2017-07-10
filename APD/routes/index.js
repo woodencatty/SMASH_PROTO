@@ -10,7 +10,7 @@ var humidity = 0;
 var audio = 0;
 var enviorment = 0;
 var light = 0;
-
+/*
   this.SensorInterval = setInterval(function () {
 
     DistCallback = function (DistValue) {
@@ -45,13 +45,13 @@ var light = 0;
     sensor.getAdcLight(LightCallback);
 
   }.bind(this), 500);
-
+*/
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log("device enable");
     res.render('index', { title: 'Express' });
   
-  if(distance < 50){
+  if(distance > 50){
     res.redirect('/identify');
   }
 });

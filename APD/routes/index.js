@@ -54,12 +54,11 @@ this.DistanceInterval = setInterval(function () {
 router.get('/main', function (req, res, next) {
   console.log("Directed to Main Page");
 
-this.DistanceInterval = setInterval(function () {
-  console.log(distance);
-}.bind(this), 500);
-
-
+if(distance < 50){
+  res.redirect('/identify')
+}else{
   res.render('index', { title: '대기화면' });
+}
 });
 
 

@@ -23,7 +23,7 @@ noble.on('discover', function(peripheral) {
         console.log('discovered IDD Level characteristic');
 
         IDDCharacteristic.on('data', function(data, isNotification) {
-          console.log('IDD level is now: ', data);
+          console.log('IDD level is now: ', data.readUInt8(0));
         });
 
         // to enable notify

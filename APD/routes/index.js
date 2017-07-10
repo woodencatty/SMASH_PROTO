@@ -56,6 +56,7 @@ router.get('/main', function (req, res, next) {
 
 if(distance < 50){
   res.redirect('/identify')
+  console.log('\t' + distance);
 }else{
   res.render('index', { title: '대기화면' });
 }

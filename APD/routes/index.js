@@ -70,19 +70,18 @@ if(distance < 50){
   res.redirect('/identify')
   console.log('\t' + distance);
 }else{
-  res.render('index', { title: '대기화면' });
+  res.render('index', { title: '대기화면', temp: temperature, humi: humidity, audio: audio, env: enviorment, light: light });
 }
 });
 
 
 router.get('/identify', function (req, res, next) {
     console.log("Directed to ID Page");
-  res.render('identify', { title: '인식화면' });
+  res.render('identify', { title: '인식화면', name:'김환자' });
+  
   bluetooth.startScan();
-  bluetooth.getID(IDCallback);
-  console.log(ID);
-
-
+ // bluetooth.getID(IDCallback);
+ //  console.log(ID);
 });
 
 module.exports = router;

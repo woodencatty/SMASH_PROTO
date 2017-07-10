@@ -6,7 +6,7 @@ var count = 0;
 
 
 module.exports.startScan = function () {
-
+  console.log('스캔 시작')
 noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {
     noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
@@ -36,6 +36,7 @@ noble.on('discover', function(peripheral) {
 
 
 module.exports.getID = function (callback) {
+  console.log('ID받아오기')
 
         IDDCharacteristic.on('data', function(data, isNotification) {
           console.log('Data : ', data.readUInt8(0));
@@ -50,7 +51,7 @@ module.exports.getID = function (callback) {
 
 
 module.exports.getAccelValue = function (callback) {
-
+  console.log('subscribe')
 
         IDDCharacteristic.on('data', function(data, isNotification) {
           console.log('Data : ', data.readUInt8(0));

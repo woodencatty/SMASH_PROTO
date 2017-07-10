@@ -21,6 +21,7 @@ usonic.init(function (error) {
     if (error) {
         console.log('ERROR : Distance sensor Failed');
     } else {
+                console.log('Distance sensor initialized');
     var sensor = usonic.createSensor(ultraECHO, ultraTRIG, 450);
     }
 });
@@ -44,10 +45,10 @@ module.exports.getHumi = function (callback) {
 };
 
 module.exports.getDist = function (callback) {
+       var sensor = usonic.createSensor(ultraECHO, ultraTRIG, 450);
        var distance = sensor();
        console.log(distance);
        callback(distance);
-       
 };
 
 module.exports.getAdcAudio = function (callback) {

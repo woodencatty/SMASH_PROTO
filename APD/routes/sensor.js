@@ -21,7 +21,7 @@ gpio.pinMode(ultraECHO, gpio.INPUT);
 module.exports.getTemp = function (callback) {
     temp.read(22, DHT22, function (err, temperature, humidity) {
         if (!err) {
-            console.log("temp :" + temperature.toFixed(1) + "C");
+         //   console.log("temp :" + temperature.toFixed(1) + "C");
             callback(temperature.toFixed(1));
         }else {console.log("Error detected");}
     });
@@ -30,7 +30,7 @@ module.exports.getTemp = function (callback) {
 module.exports.getHumi = function (callback) {
     temp.read(22, DHT22, function (err, temperature, humidity) {
         if (!err) {
-            console.log("humidity : " + humidity.toFixed(1) + "%");
+        //    console.log("humidity : " + humidity.toFixed(1) + "%");
             callback(humidity.toFixed(1));
         }else {console.log("Error detected");}
     });
@@ -50,14 +50,14 @@ module.exports.getDist = function (callback) {
         var travelTime = microt.now();
         distance = (travelTime - startTime) / 58;
         output_dist = distance;
-        console.log("Distance:\t" + distance);
+     //   console.log("Distance:\t" + distance);
          callback(distance);
 
 };
 
 module.exports.getAdcAudio = function (callback) {
     adc.readRawValue(adcAudio, function (value) {
-        console.log("Audio :\t" + value);
+     //   console.log("Audio :\t" + value);
         callback(value);
     });
 
@@ -65,7 +65,7 @@ module.exports.getAdcAudio = function (callback) {
 
 module.exports.getAdcEnv = function (callback) {
     adc.readRawValue(adcEnv, function (value) {
-        console.log("Env:\t" + value);
+     //   console.log("Env:\t" + value);
         callback(value);
 
     });
@@ -74,7 +74,7 @@ module.exports.getAdcEnv = function (callback) {
 module.exports.getAdcLight = function (callback) {
 
     adc.readRawValue(adcLight, function (value) {
-        console.log("Light:\t" + value);
+    //    console.log("Light:\t" + value);
         callback(value);
 
     });

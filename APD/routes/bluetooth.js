@@ -28,11 +28,6 @@ noble.on('discover', function(peripheral) {
         var IDDCharacteristic = characteristics[0];
         console.log('discovered IDD Level characteristic');
 
-      });
-    });
-  });
-});
-
   console.log('getting ID')
 
         IDDCharacteristic.on('data', function(data, isNotification) {
@@ -48,3 +43,8 @@ noble.on('discover', function(peripheral) {
         IDDCharacteristic.subscribe(function(error) {
           console.log('Accel value notification on');
         });
+
+      });
+    });
+  });
+});

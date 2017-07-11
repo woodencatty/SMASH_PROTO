@@ -40,5 +40,5 @@ noble.on('discover', function(peripheral) {
       });
     });
   });
-  }else {console.log(peripheral + '  \n\n\n');}
+}else {console.log(name + '  sorry, not you.');}
 });

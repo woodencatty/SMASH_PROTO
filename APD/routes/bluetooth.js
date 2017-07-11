@@ -10,13 +10,14 @@ var serviceUUIDs = ["bbb0"]; // default: [] => all
 var allowDuplicates = false; // default: false
 
   if (state === 'poweredOn') {
-    noble.startScanning(serviceUUIDs, allowDuplicates); // particular UUID's
+    noble.startScanning(); // particular UUID's
   } else {
     noble.stopScanning();
   }
 });
 
 noble.on('discover', function(peripheral) {
+  if(peripheral.uuid == 'bbb0'){
   peripheral.connect(function(error) {
     console.log('connected to peripheral: ' + peripheral.uuid);
     peripheral.discoverServices(['bbb0'], function(error, services) {
@@ -39,4 +40,5 @@ noble.on('discover', function(peripheral) {
       });
     });
   });
+  }else {console.log('사람 잘못찾으셨습니다.');}
 });

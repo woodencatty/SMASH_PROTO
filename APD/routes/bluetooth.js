@@ -17,7 +17,7 @@ var allowDuplicates = false; // default: false
 });
 
 noble.on('discover', function(peripheral) {
-  if(peripheral.advertisement.localName == 'IDD'){
+  if(peripheral.advertisement.localName == 'IasdfDD'){
   peripheral.connect(function(error) {
     console.log('connected to peripheral: ' + peripheral.uuid);
     peripheral.discoverServices(['bbb0'], function(error, services) {

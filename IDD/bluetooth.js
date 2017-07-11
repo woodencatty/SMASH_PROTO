@@ -8,7 +8,9 @@ var Characteristic = bleno.Characteristic;
 var Descriptor = bleno.Descriptor;
 var PrimaryService = bleno.PrimaryService;
 
-var Value;var IDDCharacteristic = function () {
+var Value;
+
+var IDDCharacteristic = function () {
   IDDCharacteristic.super_.call(this, {
     uuid: 'bbb1',
     properties: ['read', 'notify'],

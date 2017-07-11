@@ -2,9 +2,7 @@
 // and display notification for temperature changes
 var noble = require('noble');
 
-var IDDService;
-var IDDCharacteristic;
-
+var count = 0;
 
 noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {
@@ -18,11 +16,11 @@ noble.on('discover', function(peripheral) {
   peripheral.connect(function(error) {
     console.log('connected to peripheral: ' + peripheral.uuid);
     peripheral.discoverServices(['bbb0'], function(error, services) {
-      IDDService = services[0];
+      var IDDService = services[0];
       console.log('discoveredIDD service');
 
       IDDService.discoverCharacteristics(['bbb1'], function(error, characteristics) {
-        IDDCharacteristic = characteristics[0];
+        var IDDCharacteristic = characteristics[0];
         console.log('discovered IDD Level characteristic');
 
         IDDCharacteristic.on('data', function(data, isNotification) {

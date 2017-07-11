@@ -81,13 +81,6 @@ if(distance < 50){
 router.get('/try', function (req, res, next) {
 
   res.render('try');
-  next();
-});
-
-router.get('/welcome', function (req, res, next) {
-  var name = '김환자';
-  res.render('welcome', { name: name});
-  next();
 });
 
 router.get('/identify', function (req, res, next) {
@@ -99,6 +92,17 @@ router.get('/identify', function (req, res, next) {
  //  console.log(ID);
 
  res.redirect('/welcome')
+});
+
+
+router.get('/welcome', function (req, res, next) {
+  var name = '김환자';
+  res.render('welcome', { name: name});
+});
+
+
+router.get('/exercise', function (req, res, next) {
+  res.render('exercise');
 });
 
 module.exports = router;

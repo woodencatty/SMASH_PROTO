@@ -40,5 +40,5 @@ noble.on('discover', function(peripheral) {
       });
     });
   });
-  }else {console.log('사람 잘못찾으셨습니다.');}
+  }else {console.log(peripheral.uuid + 'Sorry. I am not your friend.');}
 });

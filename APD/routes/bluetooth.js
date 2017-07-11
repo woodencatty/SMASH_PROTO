@@ -17,7 +17,7 @@ var allowDuplicates = false; // default: false
 });
 
 noble.on('discover', function(peripheral) {
-  if(peripheral.uuid == 'bbb0'){
+  if(peripheral.advertisement.localName == 'IDD'){
   peripheral.connect(function(error) {
     console.log('connected to peripheral: ' + peripheral.uuid);
     peripheral.discoverServices(['bbb0'], function(error, services) {
@@ -40,5 +40,5 @@ noble.on('discover', function(peripheral) {
       });
     });
   });
-}else {console.log(peripheral.localname + '  sorry, not you.');}
+}else {console.log(peripheral.advertisement.localName + '  sorry, not you.');}
 });

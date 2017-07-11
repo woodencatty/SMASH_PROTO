@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title Welcome
+  h1 Welcome! #{temp} 
+  
+  p What do you wanna do?
+
+  input#btnYes(name='btnYes', type='button', value='I wanna do something', onclick="location.href='http://127.0.0.1:3000/exercise'")
+  input#btnNo(name='btnNo', type='button', value='I wanna do nothing', onclick="location.href='http://127.0.0.1:3000/main'")
+  body

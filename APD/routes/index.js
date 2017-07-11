@@ -84,6 +84,12 @@ router.get('/try', function (req, res, next) {
   next();
 });
 
+router.get('/welcome', function (req, res, next) {
+  var name = '김환자';
+  res.render('welcome', { name: name});
+  next();
+});
+
 router.get('/identify', function (req, res, next) {
     console.log("Directed to ID Page");
   //res.render('identify', { title: '인식화면', name:'김환자' });

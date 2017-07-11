@@ -70,13 +70,19 @@ router.get('/main', function (req, res, next) {
   console.log("Directed to Main Page");
 
 if(distance < 50){
-  res.redirect('/identify')
+  res.redirect('/try')
   console.log('\t' + distance);
 }else{
   res.render('index', { title: '대기화면', temp: temperature, humi: humidity, audio: audio, env: enviorment, light: light });
 }
 });
 
+
+router.get('/try', function (req, res, next) {
+
+  res.render('try');
+  next();
+});
 
 router.get('/identify', function (req, res, next) {
     console.log("Directed to ID Page");

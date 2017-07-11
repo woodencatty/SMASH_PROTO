@@ -40,5 +40,5 @@ noble.on('discover', function(peripheral) {
       });
     });
   });
-  }else {console.log(peripheral.id + '   Sorry. I am not your friend.');}
+  }else {console.log(peripheral + '  \n\n\n');}
 });

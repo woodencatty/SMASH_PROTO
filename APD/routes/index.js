@@ -94,9 +94,11 @@ router.get('/identify', function (req, res, next) {
     console.log("Directed to ID Page");
   //res.render('identify', { title: '인식화면', name:'김환자' });
   
-  bluetooth.startScan();
+  //bluetooth.startScan();
  // bluetooth.getID(IDCallback);
  //  console.log(ID);
+
+ res.redirect('/welcome')
 });
 
 module.exports = router;

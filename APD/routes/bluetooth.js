@@ -19,7 +19,6 @@ noble.on('scanStart', function (state) {
   });
 
   noble.on('discover', function (peripheral) {
-    noble.stopScanning();
   console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
   connectAndSetUp(peripheral);
 });

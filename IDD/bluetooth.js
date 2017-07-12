@@ -3,7 +3,7 @@ var util = require('util');
 
 var Move = require('./calculator.js');
 
-var Value;
+var Value = 0;
 
 function IDDService() {
     bleno.PrimaryService.call(this, {
@@ -47,7 +47,6 @@ IDDCharacteristic.prototype.onReadRequest = function(offset, callback) {
     }
 
     Move.getMoveValue(MoveCallback)
-
     var data = new Buffer(1);
     data.writeUInt8(Value, 0);
     callback(this.RESULT_SUCCESS, data);

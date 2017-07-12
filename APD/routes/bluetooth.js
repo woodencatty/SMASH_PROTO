@@ -19,11 +19,11 @@ noble.on('stateChange', function (state) {
     noble.stopScanning();
   }
 });
+};
 noble.on('discover', function (peripheral) {
   console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
   connectAndSetUp(peripheral);
 });
-};
 function connectAndSetUp(peripheral) {
   IDDperipheral = peripheral;
   peripheral.connect(function (error) {

@@ -4,9 +4,6 @@ const router = express.Router();
 const sensor = require('./sensor.js')
 const bluetooth = require('./bluetooth.js')
 
-var noble = require('noble');
-
-
 var distance = 0;
 var temperature = 0;
 var humidity = 0;
@@ -75,13 +72,12 @@ router.get('/try', function (req, res, next) {
 
 router.get('/identify', function (req, res, next) {
     console.log("Directed to identify Page");
-bluetooth.searchIDD();
 
-  bluetooth.searchIDD(function(IDValue){
+  IDDCallback = function (IDValue){
     ID = IDValue;
-    console.log(ID); 
-    
-  });
+    console.log(ID);    
+  }
+bluetooth.searchIDD(IDDCallback);
 
 
   setTimeout(function(){res.render('identify');}, 5000);

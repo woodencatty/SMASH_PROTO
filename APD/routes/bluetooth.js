@@ -1,6 +1,7 @@
 // Connect to Thermometer Service 0xBBB0
 // and display notification for temperature changes
 var noble = require('noble');
+  console.log('bluetooth module OK');
 
   const serviceUUIDs = ['bbb0'];
   const characteristicUUIDs = ['bbb1'];
@@ -19,13 +20,11 @@ noble.on('stateChange', function (state) {
     noble.stopScanning();
   }
 });
-}
 noble.on('discover', function (peripheral) {
   console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
   connectAndSetUp(peripheral);
-  // TODO should stop scanning otherwise we connect to ALL the thermometers
 });
-//};
+};
 function connectAndSetUp(peripheral) {
   IDDperipheral = peripheral;
   peripheral.connect(function (error) {

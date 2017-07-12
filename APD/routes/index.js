@@ -39,6 +39,7 @@ var ID;
   }
 
 //bluetooth callback
+bluetooth.searchIDD();
 
 this.SensorInterval = setInterval(function () {
   sensor.getTemp(TempCallback);
@@ -91,7 +92,6 @@ bluetooth.searchIDD();
 router.get('/welcome', function (req, res, next) {
       console.log("Directed to welcome Page");
       console.log(ID);
-      router.route('/try')
 
   var name = '김환자';
   res.render('welcome', { name: name});

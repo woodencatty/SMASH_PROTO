@@ -73,20 +73,23 @@ IDDCharacteristic.prototype.onUnsubscribe = function () {
   }
 };
 
-IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
-
-   MoveCallback = function (MoveValue) {
+IDDCharacteristic.prototype.onReadRequest = function(offset, callback) {
+  if (offset) {
+    callback(this.RESULT_ATTR_NOT_LONG, null);
+  }
+  else {
+    MoveCallback = function (MoveValue) {
       Value = MoveValue;
     }
 
     Move.getMoveValue(MoveCallback)
 
-  Value = 10;
-  var data = new Buffer(4);
-  data.writeUInt8(Value, 0);
-
-  callback(Characteristic.RESULT_SUCCESS, Value);
+    var data = new Buffer(1);
+    data.writeUInt8(Value, 0);
+    callback(this.RESULT_SUCCESS, data);
+  }
 };
+
 
 bleno.on('stateChange', function(state) {
   if (state === 'poweredOn') {

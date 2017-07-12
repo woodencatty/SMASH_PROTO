@@ -9,9 +9,9 @@ const characteristicUUID = '13333333333333333333333333330001'; // default: [] =>
 
 var IDDService = null;
 var IDDCharacteristic = null;
-  console.log('its on');
+console.log('its on');
 
-noble.on('stateChange', function(state) {
+noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {
     //
     // Once the BLE radio has been powered on, it is possible
@@ -27,31 +27,20 @@ noble.on('stateChange', function(state) {
 })
 
 noble.on('discover', function (peripheral) {
-  
-      console.log('find peripheral: ' + peripheral);
-    peripheral.connect(function (err) {
-      console.log('connect to peripheral: ' + peripheral);
-      peripheral.discoverServices([], function (err, services) {
-              console.log('services find: ' + services);
-        services.forEach(function (service) {
-          console.log('this service : ' + service);
-          IDDService.discoverCharacteristics([], function (err, characteristics) {
-                          console.log('characteristics find: ' + characteristics);
-            characteristics.forEach(function (characteristic) {
-                          console.log('this characteristics: ' + characteristic);
-              // Loop through each characteristic and match them to the
-              // UUIDs that we know about.
-              //
-              console.log('found characteristic:', characteristic.uuid);
-              if (characteristic.uuid == characteristicUUID) {
-                IDDCharacteristic = characteristic;
-                console.log('connected to' + characteristic.uuid)
-              }
-            });
 
-          });
+  console.log('find peripheral: ' + peripheral);
+  peripheral.connect(function (err) {
+    console.log('connect to peripheral: ' + peripheral);
+    peripheral.discoverServices([], function (err, services) {
+      console.log('services find: ' + services);
+      IDDService.discoverCharacteristics([], function (err, characteristics) {
+        console.log('this characteristics: ' + characteristics);
+        characteristics.on('read', function (data, isNotification) {
+          console.log('Our pizza is ready!');
+          var result = data.readUInt8(0);
+          console.log(result);
         });
       });
     });
+  });
 });
-

@@ -34,7 +34,7 @@ noble.on('discover', function (peripheral) {
 
       var IDDCharacteristic = characteristics[0];
   IDDCharacteristic.on('data', function (data, isNotification) {
-    var celsius = data.writeFloatLE(0);
+    var celsius = data.readFloatLE(0);
     console.log('Temperature is', celsius);
   });
   IDDCharacteristic.subscribe(); // ignore callback

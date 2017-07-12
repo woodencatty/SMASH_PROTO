@@ -1,5 +1,3 @@
-var sensor = require('./sensor.js')
+var bluetooth = require('./bluetooth.js')
 
-sensor.getAccel(function (acceleration) {
-    console.log('real' + acceleration);
-});
+bluetooth.AdvertisingDevice();

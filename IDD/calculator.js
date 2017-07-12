@@ -23,7 +23,7 @@ module.exports.getMoveValue = function (callback) {
     if(AccelZ < 0){ AccelZ = AccelZ * -1;}
 
     MoveValue = (AccelX + AccelY + AccelZ) * 3;
-    
+    if(MoveValue < 1){MoveValue = 5;}    
     //console.log(MoveValue);
 
     callback(MoveValue);

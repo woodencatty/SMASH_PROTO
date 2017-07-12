@@ -2,11 +2,14 @@
 var bleno = require('bleno');
 var util = require('util');
 
+var move = require('./calculator.js')
+
+
 var Characteristic = bleno.Characteristic;
 var Descriptor = bleno.Descriptor;
 var PrimaryService = bleno.PrimaryService;
 
-var lastTemp;
+var value = 10.00;
 
 var IDDCharacteristic = function () {
   IDDCharacteristic.super_.call(this, {
@@ -24,11 +27,18 @@ util.inherits(IDDCharacteristic, Characteristic);
 IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
   console.log('IDDCharacteristic subscribe');
 
+  var value = 10.00
+
   this.changeInterval = setInterval(function () {
 
-        result = 10.10;
+  MoveCallback = function (MoveValue) {
+      Value = MoveValue;
+    }
+
+        move.getMoveValue(MoveCallback)
+        
           var data = new Buffer(4);
-          data.writeFloatLE(result, 0);
+          data.writeFloatLE(value, 0);
 
           console.log('IDDCharacteristic update value: ' + result);
           updateValueCallback(data);
@@ -60,7 +70,7 @@ var IDDService = new PrimaryService({
     new IDDCharacteristic()
   ]
 });
-
+module.exports.AdvertisingDevice = function () {
 bleno.on('stateChange', function (state) {
   console.log('on -> stateChange: ' + state);
 
@@ -70,7 +80,7 @@ bleno.on('stateChange', function (state) {
     bleno.stopAdvertising();
   }
 });
-
+};
 bleno.on('advertisingStart', function (error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
 

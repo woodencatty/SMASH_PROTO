@@ -47,15 +47,14 @@ IDDCharacteristic.prototype.onReadRequest = function(offset, callback) {
     }
 
     Move.getMoveValue(MoveCallback)
-    var data = new Buffer(1);
-    data.writeUInt8(Value, 0);
+    var data = new Buffer(4);
+    data.writeFloatLE(Value, 0);
     callback(this.RESULT_SUCCESS, data);
   }
 };
 
 IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
   console.log('IDDCharacteristic subscribe');
-setTimeout(function(){
  this.SubsInterval = setInterval(function () {
 
        MoveCallback = function (MoveValue) {
@@ -66,13 +65,12 @@ setTimeout(function(){
 
     var data = new Buffer(4);
 
-    data.writeUInt8(Value, 0);
+    data.writeFloatLE(Value, 0);
 
     console.log('IDDCharacteristic update value: ' + Value);
     updateValueCallback(data);
 
   }.bind(this), 500);
-}, 2000);
 };
 
 IDDCharacteristic.prototype.onUnsubscribe = function () {

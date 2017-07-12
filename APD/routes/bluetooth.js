@@ -7,8 +7,6 @@ var count = 0;
 const serviceUUID = '13333333333333333333333333333337'; // default: [] => all
 const characteristicUUID = '13333333333333333333333333330001'; // default: [] => all
 
-var IDDService = null;
-var IDDCharacteristic = null;
 console.log('its on');
 
 noble.on('stateChange', function (state) {
@@ -33,16 +31,14 @@ noble.on('discover', function (peripheral) {
     peripheral.discoverSomeServicesAndCharacteristics([serviceUUID], [characteristicUUID], function (err, services, characteristics) {
       console.log('services find: ' + services);
       console.log('characteristics find: ' + characteristics);
-      
-          characteristics.forEach(function(characteristic) {
-            
-  characteristic.on('data', function (data, isNotification) {
-    var celsius = data;
+
+      var IDDCharacteristic = characteristics[0];
+  IDDCharacteristic.on('data', function (data, isNotification) {
+    var celsius = data.writeFloatLE(0);
     console.log('Temperature is', celsius);
   });
-
-  characteristic.subscribe(); // ignore callback
-  characteristic.read();      // ignore callback
+  IDDCharacteristic.subscribe(); // ignore callback
+  IDDCharacteristic.read();      // ignore callback
     });
        });
     /*peripheral.discoverServices([serviceUUID], function (err, services) {

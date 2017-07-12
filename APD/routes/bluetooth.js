@@ -33,12 +33,6 @@ noble.on('discover', function (peripheral) {
       console.log('services find: ' + services);
       console.log('services find: ' + characteristics);
 
-      characteristics.on('read', function (data, isNotification) {
-        console.log('Our pizza is ready!');
-        var result = data.readUInt8(0);
-        console.log(result);
-      });
-
     });
 
     

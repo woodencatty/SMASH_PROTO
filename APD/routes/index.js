@@ -4,6 +4,8 @@ const router = express.Router();
 const sensor = require('./sensor.js')
 const bluetooth = require('./bluetooth.js')
 
+var noble = require('noble');
+
 var distance = 0;
 var temperature = 0;
 var humidity = 0;
@@ -40,7 +42,7 @@ var ID;
 
 //bluetooth callback
 function getIDD(){
-bluetooth.searchIDD();
+bluetooth.searchIDD(noble);
 }
 this.SensorInterval = setInterval(function () {
   sensor.getTemp(TempCallback);

@@ -1,6 +1,5 @@
 // Connect to Thermometer Service 0xBBB0
 // and display notification for temperature changes
-var noble = require('noble');
   console.log('bluetooth module OK');
 
   const serviceUUIDs = ['bbb0'];
@@ -10,7 +9,7 @@ var noble = require('noble');
  var IDDCharacteristic = null;
  var IDDperipheral = null;
 
-module.exports.searchIDD = function () {
+module.exports.searchIDD = function (noble) {
   console.log('scan start');
 noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {

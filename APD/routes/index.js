@@ -77,7 +77,7 @@ router.get('/identify', function (req, res, next) {
     ID = IDValue;
     console.log(ID);    
   }
-bluetooth.searchIDD(IDDCallback);
+bluetooth.searchIDD();
 
 
   setTimeout(function(){res.render('identify');}, 5000);

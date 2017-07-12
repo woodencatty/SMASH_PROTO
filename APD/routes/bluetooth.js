@@ -1,5 +1,5 @@
-// Connect to Thermometer Service 0xBBB0
-// and display notification for temperature changes
+var noble = require('noble');
+
   console.log('bluetooth module OK');
 
   const serviceUUIDs = ['bbb0'];

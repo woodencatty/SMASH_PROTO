@@ -13,7 +13,6 @@ var audio = 0;
 var enviorment = 0;
 var light = 0;
 
-var ID;
 //sensor callback
 
   DistCallback = function (DistValue) {
@@ -41,7 +40,7 @@ var ID;
   }
 
 //bluetooth callback
-bluetooth.searchIDD(noble);
+bluetooth.searchIDD();
 
 this.SensorInterval = setInterval(function () {
   sensor.getTemp(TempCallback);

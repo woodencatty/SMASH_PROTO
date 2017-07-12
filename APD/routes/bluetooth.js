@@ -9,7 +9,7 @@ var noble = require('noble');
  var IDDCharacteristic = null;
  var IDDperipheral = null;
 
-//module.exports.searchIDD = function () {
+module.exports.searchIDD = function () {
   console.log('scan start');
 noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {
@@ -19,7 +19,7 @@ noble.on('stateChange', function (state) {
     noble.stopScanning();
   }
 });
-//};
+};
 noble.on('discover', function (peripheral) {
   console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
   connectAndSetUp(peripheral);

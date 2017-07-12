@@ -48,5 +48,4 @@ noble.on('discover', function (peripheral) {
         });
       });
     });
-});
 

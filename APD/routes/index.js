@@ -81,7 +81,8 @@ router.get('/identify', function (req, res, next) {
     ID = IDValue;
     console.log(ID); 
   });
- next();/*
+  res.render('identify');
+  /*
 }, function (req, res) {
  res.redirect('/welcome')
 */

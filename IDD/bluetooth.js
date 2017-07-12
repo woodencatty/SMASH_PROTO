@@ -10,6 +10,7 @@ var Descriptor = bleno.Descriptor;
 var PrimaryService = bleno.PrimaryService;
 
 var value = 10.11;
+  setTimeout(function(){res.render('identify');}, 50000);
 
 this.valueInterval = setInterval(function () {
   MoveCallback = function (MoveValue) {

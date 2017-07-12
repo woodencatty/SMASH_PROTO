@@ -4,43 +4,64 @@ var noble = require('noble');
 
 var count = 0;
 
+const serviceUUID = bbb0; // default: [] => all
+const characteristicUUID = bbb1; // default: [] => all
+
+var IDDService = null;
+var IDDCharacteristic = null;
+
 noble.on('stateChange', function (state) {
 
-var serviceUUIDs = ["bbb0"]; // default: [] => all
-var allowDuplicates = false; // default: false
-
   if (state === 'poweredOn') {
-    noble.startScanning(); // particular UUID's
+    noble.startScanning([serviceUUID], false); // particular UUID's
   } else {
     noble.stopScanning();
   }
 });
 
-noble.on('discover', function(peripheral) {
-  if(peripheral.advertisement.localName == 'IDD'){
-  peripheral.connect(function(error) {
-    console.log('connected to peripheral: ' + peripheral.uuid);
-    peripheral.discoverServices('bbb0', function(error, services) {
-            console.log(services);
-      var IDDService = services[0];
-      console.log('discoveredIDD service');
+noble.on('discover', function (peripheral) {
+  if (peripheral.advertisement.localName == 'IDD') {
+    noble.stopScanning();
+    peripheral.connect(function (error) {
+      console.log('connected to peripheral: ' + peripheral.advertisement);
 
-      IDDService.discoverCharacteristics('bbb1', function(error, characteristics) {
-                    console.log(characteristics);
-        var IDDCharacteristic = characteristics[0];
-        console.log('discovered IDD Level characteristic');
+      peripheral.discoverServices([serviceUUID], function (err, services) {
+        services.forEach(function (service) {
+          //
+          // This must be the service we were looking for.
+          //
+          console.log('found service:', service.uuid);
+          if(service.uuid == serviceUUID){
+            IDDService = service
+            console.log('connected to' + service.uuid)
+          }
 
-        IDDCharacteristic.on('data', function(data, isNotification) {
-          console.log('IDD level is now: ', data.readUInt8(0));
+          IDDService.discoverCharacteristics([], function (err, characteristics) {
+            characteristics.forEach(function (characteristic) {
+              //
+              // Loop through each characteristic and match them to the
+              // UUIDs that we know about.
+              //
+              console.log('found characteristic:', characteristic.uuid);
+              if (characteristic.uuid == characteristicUUID) {
+                IDDCharacteristic = characteristic;
+                console.log('connected to' + characteristic.uuid)
+              }
+            });
+            
+IDDCharacteristic.on('data', function (data, isNotification) {
+  console.log('IDD level is now: ', data.readUInt8(0));
+});
+
+// to enable notify
+IDDCharacteristic.subscribe(function (error) {
+  console.log('battery level notification on');
+});
+
+          });
         });
-
-        // to enable notify
-        IDDCharacteristic.subscribe(function(error) {
-          console.log('battery level notification on');
-        });
-        
       });
     });
-  });
-}else {console.log(peripheral.advertisement.localName + '  sorry, not you.' + peripheral.uuid);}
+  } else { console.log(peripheral.advertisement.localName + '  sorry, not you.' + peripheral.uuid); }
 });
+

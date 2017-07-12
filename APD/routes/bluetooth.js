@@ -30,8 +30,13 @@ noble.on('discover', function (peripheral) {
       console.log('find peripheral: ' + peripheral);
     peripheral.connect(function (err) {
       console.log('connect to peripheral: ' + peripheral);
-      peripheral.discoverServices([serviceUUID], function (err, services) {
+      peripheral.discoverServices([], function (err, services) {
               console.log('services find: ' + services);
+          });
+        });
+      });
+
+/*
           services.discoverCharacteristics([characteristicUUID], function (err, characteristics) {
                           console.log('this characteristics: ' + characteristics);
                characteristics.on('read', function(data, isNotification) {
@@ -40,7 +45,4 @@ noble.on('discover', function (peripheral) {
               console.log(result);
           });
             });
-
-          });
-        });
-      });
+            */

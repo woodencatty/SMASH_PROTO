@@ -9,9 +9,9 @@ const characteristicUUID = '13333333333333333333333333330001'; // default: [] =>
 
 var IDDService = null;
 var IDDCharacteristic = null;
-  console.log('its on');
+console.log('its on');
 
-noble.on('stateChange', function(state) {
+noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {
     //
     // Once the BLE radio has been powered on, it is possible
@@ -20,21 +20,22 @@ noble.on('stateChange', function(state) {
     //
     console.log('scanning...');
     noble.startScanning([serviceUUID], false);
-  }
-  else {
+  } else {
     noble.stopScanning();
   }
 })
-
 noble.on('discover', function (peripheral) {
-      console.log('find peripheral: ' + peripheral);
-    peripheral.connect(function (err) {
-      console.log('connect to peripheral: ' + peripheral);
-      peripheral.discoverServices([serviceUUID], function (err, services) {
-              console.log('services find: ' + services);
-          });
-        });
+  console.log('find peripheral: ' + peripheral);
+  peripheral.connect(function (err) {
+    console.log('connect to peripheral: ' + peripheral);
+    peripheral.discoverServices([serviceUUID], function (err, services) {
+      console.log('services find: ' + services);
+      services.discoverCharacteristics([], function (err, characteristics) {
+        console.log('this characteristics: ' + characteristics);
       });
+    });
+  });
+});
 
 /*
           services.discoverCharacteristics([characteristicUUID], function (err, characteristics) {

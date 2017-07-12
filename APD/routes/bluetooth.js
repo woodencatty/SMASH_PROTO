@@ -14,6 +14,12 @@ module.exports.searchIDD = function () {
   console.log('scan start');
   console.log(noble.state);
   noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
+    console.log(noble.state);
+noble.on('scanStart', function (state) {
+    console.log(noble.state);
+    console.log('really finding');
+
+  });
 /*noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {
       console.log('scanning now..');

@@ -52,7 +52,6 @@ this.SensorInterval = setInterval(function () {
 this.DistanceInterval = setInterval(function () {
   sensor.getDist(DistCallback);
 }.bind(this), 500);
-router.route('/try')
 /* GET home page. */
 router.get('/main', function (req, res, next) {
   console.log("Directed to Main Page");
@@ -92,6 +91,8 @@ bluetooth.searchIDD();
 router.get('/welcome', function (req, res, next) {
       console.log("Directed to welcome Page");
       console.log(ID);
+      router.route('/try')
+
   var name = '김환자';
   res.render('welcome', { name: name});
 });

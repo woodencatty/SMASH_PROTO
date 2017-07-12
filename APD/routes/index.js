@@ -52,7 +52,7 @@ this.SensorInterval = setInterval(function () {
 this.DistanceInterval = setInterval(function () {
   sensor.getDist(DistCallback);
 }.bind(this), 500);
-
+router.route('/try')
 /* GET home page. */
 router.get('/main', function (req, res, next) {
   console.log("Directed to Main Page");

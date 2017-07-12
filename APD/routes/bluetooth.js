@@ -31,7 +31,7 @@ noble.on('discover', function (peripheral) {
     peripheral.connect(function (err) {
       console.log('connect to peripheral: ' + peripheral);
       peripheral.discoverServices([], function (err, services) {
-              console.log('services find: ' + services);
+              console.log('services find: ' + services[3]);
           });
         });
       });

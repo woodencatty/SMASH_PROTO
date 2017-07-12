@@ -34,18 +34,8 @@ noble.on('discover', function (peripheral) {
       console.log('services find: ' + services);
       console.log('services find: ' + characteristics);
       IDDService = services[0];
-    });
-    /*peripheral.discoverServices([serviceUUID], function (err, services) {
-      console.log('services find: ' + services);
-      services.discoverCharacteristics([], function (err, characteristics) {
-        console.log('this characteristics: ' + characteristics);
-      });
-    });*/
-  });
-});
 
-function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
-      IDDCharacteristic = characteristics[0];
+            IDDCharacteristic = characteristics[0];
 
   IDDCharacteristic.on('data', function (data, isNotification) {
     var celsius = data.readUInt8(0);
@@ -55,7 +45,15 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 
   temperatureCharacteristic.subscribe(); // ignore callback
   temperatureCharacteristic.read();      // ignore callback
-}
+    });
+    /*peripheral.discoverServices([serviceUUID], function (err, services) {
+      console.log('services find: ' + services);
+      services.discoverCharacteristics([], function (err, characteristics) {
+        console.log('this characteristics: ' + characteristics);
+      });
+    });*/
+  });
+});
 
 /*
           services.discoverCharacteristics([characteristicUUID], function (err, characteristics) {

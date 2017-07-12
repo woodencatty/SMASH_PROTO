@@ -9,16 +9,22 @@ const characteristicUUID = '49991a70-66a2-11e7-907b-a6006ad3dba0'; // default: [
 
 var IDDService = null;
 var IDDCharacteristic = null;
+  console.log('its on');
 
-noble.on('stateChange', function (state) {
-
+noble.on('stateChange', function(state) {
   if (state === 'poweredOn') {
-  console.log('sacnning..');
-    noble.startScanning(); // particular UUID's
-  } else {
+    //
+    // Once the BLE radio has been powered on, it is possible
+    // to begin scanning for services. Pass an empty array to
+    // scan for all services (uses more time and power).
+    //
+    console.log('scanning...');
+    noble.startScanning([serviceUUID], false);
+  }
+  else {
     noble.stopScanning();
   }
-});
+})
 
 noble.on('discover', function (peripheral) {
 

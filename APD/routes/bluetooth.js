@@ -1,6 +1,7 @@
 var noble = require('noble');
 
   console.log('bluetooth module OK');
+  console.log(noble.state);
 
   const serviceUUIDs = ['bbb0'];
   const characteristicUUIDs = ['bbb1'];

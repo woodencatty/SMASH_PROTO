@@ -32,7 +32,7 @@ function connectAndSetUp(peripheral) {
     console.log('Temperature is', celsius.toFixed(1) + '°C', fahrenheit + '°F');
   });
 
- // IDDCharacteristic.subscribe(); // ignore callback
+  IDDCharacteristic.subscribe(); // ignore callback
   IDDCharacteristic.read();      // ignore callback
   
 });

@@ -69,9 +69,7 @@ var IDDService = new PrimaryService({
   characteristics: [
     new IDDCharacteristic()
   ]
-});
-module.exports.AdvertisingDevice = function () {
-bleno.on('stateChange', function (state) {
+});bleno.on('stateChange', function (state) {
   console.log('on -> stateChange: ' + state);
 
   if (state === 'poweredOn') {
@@ -80,7 +78,7 @@ bleno.on('stateChange', function (state) {
     bleno.stopAdvertising();
   }
 });
-};
+
 bleno.on('advertisingStart', function (error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
 

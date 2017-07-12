@@ -10,6 +10,7 @@ var noble = require('noble');
  var IDDperipheral = null;
 
 module.exports.searchIDD = function (callback) {
+  console.log('scan start');
 noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {
     noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);

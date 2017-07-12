@@ -80,8 +80,9 @@ router.get('/identify', function (req, res, next) {
   bluetooth.searchIDD(function(IDValue){
     ID = IDValue;
     console.log(ID); 
-  });
+    
   res.render('identify');
+  });
   /*
 }, function (req, res) {
  res.redirect('/welcome')

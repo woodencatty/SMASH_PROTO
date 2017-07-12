@@ -10,6 +10,14 @@ var PrimaryService = bleno.PrimaryService;
 
 var Value;
 
+
+var IDDService = new PrimaryService({
+  uuid: '52e840b0-66a2-11e7-907b-a6006ad3dba0',
+  characteristics: [
+    new IDDCharacteristic()
+  ]
+});
+
 var IDDCharacteristic = function () {
   IDDCharacteristic.super_.call(this, {
     uuid: '49991a70-66a2-11e7-907b-a6006ad3dba0',
@@ -74,12 +82,6 @@ IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
   callback(Characteristic.RESULT_SUCCESS, Value);
 };
 
-var IDDService = new PrimaryService({
-  uuid: '52e840b0-66a2-11e7-907b-a6006ad3dba0',
-  characteristics: [
-    new IDDCharacteristic()
-  ]
-});
 
 bleno.on('stateChange', function (state) {
   console.log('on -> stateChange: ' + state);

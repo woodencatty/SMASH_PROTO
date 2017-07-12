@@ -19,7 +19,7 @@ noble.on('stateChange', function(state) {
     // scan for all services (uses more time and power).
     //
     console.log('scanning...');
-    noble.startScanning([pizzaServiceUuid], false);
+    noble.startScanning([serviceUUID], false);
   }
   else {
     noble.stopScanning();

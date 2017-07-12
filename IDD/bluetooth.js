@@ -33,7 +33,7 @@ var value = 10.10;
       value = MoveValue;
     }
 
-        move.getMoveValue(MoveCallback)
+       // move.getMoveValue(MoveCallback)
         
           var data = new Buffer(4);
           data.writeFloatLE(value, 0);

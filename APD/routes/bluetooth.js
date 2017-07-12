@@ -4,8 +4,8 @@ var noble = require('noble');
 
 var count = 0;
 
-const serviceUUID = 20133355800; // default: [] => all
-const characteristicUUID = 20133355801; // default: [] => all
+const serviceUUID = '52e840b0-66a2-11e7-907b-a6006ad3dba0'; // default: [] => all
+const characteristicUUID = '49991a70-66a2-11e7-907b-a6006ad3dba0'; // default: [] => all
 
 var IDDService = null;
 var IDDCharacteristic = null;
@@ -13,13 +13,15 @@ var IDDCharacteristic = null;
 noble.on('stateChange', function (state) {
 
   if (state === 'poweredOn') {
-    noble.startScanning([serviceUUID], false); // particular UUID's
+  console.log('sacnning..');
+    noble.startScanning(); // particular UUID's
   } else {
     noble.stopScanning();
   }
 });
 
 noble.on('discover', function (peripheral) {
+
   if (peripheral.advertisement.localName == 'IDD') {
     noble.stopScanning();
     peripheral.connect(function (error) {

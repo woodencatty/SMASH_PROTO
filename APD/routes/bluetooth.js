@@ -8,7 +8,7 @@ noble.on('stateChange', function (state) {
 
 var serviceUUIDs = ["bbb0"]; // default: [] => all
 var allowDuplicates = false; // default: false
-h
+
   if (state === 'poweredOn') {
     noble.startScanning(); // particular UUID's
   } else {

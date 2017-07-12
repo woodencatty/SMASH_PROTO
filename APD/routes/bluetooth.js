@@ -23,7 +23,7 @@ noble.on('discover', function (peripheral) {
   connectAndSetUp(peripheral);
   // TODO should stop scanning otherwise we connect to ALL the thermometers
 });
-
+};
 function connectAndSetUp(peripheral) {
   IDDperipheral = peripheral;
   IDDperipheral.connect(function (error) {
@@ -46,4 +46,3 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
   //IDDCharacteristic.subscribe(); // ignore callback
   IDDCharacteristic.read();      // ignore callback
 }
-};

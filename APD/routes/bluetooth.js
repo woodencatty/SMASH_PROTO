@@ -32,11 +32,13 @@ noble.on('discover', function (peripheral) {
     peripheral.connect(function (err) {
       console.log('connect to peripheral: ' + peripheral);
       peripheral.discoverServices([serviceUUID], function (err, services) {
+              console.log('services find: ' + services);
         services.forEach(function (service) {
-
+          console.log('this service : ' + service);
           IDDService.discoverCharacteristics([], function (err, characteristics) {
+                          console.log('characteristics find: ' + characteristics);
             characteristics.forEach(function (characteristic) {
-              //
+                          console.log('this characteristics: ' + characteristic);
               // Loop through each characteristic and match them to the
               // UUIDs that we know about.
               //

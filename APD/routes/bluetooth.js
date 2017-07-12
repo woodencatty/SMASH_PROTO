@@ -9,7 +9,7 @@ var noble = require('noble');
  var IDDCharacteristic = null;
  var IDDperipheral = null;
 
-module.exports.searchIDD = function (callback) {
+module.exports.searchIDD = function () {
   console.log('scan start');
   noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
 noble.on('scanStart', function (state) {
@@ -37,11 +37,9 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 
   IDDCharacteristic.on('data', function (data, isNotification) {
     var celsius = data.readFloatLE(0);
-   // console.log('Temperature is', celsius.toFixed(1));
+    console.log('Temperature is', celsius.toFixed(1));
    //IDDperipheral.disconnect();
    // callback(temperature.toFixed(1));
-     IDDCharacteristic.unsubscribe(); // ignore callback
-           callback(celsius);
   });
 
   IDDCharacteristic.subscribe(); // ignore callback

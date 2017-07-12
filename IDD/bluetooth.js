@@ -6,7 +6,6 @@ var Characteristic = bleno.Characteristic;
 var Descriptor = bleno.Descriptor;
 var PrimaryService = bleno.PrimaryService;
 
-var temperatureSensorId;
 var lastTemp;
 
 var IDDCharacteristic = function () {
@@ -27,21 +26,13 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
 
   this.changeInterval = setInterval(function () {
 
-    sensor.temperature(temperatureSensorId, function (err, result) {
-      if (err) {
-        console.log('Can not get temperature from sensor', err);
-      } else {
-        console.log('Sensor ' + temperatureSensorId + ' :', result);
-        if (result != lastTemp) {
-          lastTemp = result;
+        result = 10.10;
           var data = new Buffer(4);
           data.writeFloatLE(result, 0);
 
           console.log('IDDCharacteristic update value: ' + result);
           updateValueCallback(data);
-        }
-      }
-    });
+
   }.bind(this), 2000);
 };
 

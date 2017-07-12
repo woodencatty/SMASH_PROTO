@@ -22,7 +22,12 @@ function connectAndSetUp(peripheral) {
     var serviceUUIDs = ['bbb0'];
     var characteristicUUIDs = ['bbb1'];
 
-    peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, function (error, services, characteristics) {
+    peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
+  });
+
+}
+
+function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
 
   var IDDCharacteristic = characteristics[0];
 
@@ -34,8 +39,5 @@ function connectAndSetUp(peripheral) {
 
   IDDCharacteristic.subscribe(); // ignore callback
   IDDCharacteristic.read();      // ignore callback
-  
-});
-  });
-
+ setTimeout(function(){IDDCharacteristic.unsubscribe();}, 5000); 
 }

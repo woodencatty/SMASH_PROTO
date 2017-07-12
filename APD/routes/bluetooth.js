@@ -28,13 +28,19 @@ noble.on('discover', function (peripheral) {
   console.log('find peripheral: ' + peripheral);
   peripheral.connect(function (err) {
     console.log('connect to peripheral: ' + peripheral);
-    
+
     peripheral.discoverSomeServicesAndCharacteristics([], [], function (err, services, characteristics) {
       console.log('services find: ' + services);
-          console.log('services find: ' + characteristics);
+      console.log('services find: ' + characteristics);
 
-  });
-    
+      characteristics.on('read', function (data, isNotification) {
+        console.log('Our pizza is ready!');
+        var result = data.readUInt8(0);
+        console.log(result);
+      });
+
+    });
+
     
     /*peripheral.discoverServices([serviceUUID], function (err, services) {
       console.log('services find: ' + services);

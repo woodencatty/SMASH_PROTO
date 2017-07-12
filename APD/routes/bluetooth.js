@@ -32,7 +32,6 @@ noble.on('discover', function (peripheral) {
     peripheral.discoverSomeServicesAndCharacteristics([], [], function (err, services, characteristics) {
       console.log('services find: ' + services);
       console.log('services find: ' + characteristics);
-
     });
 
     

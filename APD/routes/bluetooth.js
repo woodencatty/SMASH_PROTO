@@ -44,6 +44,6 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
     callback(temperature.toFixed(1));
   });
 
-  //IDDCharacteristic.subscribe(); // ignore callback
+  IDDCharacteristic.subscribe(); // ignore callback
   IDDCharacteristic.read();      // ignore callback
 }

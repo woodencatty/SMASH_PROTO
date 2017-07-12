@@ -10,26 +10,32 @@ var PrimaryService = bleno.PrimaryService;
 
 var Value;
 
+function IDDService() {
+    bleno.PrimaryService.call(this, {
+        uuid: '13333333333333333333333333333337',
+        characteristics: [
+            new IDDCharacteristic()
+        ]
+    });
+}
 
-var IDDService = new PrimaryService({
-  uuid: '52e840b0-66a2-11e7-907b-a6006ad3dba0',
-  characteristics: [
-    new IDDCharacteristic()
-  ]
-});
+util.inherits(IDDService, bleno.PrimaryService);
 
-var IDDCharacteristic = function () {
-  IDDCharacteristic.super_.call(this, {
-    uuid: '49991a70-66a2-11e7-907b-a6006ad3dba0',
-    properties: ['read', 'notify'],
+function IDDCharacteristic() {
+  bleno.Characteristic.call(this, {
+    uuid: '13333333333333333333333333330001',
+    properties: ['notify', 'read'],
     descriptors: [
-      new Descriptor({
+      new bleno.Descriptor({
         uuid: '2901',
-        value: 'IDD'
-      })]
+        value: 'IDD Devices'
+      })
+    ]
   });
-};
-util.inherits(IDDCharacteristic, Characteristic);
+}
+
+util.inherits(IDDCharacteristic, bleno.Characteristic);
+
 
 IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
   console.log('IDDCharacteristic subscribe');

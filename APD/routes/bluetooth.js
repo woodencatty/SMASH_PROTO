@@ -4,8 +4,8 @@ var noble = require('noble');
 
 var count = 0;
 
-const serviceUUID = '52e840b0-66a2-11e7-907b-a6006ad3dba0'; // default: [] => all
-const characteristicUUID = '49991a70-66a2-11e7-907b-a6006ad3dba0'; // default: [] => all
+const serviceUUID = '13333333333333333333333333333337'; // default: [] => all
+const characteristicUUID = '13333333333333333333333333330001'; // default: [] => all
 
 var IDDService = null;
 var IDDCharacteristic = null;

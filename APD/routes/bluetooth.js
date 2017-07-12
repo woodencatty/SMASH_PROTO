@@ -30,7 +30,7 @@ noble.on('discover', function (peripheral) {
   
       console.log('connected to peripheral: ' + peripheral.advertisement.localName);
     peripheral.connect(function (error) {
-
+       console.log('connected to peripheral: ' + peripheral.advertisement.localName);
       peripheral.discoverServices([serviceUUID], function (err, services) {
         services.forEach(function (service) {
           //

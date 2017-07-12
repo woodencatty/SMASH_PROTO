@@ -39,8 +39,9 @@ var ID;
   }
 
 //bluetooth callback
+function getIDD(){
 bluetooth.searchIDD();
-
+}
 this.SensorInterval = setInterval(function () {
   sensor.getTemp(TempCallback);
   sensor.getHumi(HumiCallback); 
@@ -73,12 +74,7 @@ router.get('/try', function (req, res, next) {
 router.get('/identify', function (req, res, next) {
     console.log("Directed to identify Page");
 
-  IDDCallback = function (IDValue){
-    ID = IDValue;
-    console.log(ID);    
-  }
-bluetooth.searchIDD();
-
+  getIDD();
 
   setTimeout(function(){res.render('identify');}, 5000);
   

@@ -9,7 +9,7 @@ var Characteristic = bleno.Characteristic;
 var Descriptor = bleno.Descriptor;
 var PrimaryService = bleno.PrimaryService;
 
-var value = 10.00;
+
 
 var IDDCharacteristic = function () {
   IDDCharacteristic.super_.call(this, {
@@ -28,7 +28,7 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
   console.log('IDDCharacteristic subscribe');
 
   this.changeInterval = setInterval(function () {
-
+var value = 10.10;
   MoveCallback = function (MoveValue) {
       value = MoveValue;
     }

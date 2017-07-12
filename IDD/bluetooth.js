@@ -19,7 +19,7 @@ util.inherits(IDDService, bleno.PrimaryService);
 function IDDCharacteristic() {
   bleno.Characteristic.call(this, {
     uuid: '13333333333333333333333333330001',
-    properties: ['notify', 'read'],
+    properties: ['read', 'notify'],
     descriptors: [
       new bleno.Descriptor({
         uuid: '2901',

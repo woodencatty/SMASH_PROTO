@@ -32,14 +32,14 @@ noble.on('discover', function (peripheral) {
     console.log('connect to peripheral: ' + peripheral);
     peripheral.discoverSomeServicesAndCharacteristics([serviceUUID], [characteristicUUID], function (err, services, characteristics) {
       console.log('services find: ' + services);
-      console.log('services find: ' + characteristics);
+      console.log('characteristics find: ' + characteristics);
       
           characteristics.forEach(function(characteristic) {
             
-  characteristic.on('data', function (data, isNotification) {
+  characteristic.on('data', function (data, isNotification) {/*
     var celsius = data.readUInt8(0);
     var fahrenheit = (celsius * 1.8 + 32.0).toFixed(1);
-    console.log('Temperature is', celsius.toFixed(1) + '°C', fahrenheit + '°F');
+    console.log('Temperature is', celsius.toFixed(1) + '°C', fahrenheit + '°F');*/
   });
 
   characteristic.subscribe(); // ignore callback

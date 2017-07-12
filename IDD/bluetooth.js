@@ -1,121 +1,89 @@
+// Thermometer Service 0xBBB0
 var bleno = require('bleno');
 var util = require('util');
 
-var Move = require('./calculator.js');
+var Characteristic = bleno.Characteristic;
+var Descriptor = bleno.Descriptor;
+var PrimaryService = bleno.PrimaryService;
 
-var Value = 0;
+var temperatureSensorId;
+var lastTemp;
 
-function IDDService() {
-    bleno.PrimaryService.call(this, {
-        uuid: '13333333333333333333333333333337',
-        characteristics: [
-            new IDDCharacteristic()
-        ]
-    });
-}
-
-util.inherits(IDDService, bleno.PrimaryService);
-
-function IDDCharacteristic() {
-  bleno.Characteristic.call(this, {
-    uuid: '13333333333333333333333333330001',
+var IDDCharacteristic = function () {
+  IDDCharacteristic.super_.call(this, {
+    uuid: 'bbb1',
     properties: ['read', 'notify'],
     descriptors: [
-      new bleno.Descriptor({
+      new Descriptor({
         uuid: '2901',
-        value: 'IDD Devices'
-      })
-    ]
+        value: 'IDD Device'
+      })]
   });
-}
-
-util.inherits(IDDCharacteristic, bleno.Characteristic);
-
-
-var name = 'IDD';
-var Service = new IDDService();
-
-
-IDDCharacteristic.prototype.onReadRequest = function(offset, callback) {
-  console.log('response to read');
-  if (offset) {
-    callback(this.RESULT_ATTR_NOT_LONG, null);
-  }
-  else {
-    MoveCallback = function (MoveValue) {
-      Value = MoveValue;
-    }
-
-    Move.getMoveValue(MoveCallback)
-    var data = new Buffer(4);
-    data.writeFloatLE(Value, 0);
-    callback(this.RESULT_SUCCESS, data);
-  }
 };
+util.inherits(IDDCharacteristic, Characteristic);
 
 IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
   console.log('IDDCharacteristic subscribe');
- this.SubsInterval = setInterval(function () {
 
-       MoveCallback = function (MoveValue) {
-      Value = MoveValue;
-    }
+  this.changeInterval = setInterval(function () {
 
-    Move.getMoveValue(MoveCallback)
+    sensor.temperature(temperatureSensorId, function (err, result) {
+      if (err) {
+        console.log('Can not get temperature from sensor', err);
+      } else {
+        console.log('Sensor ' + temperatureSensorId + ' :', result);
+        if (result != lastTemp) {
+          lastTemp = result;
+          var data = new Buffer(4);
+          data.writeFloatLE(result, 0);
 
-    var data = new Buffer(4);
-
-    data.writeFloatLE(Value, 0);
-
-    console.log('IDDCharacteristic update value: ' + Value);
-    updateValueCallback(data);
-
-  }.bind(this), 500);
+          console.log('IDDCharacteristic update value: ' + result);
+          updateValueCallback(data);
+        }
+      }
+    });
+  }.bind(this), 2000);
 };
 
 IDDCharacteristic.prototype.onUnsubscribe = function () {
   console.log('IDDCharacteristic unsubscribe');
 
-  if (this.ValueInterval) {
-    clearInterval(this.ValueInterval);
-    this.ValueInterval = null;
-  }
-
-    if (this.SubsInterval) {
-    clearInterval(this.SubsInterval);
-    this.SubsInterval = null;
+  if (this.changeInterval) {
+    clearInterval(this.changeInterval);
+    this.changeInterval = null;
   }
 };
 
+IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
+  sensor.temperature(temperatureSensorId, function (err, result) {
+    console.log('Sensor ' + temperatureSensorId + ' :', result);
+    var data = new Buffer(4);
+    data.writeFloatLE(result, 0);
+    callback(Characteristic.RESULT_SUCCESS, data);
+  });
+};
 
+var IDDService = new PrimaryService({
+  uuid: 'bbb0',
+  characteristics: [
+    new IDDCharacteristic()
+  ]
+});
 
-bleno.on('stateChange', function(state) {
+bleno.on('stateChange', function (state) {
+  console.log('on -> stateChange: ' + state);
+
   if (state === 'poweredOn') {
-    //
-    // We will also advertise the service ID in the advertising packet,
-    // so it's easier to find.
-    //
-    bleno.startAdvertising(name, [Service.uuid], function(err) {
-      if (err) {
-        console.log(err);
-      }
-    });
-  }
-  else {
+    bleno.startAdvertising('IDD', [IDDService.uuid]);
+  } else {
     bleno.stopAdvertising();
   }
 });
- 
 
-bleno.on('advertisingStart', function(err) {
-  if (!err) {
-    console.log('advertising...');
-    //
-    // Once we are advertising, it's time to set up our services,
-    // along with our characteristics.
-    //
-    bleno.setServices([
-      Service
-    ]);
+bleno.on('advertisingStart', function (error) {
+  console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
+
+  if (!error) {
+    bleno.setServices([IDDService]);
   }
 });

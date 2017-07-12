@@ -37,7 +37,7 @@ noble.on('discover', function (peripheral) {
           characteristics.forEach(function(characteristic) {
             
   characteristic.on('data', function (data, isNotification) {
-    var celsius = data.readUInt8(0);
+    var celsius = data;
     console.log('Temperature is', celsius);
   });
 

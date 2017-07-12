@@ -27,12 +27,10 @@ util.inherits(IDDCharacteristic, Characteristic);
 IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
   console.log('IDDCharacteristic subscribe');
 
-  var value = 10.00
-
   this.changeInterval = setInterval(function () {
 
   MoveCallback = function (MoveValue) {
-      Value = MoveValue;
+      value = MoveValue;
     }
 
         move.getMoveValue(MoveCallback)

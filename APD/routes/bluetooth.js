@@ -13,14 +13,15 @@ var noble = require('noble');
 module.exports.searchIDD = function () {
   console.log('scan start');
   console.log(noble.state);
-noble.on('stateChange', function (state) {
+  noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
+/*noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {
       console.log('scanning now..');
     noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
   } else {
     noble.stopScanning();
   }
-});
+});*/
 };
 noble.on('discover', function (peripheral) {
   console.log('Discovered', peripheral.advertisement.localName, peripheral.address);

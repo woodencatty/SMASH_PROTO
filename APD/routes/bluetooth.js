@@ -40,7 +40,6 @@ noble.on('discover', function (peripheral) {
   IDDCharacteristic.subscribe(); // ignore callback
   IDDCharacteristic.read();      // ignore callback
     });
-       });
     /*peripheral.discoverServices([serviceUUID], function (err, services) {
       console.log('services find: ' + services);
       services.discoverCharacteristics([], function (err, characteristics) {

@@ -13,6 +13,8 @@ var audio = 0;
 var enviorment = 0;
 var light = 0;
 
+var ID = 0;
+
 //sensor callback
 
   DistCallback = function (DistValue) {
@@ -40,6 +42,11 @@ var light = 0;
   }
 
 //bluetooth callback
+
+  IDCallback = function (IDValue) {
+    ID = IDValue;
+  }
+
 
 this.SensorInterval = setInterval(function () {
   sensor.getTemp(TempCallback);
@@ -73,14 +80,10 @@ router.get('/try', function (req, res, next) {
 router.get('/identify', function (req, res, next) {
     console.log("Directed to identify Page");
 
-bluetooth.searchIDD();
+bluetooth.searchIDD(IDCallback);
 
   setTimeout(function(){res.render('identify');}, 10000);
   
-  /*
-}, function (req, res) {
- res.redirect('/welcome')
-*/
 });
 
 

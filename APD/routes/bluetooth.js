@@ -1,7 +1,6 @@
 var noble = require('noble');
 
   console.log('bluetooth module OK');
-  console.log(noble.state);
 
   const serviceUUIDs = ['bbb0'];
   const characteristicUUIDs = ['bbb1'];
@@ -10,26 +9,16 @@ var noble = require('noble');
  var IDDCharacteristic = null;
  var IDDperipheral = null;
 
-module.exports.searchIDD = function () {
+module.exports.searchIDD = function (callback) {
   console.log('scan start');
-  console.log(noble.state);
   noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
-    console.log(noble.state);
 noble.on('scanStart', function (state) {
     console.log(noble.state);
-    console.log('really finding');
+    console.log('really finding now');
 
   });
-/*noble.on('stateChange', function (state) {
-  if (state === 'poweredOn') {
-      console.log('scanning now..');
-    noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
-  } else {
-    noble.stopScanning();
-  }
-});*/
-};
-noble.on('discover', function (peripheral) {
+
+  noble.on('discover', function (peripheral) {
   console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
   connectAndSetUp(peripheral);
 });
@@ -51,9 +40,21 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
     console.log('Temperature is', celsius.toFixed(1));
    //IDDperipheral.disconnect();
    // callback(temperature.toFixed(1));
+           callback(celsius);
   });
 
   IDDCharacteristic.subscribe(); // ignore callback
   IDDCharacteristic.read();      // ignore callback
 
   }
+/*noble.on('stateChange', function (state) {
+  if (state === 'poweredOn') {
+      console.log('scanning now..');
+    noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
+  } else {
+    noble.stopScanning();
+  }
+});*/
+};
+
+

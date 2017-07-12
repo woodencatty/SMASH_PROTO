@@ -19,7 +19,7 @@ noble.on('stateChange', function(state) {
     // scan for all services (uses more time and power).
     //
     console.log('scanning...');
-    noble.startScanning();
+    noble.startScanning([serviceUUID], false);
   }
   else {
     noble.stopScanning();
@@ -27,9 +27,9 @@ noble.on('stateChange', function(state) {
 })
 
 noble.on('discover', function (peripheral) {
-    noble.stopScanning();
-    peripheral.connect(function (error) {
+  
       console.log('connected to peripheral: ' + peripheral.advertisement.localName);
+    peripheral.connect(function (error) {
 
       peripheral.discoverServices([serviceUUID], function (err, services) {
         services.forEach(function (service) {

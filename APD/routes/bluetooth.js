@@ -27,9 +27,9 @@ noble.on('discover', function (peripheral) {
 //};
 function connectAndSetUp(peripheral) {
   IDDperipheral = peripheral;
-  IDDperipheral.connect(function (error) {
+  peripheral.connect(function (error) {
 
-    IDDperipheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
+    peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
   });
 
 }

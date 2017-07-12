@@ -1,38 +1,47 @@
+// Connect to Thermometer Service 0xBBB0
+// and display notification for temperature changes
 var noble = require('noble');
 
-noble.on('stateChange', function(state) {
+var count = 0;
+
+noble.on('stateChange', function (state) {
+
+var serviceUUIDs = ["bbb0"]; // default: [] => all
+var allowDuplicates = false; // default: false
+
   if (state === 'poweredOn') {
-    noble.startScanning();
+    noble.startScanning(); // particular UUID's
   } else {
     noble.stopScanning();
   }
 });
 
 noble.on('discover', function(peripheral) {
-  console.log('peripheral discovered (' + peripheral.id +
-              ' with address <' + peripheral.address +  ', ' + peripheral.addressType + '>,' +
-              ' connectable ' + peripheral.connectable + ',' +
-              ' RSSI ' + peripheral.rssi + ':');
-  console.log('\thello my local name is:');
-  console.log('\t\t' + peripheral.advertisement.localName);
-  console.log('\tcan I interest you in any of the following advertised services:');
-  console.log('\t\t' + JSON.stringify(peripheral.advertisement.serviceUuids));
+  noble.stopScanning();
+  if(peripheral.advertisement.localName == 'IDD'){
+  peripheral.connect(function(error) {
+    console.log('connected to peripheral: ' + peripheral);
+    peripheral.discoverServices(function(error, services) {
+      console.log(services);
+      var IDDService = services[0];
+      console.log('discoveredIDD service' + IDDService);
 
-  var serviceData = peripheral.advertisement.serviceData;
-  if (serviceData && serviceData.length) {
-    console.log('\there is my service data:');
-    for (var i in serviceData) {
-      console.log('\t\t' + JSON.stringify(serviceData[i].uuid) + ': ' + JSON.stringify(serviceData[i].data.toString('hex')));
-    }
-  }
-  if (peripheral.advertisement.manufacturerData) {
-    console.log('\there is my manufacturer data:');
-    console.log('\t\t' + JSON.stringify(peripheral.advertisement.manufacturerData.toString('hex')));
-  }
-  if (peripheral.advertisement.txPowerLevel !== undefined) {
-    console.log('\tmy TX power level is:');
-    console.log('\t\t' + peripheral.advertisement.txPowerLevel);
-  }
+      IDDService.discoverCharacteristics(function(error, characteristics) {
+              console.log(characteristics);
+        var IDDCharacteristic = characteristics[0];
+        console.log('discovered IDD Level characteristic' + IDDCharacteristic);
 
-  console.log();
+        IDDCharacteristic.on('data', function(data, isNotification) {
+          console.log('IDD level is now: ', data.readUInt8(0));
+        });
+
+        // to enable notify
+        IDDCharacteristic.subscribe(function(error) {
+          console.log('battery level notification on');
+        });
+        
+      });
+    });
+  });
+}else {console.log(peripheral.advertisement.localName + '  sorry, not you.' + peripheral.uuid);}
 });

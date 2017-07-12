@@ -19,16 +19,16 @@ var allowDuplicates = false; // default: false
 noble.on('discover', function(peripheral) {
   if(peripheral.advertisement.localName == 'IDD'){
   peripheral.connect(function(error) {
-    console.log('connected to peripheral: ' + peripheral);
-    peripheral.discoverServices(function(error, services) {
-      console.log(services);
+    console.log('connected to peripheral: ' + peripheral.uuid);
+    peripheral.discoverServices('bbb0', function(error, services) {
+            console.log(services);
       var IDDService = services[0];
-      console.log('discoveredIDD service' + IDDService);
+      console.log('discoveredIDD service');
 
-      IDDService.discoverCharacteristics(function(error, characteristics) {
-              console.log(characteristics);
+      IDDService.discoverCharacteristics('bbb1', function(error, characteristics) {
+                    console.log(characteristics);
         var IDDCharacteristic = characteristics[0];
-        console.log('discovered IDD Level characteristic' + IDDCharacteristic);
+        console.log('discovered IDD Level characteristic');
 
         IDDCharacteristic.on('data', function(data, isNotification) {
           console.log('IDD level is now: ', data.readUInt8(0));

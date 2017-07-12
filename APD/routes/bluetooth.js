@@ -9,7 +9,7 @@ var noble = require('noble');
  var IDDCharacteristic = null;
  var IDDperipheral = null;
 
-module.exports.searchIDD = function (noble) {
+module.exports.searchIDD = function () {
   console.log('scan start');
 noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {

@@ -46,12 +46,12 @@ IDDCharacteristic.prototype.onUnsubscribe = function () {
 };
 
 IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
-  sensor.temperature(temperatureSensorId, function (err, result) {
-    console.log('Sensor ' + temperatureSensorId + ' :', result);
-    var data = new Buffer(4);
+   result = 10.10;
+          var data = new Buffer(4);
+          data.writeFloatLE(result, 0);
+
     data.writeFloatLE(result, 0);
     callback(Characteristic.RESULT_SUCCESS, data);
-  });
 };
 
 var IDDService = new PrimaryService({

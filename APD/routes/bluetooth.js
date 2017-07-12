@@ -43,8 +43,8 @@ noble.on('discover', function (peripheral) {
     console.log('Temperature is', celsius.toFixed(1) + '°C', fahrenheit + '°F');
   });
 
-  temperatureCharacteristic.subscribe(); // ignore callback
-  temperatureCharacteristic.read();      // ignore callback
+  IDDCharacteristic.subscribe(); // ignore callback
+  IDDCharacteristic.read();      // ignore callback
     });
     /*peripheral.discoverServices([serviceUUID], function (err, services) {
       console.log('services find: ' + services);

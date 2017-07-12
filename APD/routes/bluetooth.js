@@ -36,10 +36,10 @@ noble.on('discover', function (peripheral) {
       
           characteristics.forEach(function(characteristic) {
             
-  characteristic.on('data', function (data, isNotification) {/*
+  characteristic.on('data', function (data, isNotification) {
     var celsius = data.readUInt8(0);
     var fahrenheit = (celsius * 1.8 + 32.0).toFixed(1);
-    console.log('Temperature is', celsius.toFixed(1) + '°C', fahrenheit + '°F');*/
+    console.log('Temperature is', celsius.toFixed(1) + '°C', fahrenheit + '°F');
   });
 
   characteristic.subscribe(); // ignore callback

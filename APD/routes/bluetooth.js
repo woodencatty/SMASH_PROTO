@@ -33,8 +33,7 @@ noble.on('discover', function (peripheral) {
     peripheral.discoverSomeServicesAndCharacteristics([serviceUUID], [characteristicUUID], function (err, services, characteristics) {
       console.log('services find: ' + services);
       console.log('services find: ' + characteristics);
-      IDDService = services;
-            IDDCharacteristic = characteristics;
+            IDDCharacteristic = characteristics[0];
 
   IDDCharacteristic.on('data', function (data, isNotification) {
     var celsius = data.readUInt8(0);

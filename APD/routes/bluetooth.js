@@ -28,19 +28,11 @@ noble.on('stateChange', function(state) {
 
 noble.on('discover', function (peripheral) {
   
-      console.log('connected to peripheral: ' + peripheral);
-    peripheral.connect(function (error) {
-       console.log('connected complete');
-      peripheral.discoverServices([], function (err, services) {
+      console.log('find peripheral: ' + peripheral);
+    peripheral.connect(function (err) {
+      console.log('connect to peripheral: ' + peripheral);
+      peripheral.discoverServices([serviceUUID], function (err, services) {
         services.forEach(function (service) {
-          //
-          // This must be the service we were looking for.
-          //
-          console.log('found service:', service.uuid);
-          if(service.uuid == serviceUUID){
-            IDDService = service
-            console.log('connected to' + service.uuid)
-          }
 
           IDDService.discoverCharacteristics([], function (err, characteristics) {
             characteristics.forEach(function (characteristic) {
@@ -54,15 +46,6 @@ noble.on('discover', function (peripheral) {
                 console.log('connected to' + characteristic.uuid)
               }
             });
-            
-IDDCharacteristic.on('data', function (data, isNotification) {
-  console.log('IDD level is now: ', data.readUInt8(0));
-});
-
-// to enable notify
-IDDCharacteristic.subscribe(function (error) {
-  console.log('battery level notification on');
-});
 
           });
         });

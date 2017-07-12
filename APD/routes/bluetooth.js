@@ -19,7 +19,7 @@ noble.on('stateChange', function(state) {
     // scan for all services (uses more time and power).
     //
     console.log('scanning...');
-    noble.startScanning();
+    noble.startScanning([serviceUUID], false);
   }
   else {
     noble.stopScanning();
@@ -27,8 +27,6 @@ noble.on('stateChange', function(state) {
 })
 
 noble.on('discover', function (peripheral) {
-
-  if (peripheral.advertisement.localName == 'IDD') {
     noble.stopScanning();
     peripheral.connect(function (error) {
       console.log('connected to peripheral: ' + peripheral.advertisement);
@@ -70,6 +68,5 @@ IDDCharacteristic.subscribe(function (error) {
         });
       });
     });
-  } else { console.log(peripheral.advertisement.localName + '  sorry, not you.' + peripheral.uuid); }
 });
 

@@ -33,8 +33,6 @@ noble.on('discover', function (peripheral) {
       console.log('connect to peripheral: ' + peripheral);
       peripheral.discoverServices([serviceUUID], function (err, services) {
               console.log('services find: ' + services);
-        services.forEach(function (service) {
-          console.log('this service : ' + service);
           service.discoverCharacteristics([characteristicUUID], function (err, characteristics) {
                           console.log('this characteristics: ' + characteristics);
                characteristics.on('read', function(data, isNotification) {
@@ -47,5 +45,3 @@ noble.on('discover', function (peripheral) {
           });
         });
       });
-    });
-

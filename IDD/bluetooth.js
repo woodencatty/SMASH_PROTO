@@ -9,7 +9,17 @@ var Characteristic = bleno.Characteristic;
 var Descriptor = bleno.Descriptor;
 var PrimaryService = bleno.PrimaryService;
 
+var value = 10.11;
 
+this.valueInterval = setInterval(function () {
+  MoveCallback = function (MoveValue) {
+      value = MoveValue;
+    }
+
+       move.getMoveValue(MoveCallback);
+       console.log('changed to :' + value);
+
+  }.bind(this), 100);
 
 var IDDCharacteristic = function () {
   IDDCharacteristic.super_.call(this, {
@@ -37,8 +47,8 @@ var value = 10.11;
         
           var data = new Buffer(4);
           data.writeFloatLE(value, 0);
-
-          console.log('IDDCharacteristic update value: ' + result);
+          
+          console.log('sending : ' + value);
           updateValueCallback(data);
 
   }.bind(this), 2000);
@@ -54,11 +64,8 @@ IDDCharacteristic.prototype.onUnsubscribe = function () {
 };
 
 IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
-   result = 10.10;
           var data = new Buffer(4);
-          data.writeFloatLE(result, 0);
-
-    data.writeFloatLE(result, 0);
+          data.writeFloatLE(value, 0);
     callback(Characteristic.RESULT_SUCCESS, data);
 };
 

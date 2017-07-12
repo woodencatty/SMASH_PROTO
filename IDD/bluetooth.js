@@ -28,7 +28,7 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
   console.log('IDDCharacteristic subscribe');
 
   this.changeInterval = setInterval(function () {
-var value = 10.10;
+var value = 10.11;
   MoveCallback = function (MoveValue) {
       value = MoveValue;
     }

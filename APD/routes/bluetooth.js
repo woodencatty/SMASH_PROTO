@@ -19,7 +19,7 @@ noble.on('stateChange', function(state) {
     // scan for all services (uses more time and power).
     //
     console.log('scanning...');
-    noble.startScanning();
+    noble.startScanning([pizzaServiceUuid], false);
   }
   else {
     noble.stopScanning();
@@ -28,9 +28,9 @@ noble.on('stateChange', function(state) {
 
 noble.on('discover', function (peripheral) {
   
-      console.log('connected to peripheral: ' + peripheral.advertisement.localName);
+      console.log('connected to peripheral: ' + peripheral);
     peripheral.connect(function (error) {
-       console.log('connected to peripheral: ' + peripheral.advertisement.localName);
+       console.log('connected complete');
       peripheral.discoverServices([], function (err, services) {
         services.forEach(function (service) {
           //

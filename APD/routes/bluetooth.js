@@ -38,8 +38,7 @@ noble.on('discover', function (peripheral) {
             
   characteristic.on('data', function (data, isNotification) {
     var celsius = data.readUInt8(0);
-    var fahrenheit = (celsius * 1.8 + 32.0).toFixed(1);
-    console.log('Temperature is', celsius.toFixed(1) + '°C', fahrenheit + '°F');
+    console.log('Temperature is', celsius);
   });
 
   characteristic.subscribe(); // ignore callback

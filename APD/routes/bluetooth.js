@@ -29,7 +29,7 @@ noble.on('stateChange', function(state) {
 noble.on('discover', function (peripheral) {
     noble.stopScanning();
     peripheral.connect(function (error) {
-      console.log('connected to peripheral: ' + peripheral.advertisement);
+      console.log('connected to peripheral: ' + peripheral.advertisement.localName);
 
       peripheral.discoverServices([serviceUUID], function (err, services) {
         services.forEach(function (service) {

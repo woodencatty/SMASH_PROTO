@@ -9,16 +9,17 @@ var noble = require('noble');
  var IDDCharacteristic = null;
  var IDDperipheral = null;
 
-//module.exports.searchIDD = function (callback) {
+module.exports.searchIDD = function () {
   console.log('scan start');
 noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {
+      console.log('scanning now..');
     noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
   } else {
     noble.stopScanning();
   }
 });
-
+}
 noble.on('discover', function (peripheral) {
   console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
   connectAndSetUp(peripheral);
@@ -47,4 +48,4 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 
   IDDCharacteristic.subscribe(); // ignore callback
   IDDCharacteristic.read();      // ignore callback
-}
+

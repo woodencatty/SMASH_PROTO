@@ -42,7 +42,7 @@ var ID;
   }
 
 //bluetooth callback
-
+bluetooth.searchIDD();
 
 this.SensorInterval = setInterval(function () {
   sensor.getTemp(TempCallback);

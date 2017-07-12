@@ -19,7 +19,7 @@ this.valueInterval = setInterval(function () {
        move.getMoveValue(MoveCallback);
        console.log('changed to :' + value);
 
-  }.bind(this), 100);
+  }.bind(this), 2000);
 
 var IDDCharacteristic = function () {
   IDDCharacteristic.super_.call(this, {
@@ -44,7 +44,7 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
           console.log('sending : ' + value);
           updateValueCallback(data);
 
-  }.bind(this), 2000);
+  }.bind(this), 500);
 };
 
 IDDCharacteristic.prototype.onUnsubscribe = function () {

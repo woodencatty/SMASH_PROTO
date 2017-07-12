@@ -79,8 +79,7 @@ router.get('/try', function (req, res, next) {
 
 router.get('/identify', function (req, res, next) {
     console.log("Directed to identify Page");
-  
-  
+        console.log(ID);  
   bluetooth.searchIDD(IDDCallback);
   
  next();

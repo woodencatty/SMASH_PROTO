@@ -21,10 +21,12 @@ noble.on('discover', function(peripheral) {
   peripheral.connect(function(error) {
     console.log('connected to peripheral: ' + peripheral);
     peripheral.discoverServices(function(error, services) {
+      console.log(services);
       var IDDService = services[0];
       console.log('discoveredIDD service' + IDDService);
 
       IDDService.discoverCharacteristics(function(error, characteristics) {
+              console.log(characteristics);
         var IDDCharacteristic = characteristics[0];
         console.log('discovered IDD Level characteristic' + IDDCharacteristic);
 

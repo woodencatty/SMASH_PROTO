@@ -12,7 +12,7 @@ var Value;
 
 var IDDCharacteristic = function () {
   IDDCharacteristic.super_.call(this, {
-    uuid: 'bbb1',
+    uuid: '20133355801',
     properties: ['read', 'notify'],
     descriptors: [
       new Descriptor({
@@ -75,7 +75,7 @@ IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
 };
 
 var IDDService = new PrimaryService({
-  uuid: 'bbb0',
+  uuid: '20133355800',
   characteristics: [
     new IDDCharacteristic()
   ]

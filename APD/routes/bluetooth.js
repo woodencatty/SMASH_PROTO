@@ -40,6 +40,7 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
    // console.log('Temperature is', celsius.toFixed(1));
    //IDDperipheral.disconnect();
    // callback(temperature.toFixed(1));
+     IDDCharacteristic.unsubscribe(); // ignore callback
            callback(celsius);
   });
 

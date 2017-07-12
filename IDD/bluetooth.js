@@ -36,6 +36,23 @@ var name = 'IDD';
 var Service = new IDDService();
 
 
+IDDCharacteristic.prototype.onReadRequest = function(offset, callback) {
+  console.log('response to read');
+  if (offset) {
+    callback(this.RESULT_ATTR_NOT_LONG, null);
+  }
+  else {
+    MoveCallback = function (MoveValue) {
+      Value = MoveValue;
+    }
+
+    Move.getMoveValue(MoveCallback)
+
+    var data = new Buffer(1);
+    data.writeUInt8(Value, 0);
+    callback(this.RESULT_SUCCESS, data);
+  }
+};
 
 IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
   console.log('IDDCharacteristic subscribe');
@@ -73,22 +90,6 @@ IDDCharacteristic.prototype.onUnsubscribe = function () {
   }
 };
 
-IDDCharacteristic.prototype.onReadRequest = function(offset, callback) {
-  if (offset) {
-    callback(this.RESULT_ATTR_NOT_LONG, null);
-  }
-  else {
-    MoveCallback = function (MoveValue) {
-      Value = MoveValue;
-    }
-
-    Move.getMoveValue(MoveCallback)
-
-    var data = new Buffer(1);
-    data.writeUInt8(Value, 0);
-    callback(this.RESULT_SUCCESS, data);
-  }
-};
 
 
 bleno.on('stateChange', function(state) {

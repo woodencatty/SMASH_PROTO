@@ -3,11 +3,6 @@ var util = require('util');
 
 var Move = require('./calculator.js');
 
-
-var Characteristic = bleno.Characteristic;
-var Descriptor = bleno.Descriptor;
-var PrimaryService = bleno.PrimaryService;
-
 var Value;
 
 function IDDService() {
@@ -35,6 +30,11 @@ function IDDCharacteristic() {
 }
 
 util.inherits(IDDCharacteristic, bleno.Characteristic);
+
+
+var name = 'IDD';
+var Service = new IDDService();
+
 
 
 IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
@@ -88,21 +88,33 @@ IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
   callback(Characteristic.RESULT_SUCCESS, Value);
 };
 
-
-bleno.on('stateChange', function (state) {
-  console.log('on -> stateChange: ' + state);
-
+bleno.on('stateChange', function(state) {
   if (state === 'poweredOn') {
-    bleno.startAdvertising('IDD', [IDDService.uuid]);
-  } else {
+    //
+    // We will also advertise the service ID in the advertising packet,
+    // so it's easier to find.
+    //
+    bleno.startAdvertising(name, [Service.uuid], function(err) {
+      if (err) {
+        console.log(err);
+      }
+    });
+  }
+  else {
     bleno.stopAdvertising();
   }
 });
+ 
 
-bleno.on('advertisingStart', function (error) {
-  console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
-
-  if (!error) {
-    bleno.setServices([IDDService]);
+bleno.on('advertisingStart', function(err) {
+  if (!err) {
+    console.log('advertising...');
+    //
+    // Once we are advertising, it's time to set up our services,
+    // along with our characteristics.
+    //
+    bleno.setServices([
+      Service
+    ]);
   }
 });

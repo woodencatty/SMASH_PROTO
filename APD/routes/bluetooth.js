@@ -31,7 +31,7 @@ noble.on('discover', function (peripheral) {
       console.log('find peripheral: ' + peripheral);
     peripheral.connect(function (err) {
       console.log('connect to peripheral: ' + peripheral);
-      peripheral.discoverServices([serviceUUID], function (err, services) {
+      peripheral.discoverServices([], function (err, services) {
               console.log('services find: ' + services);
         services.forEach(function (service) {
           console.log('this service : ' + service);

@@ -49,3 +49,4 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
   IDDCharacteristic.subscribe(); // ignore callback
   IDDCharacteristic.read();      // ignore callback
 
+  }

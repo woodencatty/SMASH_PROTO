@@ -14,8 +14,7 @@ var audio = 0;
 var enviorment = 0;
 var light = 0;
 
-var ID = 0;
-var Accel = 0;
+var ID;
 //sensor callback
 
   DistCallback = function (DistValue) {
@@ -44,12 +43,8 @@ var Accel = 0;
 
 //bluetooth callback
 
-  IDCallback = function (IDValue) {
+  IDDCallback = function (IDValue) {
     ID = IDValue;
-  }
-
-  AccelCallback = function (AccelValue) {
-    Accel = AccelValue;
   }
 
 this.SensorInterval = setInterval(function () {
@@ -77,25 +72,26 @@ if(distance < 50){
 }
 });
 
-
 router.get('/try', function (req, res, next) {
-
+    console.log("Directed to try Page");
   res.render('try');
 });
 
 router.get('/identify', function (req, res, next) {
-    console.log("Directed to ID Page");
-  //res.render('identify', { title: '인식화면', name:'김환자' });
+    console.log("Directed to identify Page");
   
-  //bluetooth.startScan();
- // bluetooth.getID(IDCallback);
- //  console.log(ID);
-
+  
+  bluetooth.searchIDD(IDDCallback);
+  
+ next();
+}, function (req, res) {
  res.redirect('/welcome')
 });
 
 
 router.get('/welcome', function (req, res, next) {
+      console.log("Directed to welcome Page");
+      console.log(ID);
   var name = '김환자';
   res.render('welcome', { name: name});
 });

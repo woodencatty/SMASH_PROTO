@@ -2,6 +2,14 @@
 // and display notification for temperature changes
 var noble = require('noble');
 
+  const serviceUUIDs = ['bbb0'];
+  const characteristicUUIDs = ['bbb1'];
+
+  
+ var IDDCharacteristic = null;
+ var IDDperipheral = null;
+
+module.exports.searchIDD = function (callback) {
 noble.on('stateChange', function (state) {
   if (state === 'poweredOn') {
     noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
@@ -17,27 +25,26 @@ noble.on('discover', function (peripheral) {
 });
 
 function connectAndSetUp(peripheral) {
+  IDDperipheral = peripheral;
+  IDDperipheral.connect(function (error) {
 
-  peripheral.connect(function (error) {
-    var serviceUUIDs = ['bbb0'];
-    var characteristicUUIDs = ['bbb1'];
-
-    peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
+    IDDperipheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
   });
 
 }
 
 function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
 
-  var IDDCharacteristic = characteristics[0];
+  IDDCharacteristic = characteristics[0];
 
   IDDCharacteristic.on('data', function (data, isNotification) {
     var celsius = data.readFloatLE(0);
-    var fahrenheit = (celsius * 1.8 + 32.0).toFixed(1);
-    console.log('Temperature is', celsius.toFixed(1) + '°C', fahrenheit + '°F');
+    console.log('Temperature is', celsius.toFixed(1));
+    IDDperipheral.disconnect();
+    callback(temperature.toFixed(1));
   });
 
-  IDDCharacteristic.subscribe(); // ignore callback
+  //IDDCharacteristic.subscribe(); // ignore callback
   IDDCharacteristic.read();      // ignore callback
- setTimeout(function(){IDDCharacteristic.unsubscribe();}, 5000); 
 }
+};

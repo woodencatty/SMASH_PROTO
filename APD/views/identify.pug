@@ -1,11 +1,9 @@
 extends layout
 
-html
-  head
+block content
     meta(charset='utf-8')
     title TRY
   h1  인식중입니다...잠시만 기다려주세요.
 
   script(type='text/javascript').
     setTimeout("location.replace('/welcome');", 100);
-  body

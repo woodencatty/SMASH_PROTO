@@ -1,8 +1,8 @@
 // Thermometer Service 0xBBB0
-var bleno = require('bleno');
-var util = require('util');
+const bleno = require('bleno');
+const util = require('util');
 
-var move = require('./calculator.js')
+const move = require('./calculator.js')
 
 
 var Characteristic = bleno.Characteristic;

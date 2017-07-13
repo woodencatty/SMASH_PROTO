@@ -1,4 +1,4 @@
-var noble = require('noble');
+const noble = require('noble');
 
 console.log('bluetooth module OK');
 
@@ -7,7 +7,7 @@ const characteristicUUIDs = ['bbb1'];
 
 
 var IDDCharacteristic = null;
-var value = 0;
+var value;
 
 module.exports.searchIDD = function () {
   console.log('scan start');

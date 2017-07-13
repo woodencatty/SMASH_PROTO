@@ -1,3 +1,3 @@
-var bluetooth = require('./bluetooth.js')
+const bluetooth = require('./bluetooth.js')
 
 bluetooth.AdvertisingDevice();

@@ -8,7 +8,7 @@ const DHT22 = 22;                    //wPi GPIO 7
 const ultraTRIG = 0;               //wPi GPIO 0
 const ultraECHO = 2;               //wPi GPIO 2
 
-var adc = new McpAdc.Mcp3208();
+const adc = new McpAdc.Mcp3208();
 var adcAudio = 0;                  //ADC Channel 0
 var adcEnv = 1;                  //ADC Channel 1
 var adcLight = 2;                  //ADC Channel 2

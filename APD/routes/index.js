@@ -4,7 +4,7 @@ const router = express.Router();
 const sensor = require('./sensor.js')
 const bluetooth = require('./bluetooth.js')
 
-var noble = require('noble');
+const noble = require('noble');
 
 var distance;
 var temperature;
@@ -14,8 +14,8 @@ var enviorment;
 var light;
 
 var ID;
-
-var exec = require('child_process').exec,
+var name;
+const exec = require('child_process').exec,
     xinput, browser;
 /*
 xinput = exec('xinput --set-prop 7 114 0 -1 1 1 0 0 0 0 1',
@@ -67,6 +67,7 @@ browser = exec('chromium-browser --kiosk --no-sandbox',
     ID = IDValue;
   }
 
+//sensor Interval
   
 this.SensorInterval = setInterval(function () {
   sensor.getTemp(TempCallback);
@@ -74,14 +75,15 @@ this.SensorInterval = setInterval(function () {
   sensor.getAdcAudio(AudCallback);
   sensor.getAdcEnv(EnvCallback);
   sensor.getAdcLight(LightCallback);
-}.bind(this), 30000);
+}.bind(this), 10000);
 
 
 this.DistanceInterval = setInterval(function () {
   sensor.getDist(DistCallback);
 }.bind(this), 1000);
 
-/* GET home page. */
+
+
 router.get('/main', function (req, res, next) {
   console.log("Directed to Main Page");
 
@@ -115,17 +117,41 @@ router.get('/welcome', function (req, res, next) {
       console.log("Directed to welcome Page");
 
 bluetooth.searchIDD();
+
   setTimeout(function(){
     bluetooth.Getdata(IDCallback)
       console.log('get value! : ' + ID);
-    res.render('welcome', { name: ID});
+      
+var reqNameOption = {
+  host: '127.0.0.1',
+  port: 60001,
+  path: 'requestName/:'+ID,
+  method: 'GET'
+};
+
+
+http.request(reqNameOption, function(res) {
+  console.log('STATUS: ' + res.statusCode);
+  console.log('HEADERS: ' + JSON.stringify(res.headers));
+  res.setEncoding('utf8');
+  res.on('data', function (chunk) {
+    console.log('BODY: ' + chunk);
+    name = chunk;
+  });
+}).end();
   }, 5000);
+
+  
+  setTimeout(function(){
+    res.render('welcome', { name: name});
+  }, 10000);
 
 });
 
 
 router.get('/exercise', function (req, res, next) {
   res.render('exercise');
+  
 });
 
 module.exports = router;

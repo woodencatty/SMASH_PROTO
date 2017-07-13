@@ -1,4 +1,4 @@
-var Accel = require('./sensor.js');
+const Accel = require('./sensor.js');
 
 var AccelX;
 var AccelY;

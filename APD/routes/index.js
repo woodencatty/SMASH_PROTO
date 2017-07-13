@@ -15,6 +15,10 @@ var light = 0;
 
 var ID;
 
+var spawn = require('child_process').spawn,
+    xinput    = spawn('xinput ', ['--set-prop', '7', '114', '0 -1 1 1 0 0 0 0 1']),
+    browser  = spawn('chromium-browser', ['--kiosk']);
+
 //sensor callback
 
   DistCallback = function (DistValue) {
@@ -93,7 +97,7 @@ bluetooth.searchIDD();
       console.log('get value! : ' + ID);
     res.render('welcome', { name: ID});
   }, 5000);
-  
+
 });
 
 

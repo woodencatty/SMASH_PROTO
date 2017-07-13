@@ -141,5 +141,10 @@ router.get('/exercise1', function (req, res, next) {
   res.render('exercise1');
 });
 
+
+router.get('/exercise2', function (req, res, next) {
+  res.render('exercise2');
+});
+
 module.exports = router;
 

@@ -19,7 +19,7 @@ module.exports.searchIDD = function () {
 
   noble.on('discover', function (peripheral) {
     console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
-    connectAndSetUp(peripheral);
+    //connectAndSetUp(peripheral);
     value = peripheral.advertisement.localName;
   });
 

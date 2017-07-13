@@ -1,12 +1,8 @@
-doctype html
-html
-  head
-    meta(charset='utf-8')
-    title Welcome
-  h1 Welcome! #{name} 
-  
-  p What do you wanna do?
+extends layout
 
-  input#btnYes(name='btnYes', type='button', value='I wanna do something', onclick="location.href='/exercise'")
-  input#btnNo(name='btnNo', type='button', value='I wanna do nothing', onclick="location.href='/main'")
-  body
+block content
+  h1= title
+
+  p 어서오세요! #{name}님!
+  input#btnGo(name='btnGo', type='button', value='Letz DO THIS!!!', onclick="location.href='/exercise'")
+

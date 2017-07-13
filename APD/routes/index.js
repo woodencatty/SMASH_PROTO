@@ -79,23 +79,21 @@ router.get('/try', function (req, res, next) {
 
 router.get('/identify', function (req, res, next) {
     console.log("Directed to identify Page");
+res.render('identify');
+});
+
+
+
+router.get('/welcome', function (req, res, next) {
+      console.log("Directed to welcome Page");
 
 bluetooth.searchIDD();
   setTimeout(function(){
     bluetooth.Getdata(IDCallback)
       console.log('get value! : ' + ID);
-    res.render('identify', { name: ID});
+    res.render('welcome', { name: ID});
   }, 5000);
-
-});
-
-
-router.get('/welcome', function (req, res, next) {
-      console.log("Directed to welcome Page");
-      console.log(ID);
-
-  var name = '김환자';
-  res.render('welcome', { name: name});
+  
 });
 
 

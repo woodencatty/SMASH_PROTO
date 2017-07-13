@@ -1,8 +1,9 @@
-extends layout
-
-block content
-  h1= title
-
-  p 어서오세요! #{name}님!
-  input#btnGo(name='btnGo', type='button', value='Letz DO THIS!!!', onclick="location.href='/exercise'")
-
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title TRY
+  h1  인식중입니다...잠시만 기다려주세요.
+  script(type='text/javascript').
+    setTimeout("location.replace('/welcome');", 100);
+  body

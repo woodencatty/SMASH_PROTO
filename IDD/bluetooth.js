@@ -10,6 +10,7 @@ var Descriptor = bleno.Descriptor;
 var PrimaryService = bleno.PrimaryService;
 
 var value = 10.11;
+var ID = 'P0001'
 
 this.valueInterval = setInterval(function () {
   MoveCallback = function (MoveValue) {
@@ -74,7 +75,7 @@ bleno.on('stateChange', function (state) {
   console.log('on -> stateChange: ' + state);
 
   if (state === 'poweredOn') {
-    bleno.startAdvertising('IDD', [IDDService.uuid]);
+    bleno.startAdvertising(ID, [IDDService.uuid]);
   } else {
     bleno.stopAdvertising();
   }

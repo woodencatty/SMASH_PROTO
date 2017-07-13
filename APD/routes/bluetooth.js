@@ -7,7 +7,7 @@ const characteristicUUIDs = ['bbb1'];
 
 
 var IDDCharacteristic = null;
-var Value = 0;
+var value = 0;
 
 module.exports.searchIDD = function () {
   console.log('scan start');
@@ -20,21 +20,23 @@ module.exports.searchIDD = function () {
   noble.on('discover', function (peripheral) {
     console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
     connectAndSetUp(peripheral);
-    Value = peripheral.advertisement.localName;
+    value = peripheral.advertisement.localName;
   });
+
+  /*
   function connectAndSetUp(peripheral) {
     peripheral.connect(function (error) {
      // peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
     });
 
-  }
+  }*/
 
   function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
     console.log('find service');
     IDDCharacteristic = characteristics[0];
     IDDCharacteristic.on('data', function (data, isNotification) {
       var celsius = data.readFloatLE(0);
-      Value = celsius.toFixed(1);
+      value = celsius.toFixed(1);
       console.log('Temperature is', celsius.toFixed(1));
     });
     IDDCharacteristic.subscribe(); // ignore callback
@@ -43,6 +45,6 @@ module.exports.searchIDD = function () {
 };
 
 module.exports.Getdata = function (callback) {
-  callback(Value);
+  callback(value);
 };
 

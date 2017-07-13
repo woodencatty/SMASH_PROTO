@@ -74,7 +74,7 @@ browser = exec('chromium-browser --kiosk --no-sandbox',
  reqNameOption = {
   host: '127.0.0.1',
   port: 60001,
-  path: 'requestName/:'+ID,
+  path: 'requestName/'+ID,
   method: 'GET'
 };
   }

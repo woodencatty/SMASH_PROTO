@@ -43,7 +43,7 @@ req.setHeader("ID", ID);
 
 req.end();
 setTimeout(function(){
-    		callback(serverdata.patient_name);
+    		callback(name);
       }, 500);
 
 };

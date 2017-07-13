@@ -16,6 +16,9 @@ var light;
 
 var ID;
 var name;
+
+var reqNameOption;
+
 /*
 const exec = require('child_process').exec,
     xinput, browser;
@@ -68,7 +71,7 @@ browser = exec('chromium-browser --kiosk --no-sandbox',
   IDCallback = function (IDValue) {
     ID = IDValue;
 
-var reqNameOption = {
+ reqNameOption = {
   host: '127.0.0.1',
   port: 60001,
   path: 'requestName/:'+ID,

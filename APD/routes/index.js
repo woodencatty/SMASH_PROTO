@@ -5,6 +5,7 @@ const sensor = require('./sensor.js')
 const bluetooth = require('./bluetooth.js')
 
 const noble = require('noble');
+const http = require('http');
 
 var distance;
 var temperature;

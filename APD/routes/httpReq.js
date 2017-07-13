@@ -18,16 +18,11 @@ var getRequest
 
   BLECallback = function (IDValue) {
     ID = IDValue;
-    console.log('ID is : ' + ID);
   }
 
 
 //module.exports.reqName = function (callback) {
 
-bluetooth.searchIDD();
-setTimeout(function(){
-bluetooth.Getdata(BLECallback);
-  }, 2000);
 callback = function(response){
 	console.log('HTTP Response Code : ' +response.statusCode);
 	if(response.statusCode != 200){
@@ -44,12 +39,20 @@ callback = function(response){
 	});
 	}
 }
-setTimeout(function(){
 
+
+bluetooth.searchIDD();
+setTimeout(function(){
+bluetooth.Getdata(BLECallback);
+  }, 2000);
+setTimeout(function(){
+    console.log('ID is : ' + ID);
 var req = http.request(getRequest,callback);
 
 req.setHeader("ID", 'P0001');
 
 req.end();
   }, 4000);
+
+  
 //};

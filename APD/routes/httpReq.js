@@ -36,7 +36,11 @@ getcallback = function(response){
 	}
 }
 
-var req = http.setHeader("ID", ID).request(getRequest,getcallback).end();
+var req = http.request(getRequest,getcallback);
+
+req.setHeader("ID", ID);
+
+req.end();
 
 setTimeout(function(){
     		callback(name);

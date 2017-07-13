@@ -42,9 +42,11 @@ callback = function(response){
 
 
 bluetooth.searchIDD();
+
 setTimeout(function(){
 bluetooth.Getdata(BLECallback);
-  }, 2000);
+  }, 4000);
+
 setTimeout(function(){
     console.log('ID is : ' + ID);
 var req = http.request(getRequest,callback);
@@ -54,5 +56,5 @@ req.setHeader("ID", 'P0001');
 req.end();
   }, 4000);
 
-  
+
 //};

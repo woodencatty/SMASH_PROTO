@@ -14,10 +14,10 @@ var enviorment;
 var light;
 
 var ID;
-
+/*
 const exec = require('child_process').exec,
     xinput, browser;
-/*
+
 xinput = exec('xinput --set-prop 7 114 0 -1 1 1 0 0 0 0 1',
   function (error, stdout, stderr) {
     console.log('stdout: ' + stdout);

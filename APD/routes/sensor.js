@@ -23,7 +23,7 @@ module.exports.getTemp = function (callback) {
         if (!err) {
          //   console.log("temp :" + temperature.toFixed(1) + "C");
             callback(temperature.toFixed(1));
-        }else {console.log("Error detected");}
+        }else {console.log("Error detected in Temperature sensor");}
     });
 };
 
@@ -32,7 +32,7 @@ module.exports.getHumi = function (callback) {
         if (!err) {
         //    console.log("humidity : " + humidity.toFixed(1) + "%");
             callback(humidity.toFixed(1));
-        }else {console.log("Error detected");}
+        }else {console.log("Error detected in Humidity sensor");}
     });
 };
 

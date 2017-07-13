@@ -6,12 +6,12 @@ const bluetooth = require('./bluetooth.js')
 
 var noble = require('noble');
 
-var distance = 0;
-var temperature = 0;
-var humidity = 0;
-var audio = 0;
-var enviorment = 0;
-var light = 0;
+var distance;
+var temperature;
+var humidity;
+var audio;
+var enviorment;
+var light;
 
 var ID;
 
@@ -74,21 +74,28 @@ this.SensorInterval = setInterval(function () {
   sensor.getAdcAudio(AudCallback);
   sensor.getAdcEnv(EnvCallback);
   sensor.getAdcLight(LightCallback);
-}.bind(this), 1000);
+}.bind(this), 30000);
 
 
 this.DistanceInterval = setInterval(function () {
   sensor.getDist(DistCallback);
-}.bind(this), 500);
+}.bind(this), 1000);
+
 /* GET home page. */
 router.get('/main', function (req, res, next) {
   console.log("Directed to Main Page");
 
 if(distance < 50){
+
+  if (this.DistanceInterval) {
+    clearInterval(this.DistanceInterval);
+    this.DistanceInterval = null;
+  }
+
   res.redirect('/try')
   console.log('\t' + distance);
 }else{
-  res.render('index', { title: '대기화면', temp: temperature, humi: humidity, audio: audio, env: enviorment, light: light });
+  res.render('index', { title: '대기화면', temp: temperature, humi: humidity, audio: audio, env: enviorment, light: light, distance: distance });
 }
 });
 

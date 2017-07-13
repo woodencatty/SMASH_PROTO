@@ -74,18 +74,6 @@ var reqNameOption = {
   path: 'requestName/:'+ID,
   method: 'GET'
 };
-
-http.request(reqNameOption, function(res) {
-  console.log(reqNameOption.path);
-  console.log('STATUS: ' + res.statusCode);
-  console.log('HEADERS: ' + JSON.stringify(res.headers));
-  res.setEncoding('utf8');
-  res.on('data', function (chunk) {
-    console.log('BODY: ' + chunk);
-    name = chunk;
-  });
-}).end();
-
   }
 
 //sensor Interval
@@ -141,7 +129,20 @@ bluetooth.searchIDD();
 
   setTimeout(function(){
     bluetooth.Getdata(IDCallback)
+    
       console.log('get value! : ' + ID);
+
+http.request(reqNameOption, function(res) {
+  console.log(reqNameOption.path);
+  console.log('STATUS: ' + res.statusCode);
+  console.log('HEADERS: ' + JSON.stringify(res.headers));
+  res.setEncoding('utf8');
+  res.on('data', function (chunk) {
+    console.log('BODY: ' + chunk);
+    name = chunk;
+  });
+}).end();
+
   }, 5000);
 
   

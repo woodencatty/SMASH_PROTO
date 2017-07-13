@@ -124,7 +124,11 @@ bluetooth.searchIDD();
   setTimeout(function(){
     bluetooth.Getdata(IDCallback)
       console.log('get value! : ' + ID);
-      http.reqName(ID, NameCallback);
+      
+if(ID == 'notfound'){
+	    console.log('user not found')
+}else{http.reqName(ID, NameCallback);
+      }
       setTimeout(function(){
     res.render('welcome', { name: name});
       }, 500);

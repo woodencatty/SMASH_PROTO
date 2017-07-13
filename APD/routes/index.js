@@ -133,6 +133,7 @@ var reqNameOption = {
 
 
 http.request(reqNameOption, function(res) {
+  console.log(reqNameOption.path);
   console.log('STATUS: ' + res.statusCode);
   console.log('HEADERS: ' + JSON.stringify(res.headers));
   res.setEncoding('utf8');

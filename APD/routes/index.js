@@ -117,7 +117,7 @@ res.render('identify');
 router.get('/welcome', function (req, res, next) {
       console.log("Directed to welcome Page");
 
-  http.reqName(IDCallback);
+  //http.reqName(IDCallback);
 
   setTimeout(function(){
     res.render('welcome', { name: name});

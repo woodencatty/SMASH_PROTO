@@ -16,9 +16,18 @@ var light = 0;
 var ID;
 
 var exec = require('child_process').exec,
-    child;
+    xinput, browser;
 
-child = exec('xinput --set-prop 7 114 0 -1 1 1 0 0 0 0 1',
+xinput = exec('xinput --set-prop 7 114 0 -1 1 1 0 0 0 0 1',
+  function (error, stdout, stderr) {
+    console.log('stdout: ' + stdout);
+    console.log('stderr: ' + stderr);
+    if (error !== null) {
+      console.log('exec error: ' + error);
+    }
+});
+
+browser = exec('chromium-browser --kiosk --no-sandbox',
   function (error, stdout, stderr) {
     console.log('stdout: ' + stdout);
     console.log('stderr: ' + stderr);

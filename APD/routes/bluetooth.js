@@ -10,6 +10,7 @@ var noble = require('noble');
  var Value = 0;
 
 module.exports.searchIDD = function () {
+  noble.state = 'poweredOn';
   console.log('scan start');
   noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
 noble.on('scanStart', function (state) {
@@ -70,7 +71,7 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 };
 
 module.exports.Getdata = function (callback) {
-
+  noble.state = 'poweredOff'
     callback(Value);
 };
 

@@ -15,7 +15,7 @@ var getRequest
 
 
 
-  IDCallback = function (IDValue) {
+  BLECallback = function (IDValue) {
     ID = IDValue;
 
   }
@@ -25,7 +25,7 @@ module.exports.reqName = function (callback) {
 
 bluetooth.searchIDD();
 
-bluetooth.Getdata(IDCallback)
+bluetooth.Getdata(BLECallback);
 
 callback = function(response){
 	console.log('HTTP Response Code : ' +response.statusCode);

@@ -20,10 +20,11 @@ module.exports.searchIDD = function () {
   noble.on('discover', function (peripheral) {
     console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
     connectAndSetUp(peripheral);
+    Value = peripheral.advertisement.localName;
   });
   function connectAndSetUp(peripheral) {
     peripheral.connect(function (error) {
-      peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
+     // peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
     });
 
   }

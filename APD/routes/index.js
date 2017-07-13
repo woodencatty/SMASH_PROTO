@@ -14,7 +14,7 @@ var audio;
 var enviorment;
 var light;
 
-var ID = '';
+var ID = 'notfound';
 var name;
 /*
 const exec = require('child_process').exec,

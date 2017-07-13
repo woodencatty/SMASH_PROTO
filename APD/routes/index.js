@@ -67,6 +67,25 @@ browser = exec('chromium-browser --kiosk --no-sandbox',
 
   IDCallback = function (IDValue) {
     ID = IDValue;
+
+var reqNameOption = {
+  host: '127.0.0.1',
+  port: 60001,
+  path: 'requestName/:'+ID,
+  method: 'GET'
+};
+
+http.request(reqNameOption, function(res) {
+  console.log(reqNameOption.path);
+  console.log('STATUS: ' + res.statusCode);
+  console.log('HEADERS: ' + JSON.stringify(res.headers));
+  res.setEncoding('utf8');
+  res.on('data', function (chunk) {
+    console.log('BODY: ' + chunk);
+    name = chunk;
+  });
+}).end();
+
   }
 
 //sensor Interval
@@ -123,25 +142,6 @@ bluetooth.searchIDD();
   setTimeout(function(){
     bluetooth.Getdata(IDCallback)
       console.log('get value! : ' + ID);
-      
-var reqNameOption = {
-  host: '127.0.0.1',
-  port: 60001,
-  path: 'requestName/:'+ID,
-  method: 'GET'
-};
-
-
-http.request(reqNameOption, function(res) {
-  console.log(reqNameOption.path);
-  console.log('STATUS: ' + res.statusCode);
-  console.log('HEADERS: ' + JSON.stringify(res.headers));
-  res.setEncoding('utf8');
-  res.on('data', function (chunk) {
-    console.log('BODY: ' + chunk);
-    name = chunk;
-  });
-}).end();
   }, 5000);
 
   

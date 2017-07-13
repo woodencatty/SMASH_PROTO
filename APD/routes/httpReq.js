@@ -19,11 +19,10 @@ var getRequest
 
 module.exports.reqName = function (ID, callback) {
 
-callback = function(response){
+getcallback = function(response){
 	console.log('HTTP Response Code : ' +response.statusCode);
 	if(response.statusCode != 200){
 		console.log('Error Response!');
-
 	}else{
 	var serverdata = '';
 	response.on('data', function(chunk){
@@ -37,11 +36,8 @@ callback = function(response){
 	}
 }
 
-var req = http.request(getRequest,callback);
+var req = http.setHeader("ID", ID).request(getRequest,getcallback).end();
 
-req.setHeader("ID", ID);
-
-req.end();
 setTimeout(function(){
     		callback(name);
       }, 500);

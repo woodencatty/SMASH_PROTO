@@ -13,7 +13,7 @@ var audio = 0;
 var enviorment = 0;
 var light = 0;
 
-var ID = 0;
+var ID;
 
 //sensor callback
 

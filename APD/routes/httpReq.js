@@ -13,6 +13,7 @@ var getRequest
   method: 'GET'
 };
 
+	console.log('HTTP Response ongoing');
 
 
   BLECallback = function (IDValue) {

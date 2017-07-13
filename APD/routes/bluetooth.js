@@ -27,12 +27,11 @@ function connectAndSetUp(peripheral) {
   peripheral.connect(function (error) {
 
     peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
-/*
+
     setTimeout(function(){
       peripheral.disconnect();
       console.log('disconnected');
   }, 20000)
-*/  
 
 });
 

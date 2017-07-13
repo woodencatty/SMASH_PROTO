@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const sensor = require('./sensor.js')
-const http = require('./httpReq.js')
-
+const bluetooth = require('./bluetooth.js')
 
 const noble = require('noble');
 
@@ -14,13 +13,11 @@ var audio;
 var enviorment;
 var light;
 
-var name;
+var ID;
 
-
-/*
 const exec = require('child_process').exec,
     xinput, browser;
-
+/*
 xinput = exec('xinput --set-prop 7 114 0 -1 1 1 0 0 0 0 1',
   function (error, stdout, stderr) {
     console.log('stdout: ' + stdout);
@@ -64,11 +61,12 @@ browser = exec('chromium-browser --kiosk --no-sandbox',
     light = LightValue;
   }
 
-  IDCallback = function(nameValue){
-      name = nameValue
+//bluetooth callback
+
+  IDCallback = function (IDValue) {
+    ID = IDValue;
   }
 
-//sensor Interval
   
 this.SensorInterval = setInterval(function () {
   sensor.getTemp(TempCallback);
@@ -83,8 +81,7 @@ this.DistanceInterval = setInterval(function () {
   sensor.getDist(DistCallback);
 }.bind(this), 1000);
 
-
-
+/* GET home page. */
 router.get('/main', function (req, res, next) {
   console.log("Directed to Main Page");
 
@@ -117,18 +114,19 @@ res.render('identify');
 router.get('/welcome', function (req, res, next) {
       console.log("Directed to welcome Page");
 
-  //http.reqName(IDCallback);
+bluetooth.searchIDD();
 
   setTimeout(function(){
-    res.render('welcome', { name: name});
-  }, 10000);
+    bluetooth.Getdata(IDCallback)
+      console.log('get value! : ' + ID);
+    res.render('welcome', { name: ID});
+  }, 5000);
 
 });
 
 
 router.get('/exercise', function (req, res, next) {
   res.render('exercise');
-  
 });
 
 module.exports = router;

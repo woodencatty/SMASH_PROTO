@@ -18,8 +18,6 @@ module.exports.searchIDD = function () {
 
   });
 
-};
-
   noble.on('discover', function (peripheral) {
     console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
     connectAndSetUp(peripheral);
@@ -49,6 +47,7 @@ module.exports.searchIDD = function () {
     IDDCharacteristic.read();      // ignore callback
 
   }
+};
 
 module.exports.Getdata = function (callback) {
   callback(Value);

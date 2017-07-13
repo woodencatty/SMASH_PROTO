@@ -8,7 +8,7 @@ var noble = require('noble');
   
  var IDDCharacteristic = null;
 
-module.exports.searchIDD = function (callback) {
+module.exports.searchIDD = function () {
   console.log('scan start');
   noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
 noble.on('scanStart', function (state) {

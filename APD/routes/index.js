@@ -80,7 +80,7 @@ router.get('/try', function (req, res, next) {
 router.get('/identify', function (req, res, next) {
     console.log("Directed to identify Page");
 
-bluetooth.searchIDD(IDCallback);
+bluetooth.searchIDD();
   console.log('get value! : ' + ID);
   setTimeout(function(){
     res.render('identify', { name: ID});

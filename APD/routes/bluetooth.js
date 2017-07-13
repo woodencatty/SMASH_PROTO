@@ -10,7 +10,7 @@ var IDDCharacteristic = null;
 var value;
 
 module.exports.searchIDD = function () {
-  noble.state = 'poweredOn';
+  //noble.state = 'poweredOn';
   console.log('scan start');
   noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
   noble.on('scanStart', function (state) {

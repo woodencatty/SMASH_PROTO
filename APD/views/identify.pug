@@ -4,5 +4,5 @@ block content
   h1= title
 
   p 어서오세요! #{name}님!
-  script(type='text/javascript').
-   setTimeout("location.href='/exercise';", 400);
+  input#btnGo(name='btnGo', type='button', value='No', onclick="location.href='/exercise'")
+

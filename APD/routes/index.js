@@ -86,7 +86,7 @@ bluetooth.searchIDD();
       console.log('get value! : ' + ID);
     res.render('identify', { name: ID});
   }, 5000);
-  
+
 });
 
 

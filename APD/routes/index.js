@@ -83,7 +83,7 @@ router.get('/identify', function (req, res, next) {
 bluetooth.searchIDD(IDCallback);
   console.log('get value! : ' + ID);
   setTimeout(function(){
-    res.render('identify', { name: 'ID'});
+    res.render('identify', { name: ID});
   }, 10000);
   
 });

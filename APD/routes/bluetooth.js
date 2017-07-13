@@ -44,7 +44,9 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
     var celsius = data.readFloatLE(0);
     console.log('Temperature is', celsius.toFixed(1));
    //IDDperipheral.disconnect();
+    setTimeout(function(){
     callback(celsius.toFixed(1));
+  }, 1000)
   });
 
   IDDCharacteristic.subscribe(); // ignore callback

@@ -47,7 +47,7 @@ var ID = 0;
     ID = IDValue;
   }
 
-
+  
 this.SensorInterval = setInterval(function () {
   sensor.getTemp(TempCallback);
   sensor.getHumi(HumiCallback); 

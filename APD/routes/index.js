@@ -15,12 +15,17 @@ var light = 0;
 
 var ID;
 
-var spawn = require('child_process').spawn
-    .on('error', function( err ){ throw err }),
-    xinput    = spawn('xinput ', ['--set-prop', '7', '114', '0', '-1', '1', '1', '0', '0', '0', '0', '1']),
-    
-    browser  = spawn('chromium-browser', ['--kiosk', '--no-sandbox']);
+var exec = require('child_process').exec,
+    child;
 
+child = exec('xinput --set-prop 7 114 0 -1 1 1 0 0 0 0 1',
+  function (error, stdout, stderr) {
+    console.log('stdout: ' + stdout);
+    console.log('stderr: ' + stderr);
+    if (error !== null) {
+      console.log('exec error: ' + error);
+    }
+});
 //sensor callback
 
   DistCallback = function (DistValue) {

@@ -18,7 +18,9 @@ var getRequest
 
 
 module.exports.reqName = function (ID, callback) {
-
+if(ID == 'notfound'){
+	    callback('User Not found');
+}
 getcallback = function(response){
 	console.log('HTTP Response Code : ' +response.statusCode);
 	if(response.statusCode != 200){

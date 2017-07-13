@@ -138,7 +138,7 @@ if(ID == 'undefined'){
 
 
 router.get('/exercise1', function (req, res, next) {
-  res.render('exercise');
+  res.render('exercise1');
 });
 
 module.exports = router;

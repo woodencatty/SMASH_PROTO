@@ -15,7 +15,6 @@ module.exports.searchIDD = function () {
   noble.on('scanStart', function (state) {
     console.log(noble.state);
     console.log('really finding now');
-
   });
 
   noble.on('discover', function (peripheral) {
@@ -24,10 +23,7 @@ module.exports.searchIDD = function () {
   });
   function connectAndSetUp(peripheral) {
     peripheral.connect(function (error) {
-
       peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
-
-
     });
 
   }
@@ -35,17 +31,13 @@ module.exports.searchIDD = function () {
   function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
     console.log('find service');
     IDDCharacteristic = characteristics[0];
-
     IDDCharacteristic.on('data', function (data, isNotification) {
       var celsius = data.readFloatLE(0);
       Value = celsius.toFixed(1);
       console.log('Temperature is', celsius.toFixed(1));
-
     });
-
     IDDCharacteristic.subscribe(); // ignore callback
     IDDCharacteristic.read();      // ignore callback
-
   }
 };
 

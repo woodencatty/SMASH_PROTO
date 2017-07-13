@@ -1,6 +1,5 @@
 
 const http = require('http');
-const bluetooth = require('./bluetooth.js')
 
 var ID;
 
@@ -16,12 +15,9 @@ var getRequest
 	console.log('HTTP Response ongoing');
 
 
-  BLECallback = function (IDValue) {
-    ID = IDValue;
-  }
 
 
-//module.exports.reqName = function (callback) {
+module.exports.reqName = function (ID, callback) {
 
 callback = function(response){
 	console.log('HTTP Response Code : ' +response.statusCode);
@@ -35,26 +31,16 @@ callback = function(response){
 	});	
 	response.on('end',function(){
 		console.log(serverdata);
-    console.log(serverdata.serial_number);
+    console.log(serverdata.patient_name);
+		callback(serverdata.patient_name)
 	});
 	}
 }
 
-
-bluetooth.searchIDD();
-
-setTimeout(function(){
-bluetooth.Getdata(BLECallback);
-  }, 5000);
-
-setTimeout(function(){
-    console.log('ID is : ' + ID);
 var req = http.request(getRequest,callback);
 
-req.setHeader("ID", 'P0001');
+req.setHeader("ID", ID);
 
 req.end();
-  }, 7000);
 
-
-//};
+};

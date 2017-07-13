@@ -3,6 +3,7 @@ const router = express.Router();
 
 const sensor = require('./sensor.js')
 const bluetooth = require('./bluetooth.js')
+const http = require('./httpReq.js')
 
 const noble = require('noble');
 
@@ -14,6 +15,7 @@ var enviorment;
 var light;
 
 var ID;
+var name;
 /*
 const exec = require('child_process').exec,
     xinput, browser;
@@ -67,6 +69,9 @@ browser = exec('chromium-browser --kiosk --no-sandbox',
     ID = IDValue;
   }
 
+  NameCallback = function (nameValue) {
+    name = nameValue;
+  }
   
 this.SensorInterval = setInterval(function () {
   sensor.getTemp(TempCallback);
@@ -119,6 +124,9 @@ bluetooth.searchIDD();
   setTimeout(function(){
     bluetooth.Getdata(IDCallback)
       console.log('get value! : ' + ID);
+      http.reqName(ID, nameCallback);
+
+
     res.render('welcome', { name: ID});
   }, 5000);
 

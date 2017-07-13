@@ -128,7 +128,7 @@ bluetooth.searchIDD();
       setTimeout(function(){
     res.render('welcome', { name: name});
       }, 500);
-  }, 5000);
+  }, 2000);
 
 });
 

@@ -1,7 +1,7 @@
 
 const http = require('http');
 
-var ID;
+var name;
 
 var getRequest
 
@@ -32,7 +32,7 @@ callback = function(response){
 	response.on('end',function(){
 		console.log(serverdata);
     console.log(serverdata.patient_name);
-		callback(serverdata.patient_name)
+		name = serverdata.patient_name;
 	});
 	}
 }
@@ -42,5 +42,8 @@ var req = http.request(getRequest,callback);
 req.setHeader("ID", ID);
 
 req.end();
+setTimeout(function(){
+    		callback(serverdata.patient_name);
+      }, 500);
 
 };

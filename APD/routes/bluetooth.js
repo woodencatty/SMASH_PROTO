@@ -43,7 +43,7 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 
   IDDCharacteristic.on('data', function (data, isNotification) {
     var celsius = data.readFloatLE(0);
-    Value = celsius;
+    Value = celsius.toFixed(1);
     console.log('Temperature is', celsius.toFixed(1));
    //IDDperipheral.disconnect();
     
@@ -69,8 +69,8 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 });*/
 };
 
-module.exports.Getdata = function () {
+module.exports.Getdata = function (callback) {
 
-
+    callback(Value);
 };
 

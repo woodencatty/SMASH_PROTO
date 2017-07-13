@@ -125,9 +125,9 @@ bluetooth.searchIDD();
     bluetooth.Getdata(IDCallback)
       console.log('get value! : ' + ID);
       http.reqName(ID, NameCallback);
-
-
-    res.render('welcome', { name: ID});
+      setTimeout(function(){
+    res.render('welcome', { name: name});
+      }, 500);
   }, 5000);
 
 });

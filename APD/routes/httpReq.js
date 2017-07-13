@@ -40,6 +40,7 @@ callback = function(response){
 	});	
 	response.on('end',function(){
 		console.log(serverdata);
+    console.log(serverdata.serial_number);
 	});
 	}
 }

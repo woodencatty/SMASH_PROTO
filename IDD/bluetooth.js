@@ -54,7 +54,7 @@ IDDCharacteristic.prototype.onUnsubscribe = function () {
     clearInterval(this.changeInterval);
     this.changeInterval = null;
   }
-};s
+};
 
 IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
           var data = new Buffer(4);

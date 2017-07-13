@@ -1,8 +1,15 @@
 body {
+  
+  background-image: url(/images/전체배경_레이어_무지.png);
+  background-size: cover;
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  color: #FFFFFF;
 }
 
-a {
-  color: #00B7FF;
+h1 {
+  font-weight: bold;
+  font-size: 50px;
+  color: #FFFFFF;
 }

@@ -7,6 +7,7 @@ var noble = require('noble');
 
   
  var IDDCharacteristic = null;
+ var Value = 0;
 
 module.exports.searchIDD = function () {
   console.log('scan start');
@@ -42,6 +43,7 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 
   IDDCharacteristic.on('data', function (data, isNotification) {
     var celsius = data.readFloatLE(0);
+    Value = celsius;
     console.log('Temperature is', celsius.toFixed(1));
    //IDDperipheral.disconnect();
     
@@ -67,4 +69,8 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 });*/
 };
 
+module.exports.Getdata = function () {
+
+
+};
 

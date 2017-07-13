@@ -81,8 +81,9 @@ router.get('/identify', function (req, res, next) {
     console.log("Directed to identify Page");
 
 bluetooth.searchIDD();
-  console.log('get value! : ' + ID);
   setTimeout(function(){
+    bluetooth.Getdata(IDCallback)
+      console.log('get value! : ' + ID);
     res.render('identify', { name: ID});
   }, 10000);
   

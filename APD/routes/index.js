@@ -25,7 +25,7 @@ xinput = exec('xinput --set-prop 7 114 0 -1 1 1 0 0 0 0 1',
     if (error !== null) {
       console.log('exec error: ' + error);
     }
-});*/
+});
 
 browser = exec('chromium-browser --kiosk --no-sandbox',
   function (error, stdout, stderr) {
@@ -34,7 +34,7 @@ browser = exec('chromium-browser --kiosk --no-sandbox',
     if (error !== null) {
       console.log('exec error: ' + error);
     }
-});
+});*/
 //sensor callback
 
   DistCallback = function (DistValue) {

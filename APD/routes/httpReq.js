@@ -25,9 +25,9 @@ var getRequest
 //module.exports.reqName = function (callback) {
 
 bluetooth.searchIDD();
-
+setTimeout(function(){
 bluetooth.Getdata(BLECallback);
-
+  }, 2000);
 callback = function(response){
 	console.log('HTTP Response Code : ' +response.statusCode);
 	if(response.statusCode != 200){
@@ -44,12 +44,12 @@ callback = function(response){
 	});
 	}
 }
+setTimeout(function(){
 
 var req = http.request(getRequest,callback);
 
 req.setHeader("ID", 'P0001');
 
 req.end();
-
-
+  }, 4000);
 //};

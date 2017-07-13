@@ -14,7 +14,7 @@ var audio;
 var enviorment;
 var light;
 
-var ID = 'notfound';
+var ID = 'undefined';
 var name;
 /*
 const exec = require('child_process').exec,
@@ -125,7 +125,7 @@ bluetooth.searchIDD();
     bluetooth.Getdata(IDCallback)
       console.log('get value! : ' + ID);
       
-if(ID == 'notfound'){
+if(ID == 'undefined'){
 	    console.log('user not found')
 }else{http.reqName(ID, NameCallback);
       }

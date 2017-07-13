@@ -54,7 +54,7 @@ IDDCharacteristic.prototype.onUnsubscribe = function () {
     clearInterval(this.changeInterval);
     this.changeInterval = null;
   }
-};
+};s
 
 IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
           var data = new Buffer(4);
@@ -67,7 +67,10 @@ var IDDService = new PrimaryService({
   characteristics: [
     new IDDCharacteristic()
   ]
-});bleno.on('stateChange', function (state) {
+});
+
+module.exports.AdvertisingDevice = function () {
+bleno.on('stateChange', function (state) {
   console.log('on -> stateChange: ' + state);
 
   if (state === 'poweredOn') {
@@ -76,7 +79,7 @@ var IDDService = new PrimaryService({
     bleno.stopAdvertising();
   }
 });
-
+};
 bleno.on('advertisingStart', function (error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
 

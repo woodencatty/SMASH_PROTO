@@ -72,9 +72,9 @@ browser = exec('chromium-browser --kiosk --no-sandbox',
     ID = IDValue;
 
  reqNameOption = {
-  host: '127.0.0.1',
+  host: '192.9.44.162',
   port: 60001,
-  path: 'requestName/'+ID,
+  path: '/requestName/'+ID,
   method: 'GET'
 };
   }
@@ -135,8 +135,9 @@ bluetooth.searchIDD();
     
       console.log('get value! : ' + ID);
 
-http.request(reqNameOption, function(res) {
   console.log(reqNameOption.path);
+
+http.request(reqNameOption, function(res) {
   console.log('STATUS: ' + res.statusCode);
   console.log('HEADERS: ' + JSON.stringify(res.headers));
   res.setEncoding('utf8');

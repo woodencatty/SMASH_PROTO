@@ -71,7 +71,7 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 };
 
 module.exports.Getdata = function (callback) {
-    noble.state = 'poweredOff'
+    //noble.state = 'poweredOff'
     callback(Value);
 };
 

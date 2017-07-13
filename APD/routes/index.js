@@ -133,7 +133,7 @@ bluetooth.searchIDD();
 });
 
 
-router.get('/exercise', function (req, res, next) {
+router.get('/exercise1', function (req, res, next) {
   res.render('exercise');
 });
 

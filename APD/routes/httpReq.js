@@ -17,11 +17,11 @@ var getRequest
 
   BLECallback = function (IDValue) {
     ID = IDValue;
-
+    console.log('ID is : ' + ID);
   }
 
 
-module.exports.reqName = function (callback) {
+//module.exports.reqName = function (callback) {
 
 bluetooth.searchIDD();
 
@@ -50,4 +50,4 @@ req.setHeader("ID", ID);
 req.end();
 
 
-};
+//};

@@ -155,17 +155,6 @@ if(ID == 'undefined'){
 
 });
 
-//운동 1. 운동 2와 순환구조를 가진다.
-router.get('/exercise1', function (req, res, next) {
-  res.render('exercise1');
-});
-
-
-//운동 2
-router.get('/exercise2', function (req, res, next) {
-  res.render('exercise2');
-});
-
 //운동 3(gif)
 router.get('/exercise3', function (req, res, next) {
   res.render('exercise3');

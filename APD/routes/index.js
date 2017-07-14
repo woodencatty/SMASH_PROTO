@@ -156,6 +156,15 @@ if(ID == 'undefined'){
 });
 
 //운동 3(gif)
+
+router.get('/exercise1', function (req, res, next) {
+  res.render('exercise1');
+});
+
+router.get('/exercise2', function (req, res, next) {
+  res.render('exercise2');
+});
+
 router.get('/exercise3', function (req, res, next) {
   res.render('exercise3');
 });

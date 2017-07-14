@@ -1,28 +1,31 @@
-const noble = require('noble');
+const noble = require('noble');                     //bluetooth 수신부(Central) 모듈
 
 console.log('bluetooth module OK');
 
-const serviceUUIDs = ['bbb0'];
-const characteristicUUIDs = ['bbb1'];
+const serviceUUIDs = ['bbb0'];                      //환자 식별기기의 bluetooth 서비스 uuid
+const characteristicUUIDs = ['bbb1'];               //환자 식별기기의 데이터 전송 서비스 uuid
 
 
-var IDDCharacteristic = null;
-var value;
+var IDDCharacteristic = null;                       //블루투스 서비스 객체 저장
+var value;                                          // 콜백 전달값 변수
 
+
+//IDD 기기 탐색 기능 모듈화
 module.exports.searchIDD = function () {
-    console.log(noble.state);
-  //noble.state = 'poweredOn';
-  console.log('scan start');
-  noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
+  console.log(noble.state);                                                  //noble 모듈의 상태(noble.status)가 'poweredOn'상태여야만 탐색이 가능하다.
+  console.log('Start scanning..');
+  noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);     //bbb0(서비스 uuid)를 탐색함. 뒤는 bbb0의 128bit형태의 uuid
   noble.on('scanStart', function (state) {
-    console.log(noble.state);
-    console.log('really finding now');
+    console.log(noble.state);                                                //탐색을 정말 수행하고 있는지에 대한 로그
   });
 
+  //기기 탐색 완료시 수행되는 함수. 기기 이름을 value에 저장함.
   noble.on('discover', function (peripheral) {
     console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
-    //connectAndSetUp(peripheral);
     value = peripheral.advertisement.localName;
+
+    // 데이터 전달은 기능에 맞춰 재 개편 예정..
+    //connectAndSetUp(peripheral);
   });
 
   /*
@@ -31,7 +34,7 @@ module.exports.searchIDD = function () {
      // peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
     });
 
-  }*/
+  }
 
   function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
     console.log('find service');
@@ -43,9 +46,10 @@ module.exports.searchIDD = function () {
     });
     IDDCharacteristic.subscribe(); // ignore callback
     IDDCharacteristic.read();      // ignore callback
-  }
+  }*/
 };
 
+//결과값 전달 모듈.
 module.exports.Getdata = function (callback) {
   callback(value);
 };

@@ -9,7 +9,7 @@ block content
   img(src='/images/move.gif' width='955', height='1216' alt="muk-pa")
 
   script(type='text/javascript').
-    var SetTime = 20;
+    var SetTime = 10;
     function msg_time() {
     m = Math.floor(SetTime % 60);
     var msg =  m ;
@@ -17,4 +17,4 @@ block content
     SetTime--;
     if (SetTime < 0) { clearInterval(tid); location.replace('/done'); }
     }
-    window.onload = function TimerStart(){ tid=setInterval('msg_time()',1000) };
+    window.onload = function TimerStart(){ tid=setInterval('msg_time()',2000) };

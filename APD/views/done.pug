@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+
+  p 수고하셨어요! #{name}님!
+
+
+
+  input#btnGo(name='btnGo', type='button', value='Good-bye', onclick="location.href='/main'")
+

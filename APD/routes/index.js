@@ -8,7 +8,7 @@ const http = require('./httpReq.js')
 
 //noble의 상태를 poweredOn으로 변경하기 위한 조치
 const noble = require('noble');
-
+noble.state = 'poweredOn';
 //각 센서값을 받을 변수 정의
 var distance;
 var temperature;

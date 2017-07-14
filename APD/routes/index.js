@@ -166,5 +166,11 @@ router.get('/exercise2', function (req, res, next) {
   res.render('exercise2');
 });
 
+//운동 3(gif)
+router.get('/exercise3', function (req, res, next) {
+  res.render('exercise3');
+});
+
+
 module.exports = router;
 

@@ -7,3 +7,14 @@ block content
 
   img(src='/images/move.gif' width='450', height='1498' alt="muk-pa")
 
+  #ViewTimer
+  script(type='text/javascript').
+    var SetTime = 20;
+    function msg_time() {
+    m = Math.floor(SetTime % 60);
+    var msg =  m ;
+    document.all.ViewTimer.innerHTML = msg;
+    SetTime--;
+    if (SetTime < 0) { clearInterval(tid);}
+    }
+    window.onload = function TimerStart(){ tid=setInterval('msg_time()',1000) };

@@ -1,8 +1,8 @@
 
 const http = require('http');										//http 요청 모듈
 
-var name;															//리턴값 저장 변수
-var getRequest;														//GET요청 JSON데이터
+let name;															//리턴값 저장 변수
+let getRequest;														//GET요청 JSON데이터
 
 
  getRequest = {														//GET요청 JSON데이터 정의
@@ -15,7 +15,7 @@ var getRequest;														//GET요청 JSON데이터
 console.log('HTTP module OK');										
 
 //요청 모듈화(ID값을 파라메터로 받음)
-module.exports.reqName = function (ID, callback) {
+module.exports.reqName = function (ID) {
 
 //요청 데이터 수신 콜백함수
 getcallback = function(response){
@@ -23,7 +23,7 @@ getcallback = function(response){
 	if(response.statusCode != 200){
 		console.log('Error Response!');
 	}else{
-	var serverdata = '';
+	let serverdata = '';
 	response.on('data', function(chunk){							//응답 데이터를 JSON형태로 파싱함
 		serverdata = JSON.parse(chunk);
 	});	
@@ -35,14 +35,10 @@ getcallback = function(response){
 	}
 }
 
-var req = http.request(getRequest,getcallback);						//GET요청 전송
+let req = http.request(getRequest,getcallback);						//GET요청 전송
 
 req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
 
 req.end();
-
-setTimeout(function(){
-    		callback(name);											//데이터 수신이 끝날 때 즈음 데이터 반환
-      }, 500);
 
 };

@@ -6,8 +6,9 @@ const serviceUUIDs = ['bbb0'];                      //환자 식별기기의 blu
 const characteristicUUIDs = ['bbb1'];               //환자 식별기기의 데이터 전송 서비스 uuid
 
 
-var IDDCharacteristic = null;                       //블루투스 서비스 객체 저장
-var value;                                          // 콜백 전달값 변수
+let IDDCharacteristic = null;                       //블루투스 서비스 객체 저장
+
+let ID = '';
 
 
 //IDD 기기 탐색 기능 모듈화
@@ -22,7 +23,7 @@ module.exports.searchIDD = function () {
   //기기 탐색 완료시 수행되는 함수. 기기 이름을 value에 저장함.
   noble.on('discover', function (peripheral) {
     console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
-    value = peripheral.advertisement.localName;
+    ID = peripheral.advertisement.localName;
 
     // 데이터 전달은 기능에 맞춰 재 개편 예정..
     //connectAndSetUp(peripheral);
@@ -40,7 +41,7 @@ module.exports.searchIDD = function () {
     console.log('find service');
     IDDCharacteristic = characteristics[0];
     IDDCharacteristic.on('data', function (data, isNotification) {
-      var celsius = data.readFloatLE(0);
+      let celsius = data.readFloatLE(0);
       value = celsius.toFixed(1);
       console.log('Temperature is', celsius.toFixed(1));
     });
@@ -49,8 +50,4 @@ module.exports.searchIDD = function () {
   }*/
 };
 
-//결과값 전달 모듈.
-module.exports.Getdata = function (callback) {
-  callback(value);
-};
 

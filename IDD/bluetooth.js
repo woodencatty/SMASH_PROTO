@@ -23,7 +23,7 @@ this.valueInterval = setInterval(function () {
 
   }.bind(this), 2000);
 
-//bluetooth 상세 서비스 객체 정의
+//bluetooth Characteristic 정의
 var IDDCharacteristic = function () {
   IDDCharacteristic.super_.call(this, {
     uuid: 'bbb1',
@@ -37,7 +37,7 @@ var IDDCharacteristic = function () {
 };
 util.inherits(IDDCharacteristic, Characteristic);
 
-//Bluetooth 서비스 객체 정의
+//Bluetooth Service 정의
 var IDDService = new PrimaryService({
   uuid: 'bbb0',
   characteristics: [

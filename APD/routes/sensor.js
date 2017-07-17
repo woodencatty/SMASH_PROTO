@@ -82,15 +82,6 @@ gpio.pinMode(ultraECHO, gpio.INPUT);                 // 근접센서 에코핀 �
 //센서 측정 Interval 시작 모듈
 module.exports.startSense = function () {
 
-this.SensorInterval = setInterval(()=>{
-  getDHT22();
-  getAdcAudio();
-  getAdcEnv();
-  getAdcLight();
-  getDist();
-//console.log(distance, temperature, humidity, audio);
-}, 1000);  //값 확인을 위해 간격 짧게 잡음.
-
 };
 
 //센서 측정 Interval 중단 모듈

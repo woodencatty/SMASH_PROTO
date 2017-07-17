@@ -3,7 +3,16 @@ const router = express.Router();
 
 //센서모듈, bluetooth모듈, http모듈 import
 const sensor = require('./sensor.js')
-      sensor.startSense();
+
+this.SensorInterval = setInterval(()=>{
+  sensor.getDHT22();
+  sensor.getAdcAudio();
+  sensor.getAdcEnv();
+  sensor.getAdcLight();
+  sensor.getDist();
+//console.log(distance, temperature, humidity, audio);
+}, 1000);  //값 확인을 위해 간격 짧게 잡음.
+
 
 
 const bluetooth = require('./bluetooth.js');

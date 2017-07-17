@@ -9,7 +9,7 @@ const sensor = require('./sensor.js')
 //const bluetooth = require('./bluetooth.js');
 const http = require('./httpReq.js');
 
-const bluetooth_classtest = require('./bluetooth_test.js');
+const bluetooth_classtest = require('./bluetooth_classtest.js');
 //noble의 상태를 poweredOn으로 변경하기 위한 조치
 const noble = require('noble');
 noble.state = 'poweredOn';

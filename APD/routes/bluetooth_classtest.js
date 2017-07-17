@@ -2,7 +2,7 @@ const noble = require('noble');                     //bluetooth 수신부(Centra
 
 console.log('bluetooth module OK');
 
-export const serviceUUIDs = ['bbb0'];                      //환자 식별기기의 bluetooth 서비스 uuid
+const serviceUUIDs = ['bbb0'];                      //환자 식별기기의 bluetooth 서비스 uuid
 const characteristicUUIDs = ['bbb1'];               //환자 식별기기의 데이터 전송 서비스 uuid
 
 class Bluetooth {

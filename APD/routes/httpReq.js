@@ -1,7 +1,11 @@
 
 const http = require('http');										//http 요청 모듈
 
-let name;															//리턴값 저장 변수
+
+
+module.exports = {
+ name : ''
+}																	//리턴값 저장 변수
 let getRequest;														//GET요청 JSON데이터
 
 

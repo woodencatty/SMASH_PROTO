@@ -6,12 +6,10 @@ const sensor = require('./sensor.js')
       sensor.startSense();
 
 
-//const bluetooth = require('./bluetooth.js');
+const bluetooth = require('./bluetooth.js');
 const http = require('./httpReq.js');
 
-//const bluetooth_classtest = require('./bluetooth_classtest.js');
 //noble의 상태를 poweredOn으로 변경하기 위한 조치
-var {bluetooth} = require('bluetooth_classtest.js');
 const noble = require('noble');
 noble.state = 'poweredOn';
 
@@ -77,7 +75,7 @@ router.get('/welcome',(req, res, next) =>{
       console.log("Directed to welcome Page");
 
 //식별기기 탐색을 시작한다.
-bluetooth_classtest.searchIDD();
+bluetooth.searchIDD();
 
 //탐색이 종료될 즈음 생성된 값을 받아와 http요청을 전송하고, 이름을 받아 welcome화면을 표시한다.
   setTimeout(function(){

@@ -15,14 +15,17 @@ const adcAudio = 0;                                    //ADC Channel 0
 const adcEnv = 1;                                      //ADC Channel 1
 const adcLight = 2;                                    //ADC Channel 2
 
-//각 센서값을 받을 변수 정의
-let distance;
-let temperature;
-let humidity;
-let audio;
-let envelope;
-let light;
 
+//각 센서값을 받을 변수 정의
+module.exports = {
+
+ distance : 0.0,
+ temperature : 0.0,
+ humidity : 0.0,
+ audio : 0.0,
+ envelope : 0.0,
+ light : 0.0
+}
 gpio.wiringPiSetup();                                //wiring-pi 초기화
 gpio.pinMode(ultraTRIG, gpio.OUTPUT);                // 근접센서 트리거핀 초기화
 gpio.pinMode(ultraECHO, gpio.INPUT);                 // 근접센서 에코핀 초기화

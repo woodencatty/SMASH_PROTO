@@ -9,14 +9,13 @@ const sensor = require('./sensor.js')
 //const bluetooth = require('./bluetooth.js');
 const http = require('./httpReq.js');
 
-const bluetooth_classtest = require('./bluetooth_classtest.js');
-import {serviceUUIDs} from 'bluetooth_classtest.js'
-console.log(serviceUUIDs);
+//const bluetooth_classtest = require('./bluetooth_classtest.js');
 //noble의 상태를 poweredOn으로 변경하기 위한 조치
+var {bluetooth} = require('bluetooth_classtest.js');
 const noble = require('noble');
 noble.state = 'poweredOn';
 
-
+bluetooth.searchIDD();
 //환자 식별기기 ID값과 이름값을 받을 변수
 
 //터치 센서 보정과 브라우저 자동 실행 코드. 테스트중엔 사용하지 않음.

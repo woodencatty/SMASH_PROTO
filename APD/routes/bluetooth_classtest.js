@@ -54,6 +54,6 @@ constructor(name, age, height, width) {
 
   }
 }
-
+exports.Bluetooth = Bluetooth;
 
 

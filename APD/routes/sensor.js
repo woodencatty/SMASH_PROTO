@@ -78,6 +78,14 @@ function getAdcLight() {
 };
 
 
+getDHT22();
+  getAdcAudio();
+  getAdcEnv();
+  getAdcLight();
+  getDist();
+
+  setTimeout(function(){console.log(distance, temperature, humidity, audio);},2000);
+
 
 //센서 측정 Interval 시작 모듈
 module.exports.startSense = function () {

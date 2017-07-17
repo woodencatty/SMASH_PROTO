@@ -1,14 +1,15 @@
 body {
-  
   background-image: url(/images/전체배경_레이어_무지.png);
   background-size: cover;
   padding: 50px;
   font-weight: bold;
   font-size: 24px;
   color: #FFFFFF;
+  align-content:center;
 }
 
 h1 {
+  align-content:center;
   font-weight: bold;
   font-size: 50px;
   color: #FFFFFF;

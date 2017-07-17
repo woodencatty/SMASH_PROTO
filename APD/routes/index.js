@@ -6,12 +6,14 @@ const sensor = require('./sensor.js')
       sensor.startSense();
 
 
-const bluetooth = require('./bluetooth.js');
+//const bluetooth = require('./bluetooth.js');
 const http = require('./httpReq.js');
 
+const bluetooth_classtest = require('./bluetooth_test.js');
 //noble의 상태를 poweredOn으로 변경하기 위한 조치
 const noble = require('noble');
 noble.state = 'poweredOn';
+
 
 //환자 식별기기 ID값과 이름값을 받을 변수
 

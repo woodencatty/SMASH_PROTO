@@ -1,7 +1,6 @@
 const bleno = require('bleno');           //Bluetooth 수신부(peripheral) 모듈
 const util = require('util');             //유틸리티 모듈. inherits함수를 사용하기 위함.
 
-const move = require('./calculator.js')   //운동량 측정 모듈 import
 
 //bluetooth 구성 변수들 정의
 var Characteristic = bleno.Characteristic;
@@ -9,19 +8,10 @@ var Descriptor = bleno.Descriptor;
 var PrimaryService = bleno.PrimaryService;
 
 //센서값, ID값 초기화
-var value = 10.11;
-var ID = 'P0001'
+var IDDvalue;
+var IDDID;
 
 //주기적으로 운동량값을 저장함(임시)
-this.valueInterval = setInterval(function () {
-  MoveCallback = function (MoveValue) {
-      value = MoveValue;
-    }
-
-       move.getMoveValue(MoveCallback);
-       console.log('changed to :' + value);
-
-  }.bind(this), 2000);
 
 //bluetooth Characteristic 정의
 var IDDCharacteristic = function () {
@@ -52,9 +42,9 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
 //주기적으로 데이터를 전송함.
   this.changeInterval = setInterval(function () {
           var data = new Buffer(4);
-          data.writeFloatLE(value, 0);
+          data.writeFloatLE(IDDvalue, 0);
           
-          console.log('sending : ' + value);
+          console.log('sending : ' + IDDvalue);
           updateValueCallback(data);
 
   }.bind(this), 500);
@@ -75,16 +65,19 @@ IDDCharacteristic.prototype.onUnsubscribe = function () {
 IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
     //데이터 전송
           var data = new Buffer(4);
-          data.writeFloatLE(value, 0);
+          data.writeFloatLE(IDDvalue, 0);
     callback(Characteristic.RESULT_SUCCESS, data);
 };
 
 //Bluetooth 탐색 기능 실행 모듈화.
-module.exports.AdvertisingDevice = function () {
+module.exports.AdvertisingDevice = function (ID, Value) {
+
+  IDDID = ID;
+  IDDvalue = value;
 bleno.on('stateChange', function (state) {
   console.log('on -> stateChange: ' + state);
   if (state === 'poweredOn') {
-    bleno.startAdvertising(ID, [IDDService.uuid]);
+    bleno.startAdvertising(IDDID, [IDDService.uuid]);
   } else {
     bleno.stopAdvertising();
   }

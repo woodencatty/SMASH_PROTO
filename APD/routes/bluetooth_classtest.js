@@ -55,7 +55,7 @@ constructor(name, age, height, weight) {
   }
 }
 
-var ble = new Bluetooth(name, 10, 10, 10);
+var ble = new Bluetooth('whatte', 10, 10, 10);
 console.log(ble.name);
 
 

@@ -7,7 +7,7 @@ const characteristicUUIDs = ['bbb1'];               //환자 식별기기의 데
 
 class Bluetooth {
 
-constructor(name, age, height, weight) {
+constructor(name, age, height, width) {
     this.IDDCharacteristic = null;
     this.ID = '';
     this.height = height;

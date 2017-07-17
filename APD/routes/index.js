@@ -44,7 +44,7 @@ function startSense(){
   sensor.getAdcEnv();
   sensor.getAdcLight();
   sensor.getDist();
-//console.log(distance, temperature, humidity, audio);
+  console.log(sensor.distance, sensor.temperature, sensor.humidity, sensor.audio);
 }, 1000);  //값 확인을 위해 간격 짧게 잡음.
 }
 

@@ -88,7 +88,7 @@ this.SensorInterval = setInterval(()=>{
   getAdcEnv();
   getAdcLight();
   getDist();
-console.log(distance, temperature, humidity, audio);
+//console.log(distance, temperature, humidity, audio);
 }, 1000);  //값 확인을 위해 간격 짧게 잡음.
 
 };

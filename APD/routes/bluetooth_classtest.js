@@ -55,8 +55,5 @@ constructor(name, age, height, width) {
   }
 }
 
-var ble = new Bluetooth('whatte', 10, 10, 10);
-console.log(ble.height);
-
 
 

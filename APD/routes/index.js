@@ -10,6 +10,11 @@ const sensor = require('./sensor.js')
 const http = require('./httpReq.js');
 
 const bluetooth_classtest = require('./bluetooth_classtest.js');
+
+
+var ble = new Bluetooth('whatte', 10, 10, 10);
+console.log(ble.height);
+
 //noble의 상태를 poweredOn으로 변경하기 위한 조치
 const noble = require('noble');
 noble.state = 'poweredOn';

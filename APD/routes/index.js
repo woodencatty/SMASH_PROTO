@@ -47,7 +47,7 @@ router.get('/main',(req, res, next) =>{
   console.log("Directed to Main Page");
 
 //거리가 50cm 이하일 경우 try페이지로 전환하고, 아닐 경우 대기화면을 표시
-if(sensor.distance < 50){
+if(sensor.distance > 5000){
   sensor.stopSense();
   console.log('\t' + sensor.distance);
   res.redirect('/try')

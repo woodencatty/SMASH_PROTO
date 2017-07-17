@@ -13,7 +13,6 @@ const http = require('./httpReq.js');
 const noble = require('noble');
 noble.state = 'poweredOn';
 
-bluetooth.searchIDD();
 //환자 식별기기 ID값과 이름값을 받을 변수
 
 //터치 센서 보정과 브라우저 자동 실행 코드. 테스트중엔 사용하지 않음.

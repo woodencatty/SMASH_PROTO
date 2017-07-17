@@ -23,15 +23,9 @@ module.exports = {
  humidity : 2.0,
  audio : 2.0,
  envelope : 2.0,
- light : 2.0
-}
+ light : 2.0,
 
-gpio.wiringPiSetup();                                //wiring-pi 초기화
-gpio.pinMode(ultraTRIG, gpio.OUTPUT);                // 근접센서 트리거핀 초기화
-gpio.pinMode(ultraECHO, gpio.INPUT);                 // 근접센서 에코핀 초기화
-
-//온습도측정 함수화
-function getDHT22() {
+ getDHT22 : function () {
     temp.read(22, DHT22, (err, temp, humi) => {
         if (!err) {
             this.temperature = temp.toFixed(1);
@@ -39,10 +33,10 @@ function getDHT22() {
 
         } else { console.log("Error detected in DHT22 sensor"); }
     });
-};
+},
 
 //거리측정 함수화
-function getDist() {
+ getDist : function() {
     let pulse = 0;
     gpio.digitalWrite(ultraTRIG, 0);
     sleep.msleep(2);
@@ -54,28 +48,36 @@ function getDist() {
     while (gpio.digitalRead(ultraECHO) == 1);
     let travelTime = microt.now();
     this.distance = (travelTime - startTime) / 58;
-};
+},
 
 //소음측정 함수화
-function getAdcAudio() {
+ getAdcAudio : function() {
     adc.readRawValue(adcAudio, (value) => {
         this.audio = value;
     });
-};
+},
 
 //(대략적)소음측정 함수화
-function getAdcEnv() {
+ getAdcEnv : function() {
     adc.readRawValue(adcEnv, (value) => {
         this.envelope = value;
     });
-};
+},
 
 //조도측정 함수화
-function getAdcLight() {
+ getAdcLight : function() {
     adc.readRawValue(adcLight, (value) => {
         this.light = value;
     });
-};
+}
+}
+
+gpio.wiringPiSetup();                                //wiring-pi 초기화
+gpio.pinMode(ultraTRIG, gpio.OUTPUT);                // 근접센서 트리거핀 초기화
+gpio.pinMode(ultraECHO, gpio.INPUT);                 // 근접센서 에코핀 초기화
+
+//온습도측정 함수화
+
 
 //센서 측정 Interval 시작 모듈
 module.exports.startSense = function () {

@@ -80,8 +80,7 @@ function getAdcLight() {
 module.exports.startSense = function () {
 
 this.SensorInterval = setInterval(()=>{
-  getTemp();
-  getHumi(); 
+  getDHT22();
   getAdcAudio();
   getAdcEnv();
   getAdcLight();

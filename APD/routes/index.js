@@ -76,7 +76,7 @@ router.get('/welcome',(req, res, next) =>{
       console.log("Directed to welcome Page");
 
 //식별기기 탐색을 시작한다.
-bluetooth.searchIDD();
+bluetooth_classtest.searchIDD();
 
 //탐색이 종료될 즈음 생성된 값을 받아와 http요청을 전송하고, 이름을 받아 welcome화면을 표시한다.
   setTimeout(function(){

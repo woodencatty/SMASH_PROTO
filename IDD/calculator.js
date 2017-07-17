@@ -30,7 +30,7 @@ function getMoveValue(){
 module.exports.startGetValue = function () {
 
 this.valueInterval = setInterval(function () {
-  getMoveValue();
+  getMoveValue(); 
 
   }.bind(this), 2000);
 };

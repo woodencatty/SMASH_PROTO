@@ -1,11 +1,7 @@
 
 const http = require('http');										//http 요청 모듈
 
-
-
-module.exports = {
- name : ''
-}																	//리턴값 저장 변수
+											//리턴값 저장 변수
 let getRequest;														//GET요청 JSON데이터
 
 
@@ -16,10 +12,13 @@ let getRequest;														//GET요청 JSON데이터
   method: 'GET'
 };
 
-console.log('HTTP module OK');										
 
-//요청 모듈화(ID값을 파라메터로 받음)
-module.exports.reqName = function (ID) {
+console.log('HTTP module OK');	
+
+
+module.exports = {
+ name : '',
+reqName : function (ID) {
 
 //요청 데이터 수신 콜백함수
 getcallback = function(response){
@@ -45,4 +44,8 @@ req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
 
 req.end();
 
-};
+}
+
+}															
+
+//요청 모듈화(ID값을 파라메터로 받음)

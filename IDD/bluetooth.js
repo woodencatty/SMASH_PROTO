@@ -22,7 +22,7 @@ var IDDCharacteristic = function () {
       new Descriptor({
         uuid: '2901',
         value: 'IDD Device'
-      })]
+      })] 
   });
 };
 util.inherits(IDDCharacteristic, Characteristic);

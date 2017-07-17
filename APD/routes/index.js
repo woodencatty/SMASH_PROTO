@@ -4,17 +4,6 @@ const router = express.Router();
 //센서모듈, bluetooth모듈, http모듈 import
 const sensor = require('./sensor.js')
 
-this.SensorInterval = setInterval(()=>{
-  sensor.getDHT22();
-  sensor.getAdcAudio();
-  sensor.getAdcEnv();
-  sensor.getAdcLight();
-  sensor.getDist();
-//console.log(distance, temperature, humidity, audio);
-}, 1000);  //값 확인을 위해 간격 짧게 잡음.
-
-
-
 const bluetooth = require('./bluetooth.js');
 const http = require('./httpReq.js');
 
@@ -48,18 +37,34 @@ browser = exec('chromium-browser --kiosk --no-sandbox',
 });*/
 
 
-//블루투스 콜백
+function startSense(){
+  this.SensorInterval = setInterval(()=>{
+  sensor.getDHT22();
+  sensor.getAdcAudio();
+  sensor.getAdcEnv();
+  sensor.getAdcLight();
+  sensor.getDist();
+//console.log(distance, temperature, humidity, audio);
+}, 1000);  //값 확인을 위해 간격 짧게 잡음.
+}
 
+function stopSense(){
+  if (this.SensorInterval) {
+    clearInterval(this.SensorInterval);
+    this.SensorInterval = null;
+  }
+}
 
+startSense();
 //대기화면. 센서값 갱신을 위해 2초에 한번씩 갱신한다.
 router.get('/main',(req, res, next) =>{
   console.log("Directed to Main Page");
 
 //거리가 50cm 이하일 경우 try페이지로 전환하고, 아닐 경우 대기화면을 표시
-if(sensor.distance > 5000){
-  sensor.stopSense();
+if(sensor.distance < 50){
+   stopSense();
   console.log('\t' + sensor.distance);
-  res.redirect('/try')
+  res.redirect('/try');
 }else{
   res.render('index', { title: '대기화면', temp: sensor.temperature, humi: sensor.humidity, audio: sensor.audio, env: sensor.envelope, light: sensor.light, distance: sensor.distance });
 }

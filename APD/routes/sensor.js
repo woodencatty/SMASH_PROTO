@@ -25,6 +25,7 @@ module.exports = {
  envelope : 2.0,
  light : 2.0,
 
+//온습도측정 함수화
  getDHT22 : function () {
     temp.read(22, DHT22, (err, temp, humi) => {
         if (!err) {
@@ -75,21 +76,3 @@ module.exports = {
 gpio.wiringPiSetup();                                //wiring-pi 초기화
 gpio.pinMode(ultraTRIG, gpio.OUTPUT);                // 근접센서 트리거핀 초기화
 gpio.pinMode(ultraECHO, gpio.INPUT);                 // 근접센서 에코핀 초기화
-
-//온습도측정 함수화
-
-
-//센서 측정 Interval 시작 모듈
-module.exports.startSense = function () {
-
-};
-
-//센서 측정 Interval 중단 모듈
-module.exports.stopSense = function () {
-
-  if (this.SensorInterval) {
-    clearInterval(this.SensorInterval);
-    this.SensorInterval = null;
-  }
-
-};

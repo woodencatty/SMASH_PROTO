@@ -28,8 +28,8 @@ AccelCallback = function (x, y, z) {
     this.AccelY = this.AccelY*this.AccelY;
     this.AccelZ = this.AccelZ*this.AccelZ;
 
-    MoveValue = Math.sqrt(AccelX + AccelY + AccelZ);
-    console.log(MoveValue + '      x:'+AccelX+ '      y:'+AccelY+ '      z:'+AccelZ);
+    MoveValue = Math.sqrt(this.AccelX + this.AccelY + this.AccelZ);
+    console.log(MoveValue + '      x:'+this.AccelX+ '      y:'+this.AccelY+ '      z:'+this.AccelZ);
 }
 
 }

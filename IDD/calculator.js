@@ -15,7 +15,8 @@ getMoveValue: function(){
  let AccelX_1 = Accel.AccelX;
  let AccelY_1 = Accel.AccelY;
  let AccelZ_1 = Accel.AccelZ;
-
+console.log(AccelX_1);
+console.log(Accel.AccelX);
 setTimeout(function () {
  Accel.getAccel();
  let AccelX_2 = Accel.AccelX;

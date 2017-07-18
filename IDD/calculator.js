@@ -20,6 +20,7 @@ AccelCallback = function (x, y, z) {
     AccelX = Math.ceil(x*10);
     AccelY = Math.ceil(y*10);
     AccelZ = Math.ceil(z*10);
+    console.log(AccelX, AccelY, AccelZ)
 }
 
     //가속도값 받아옴.

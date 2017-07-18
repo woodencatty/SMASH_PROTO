@@ -17,7 +17,7 @@ getMoveValue: function(){
  let AccelZ = Accel.AccelZ*Accel.AccelZ;
 
     this.MoveValue = Math.sqrt(AccelX + AccelY + AccelZ);
-    console.log(MoveValue + '      x:'+AccelX+ '      y:'+AccelY+ '      z:'+AccelZ);
+    console.log(this.MoveValue + '      x:'+AccelX+ '      y:'+AccelY+ '      z:'+AccelZ);
 }
 
 }

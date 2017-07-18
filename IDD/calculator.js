@@ -16,13 +16,13 @@ getMoveValue: function(){
  let AccelY_1 = Accel.AccelY;
  let AccelZ_1 = Accel.AccelZ;
 console.log(AccelX_1);
-console.log(Accel.AccelX);
 setTimeout(function () {
  Accel.getAccel();
  let AccelX_2 = Accel.AccelX;
  let AccelY_2 = Accel.AccelY;
  let AccelZ_2 = Accel.AccelZ;
 
+console.log(AccelX_2);
  let changeX = Math.abs(AccelX_1) - Math.abs(AccelX_2);
  let changeY = Math.abs(AccelY_1) - Math.abs(AccelY_2);
  let changeZ = Math.abs(AccelZ_1) - Math.abs(AccelZ_2);

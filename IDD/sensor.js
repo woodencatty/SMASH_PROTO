@@ -12,7 +12,7 @@ adxl345.init()
 module.exports.getAccel = function (callback) {
   adxl345.getAcceleration(true) // true for g-force units, else false for m/s²
     .then((acceleration) => {
-
+      console.log(acceleration.x, acceleration.y, acceleration.z);
       //가속도값(X, Y, Z) 반환
       callback(acceleration.x, acceleration.y, acceleration.z);
     })  

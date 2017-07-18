@@ -16,7 +16,7 @@ getMoveValue: function(){
  let AccelY_1 = Accel.AccelY;
  let AccelZ_1 = Accel.AccelZ;
 
-this.valueInterval = setInterval(function () {
+setTimeout(function () {
  Accel.getAccel();
  let AccelX_2 = Accel.AccelX;
  let AccelY_2 = Accel.AccelY;
@@ -28,7 +28,7 @@ this.valueInterval = setInterval(function () {
  
  let speed = (changeX+changeY+changeZ) * 10000
  console.log(speed);
-}.bind(this), 10);
+}, 10);
 
 }
 

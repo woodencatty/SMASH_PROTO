@@ -1,12 +1,6 @@
 const Accel = require('./sensor.js');   //가속도 센서 모듈 import
 
 //센서의 X, Y, Z값을 받아온다.
-let AccelX;
-let AccelY;
-let AccelZ;
-
-//변환하여 저장할 값.
-let MoveValue
 
 //센서값 콜백함수 정의
 AccelCallback = function (x, y, z) {
@@ -15,8 +9,17 @@ AccelCallback = function (x, y, z) {
     AccelZ = Math.ceil(z*10);
 }
 
-//운동량 측정 모듈화
-function getMoveValue(){
+
+//변환하여 저장할 값.
+
+module.exports = {
+ AccelX: 0.0,
+ AccelY: 0.0,
+ AccelZ: 0.0,
+ MoveValue: 0.0,
+
+
+getMoveValue: function(){
 
     //가속도값 받아옴.
     Accel.getAccel(AccelCallback);
@@ -26,11 +29,16 @@ function getMoveValue(){
     AccelZ = AccelZ*AccelZ;
 
     MoveValue = Math.sqrt(AccelX + AccelY + AccelZ);
+    console.log(MoveValue);
 }
-module.exports.startGetValue = function () {
+
+}
+
+//운동량 측정 모듈화
+startGetValue = function () {
 
 this.valueInterval = setInterval(function () {
   getMoveValue(); 
 
-  }.bind(this), 2000);
+  }.bind(this), 100);
 };

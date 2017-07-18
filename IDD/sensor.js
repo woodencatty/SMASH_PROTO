@@ -15,7 +15,7 @@ module.exports.getAccel = function (callback) {
 
       //가속도값(X, Y, Z) 반환
       callback(acceleration.x, acceleration.y, acceleration.z);
-    })
+    })  
     .catch((err) => {
       console.log(`ADXL345 read error: ${err}`);
     });

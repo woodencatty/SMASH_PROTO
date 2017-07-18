@@ -26,7 +26,7 @@ this.valueInterval = setInterval(function () {
  let changeY = Math.abs(AccelY_1) - Math.abs(AccelY_2);
  let changeZ = Math.abs(AccelZ_1) - Math.abs(AccelZ_2);
  
- console.log('      x:'+changeX+ '      y:'+changeY+ '      z:'+changeZAccelZ);
+ console.log('      x:'+changeX+ '      y:'+changeY+ '      z:'+changeZ);
 }.bind(this), 10);
 
 }

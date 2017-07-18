@@ -6,30 +6,31 @@ console.log('calculating..');
 //변환하여 저장할 값.
 
 module.exports = {
- AccelX: 0.0,
- AccelY: 0.0,
- AccelZ: 0.0,
  MoveValue: 0.0,
 
 getMoveValue: function(){
 
 
+ let AccelX = 0.0;
+ let AccelY = 0.0;
+ let AccelZ = 0.0;
+
 //센서값 콜백함수 정의
 AccelCallback = function (x, y, z) {
-    this.AccelX = Math.ceil(x*10);
-    this.AccelY = Math.ceil(y*10);
-    this.AccelZ = Math.ceil(z*10);
+    AccelX = Math.ceil(x*10);
+    AccelY = Math.ceil(y*10);
+    AccelZ = Math.ceil(z*10);
 }
 
     //가속도값 받아옴.
     Accel.getAccel(AccelCallback);
 
-    this.AccelX = this.AccelX*this.AccelX;
-    this.AccelY = this.AccelY*this.AccelY;
-    this.AccelZ = this.AccelZ*this.AccelZ;
+    AccelX = AccelX*AccelX;
+    AccelY = AccelY*AccelY;
+    AccelZ = AccelZ*AccelZ;
 
-    MoveValue = Math.sqrt(this.AccelX + this.AccelY + this.AccelZ);
-    console.log(MoveValue + '      x:'+this.AccelX+ '      y:'+this.AccelY+ '      z:'+this.AccelZ);
+    MoveValue = Math.sqrt(AccelX + AccelY + AccelZ);
+    console.log(MoveValue + '      x:'+AccelX+ '      y:'+AccelY+ '      z:'+AccelZ);
 }
 
 }

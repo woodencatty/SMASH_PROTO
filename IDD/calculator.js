@@ -29,7 +29,7 @@ getMoveValue: function(){
     AccelZ = AccelZ*AccelZ;
 
     MoveValue = Math.sqrt(AccelX + AccelY + AccelZ);
-    console.log(MoveValue);
+    console.log(MoveValue + '      x:'+AccelX+ '      y:'+AccelY+ '      z:'+AccelZ);
 }
 
 }
@@ -40,5 +40,5 @@ startGetValue = function () {
 this.valueInterval = setInterval(function () {
   getMoveValue(); 
 
-  }.bind(this), 100);
+  }.bind(this), 500);
 };

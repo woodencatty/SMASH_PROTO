@@ -29,7 +29,6 @@ setTimeout(function () {
  let speed = (changeX+changeY+changeZ) * 10000
  console.log(speed);
 }, 10);
-
 }
 
 }

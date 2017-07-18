@@ -18,7 +18,6 @@ module.exports = {
  AccelZ: 0.0,
  MoveValue: 0.0,
 
-
 getMoveValue: function(){
 
     //가속도값 받아옴.

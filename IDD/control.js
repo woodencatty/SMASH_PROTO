@@ -4,7 +4,7 @@ const move = require('./calculator.js')   //운동량 측정 모듈 import
 
 
 this.valueInterval = setInterval(function () {
-  getMoveValue(); 
+  move.getMoveValue(); 
 
 }.bind(this), 500);
 

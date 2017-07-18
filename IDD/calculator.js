@@ -9,7 +9,7 @@ AccelCallback = function (x, y, z) {
     AccelZ = Math.ceil(z*10);
 }
 
-
+console.log('calculating..');
 //변환하여 저장할 값.
 
 module.exports = {

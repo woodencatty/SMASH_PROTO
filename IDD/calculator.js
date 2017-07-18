@@ -12,12 +12,15 @@ getMoveValue: function(){
 
     Accel.getAccel();
 
+console.log(Accel.AccelX, Accel.AccelY, Accel.AccelZ);
+/*
  let AccelX = Accel.AccelX*Accel.AccelX;
  let AccelY = Accel.AccelY*Accel.AccelY;
  let AccelZ = Accel.AccelZ*Accel.AccelZ;
 
     this.MoveValue = Math.sqrt(AccelX + AccelY + AccelZ);
     console.log(this.MoveValue + '      x:'+AccelX+ '      y:'+AccelY+ '      z:'+AccelZ);
+*/
 }
 
 }

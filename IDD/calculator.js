@@ -35,10 +35,7 @@ getMoveValue: function(){
 }
 
 //운동량 측정 모듈화
-startGetValue = function () {
-
 this.valueInterval = setInterval(function () {
   getMoveValue(); 
 
   }.bind(this), 500);
-};

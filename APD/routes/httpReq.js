@@ -18,6 +18,7 @@ console.log('HTTP module OK');
 
 module.exports = {
  name : '',
+ exercise,
 reqName : function (ID) {
 
 //요청 데이터 수신 콜백함수
@@ -45,7 +46,6 @@ req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
 req.end();
 
 }
-
 }															
 
 //요청 모듈화(ID값을 파라메터로 받음)

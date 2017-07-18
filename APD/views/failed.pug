@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1 인식에 실패하였습니다.. 다시 시도해주세요!
+
+  script(type='text/javascript').
+    setTimeout("location.replace('/main');", 5000);

@@ -1,12 +1,17 @@
 const fs = require('fs');
 
-class UserSession{
 
-constructor(name, age, height, weight) {
+module.exports = {
+  name: '',
+  age: 0,
+  height: 0,
+  weight: 0,
+
+  setupSession: function(name, age, height, weight){
     this.name = name;
     this.age = age;
     this.height = height;
-    this.width = width;
+    this.weight = weight;
   }
-
 }
+

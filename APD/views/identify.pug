@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  h1 인식중입니다...잠시만 기다려주세요.
+  h1 인식중입니다...잠시만 기다려주세요. 재시도 횟수 : #{retry}
 
   script(type='text/javascript').
     setTimeout("location.replace('/welcome');", 100);

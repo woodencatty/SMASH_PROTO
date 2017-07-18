@@ -15,6 +15,6 @@ block content
     var msg =  m ;
     document.all.ViewTimer.innerHTML = msg;
     SetTime--;
-    if (SetTime < 0) { clearInterval(tid); location.replace('/done'); }
+    if (SetTime < 0) { clearInterval(tid); location.replace(#{nextExercise}); }
     }
     window.onload = function TimerStart(){ tid=setInterval('msg_time()',1000) };

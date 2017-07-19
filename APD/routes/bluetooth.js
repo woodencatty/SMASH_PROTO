@@ -33,19 +33,18 @@ module.exports = {
       ID = peripheral.advertisement.localName;
 
       peripheral.connect( (error)=> {
+        console.log(error);
        peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, (error, services, characteristics)=>{
         console.log('onchar');
-        console.log(error);
+        characteristic.discoverDescriptors((error, descriptors)=>{
+          descriptor.readValue((error, data)=>{
+            console.log(data);
+          });
+
+        });
         //console.log(characteristics[0]);
        });
       });
-
-      setTimeout(function(){
-      peripheral.updateRssi((error, rssi)=>{
-                console.log('rssiUpdated : '+ rssi);
-
-      });
-      }, 2000);
 
       peripheral.once('connect', ()=>{
         console.log('onconn');

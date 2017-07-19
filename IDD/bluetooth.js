@@ -22,7 +22,7 @@ var IDDCharacteristic = function () {
       new Descriptor({
         uuid: '2901',
         value: 'IDD Device'
-      })] 
+      })]
   });
 };
 util.inherits(IDDCharacteristic, Characteristic);
@@ -39,13 +39,13 @@ var IDDService = new PrimaryService({
 IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
   console.log('IDDCharacteristic subscribe');
 
-//주기적으로 데이터를 전송함.
+  //주기적으로 데이터를 전송함.
   this.changeInterval = setInterval(function () {
-          var data = new Buffer(4);
-          data.writeFloatLE(IDDvalue, 0);
-          
-          console.log('sending : ' + IDDvalue);
-          updateValueCallback(data);
+    var data = new Buffer(4);
+    data.writeFloatLE(IDDvalue, 0);
+
+    console.log('sending : ' + IDDvalue);
+    updateValueCallback(data);
 
   }.bind(this), 500);
 };
@@ -54,7 +54,7 @@ IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCal
 IDDCharacteristic.prototype.onUnsubscribe = function () {
   console.log('IDDCharacteristic unsubscribe');
 
-//데이터 전송 주기를 해제함.
+  //데이터 전송 주기를 해제함.
   if (this.changeInterval) {
     clearInterval(this.changeInterval);
     this.changeInterval = null;
@@ -63,10 +63,10 @@ IDDCharacteristic.prototype.onUnsubscribe = function () {
 
 //Bluetooth Central모듈에서 Read 요청을 보냈을 때의 경우
 IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
-    //데이터 전송
-          var data = new Buffer(4);
-          data.writeFloatLE(IDDvalue, 0);
-    callback(Characteristic.RESULT_SUCCESS, data);
+  //데이터 전송
+  var data = new Buffer(4);
+  data.writeFloatLE(IDDvalue, 0);
+  callback(Characteristic.RESULT_SUCCESS, data);
 };
 
 //Bluetooth 탐색 기능 실행 모듈화.
@@ -74,14 +74,14 @@ module.exports.AdvertisingDevice = function (ID, Value) {
 
   IDDID = ID;
   IDDvalue = value;
-bleno.on('stateChange', function (state) {
-  console.log('on -> stateChange: ' + state);
-  if (state === 'poweredOn') {
-    bleno.startAdvertising(IDDID, [IDDService.uuid]);
-  } else {
-    bleno.stopAdvertising();
-  }
-});
+  bleno.on('stateChange', function (state) {
+    console.log('on -> stateChange: ' + state);
+    if (state === 'poweredOn') {
+      bleno.startAdvertising(IDDID, [IDDService.uuid]);
+    } else {
+      bleno.stopAdvertising();
+    }
+  });
 };
 bleno.on('advertisingStart', function (error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));

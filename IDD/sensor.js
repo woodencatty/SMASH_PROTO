@@ -14,16 +14,17 @@ module.exports = {
   AccelY: 0.0,
   AccelZ: 0.0,
 
-getAccel : function () {
-  adxl345.getAcceleration(true) // true for g-force units, else false for m/s²
-    .then((acceleration) => {
-      //가속도값(X, Y, Z) 반환
-      this.AccelX = acceleration.x;
-      this.AccelY = acceleration.y;
-      this.AccelZ = acceleration.z;
-    })  
-    .catch((err) => {
-      console.log(`ADXL345 read error: ${err}`);
-    });
+  getAccel: function () {
+    adxl345.getAcceleration(true) // true for g-force units, else false for m/s²
+      .then((acceleration) => {
+        //가속도값(X, Y, Z) 반환
+        this.AccelX = acceleration.x;
+        this.AccelY = acceleration.y;
+        this.AccelZ = acceleration.z;
+      })
+      .catch((err) => {
+        console.log(`ADXL345 read error: ${err}`);
+      });
 
-}}
+  }
+}

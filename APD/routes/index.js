@@ -78,12 +78,12 @@ router.get('/try', (req, res, next) => {
 
 //환자 인식 화면
 router.get('/identify', (req, res, next) => {
-  console.log("Directed to identify Page"); 
-  if(bluetooth.try_count > 3){
-  res.render('failed');
-}else {
-    res.render('identify', { retry: bluetooth.try_count});
-}
+  console.log("Directed to identify Page");
+  if (bluetooth.try_count > 3) {
+    res.render('failed');
+  } else {
+    res.render('identify', { retry: bluetooth.try_count });
+  }
 });
 
 //환영 화면
@@ -97,12 +97,15 @@ router.get('/welcome', (req, res, next) => {
     console.log('get value! : ' + bluetooth.ID);
 
     if (ID == 'noname') {
+      bluetooth.stopSearch();
       console.log('user not found')
-          res.redirect('/identify');
+      res.redirect('/identify');
     } else {
       http.reqName(bluetooth.ID);
     }
     setTimeout(function () {
+      bluetooth.stopSearch();
+
       res.render('welcome', { name: http.name });
     }, 500);
   }, 2000);

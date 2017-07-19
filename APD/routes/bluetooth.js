@@ -37,12 +37,13 @@ module.exports = {
 
 function connectAndSetUp(peripheral) {
       peripheral.connect( (error)=> {
-       peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
+       peripheral.discoverAllServicesAndCharacteristics((error, services, characteristics)=>{
+         console.log(error);
+         console.log(services);
+         console.log(characteristics);
+       });
       });
 
-      peripheral.once('connect', function(){
-        console.log('connected on peripheral');
-      });
     }
   
     function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {

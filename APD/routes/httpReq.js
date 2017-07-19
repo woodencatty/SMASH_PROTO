@@ -30,7 +30,7 @@ console.log('HTTP module OK');
 
 
 module.exports = {
-getInfo : function (ID) {
+http_getInfo : function (ID) {
 
 //요청 데이터 수신 콜백함수
 getcallback = function(response){
@@ -62,7 +62,7 @@ req.end();
 
 },
 
-putInfo: function(ID, Steps){
+http_putInfo: function(ID, Steps){
 postcallback = function(response){
 	console.log('HTTP Response Code : ' +response.statusCode);		//리턴코드를 분석하여 상태 확인
 	if(response.statusCode != 200){

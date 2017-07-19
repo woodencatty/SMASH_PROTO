@@ -112,7 +112,7 @@ router.get('/welcome', (req, res, next) => {
     }
 
     
-    getSearchedID(IDCallback);
+    bluetooth.getSearchedID(IDCallback);
   }, 2000);
 
 });

@@ -8,7 +8,7 @@ console.log('calculating..');
 let WalkCount = 0;
 
 module.exports = {
- WalkCount: this.WalkCount,
+ WalkCount: WalkCount,
 getMoveValue: function(){
 
     Accel.getAccel();
@@ -30,7 +30,7 @@ setTimeout(function () {
  let force = (changeX+changeY+changeZ) * 10000
  console.log(force);
  if(force > 10000){
-     this.WalkCount = this.WalkCount + 1;
+     WalkCount = WalkCount + 1;
      console.log('Step detected');
 }
 }, 10);

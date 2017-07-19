@@ -11,7 +11,7 @@ var lastTemp;
 var IDDCharacteristic = function () {
   IDDCharacteristic.super_.call(this, {
     uuid: 'bbb1',
-    properties: ['read'],
+    properties: ['read', 'notify'],
     descriptors: [
       new Descriptor({
         uuid: '2901',
@@ -35,6 +35,32 @@ var IDDService = new PrimaryService({
     new IDDCharacteristic()
   ]
 });
+
+IDDCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
+  console.log('IDDCharacteristic subscribe');
+
+  this.changeInterval = setInterval(function () {
+
+    var result = 10.10;
+        if (result != lastTemp) {
+          lastTemp = result;
+          var data = new Buffer(4);
+          data.writeFloatLE(result, 0);
+
+          console.log('IDDCharacteristic update value: ' + result);
+          updateValueCallback(data);
+        }
+  }.bind(this), 2000);
+};
+
+IDDCharacteristic.prototype.onUnsubscribe = function () {
+  console.log('IDDCharacteristic unsubscribe');
+
+  if (this.changeInterval) {
+    clearInterval(this.changeInterval);
+    this.changeInterval = null;
+  }
+};
 
 bleno.on('stateChange', function (state) {
   console.log('on -> stateChange: ' + state);

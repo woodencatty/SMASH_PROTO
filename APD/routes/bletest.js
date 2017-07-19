@@ -36,6 +36,10 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
     console.log('Temperature is', celsius.toFixed(1) + '°C', fahrenheit + '°F');
   });
 
-  temperatureCharacteristic.subscribe(); // ignore callback
+ // temperatureCharacteristic.subscribe(); // ignore callback
+ 
+  this.SensorInterval = setInterval(() => {
+      console.log('read');
   temperatureCharacteristic.read();      // ignore callback
+   }, 1000);  //값 확인을 위해 간격 짧게 잡음.
 }

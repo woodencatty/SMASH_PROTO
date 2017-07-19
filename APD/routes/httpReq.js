@@ -18,7 +18,7 @@ console.log('HTTP module OK');
 
 module.exports = {
  name : '',
- exercise,
+ exercise:'',
 reqName : function (ID) {
 
 //요청 데이터 수신 콜백함수

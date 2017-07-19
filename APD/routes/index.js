@@ -104,7 +104,7 @@ router.get('/welcome', (req, res, next) => {
         console.log('user not found')
         res.redirect('/identify');
       } else {
-        http.reqName(ID);
+        http.getInfo(ID);
       }
       setTimeout(function () {
         bluetooth.stopSearch();
@@ -115,7 +115,12 @@ router.get('/welcome', (req, res, next) => {
         http.getInfo(SessionCallback);
       }, 500);
     }
+
+    StepCallback = function(ID, Steps){
+      http.putInfo(ID, Steps);
+    }
     bluetooth.getSearchedID(IDCallback);
+    bluetooth.getStepCount(StepCallback);
   }, 2000);
 
 });

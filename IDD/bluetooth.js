@@ -69,20 +69,7 @@ IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
   callback(Characteristic.RESULT_SUCCESS, data);
 };
 
-//Bluetooth 탐색 기능 실행 모듈화.
-module.exports.AdvertisingDevice = function (ID, Value) {
 
-  IDDID = ID;
-  IDDvalue = Value;
-  bleno.on('stateChange', function (state) {
-    console.log('on -> stateChange: ' + state);
-    if (state === 'poweredOn') {
-      bleno.startAdvertising(IDDID, [IDDService.uuid]);
-    } else {
-      bleno.stopAdvertising();
-    }
-  });
-};
 bleno.on('advertisingStart', function (error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
   if (!error) {
@@ -93,3 +80,21 @@ bleno.on('advertisingStart', function (error) {
 bleno.on('disconnect', (clientAddress)=>{
   console.log(clientAddress + 'is disconnected.');
 });
+
+//Bluetooth 탐색 기능 실행 모듈화.
+module.exports.AdvertisingDevice = function (ID) {
+
+  IDDID = ID;
+  bleno.on('stateChange', function (state) {
+    console.log('on -> stateChange: ' + state);
+    if (state === 'poweredOn') {
+      bleno.startAdvertising(IDDID, [IDDService.uuid]);
+    } else {
+      bleno.stopAdvertising();
+    }
+  });
+};
+
+module.exports.SetStepValue = function (value) {
+  IDDvalue = value;
+};

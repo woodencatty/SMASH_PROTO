@@ -18,11 +18,19 @@ let age = 0;
 };
 
 
+ postRequest = {														//GET요청 JSON데이터 정의
+  host: '127.0.0.1',
+  port: 60001,
+  path: '/submitUserSteps',
+  method: 'POST'
+};
+
+
 console.log('HTTP module OK');	
 
 
 module.exports = {
-	reqName : function (ID) {
+getInfo : function (ID) {
 
 //요청 데이터 수신 콜백함수
 getcallback = function(response){
@@ -52,6 +60,30 @@ req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
 
 req.end();
 
+},
+
+putInfo: function(ID, Steps){
+postcallback = function(response){
+	console.log('HTTP Response Code : ' +response.statusCode);		//리턴코드를 분석하여 상태 확인
+	if(response.statusCode != 200){
+		console.log('Error Response!');
+	}else{
+	let serverdata = '';
+	response.on('data', function(chunk){							//응답 데이터를 JSON형태로 파싱함
+		serverdata = JSON.parse(chunk);
+	});	
+	response.on('end',function(){									//응답이 끝났을 시 데이터 추출
+		console.log(serverdata);
+	});
+	}
+}
+
+let req = http.request(postRequest,postcallback);						//GET요청 전송
+
+req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
+req.setHeader("ID", Steps);	
+
+req.end();
 },
 
 getInfo : function(callback){

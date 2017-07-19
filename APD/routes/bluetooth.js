@@ -11,6 +11,26 @@ let IDDCharacteristic = null;                       //블루투스 서비스 객
 
 let ID = 'noname';
 let try_count = 0;
+let step_count = 0;
+
+
+    function connectAndSetUp(peripheral) {
+      peripheral.connect(function (error) {
+       peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
+      });
+    }
+  
+    function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
+      console.log('find service');
+      IDDCharacteristic = characteristics[0];
+      IDDCharacteristic.on('data', function (data, isNotification) {
+        let value = data.readFloatLE(0);
+        step_count = value.toFixed(1);
+        console.log('Temperature is', value.toFixed(1));
+      });
+      IDDCharacteristic.subscribe(); // ignore callback
+      IDDCharacteristic.read();      // ignore callback
+    }
 
 module.exports = {
   //IDD 기기 탐색 기능 모듈화2
@@ -28,29 +48,11 @@ module.exports = {
       console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
       ID = peripheral.advertisement.localName;
 
-      // 데이터 전달은 기능에 맞춰 재 개편 예정..
-      //connectAndSetUp(peripheral);
+      // 데이터 전달
+      connectAndSetUp(peripheral);
     });
 
-    /*
-    function connectAndSetUp(peripheral) {
-      peripheral.connect(function (error) {
-       // peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
-      });
-  
-    }
-  
-    function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
-      console.log('find service');
-      IDDCharacteristic = characteristics[0];
-      IDDCharacteristic.on('data', function (data, isNotification) {
-        let celsius = data.readFloatLE(0);
-        value = celsius.toFixed(1);
-        console.log('Temperature is', celsius.toFixed(1));
-      });
-      IDDCharacteristic.subscribe(); // ignore callback
-      IDDCharacteristic.read();      // ignore callback
-    }*/
+    
   },
   stopSearch: function () {
     noble.stopScanning();
@@ -62,5 +64,10 @@ module.exports = {
 
   getTryCount: function(callback){
       callback(try_count);
+  },
+
+  getStepCount: function(callback){
+    callback(ID, step_count);
   }
+
 }

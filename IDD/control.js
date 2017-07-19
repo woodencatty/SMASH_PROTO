@@ -10,7 +10,6 @@ let dateTime = new Date();
 
 this.valueInterval = setInterval(function () {
   move.setWalkCount();
-
   //console.log('Walk count : ' + move.WalkCount);
 }.bind(this), 200);
 
@@ -27,9 +26,12 @@ this.loggingInterval = setInterval(function () {
         });
       });
     });
+
+    
+  bluetooth.SetStepValue(WalkCount);
   }
   move.getWalkCount(WalkCallback);
 }.bind(this), 5000);
 
 
-bluetooth.AdvertisingDevice('P0001', 10); //Bluetooth 탐색 모듈 실행 
+bluetooth.AdvertisingDevice('P0001'); //Bluetooth 탐색 모듈 실행 

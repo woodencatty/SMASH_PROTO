@@ -38,9 +38,12 @@ module.exports = {
         //console.log(characteristics[0]);
        });
       });
-
+      setTimeout(function(){
       peripheral.updateRssi((error, rssi)=>{
+                console.log('rssiUpdated : '+ rssi);
+
       });
+      }, 500);
 
       peripheral.once('connect', ()=>{
         console.log('onconn');

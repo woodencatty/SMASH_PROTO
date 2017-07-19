@@ -35,15 +35,17 @@ module.exports = {
       peripheral.connect( (error)=> {
        peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, (error, services, characteristics)=>{
         console.log('onchar');
+        console.log(error);
         //console.log(characteristics[0]);
        });
       });
+
       setTimeout(function(){
       peripheral.updateRssi((error, rssi)=>{
                 console.log('rssiUpdated : '+ rssi);
 
       });
-      }, 500);
+      }, 2000);
 
       peripheral.once('connect', ()=>{
         console.log('onconn');

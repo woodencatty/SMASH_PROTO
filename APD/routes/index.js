@@ -147,5 +147,10 @@ router.get('/done', (req, res, next) => {
 });
 
 
+router.get('/bletest', (req, res, next) => {
+  bluetooth.startSearch();
+});
+
+
 module.exports = router;
 

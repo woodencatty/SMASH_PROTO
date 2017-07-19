@@ -17,7 +17,7 @@ let step_count = 0;
     
 
 module.exports = {
-  //IDD 기기 탐색 기능 모듈화2
+  //IDD 기기 탐색 기능 모듈화
   startSearch: function () {
     this.try_count++;
     console.log(noble.state);                                                  //noble 모듈의 상태(noble.status)가 'poweredOn'상태여야만 탐색이 가능하다.
@@ -32,31 +32,13 @@ module.exports = {
       console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
       ID = peripheral.advertisement.localName;
 
-      // 데이터 전달
-      connectAndSetUp(peripheral);
-
-function connectAndSetUp(peripheral) {
       peripheral.connect( (error)=> {
+        console.log('onconn');
        peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, (error, services, characteristics)=>{
         console.log('onchar');
         //console.log(characteristics[0]);
-        characteristics[0].subscribe((error)=>{
-          console.log(error);
-        });
        });
       });
-
-    }
-  
-    function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
-      console.log( characteristics[0]);
-          characteristics[0].read((error, data)=>{
-              console.log(data);
-              console.log(error);
-          });
-    }
-    });
-
     
   },
   stopSearch: function () {

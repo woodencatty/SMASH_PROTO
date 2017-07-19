@@ -7,10 +7,7 @@ const fs = require('fs');
 this.valueInterval = setInterval(function () {
   move.setWalkCount(); 
   
-  move.getWalkCount(walkCallback);
-  console.log('Walk count : ' + move.WalkCount);
-
-
+   // console.log('Walk count : ' + move.WalkCount);
 }.bind(this), 200);
 
 

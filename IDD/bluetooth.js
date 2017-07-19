@@ -73,7 +73,7 @@ IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
 module.exports.AdvertisingDevice = function (ID, Value) {
 
   IDDID = ID;
-  IDDvalue = value;
+  IDDvalue = Value;
   bleno.on('stateChange', function (state) {
     console.log('on -> stateChange: ' + state);
     if (state === 'poweredOn') {

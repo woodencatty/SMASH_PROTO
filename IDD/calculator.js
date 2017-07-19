@@ -6,8 +6,7 @@ console.log('calculating..');
 //변환하여 저장할 값.
 
 module.exports = {
- MoveValue: 0.0,
-
+ WalkCount: 0,
 getMoveValue: function(){
 
     Accel.getAccel();
@@ -22,14 +21,16 @@ setTimeout(function () {
  let AccelY_2 = Accel.AccelY;
  let AccelZ_2 = Accel.AccelZ;
 
- let changeX = Math.abs(AccelX_1) - Math.abs(AccelX_2);
- let changeY = Math.abs(AccelY_1) - Math.abs(AccelY_2);
- let changeZ = Math.abs(AccelZ_1) - Math.abs(AccelZ_2);
+ let changeX = Math.abs(Math.abs(AccelX_1) - Math.abs(AccelX_2));
+ let changeY = Math.abs(Math.abs(AccelY_1) - Math.abs(AccelY_2));
+ let changeZ = Math.abs(Math.abs(AccelZ_1) - Math.abs(AccelZ_2));
  
- console.log(changeX, changeY, changeZ);
-
- let speed = (changeX+changeY+changeZ) * 10000
- console.log(speed);
+ let force = (changeX+changeY+changeZ) * 10000
+ console.log(force);
+ if(force > 1000){
+     this.WalkCount = this.WalkCount + 1;
+     console.log('Step detected');
+}
 }, 10);
 }
 

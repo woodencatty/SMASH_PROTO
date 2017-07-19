@@ -5,9 +5,9 @@ const Accel = require('./sensor.js');   //가속도 센서 모듈 import
 console.log('calculating..');
 //변환하여 저장할 값.
 
+   let WalkCount = 0;
 
 module.exports = {
-    WalkCount:1,
 setWalkCount: function(){
 
     Accel.getAccel();
@@ -29,10 +29,13 @@ setTimeout(function () {
  let force = (changeX+changeY+changeZ) * 10000
  console.log(force);
  if(force > 10000){
-     this.WalkCount++;
-     console.log('Step detected' + this.WalkCount);
+     WalkCount++;
+     console.log('Step detected' + WalkCount);
 }
 }, 10);
 },
+getWalkCount: function(callback){
+    callback(WalkCount);
+}
 }
 //운동량 측정 모듈화

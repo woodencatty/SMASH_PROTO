@@ -33,11 +33,26 @@ module.exports = {
       ID = peripheral.advertisement.localName;
 
       peripheral.connect( (error)=> {
-        console.log('onconn');
        peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, (error, services, characteristics)=>{
         console.log('onchar');
         //console.log(characteristics[0]);
        });
+      });
+
+      peripheral.updateRssi((error, rssi)=>{
+      });
+
+      peripheral.once('connect', ()=>{
+        console.log('onconn');
+      });
+      peripheral.once('rssiUpdate', (rssi)=>{
+                console.log('rssiUpdate : '+ rssi);
+      });
+      peripheral.once('servicesDiscover', (services)=>{
+                        console.log('services found : '+ services);
+      });
+      service.once('includedServicesDiscover', (includedServiceUuids)=>{
+                                console.log('include services found : '+ includedServiceUuids);
       });
     });
   },

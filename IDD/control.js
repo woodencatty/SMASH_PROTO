@@ -3,24 +3,27 @@ const move = require('./calculator.js')   //운동량 측정 모듈 import
 
 const fs = require('fs');
 
+require('date-utils');
+
+let dateTime = new Date();
+
 
 this.valueInterval = setInterval(function () {
-WalkCallback = function(WalkCount){
-    console.log('Walk count : ' + WalkCount);
-}
-
   move.setWalkCount(); 
   
     //console.log('Walk count : ' + move.WalkCount);
-    move.getWalkCount(WalkCallback);
 }.bind(this), 200);
 
 
 
 this.loggingInterval = setInterval(function () {
+
+
+WalkCallback = function(WalkCount){
+  
   fs.open('./log.txt', 'a+', function(err, fd) {
   if(err) throw err;
-  var buf = new Buffer('bbbbb\n');
+  var buf = new Buffer(WalkCount + 'Steps Walked.       '+dateTime.toFormat('YYYY-MM-DD HH24:MI:SS'));
   fs.write(fd, buf, 0, buf.length, null, function(err, written, buffer) {
     if(err) throw err;
     console.log(err, written, buffer);
@@ -29,6 +32,12 @@ this.loggingInterval = setInterval(function () {
     });
   });
 });
+}
+
+
+
+    move.getWalkCount(WalkCallback);
+
 }.bind(this), 5000);
 
 

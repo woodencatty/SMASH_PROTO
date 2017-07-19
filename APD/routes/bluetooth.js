@@ -51,9 +51,6 @@ module.exports = {
       peripheral.once('servicesDiscover', (services)=>{
                         console.log('services found : '+ services);
       });
-      service.once('includedServicesDiscover', (includedServiceUuids)=>{
-                                console.log('include services found : '+ includedServiceUuids);
-      });
     });
   },
   stopSearch: function () {

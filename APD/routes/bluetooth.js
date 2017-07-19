@@ -39,6 +39,10 @@ function connectAndSetUp(peripheral) {
       peripheral.connect(function (error) {
        peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
       });
+
+      peripheral.once('connect', function(){
+        console.log('connected on peripheral');
+      });
     }
   
     function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {

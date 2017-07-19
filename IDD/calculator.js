@@ -5,8 +5,10 @@ const Accel = require('./sensor.js');   //가속도 센서 모듈 import
 console.log('calculating..');
 //변환하여 저장할 값.
 
+let WalkCount = 0;
+
 module.exports = {
- WalkCount: 0,
+ WalkCount: this.WalkCount,
 getMoveValue: function(){
 
     Accel.getAccel();

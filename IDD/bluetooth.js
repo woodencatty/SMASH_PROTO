@@ -20,7 +20,6 @@ util.inherits(IDDCharacteristic, Characteristic);
 
 IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
   var result = 10.10;
-    console.log('Sensor ' + temperatureSensorId + ' :', result);
     var data = new Buffer(4);
     data.writeFloatLE(result, 0);
     callback(Characteristic.RESULT_SUCCESS, data);

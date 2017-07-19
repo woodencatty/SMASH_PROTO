@@ -31,7 +31,7 @@ setTimeout(function () {
  console.log(force);
  if(force > 10000){
      WalkCount = WalkCount + 1;
-     console.log('Step detected');
+     console.log('Step detected' + WalkCount);
 }
 }, 10);
 }

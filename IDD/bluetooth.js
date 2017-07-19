@@ -16,7 +16,7 @@ var IDDID;
 //bluetooth Characteristic 정의
 var IDDCharacteristic = function () {
   IDDCharacteristic.super_.call(this, {
-    uuid: 'bbb1',
+    uuid: '13333333333333333333333333330001',
     properties: ['read', 'notify'],
     descriptors: [
       new Descriptor({
@@ -29,7 +29,7 @@ util.inherits(IDDCharacteristic, Characteristic);
 
 //Bluetooth Service 정의
 var IDDService = new PrimaryService({
-  uuid: 'bbb0',
+  uuid: '13333333333333333333333333333337',
   characteristics: [
     new IDDCharacteristic()
   ]

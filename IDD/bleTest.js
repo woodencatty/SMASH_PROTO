@@ -15,7 +15,7 @@ var IDDCharacteristic = function () {
     descriptors: [
       new Descriptor({
         uuid: '2901',
-        value: 'Temperature'
+        value: 'IDD Device'
       })]
   });
 };
@@ -40,10 +40,10 @@ bleno.on('stateChange', function (state) {
   console.log('on -> stateChange: ' + state);
 
   if (state === 'poweredOn') {
-    bleno.startAdvertising('Thermometer', [IDDService.uuid]);
+    bleno.startAdvertising('P0001', [IDDService.uuid]);
   } else {
     bleno.stopAdvertising();
-  }
+  }W
 });
 
 bleno.on('advertisingStart', function (error) {

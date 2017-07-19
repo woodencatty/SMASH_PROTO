@@ -7,6 +7,7 @@ console.log('calculating..');
 let walkCount = 0;
 
 module.exports = {
+    WalkCount: this.walkCount,
 setWalkCount: function(){
 
     Accel.getAccel();

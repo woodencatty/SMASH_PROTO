@@ -39,10 +39,10 @@ function connectAndSetUp(peripheral) {
       peripheral.connect( (error)=> {
        peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, (error, services, characteristics)=>{
         console.log( characteristics[0]);
-         characteristics[0].read((error, data)=>{
+        /*characteristics[0].read((error, data)=>{
               console.log(data);
               console.log(error);
-         })
+         })*/
        });
       });
 

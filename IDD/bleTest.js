@@ -43,7 +43,7 @@ bleno.on('stateChange', function (state) {
     bleno.startAdvertising('P0001', [IDDService.uuid]);
   } else {
     bleno.stopAdvertising();
-  }W
+  }
 });
 
 bleno.on('advertisingStart', function (error) {

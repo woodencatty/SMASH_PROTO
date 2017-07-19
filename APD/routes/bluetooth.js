@@ -30,18 +30,21 @@ function connectAndSetUp(peripheral) {
 
 function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
 
-  var temperatureCharacteristic = characteristics[0];
+  var IDDCharacteristic = characteristics[0];
 
-  temperatureCharacteristic.on('data', function (data, isNotification) {
+  IDDCharacteristic.on('data', function (data, isNotification) {
     var celsius = data.readFloatLE(0);
     var fahrenheit = (celsius * 1.8 + 32.0).toFixed(1);
     console.log('Temperature is', celsius.toFixed(1) + '°C', fahrenheit + '°F');
   });
 
- // temperatureCharacteristic.subscribe(); // ignore callback
+ // IDDCharacteristic.subscribe(); // ignore callback
  
       console.log('read');
-  temperatureCharacteristic.read();      // ignore callback
+      
+  this.SensorInterval = setInterval(() => {
+  IDDCharacteristic.read();      // ignore callback
+    }, 1000);  //값 확인을 위해 간격 짧게 잡음.
 }
 
 

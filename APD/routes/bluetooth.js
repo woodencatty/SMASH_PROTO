@@ -27,7 +27,7 @@ module.exports = {
     noble.on('discover', (peripheral) => {
       
       noble.stopScanning();
-      
+
       console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
       ID = peripheral.advertisement.localName;
       peripheral.connect((error) => {
@@ -37,11 +37,12 @@ module.exports = {
           IDDCharacteristic = characteristics[0];
 
           IDDCharacteristic.subscribe(); // ignore callback
-          IDDCharacteristic.read();      // ignore callback
+          //IDDCharacteristic.read();      // ignore callback
+          characteristic.on('data', (data, isNotification)=>{
+                        console.log(data, isNotification);
 
-          IDDCharacteristic.on('read', function (data, isNotification) {
-            console.log(data, isNotification);
           });
+
         });
       });
 

@@ -11,7 +11,7 @@ const http = require('./httpReq.js');
 const noble = require('noble');
 noble.state = 'poweredOn';
 
-//환자 식별기기 ID값과 이름값을 받을 변수
+const session = require('./session.js');
 
 //터치 센서 보정과 브라우저 자동 실행 코드. 테스트중엔 사용하지 않음.
 /*
@@ -108,37 +108,34 @@ router.get('/welcome', (req, res, next) => {
       }
       setTimeout(function () {
         bluetooth.stopSearch();
-        NameCallback = function (name) {
+        SessionCallback = function (name, age, height, weight, exercise) {
+          session.setupSession(name, age, height, weight, exercise);
           res.render('welcome', { name: name });
         }
-        http.getName(NameCallback);
+        http.getInfo(SessionCallback);
       }, 500);
-
     }
-
-
     bluetooth.getSearchedID(IDCallback);
   }, 2000);
 
 });
 
-
-router.get('/exercise1', (req, res, next) => {
-  let nextExercise = '/exercise2'
-  res.render('exercise1', { nextExercise: nextExercise });
+router.get('/exercise', (req, res, next) => {
+  SessionCallback = function (exercise) {
+    let nextExercise = '/' + exercise[1];
+    res.render(exercise[0]);
+  }
+  session.getExercise(ExerciseCallback);
 });
 
-router.get('/exercise2', (req, res, next) => {
-  let nextExercise = '/exercise3'
-
-  res.render('exercise2', { nextExercise: nextExercise });
+router.get('/exercise_done', (req, res, next) => {
+  session.clearExercise();
+  res.redirect('/exercise');
 });
 
-router.get('/exercise3', (req, res, next) => {
-  let nextExercise = '/main'
-  res.render('exercise3', { nextExercise: nextExercise });
+router.get('/undefined', (req, res, next) => {
+  res.redirect('/done');
 });
-
 
 router.get('/done', (req, res, next) => {
   res.render('done');

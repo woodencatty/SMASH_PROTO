@@ -6,7 +6,9 @@ let getRequest;														//GET요청 JSON데이터
 
 let name = '';
 let exercise ='';
-
+let weight = 0;
+let height = 0;
+let age = 0;
 
  getRequest = {														//GET요청 JSON데이터 정의
   host: '127.0.0.1',
@@ -36,6 +38,10 @@ getcallback = function(response){
 		console.log(serverdata);
     console.log(serverdata.patient_name);
 		name = serverdata.patient_name;
+		exercise = serverdata.patient_exercise;
+		age = serverdata.patient_age;
+		height = serverdata.patient_height;
+		weight = serverdata.patient_weight;
 	});
 	}
 }
@@ -46,6 +52,10 @@ req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
 
 req.end();
 
+},
+
+getInfo : function(callback){
+	callback(name, age, height, weight, exercise);
 },
 
 getName : function(callback){

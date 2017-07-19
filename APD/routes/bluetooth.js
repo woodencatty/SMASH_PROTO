@@ -55,16 +55,13 @@ function connectAndSetUp(peripheral) {
       IDDCharacteristic.read();      // ignore callback
 
       IDDCharacteristic.on('data', function (data, isNotification) {
-        setTimeout(function () {
         console.log(data, isNotification);
           
         let value = data.readFloatLE(0);
         step_count = value.toFixed(1);
         console.log('Temperature is', value.toFixed(1));
-         }, 2000);
       });
     }
-
     });
 
     

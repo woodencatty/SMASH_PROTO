@@ -3,66 +3,70 @@ const noble = require('noble');                     //bluetooth 수신부(Centra
 console.log('bluetooth module OK');
 
 
-const serviceUUIDs = ['13333333333333333333333333333337'];                      //환자 식별기기의 bluetooth 서비스 uuid
-const characteristicUUIDs = ['13333333333333333333333333330001'];               //환자 식별기기의 데이터 전송 서비스 uuid
+const serviceUUIDs = ['bbb0'];                      //환자 식별기기의 bluetooth 서비스 uuid
+const characteristicUUIDs = ['bbb1'];               //환자 식별기기의 데이터 전송 서비스 uuid
 
 let IDDCharacteristic = null;                       //블루투스 서비스 객체 저장
+
 
 let ID = 'noname';
 let try_count = 0;
 let step_count = 0;
-
+ 
 module.exports = {
   //IDD 기기 탐색 기능 모듈화
   startSearch: function () {
     this.try_count++;
     console.log(noble.state);                                                  //noble 모듈의 상태(noble.status)가 'poweredOn'상태여야만 탐색이 가능하다.
     console.log('Start scanning..');
-    noble.startScanning(['13333333333333333333333333333337']);     //bbb0(서비스 uuid)를 탐색함. 뒤는 bbb0의 128bit형태의 uuid
-    noble.on('scanStart', (state) => {
+    noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);     //bbb0(서비스 uuid)를 탐색함. 뒤는 bbb0의 128bit형태의 uuid
+    noble.on('scanStart', (state)=> {
       console.log(noble.state);                                                //탐색을 정말 수행하고 있는지에 대한 로그
     });
 
     //기기 탐색 완료시 수행되는 함수. 기기 이름을 value에 저장함.
-    noble.on('discover', (peripheral) => {
-      
-      noble.stopScanning();
-
+    noble.on('discover', (peripheral) =>{
       console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
       ID = peripheral.advertisement.localName;
-      peripheral.connect((error) => {
+
+      peripheral.connect( (error)=> {
         console.log(error);
-        peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, (error, services, characteristics) => {
-          console.log('onchar');
-          IDDCharacteristic = characteristics[0];
-
-          IDDCharacteristic.subscribe(); // ignore callback
-          //IDDCharacteristic.read();      // ignore callback
-          characteristic.on('data', (data, isNotification)=>{
-                        console.log(data, isNotification);
-
+       peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, (error, services, characteristics)=>{
+        console.log('onchar');
+        characteristic.discoverDescriptors((error, descriptors)=>{
+          descriptor.readValue((error, data)=>{
+            console.log(data);
           });
 
         });
+        //console.log(characteristics[0]);
+       });
       });
 
+      peripheral.once('connect', ()=>{
+        console.log('onconn');
+      });
+      peripheral.once('rssiUpdate', (rssi)=>{
+                console.log('rssiUpdate : '+ rssi);
+      });
+      peripheral.once('servicesDiscover', (services)=>{
+                        console.log('services found : '+ services);
+      });
     });
   },
-
-
   stopSearch: function () {
     noble.stopScanning();
   },
 
-  getSearchedID: function (callback) {
-    callback(ID);
+  getSearchedID: function(callback){
+      callback(ID);
   },
 
-  getTryCount: function (callback) {
-    callback(try_count);
+  getTryCount: function(callback){
+      callback(try_count);
   },
 
-  getStepCount: function (callback) {
+  getStepCount: function(callback){
     callback(ID, step_count);
   }
 

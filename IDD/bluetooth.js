@@ -13,15 +13,10 @@ var IDDID;
 
 //주기적으로 운동량값을 저장함(임시)
 
-
-//Bluetooth 탐색 기능 실행 모듈화.
-module.exports.AdvertisingDevice = function (ID) {
-
-
 //bluetooth Characteristic 정의
 var IDDCharacteristic = function () {
   IDDCharacteristic.super_.call(this, {
-    uuid: '13333333333333333333333333330001',
+    uuid: 'bbb1',
     properties: ['read', 'notify'],
     descriptors: [
       new Descriptor({
@@ -34,7 +29,7 @@ util.inherits(IDDCharacteristic, Characteristic);
 
 //Bluetooth Service 정의
 var IDDService = new PrimaryService({
-  uuid: '13333333333333333333333333333337',
+  uuid: 'bbb0',
   characteristics: [
     new IDDCharacteristic()
   ]
@@ -91,6 +86,9 @@ bleno.on('accept', (clientAddress)=>{
   console.log(clientAddress + ' is connected.');
 });
 
+
+//Bluetooth 탐색 기능 실행 모듈화.
+module.exports.AdvertisingDevice = function (ID) {
 
   IDDID = ID;
   bleno.on('stateChange', function (state) {

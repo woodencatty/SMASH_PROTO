@@ -54,5 +54,9 @@ module.exports = {
   },
   stopSearch: function () {
     noble.stopScanning();
+  },
+
+  getSearchedID: function(callback){
+      callback(ID);
   }
 }

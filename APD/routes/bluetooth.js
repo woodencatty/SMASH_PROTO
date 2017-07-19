@@ -61,7 +61,7 @@ function connectAndSetUp(peripheral) {
         let value = data.readFloatLE(0);
         step_count = value.toFixed(1);
         console.log('Temperature is', value.toFixed(1));
-         }, 500);
+         }, 2000);
       });
     }
 

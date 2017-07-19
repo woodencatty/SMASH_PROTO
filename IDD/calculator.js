@@ -33,13 +33,5 @@ setTimeout(function () {
 }
 }, 10);
 },
-
 }
-
-this.valueInterval = setInterval(function () {
-    console.log('Walk count : ' + walkCount);
-
-
-}.bind(this), 1000);
-
 //운동량 측정 모듈화

@@ -25,9 +25,11 @@ module.exports = {
 
     //기기 탐색 완료시 수행되는 함수. 기기 이름을 value에 저장함.
     noble.on('discover', (peripheral) => {
+      
+      noble.stopScanning();
+      
       console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
       ID = peripheral.advertisement.localName;
-
       peripheral.connect((error) => {
         console.log(error);
         peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, (error, services, characteristics) => {

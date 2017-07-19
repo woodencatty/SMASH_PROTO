@@ -4,6 +4,9 @@ const http = require('http');										//http 요청 모듈
 											//리턴값 저장 변수
 let getRequest;														//GET요청 JSON데이터
 
+let name = '';
+let exercise ='';
+
 
  getRequest = {														//GET요청 JSON데이터 정의
   host: '127.0.0.1',
@@ -17,9 +20,7 @@ console.log('HTTP module OK');
 
 
 module.exports = {
- name : '',
- exercise:'',
-reqName : function (ID) {
+	reqName : function (ID) {
 
 //요청 데이터 수신 콜백함수
 getcallback = function(response){
@@ -45,6 +46,14 @@ req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
 
 req.end();
 
+},
+
+getName : function(callback){
+	callback(name);
+},
+
+getExercise : function(callback){
+	callback(exercise);
 }
 }															
 

@@ -82,11 +82,11 @@ router.get('/identify', (req, res, next) => {
   if (bluetooth.try_count > 3) {
     res.render('failed');
   } else {
-    TryCallback = function(try_count){
-    res.render('identify', { retry: try_count });
+    TryCallback = function (try_count) {
+      res.render('identify', { retry: try_count });
     }
     bluetooth.getTryCount(TryCallback);
-    }
+  }
 });
 
 //환영 화면
@@ -98,23 +98,25 @@ router.get('/welcome', (req, res, next) => {
   //탐색이 종료될 즈음 생성된 값을 받아와 http요청을 전송하고, 이름을 받아 welcome화면을 표시한다.
   setTimeout(function () {
 
-    IDCallback = function(ID){
-    if (ID == 'noname') {
-      bluetooth.stopSearch();
-      console.log('user not found')
-      res.redirect('/identify');
-    } else {
-      http.reqName(ID);
+    IDCallback = function (ID) {
+      if (ID == 'noname') {
+        bluetooth.stopSearch();
+        console.log('user not found')
+        res.redirect('/identify');
+      } else {
+        http.reqName(ID);
+      }
+      setTimeout(function () {
+        bluetooth.stopSearch();
+        NameCallback = function (name) {
+          res.render('welcome', { name: name });
+        }
+        http.getName(NameCallback);
+      }, 500);
+
     }
-    setTimeout(function () {
-      bluetooth.stopSearch();
 
-      res.render('welcome', { name: http.name });
-    }, 500);
 
-    }
-
-    
     bluetooth.getSearchedID(IDCallback);
   }, 2000);
 

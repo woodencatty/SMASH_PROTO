@@ -121,7 +121,7 @@ router.get('/welcome', (req, res, next) => {
     }
     bluetooth.getSearchedID(IDCallback);
     bluetooth.getStepCount(StepCallback);
-  }, 20000);
+  }, 2000);
 
 });
 

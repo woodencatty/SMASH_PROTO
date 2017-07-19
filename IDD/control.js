@@ -20,9 +20,9 @@ this.loggingInterval = setInterval(function () {
       var buf = new Buffer(WalkCount + 'Steps Walked.       ' + dateTime.toFormat('YYYY-MM-DD HH24:MI:SS'));
       fs.write(fd, buf, 0, buf.length, null, function (err, written, buffer) {
         if (err) throw err;
-        console.log(err, written, buffer);
+        //console.log(err, written, buffer);
         fs.close(fd, function () {
-          console.log('Done');
+          //console.log('Done');
         });
       });
     });

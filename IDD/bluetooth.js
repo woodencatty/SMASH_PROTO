@@ -103,4 +103,5 @@ module.exports.AdvertisingDevice = function (ID) {
 
 module.exports.SetStepValue = function (value) {
   IDDvalue = value;
+  console.log('value setted : ' + IDDvalue);
 };

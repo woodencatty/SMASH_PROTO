@@ -49,16 +49,20 @@ function connectAndSetUp(peripheral) {
       console.log('find service');
       console.log(characteristics);
       IDDCharacteristic = characteristics[0];
+
+
+      IDDCharacteristic.subscribe(); // ignore callback
+      IDDCharacteristic.read();      // ignore callback
+
       IDDCharacteristic.on('data', function (data, isNotification) {
+        setTimeout(function () {
         console.log(data, isNotification);
-          setTimeout(function () {
+          
         let value = data.readFloatLE(0);
         step_count = value.toFixed(1);
         console.log('Temperature is', value.toFixed(1));
-         }, 500);
+         }, 2000);
       });
-      IDDCharacteristic.subscribe(); // ignore callback
-      IDDCharacteristic.read();      // ignore callback
     }
 
     });

@@ -89,3 +89,7 @@ bleno.on('advertisingStart', function (error) {
     bleno.setServices([IDDService]);
   }
 });
+
+bleno.on('disconnect', (clientAddress)=>{
+  console.log(clientAddress + 'is disconnected.');
+});

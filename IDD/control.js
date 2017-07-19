@@ -16,7 +16,7 @@ this.valueInterval = setInterval(function () {
 
 this.loggingInterval = setInterval(function () {
   WalkCallback = function (WalkCount) {
-    fs.open('./log.txt', 'a+', function (err, fd) {
+    fs.open('./log.txt', 'w', function (err, fd) {
       if (err) throw err;
       var buf = new Buffer(WalkCount + 'Steps Walked.       ' + dateTime.toFormat('YYYY-MM-DD HH24:MI:SS'));
       fs.write(fd, buf, 0, buf.length, null, function (err, written, buffer) {

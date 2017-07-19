@@ -13,7 +13,7 @@ let ID = 'noname';
 let try_count = 0;
 
 module.exports = {
-  //IDD 기기 탐색 기능 모듈화
+  //IDD 기기 탐색 기능 모듈화2
   startSearch: function () {
     this.try_count++;
     console.log(noble.state);                                                  //noble 모듈의 상태(noble.status)가 'poweredOn'상태여야만 탐색이 가능하다.

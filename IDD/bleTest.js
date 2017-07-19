@@ -8,8 +8,8 @@ var PrimaryService = bleno.PrimaryService;
 var temperatureSensorId;
 var lastTemp;
 
-var TemperatureCharacteristic = function () {
-  TemperatureCharacteristic.super_.call(this, {
+var IDDCharacteristic = function () {
+  IDDCharacteristic.super_.call(this, {
     uuid: 'bbb1',
     properties: ['read'],
     descriptors: [
@@ -19,9 +19,9 @@ var TemperatureCharacteristic = function () {
       })]
   });
 };
-util.inherits(TemperatureCharacteristic, Characteristic);
+util.inherits(IDDCharacteristic, Characteristic);
 
-TemperatureCharacteristic.prototype.onReadRequest = function (offset, callback) {
+IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
   var result = 10.10;
     console.log('Sensor ' + temperatureSensorId + ' :', result);
     var data = new Buffer(4);
@@ -29,10 +29,10 @@ TemperatureCharacteristic.prototype.onReadRequest = function (offset, callback) 
     callback(Characteristic.RESULT_SUCCESS, data);
 };
 
-var thermometerService = new PrimaryService({
+var IDDService = new PrimaryService({
   uuid: 'bbb0',
   characteristics: [
-    new TemperatureCharacteristic()
+    new IDDCharacteristic()
   ]
 });
 
@@ -40,7 +40,7 @@ bleno.on('stateChange', function (state) {
   console.log('on -> stateChange: ' + state);
 
   if (state === 'poweredOn') {
-    bleno.startAdvertising('Thermometer', [thermometerService.uuid]);
+    bleno.startAdvertising('Thermometer', [IDDService.uuid]);
   } else {
     bleno.stopAdvertising();
   }
@@ -50,6 +50,15 @@ bleno.on('advertisingStart', function (error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
 
   if (!error) {
-    bleno.setServices([thermometerService]);
+    bleno.setServices([IDDService]);
   }
+});
+
+bleno.on('accept', (clientAddress)=>{
+    console.log('conntected to '+ clientAddress);
+});
+
+bleno.on('disconnect', (clientAddress)=>{
+        console.log('disconnect to '+ clientAddress);
+
 });

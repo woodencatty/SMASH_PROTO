@@ -23,12 +23,12 @@ module.exports = {
     console.log(noble.state);                                                  //noble 모듈의 상태(noble.status)가 'poweredOn'상태여야만 탐색이 가능하다.
     console.log('Start scanning..');
     noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);     //bbb0(서비스 uuid)를 탐색함. 뒤는 bbb0의 128bit형태의 uuid
-    noble.on('scanStart', function (state) {
+    noble.on('scanStart', (state)=> {
       console.log(noble.state);                                                //탐색을 정말 수행하고 있는지에 대한 로그
     });
 
     //기기 탐색 완료시 수행되는 함수. 기기 이름을 value에 저장함.
-    noble.on('discover', function (peripheral) {
+    noble.on('discover', (peripheral) =>{
       console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
       ID = peripheral.advertisement.localName;
 
@@ -36,7 +36,7 @@ module.exports = {
       connectAndSetUp(peripheral);
 
 function connectAndSetUp(peripheral) {
-      peripheral.connect(function (error) {
+      peripheral.connect( (error)=> {
        peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
       });
 
@@ -46,21 +46,10 @@ function connectAndSetUp(peripheral) {
     }
   
     function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
-      console.log('find service');
-      console.log(characteristics);
-      IDDCharacteristic = characteristics[0];
-
-
-      IDDCharacteristic.subscribe(); // ignore callback
-      IDDCharacteristic.read();      // ignore callback
-
-      IDDCharacteristic.on('data', function (data, isNotification) {
-        console.log(data, isNotification);
-          
-        let value = data.readFloatLE(0);
-        step_count = value.toFixed(1);
-        console.log('Temperature is', value.toFixed(1));
-      });
+          characteristics[0].read((error, data)=>{
+              console.log(data);
+              console.log(error);
+          });
     }
     });
 
@@ -83,3 +72,22 @@ function connectAndSetUp(peripheral) {
   }
 
 }
+
+
+/*
+    console.log('find service');
+      console.log(characteristics);
+      IDDCharacteristic = characteristics[0];
+
+
+      IDDCharacteristic.subscribe(); // ignore callback
+      IDDCharacteristic.read();      // ignore callback
+
+      IDDCharacteristic.on('data', function (data, isNotification) {
+        console.log(data, isNotification);
+          
+        let value = data.readFloatLE(0);
+        step_count = value.toFixed(1);
+        console.log('Temperature is', value.toFixed(1));
+      });
+ */

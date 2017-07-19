@@ -29,8 +29,8 @@ let step_count = 0;
         step_count = value.toFixed(1);
         console.log('Temperature is', value.toFixed(1));
       });
-      IDDCharacteristic.subscribe(); // ignore callback
-      IDDCharacteristic.read();      // ignore callback
+     // IDDCharacteristic.subscribe(); // ignore callback
+     // IDDCharacteristic.read();      // ignore callback
     }
 
 module.exports = {

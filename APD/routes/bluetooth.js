@@ -46,6 +46,7 @@ function connectAndSetUp(peripheral) {
     }
   
     function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
+      console.log( characteristics[0]);
           characteristics[0].read((error, data)=>{
               console.log(data);
               console.log(error);

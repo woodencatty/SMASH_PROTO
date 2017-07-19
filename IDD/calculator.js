@@ -29,7 +29,7 @@ setTimeout(function () {
  let force = (changeX+changeY+changeZ) * 10000
  console.log(force);
  if(force > 10000){
-     WalkCount = WalkCount + 1;
+     this.WalkCount++;
      console.log('Step detected' + WalkCount);
 }
 }, 10);

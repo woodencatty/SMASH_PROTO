@@ -1,4 +1,4 @@
-var server = new(require('bluetooth-serial-port')).BluetoothSerialPortServer();
+const server = require('bluetooth-serial-port');
  
  console.log('its running');
 

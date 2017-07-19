@@ -1,17 +1,21 @@
-const fs = require('fs');
+
+  let name = '';
+  let age = 0;
+  let height = 0;
+  let weight = 0;
 
 
 module.exports = {
-  name: '',
-  age: 0,
-  height: 0,
-  weight: 0,
 
-  setupSession: function(name, age, height, weight){
-    this.name = name;
-    this.age = age;
-    this.height = height;
-    this.weight = weight;
+  setupSession: function(valueName, valueAge, valueHeight, valueWeight) {
+    name = valueName;
+    age = valueAge;
+    height = valueHeight;
+    weight = valueWeight;
+  },
+  
+  getNmae: function(callback){
+    callback(name)
   }
 }
 

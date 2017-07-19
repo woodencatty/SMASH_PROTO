@@ -14,10 +14,7 @@ this.valueInterval = setInterval(function () {
     //console.log('Walk count : ' + move.WalkCount);
 }.bind(this), 200);
 
-
-
 this.loggingInterval = setInterval(function () {
-
 WalkCallback = function(WalkCount){
   fs.open('./log.txt', 'a+', function(err, fd) {
   if(err) throw err;
@@ -32,7 +29,6 @@ WalkCallback = function(WalkCount){
 });
 }
     move.getWalkCount(WalkCallback);
-
 }.bind(this), 5000);
 
 

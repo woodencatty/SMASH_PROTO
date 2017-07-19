@@ -37,10 +37,10 @@ module.exports = {
 
 function connectAndSetUp(peripheral) {
       peripheral.connect( (error)=> {
-       peripheral.discoverAllServicesAndCharacteristics((error, services, characteristics)=>{
-         console.log(error);
+       peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, (error, services, characteristics)=>{
          console.log(services);
          console.log(characteristics);
+         
        });
       });
 

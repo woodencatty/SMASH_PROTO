@@ -26,9 +26,9 @@ let step_count = 0;
       IDDCharacteristic = characteristics[0];
       IDDCharacteristic.on('data', function (data, isNotification) {
         console.log(data, isNotification);
-       // let value = data.readFloatLE(0);
-       // step_count = value.toFixed(1);
-       // console.log('Temperature is', value.toFixed(1));
+        let value = data.readFloatLE(0);
+        step_count = value.toFixed(1);
+        console.log('Temperature is', value.toFixed(1));
       });
       IDDCharacteristic.subscribe(); // ignore callback
       IDDCharacteristic.read();      // ignore callback

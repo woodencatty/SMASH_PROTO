@@ -22,6 +22,7 @@ let step_count = 0;
   
     function onServicesAndCharacteristicsDiscovered(error, services, characteristics) {
       console.log('find service');
+      console.log(characteristics);
       IDDCharacteristic = characteristics[0];
       IDDCharacteristic.on('data', function (data, isNotification) {
         let value = data.readFloatLE(0);

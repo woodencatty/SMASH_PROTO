@@ -78,8 +78,14 @@ bleno.on('advertisingStart', function (error) {
 });
 
 bleno.on('disconnect', (clientAddress)=>{
-  console.log(clientAddress + 'is disconnected.');
+  console.log(clientAddress + ' is disconnected.');
 });
+
+
+bleno.on('accept', (clientAddress)=>{
+  console.log(clientAddress + ' is connected.');
+});
+
 
 //Bluetooth 탐색 기능 실행 모듈화.
 module.exports.AdvertisingDevice = function (ID) {

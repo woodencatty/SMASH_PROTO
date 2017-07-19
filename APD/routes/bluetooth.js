@@ -39,7 +39,7 @@ module.exports = {
         //console.log(characteristics[0]);
        });
       });
-    
+    });
   },
   stopSearch: function () {
     noble.stopScanning();

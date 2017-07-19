@@ -82,8 +82,11 @@ router.get('/identify', (req, res, next) => {
   if (bluetooth.try_count > 3) {
     res.render('failed');
   } else {
-    res.render('identify', { retry: bluetooth.try_count });
-  }
+    TryCallback = function(try_count){
+    res.render('identify', { retry: try_count });
+    }
+    bluetooth.getTryCount(TryCallback);
+    }
 });
 
 //환영 화면

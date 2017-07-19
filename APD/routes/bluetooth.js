@@ -58,5 +58,9 @@ module.exports = {
 
   getSearchedID: function(callback){
       callback(ID);
+  },
+
+  getTryCount: function(callback){
+      callback(try_count);
   }
 }

@@ -1,7 +1,8 @@
-var YourThing = require('YourThing');
+var YourThing = require('YourThing.js');
 
 var id = 'P0001';
 YourThing.discoverById(function(yourThingInstance) {
+  
 
   // you can be notified of disconnects
   yourThingInstance.on('disconnect', function() {

@@ -36,7 +36,7 @@ module.exports = {
         for (var i = 0; i < 200; i++) {
         gpio.digitalWrite(piezo, 1);
         gpio.digitalWrite(piezo, 0);
-        sleep.msleep(1);
+        sleep.usleep(1);
     }
 
     },

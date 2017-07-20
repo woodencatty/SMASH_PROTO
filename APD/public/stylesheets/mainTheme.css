@@ -1,0 +1,55 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+body {
+	background-image: url(전체배경_레이어_무지.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.contents {
+	color: rgba(255, 255, 255, 1.00);
+	font-weight: normal;
+	width: 85%;
+	height: 85%;
+	position: absolute;
+	top: 10%;
+	left: 10%;
+	text-align: center;
+}
+
+.message {
+	background-color: rgba(255, 255, 255, 0.75);
+	color: rgba(0, 0, 0, 1.00);
+	font-weight: normal;
+	width: 85%;
+	height: 85%;
+	position: absolute;
+	top: 10%;
+	left: 10%;
+	text-align: center;
+}
+
+#Date {
+	font-size: 40px;
+	text-align: left;
+	font-weight: bolder;
+}
+
+#Time {
+	font-weight: bolder;
+	font-size: 125px;
+	text-align: left;
+}
+
+#TmpHmi {
+	font-size: 40px;
+	font-weight: bolder;
+}
+
+#TryMessage {
+	align-self: center;
+	font-size: 40px;
+	font-weight: bolder;
+}

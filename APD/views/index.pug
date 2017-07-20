@@ -1,29 +1,33 @@
 extends layout
 
 block content
-  h1= title 
-  p 기온 : #{temp}
-  p 습도 : #{humi}
-  p 소음도 : #{audio}
-  p 대략적 소음 : #{env}
-  p 조명 : #{light}
-  p 거리 : #{distance}
-
-  script(type='text/javascript').
-    var day = new Date();
-    document.write('DAY: ' + day.getFullYear() + ' ');
-    document.write(' : ' + (day.getMonth() + 1) + ' ');
-    document.write(' : ' + day.getDate() + ' ');
-    document.write('<br />'); 
-    document.write('TIME: ' + day.getHours() + ' ');
-    document.write(' : ' + day.getMinutes() + ' ');
-    document.write(' : ' + day.getSeconds() + ' ');
-    document.write('<br />');
-    setTimeout("history.go(0);", 2000);
-
-
-  input#btnRefresh(name='refresh', type='button', value='새로고침', onclick="location.href='/main'")
-  input#btntry(name='btnNo', type='button', value='인식하기', onclick="location.href='/try'")
+    .contents
+      script(type='text/javascript').
+        var d = new Date();
+        document.write("<a id='Date'>" + d.getFullYear() + "년 " + (d.getMonth() + 1) + "월 " + d.getDate() + "일 </a>");
+        document.write(d.getHours() + " : " + m);
+      |     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      |     
+      a#TmpHmi  #{temp}C #{humi}
+      |     
+      script(type='text/javascript').
+        var d = new Date();
+        var m = 0;
+        if (d.getMinutes() < 10) {
+        m = "0" + d.getMinutes().toString()
+        } else {
+        m = d.getMinutes().toString()
+        }
+        document.write("<a id='Time'>" + d.getHours() + ":" + m + "</a>");
+      |     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+      |     
+      img(src='세부소스/날씨/맑음.png', width='70', height='76', alt='')
+      |  &nbsp; /&nbsp; 
+      img(src='세부소스/날씨/맑음.png', width='70', height='76', alt='')
+      |     
+      br
+      |     
+      img(src='png/SCAN_20170717_120222551.jpg', width='546', height='772', alt='')
 
 
 

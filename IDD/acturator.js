@@ -33,12 +33,12 @@ module.exports = {
         }, 500);
     },
     piezo_powerOn: function () {
-        softToneCreate(piezo);
-        softToneWrite(piezo, 500);
+        gpio.softToneCreate(piezo);
+        gpio.softToneWrite(piezo, 500);
          setTimeout(function () {
-        softToneWrite(piezo, 1000);
+       gpio.softToneWrite(piezo, 1000);
          setTimeout(function () {
-            softToneStop(piezo);
+           gpio.softToneStop(piezo);
              }, 500);
              }, 500);
     },

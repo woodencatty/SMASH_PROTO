@@ -50,8 +50,8 @@ function startSense() {
     sensor.getAdcEnv();
     sensor.getAdcLight();
     sensor.getDist();
-          acturator.led_sensorActive();
-  acturator.piezo_dataSaved();
+  //        acturator.led_sensorActive();
+//  acturator.piezo_dataSaved();
 
     //console.log(sensor.distance, sensor.temperature, sensor.humidity, sensor.audio);
   }, 1000);  //값 확인을 위해 간격 짧게 잡음.

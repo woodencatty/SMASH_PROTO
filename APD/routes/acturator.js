@@ -22,13 +22,13 @@ module.exports = {
             setTimeout(function () {
                 setTimeout(function () {
                     gpio.digitalWrite(ledB, 0);
-                }, 500);
+                }, 50);
                 gpio.digitalWrite(ledG, 0);
                 gpio.digitalWrite(ledB, 1);
-            }, 500);
+            }, 50);
             gpio.digitalWrite(ledR, 0);
             gpio.digitalWrite(ledG, 1);
-        }, 500);
+        }, 50);
     },
     piezo_powerOn: function () {
         gpio.softToneWrite(piezo, 500);
@@ -46,7 +46,7 @@ module.exports = {
     },
     piezo_dataSaved: function(){
         gpio.softToneWrite(piezo, 700);
-         setTimeout(function () {gpio.softToneWrite(piezo, 700);
+         setTimeout(function () {gpio.softToneWrite(piezo, 70);
            setTimeout(function () {gpio.softToneStop(piezo);
              }, 50);  }, 50);
     },

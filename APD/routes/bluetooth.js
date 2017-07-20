@@ -23,7 +23,7 @@ function connectAndSetUp(peripheral) {
     var serviceUUIDs = ['bbb0'];
     var characteristicUUIDs = ['bbb1'];
 
-    peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
+   // peripheral.discoverSomeServicesAndCharacteristics(serviceUUIDs, characteristicUUIDs, onServicesAndCharacteristicsDiscovered);
   });
 
 }

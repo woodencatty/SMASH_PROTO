@@ -33,22 +33,14 @@ module.exports = {
         }, 500);
     },
     piezo_powerOn: function () {
-        for (var i = 0; i < 1000; i++) {
-        gpio.digitalWrite(piezo, 1);
-        gpio.digitalWrite(piezo, 0);
-        sleep.usleep(500);
-    }
-     for (var i = 0; i < 1000; i++) {
-        gpio.digitalWrite(piezo, 1);
-        gpio.digitalWrite(piezo, 0);
-        sleep.usleep(300);
-    }
-     for (var i = 0; i < 1000; i++) {
-        gpio.digitalWrite(piezo, 1);
-        gpio.digitalWrite(piezo, 0);
-        sleep.usleep(100);
-    }
-
+        softToneCreate(piezo);
+        softToneWrite(piezo, 500);
+         setTimeout(function () {
+        softToneWrite(piezo, 1000);
+         setTimeout(function () {
+            softToneStop(piezo);
+             }, 500);
+             }, 500);
     },
 
     led_sensorActive: function () {

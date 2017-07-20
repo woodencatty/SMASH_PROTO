@@ -33,24 +33,24 @@ module.exports = {
         }, 500);
     },
     piezo_powerOn: function () {
-        for (var i = 0; i < 20; i++) {
+        for (var i = 0; i < 100; i++) {
             gpio.digitalWrite(piezo, 1);
-            setTimeout(function () { gpio.digitalWrite(piezo, 0); }, 70);
+            setTimeout(function () { gpio.digitalWrite(piezo, 0); }, 10);
         }
         setTimeout(function () {
-            for (var i = 0; i < 20; i++) {
+            for (var i = 0; i < 100; i++) {
                 gpio.digitalWrite(piezo, 1);
-                setTimeout(function () { gpio.digitalWrite(piezo, 0); }, 50);
+                setTimeout(function () { gpio.digitalWrite(piezo, 0); }, 5);
             }
             setTimeout(function () {
-                for (var i = 0; i < 20; i++) {
+                for (var i = 0; i < 100; i++) {
                     gpio.digitalWrite(piezo, 1);
-                    setTimeout(function () { gpio.digitalWrite(piezo, 0); }, 30);
+                    setTimeout(function () { gpio.digitalWrite(piezo, 0); }, 3);
                 }
                 setTimeout(function () {
-                    for (var i = 0; i < 20; i++) {
+                    for (var i = 0; i < 100; i++) {
                         gpio.digitalWrite(piezo, 1);
-                        setTimeout(function () { gpio.digitalWrite(piezo, 0); }, 10);
+                        setTimeout(function () { gpio.digitalWrite(piezo, 0); }, 1);
                     }
                 }, 500);
             }, 500);

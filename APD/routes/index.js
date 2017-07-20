@@ -127,6 +127,7 @@ router.get('/welcome', (req, res, next) => {
 
 router.get('/exercise', (req, res, next) => {
   ExerciseCallback = function (exercise) {
+    
     let nextExercise = '/' + exercise[1];
     res.render(exercise[0]);
   }

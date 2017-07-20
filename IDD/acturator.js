@@ -1,8 +1,6 @@
 const gpio = require('wiring-pi');                   //Wiring-pi 모듈
 const sleep = require('sleep');                      
 
-const test = require('./acturator.js');                      
-
 
 const ledR = 29;                                  
 const ledG = 28;                               

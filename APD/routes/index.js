@@ -7,6 +7,8 @@ const sensor = require('./sensor.js')
 const bluetooth = require('./bluetooth.js');
 const http = require('./httpReq.js');
 
+const acturator = require('./acturator.js');                      
+
 //noble의 상태를 poweredOn으로 변경하기 위한 조치
 const noble = require('noble');
 noble.state = 'poweredOn';
@@ -37,6 +39,10 @@ browser = exec('chromium-browser --kiosk --no-sandbox',
 });*/
 
 
+acturator.led_powerOn();
+acturator.piezo_powerOn();
+
+
 function startSense() {
   this.SensorInterval = setInterval(() => {
     sensor.getDHT22();
@@ -44,9 +50,18 @@ function startSense() {
     sensor.getAdcEnv();
     sensor.getAdcLight();
     sensor.getDist();
+          acturator.led_sensorActive();
+  acturator.piezo_dataSaved();
+
     //console.log(sensor.distance, sensor.temperature, sensor.humidity, sensor.audio);
   }, 1000);  //값 확인을 위해 간격 짧게 잡음.
 }
+
+
+this.statusInterval = setInterval(function () {
+      acturator.led_normal();
+  //console.log('Walk count : ' + move.WalkCount);
+}.bind(this), 1000);
 
 function stopSense() {
   if (this.SensorInterval) {

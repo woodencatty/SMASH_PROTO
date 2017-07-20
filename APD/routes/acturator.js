@@ -7,11 +7,12 @@ const ledB = 29;
 const piezo = 25;
 
 gpio.wiringPiSetup();                                //wiring-pi 초기화
-gpio.pinMode(ledR, gpio.OUTPUT);
-gpio.pinMode(ledG, gpio.OUTPUT);
+gpio.pinMode(ledR, gpio.OUTPUT);               
+gpio.pinMode(ledG, gpio.OUTPUT);                 
 gpio.pinMode(ledB, gpio.OUTPUT);
 gpio.pinMode(piezo, gpio.OUTPUT);
 
+gpio.softToneCreate(piezo);
 
 module.exports = {
 
@@ -30,58 +31,29 @@ module.exports = {
         }, 500);
     },
     piezo_powerOn: function () {
-        for (var i = 0; i < 20; i++) {
-            gpio.digitalWrite(piezo, 1);
-            setTimeout(function () { gpio.digitalWrite(piezo, 0); }, 70);
-        }
-        setTimeout(function () {
-            for (var i = 0; i < 20; i++) {
-                gpio.digitalWrite(piezo, 1);
-                setTimeout(function () { gpio.digitalWrite(piezo, 0); }, 50);
-            }
-            setTimeout(function () {
-                for (var i = 0; i < 20; i++) {
-                    gpio.digitalWrite(piezo, 1);
-                    setTimeout(function () { gpio.digitalWrite(piezo, 0); }, 30);
-                }
-                setTimeout(function () {
-                    for (var i = 0; i < 20; i++) {
-                        gpio.digitalWrite(piezo, 1);
-                        setTimeout(function () { gpio.digitalWrite(piezo, 0); }, 10);
-                    }
-                }, 500);
-            }, 500);
-        }, 500);
-
+        gpio.softToneWrite(piezo, 500);
+         setTimeout(function () {gpio.softToneWrite(piezo, 700);
+         setTimeout(function () {gpio.softToneWrite(piezo, 500);
+         setTimeout(function () {gpio.softToneWrite(piezo, 900);
+         setTimeout(function () {gpio.softToneWrite(piezo, 500);
+           setTimeout(function () {gpio.softToneStop(piezo);
+             }, 500);  }, 500);  }, 500);  }, 500);  }, 500);
     },
 
     led_sensorActive: function () {
          gpio.digitalWrite(ledB, 1);
-            setTimeout(function () { gpio.digitalWrite(ledB, 0); }, 1000);
+            setTimeout(function () { gpio.digitalWrite(ledB, 0); }, 10);
+    },
+    piezo_dataSaved: function(){
+        gpio.softToneWrite(piezo, 700);
+         setTimeout(function () {gpio.softToneWrite(piezo, 700);
+           setTimeout(function () {gpio.softToneStop(piezo);
+             }, 500);  }, 500);
     },
 
     led_normal: function () {
          gpio.digitalWrite(ledG, 1);
-            setTimeout(function () { gpio.digitalWrite(ledG, 0); }, 1000);
+            setTimeout(function () { gpio.digitalWrite(ledG, 0); }, 10);
     }
 
-}
-
-
-while (1) {
-    for (var i = 0; i < 20; i++) {
-        gpio.digitalWrite(piezo, 1);
-        gpio.digitalWrite(piezo, 0);
-        sleep.msleep(10);
-    }
-    gpio.digitalWrite(ledR, 1);
-    sleep.msleep(500);
-    gpio.digitalWrite(ledR, 0);
-    gpio.digitalWrite(ledG, 1);
-    sleep.msleep(500);
-
-    gpio.digitalWrite(ledG, 0);
-    gpio.digitalWrite(ledB, 1);
-    sleep.msleep(500);
-    gpio.digitalWrite(ledB, 0);
 }

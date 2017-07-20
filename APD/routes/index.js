@@ -57,12 +57,6 @@ function startSense() {
   }, 1000);  //값 확인을 위해 간격 짧게 잡음.
 }
 
-
-this.statusInterval = setInterval(function () {
-      acturator.led_normal();
-  //console.log('Walk count : ' + move.WalkCount);
-}.bind(this), 1000);
-
 function stopSense() {
   if (this.SensorInterval) {
     clearInterval(this.SensorInterval);

@@ -19,6 +19,8 @@ block content
         m = d.getMinutes().toString()
         }
         document.write("<a id='Time'>" + d.getHours() + ":" + m + "</a>");
+        setTimeout("history.go(0);", 2000);
+
       |     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
       |     
       img(src='images/세부소스/날씨/맑음.png', width='70', height='76', alt='')

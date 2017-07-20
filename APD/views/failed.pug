@@ -20,3 +20,7 @@ block content
 
   script(type='text/javascript').
     setTimeout("location.replace('/main');", 5000);
+    document.oncontextmenu=function(){return false;} // 우클릭 방지
+    document.onselectstart=function(){return false;} // 드래그 방지 
+    document.ondragstart=function(){return false;} // 선택 방지
+    document.onmousedown=function(){return false;}

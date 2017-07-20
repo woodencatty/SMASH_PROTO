@@ -49,7 +49,7 @@ module.exports = {
         gpio.softToneWrite(piezo, 700);
          setTimeout(function () {gpio.softToneWrite(piezo, 700);
            setTimeout(function () {gpio.softToneStop(piezo);
-             }, 500);  }, 500);
+             }, 50);  }, 50);
     },
 
     led_normal: function () {

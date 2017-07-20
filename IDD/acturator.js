@@ -33,10 +33,10 @@ module.exports = {
         }, 500);
     },
     piezo_powerOn: function () {
-        for (var i = 0; i < 2000; i++) {
+        for (var i = 0; i < 200; i++) {
         gpio.digitalWrite(piezo, 1);
         gpio.digitalWrite(piezo, 0);
-        sleep.msleep(10);
+        sleep.msleep(1);
     }
 
     },

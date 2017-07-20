@@ -15,6 +15,7 @@ gpio.pinMode(ledG, gpio.OUTPUT);
 gpio.pinMode(ledB, gpio.OUTPUT);
 gpio.pinMode(piezo, gpio.OUTPUT);
 
+gpio.softToneCreate(piezo);
 
 module.exports = {
 
@@ -33,7 +34,6 @@ module.exports = {
         }, 500);
     },
     piezo_powerOn: function () {
-        gpio.softToneCreate(piezo);
         gpio.softToneWrite(piezo, 500);
          setTimeout(function () {gpio.softToneWrite(piezo, 700);
          setTimeout(function () {gpio.softToneWrite(piezo, 500);
@@ -46,6 +46,12 @@ module.exports = {
     led_sensorActive: function () {
          gpio.digitalWrite(ledB, 1);
             setTimeout(function () { gpio.digitalWrite(ledB, 0); }, 1000);
+    },
+    piezo_dataSaved: function(){
+        gpio.softToneWrite(piezo, 700);
+         setTimeout(function () {gpio.softToneWrite(piezo, 700);
+           setTimeout(function () {gpio.softToneStop(piezo);
+             }, 500);  }, 500);
     },
 
     led_normal: function () {

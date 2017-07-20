@@ -14,9 +14,14 @@ let dateTime = new Date();
 acturator.led_powerOn();
 acturator.piezo_powerOn();
 
+this.statusInterval = setInterval(function () {
+      acturator.led_normal();
+  //console.log('Walk count : ' + move.WalkCount);
+}.bind(this), 1000);
 
 this.valueInterval = setInterval(function () {
   move.setWalkCount();
+      acturator.led_sensorActive();
   //console.log('Walk count : ' + move.WalkCount);
 }.bind(this), 200);
 
@@ -34,8 +39,9 @@ this.loggingInterval = setInterval(function () {
       });
     });
 
-    
-  bluetooth.SetStepValue(WalkCount);
+    acturator.piezo_dataSaved();
+
+  //bluetooth.SetStepValue(WalkCount);
   }
   move.getWalkCount(WalkCallback);
 }.bind(this), 5000);

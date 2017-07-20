@@ -116,11 +116,11 @@ router.get('/welcome', (req, res, next) => {
       }, 500);
     }
 
-    StepCallback = function(ID, Steps){
+   /* StepCallback = function(ID, Steps){
       http.http_putInfo(ID, Steps);
-    }
+    }*/
     bluetooth.getSearchedID(IDCallback);
-    bluetooth.getStepCount(StepCallback);
+    //bluetooth.getStepCount(StepCallback);
   }, 2000);
 
 });

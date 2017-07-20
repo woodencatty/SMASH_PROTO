@@ -38,12 +38,11 @@ this.loggingInterval = setInterval(function () {
         });
       });
     });
-
-    acturator.piezo_dataSaved();
-
   //bluetooth.SetStepValue(WalkCount);
   }
   move.getWalkCount(WalkCallback);
+  acturator.piezo_dataSaved();
+
 }.bind(this), 5000);
 
 

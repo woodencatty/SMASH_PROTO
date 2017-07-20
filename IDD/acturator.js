@@ -45,7 +45,7 @@ module.exports = {
 
     led_sensorActive: function () {
          gpio.digitalWrite(ledB, 1);
-            setTimeout(function () { gpio.digitalWrite(ledB, 0); }, 1000);
+            setTimeout(function () { gpio.digitalWrite(ledB, 0); }, 10);
     },
     piezo_dataSaved: function(){
         gpio.softToneWrite(piezo, 700);
@@ -56,7 +56,7 @@ module.exports = {
 
     led_normal: function () {
          gpio.digitalWrite(ledG, 1);
-            setTimeout(function () { gpio.digitalWrite(ledG, 0); }, 1000);
+            setTimeout(function () { gpio.digitalWrite(ledG, 0); }, 10);
     }
 
 }

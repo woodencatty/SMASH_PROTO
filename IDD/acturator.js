@@ -9,9 +9,15 @@ gpio.wiringPiSetup();                                //wiring-pi 초기화
 gpio.pinMode(ledR, gpio.OUTPUT);               
 gpio.pinMode(ledG, gpio.OUTPUT);                 
 gpio.pinMode(ledB, gpio.OUTPUT);
+/*
+module.exports = {
 
+powerOn: function(){
+*/
 while(1){
      gpio.digitalWrite(ledR, 1);
         sleep.msleep(500);
     gpio.digitalWrite(ledR, 0);
 }
+
+//}}

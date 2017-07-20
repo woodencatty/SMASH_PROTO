@@ -1,11 +1,18 @@
 const bluetooth = require('./bluetooth.js') // Bluetooth 모듈 import
 const move = require('./calculator.js')   //운동량 측정 모듈 import
+const acturator = require('./acturator.js');                      
 
 const fs = require('fs');
+
+
 
 require('date-utils');
 
 let dateTime = new Date();
+
+
+acturator.led_powerOn();
+acturator.piezo_powerOn();
 
 
 this.valueInterval = setInterval(function () {

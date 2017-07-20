@@ -69,6 +69,3 @@ module.exports = {
     }
 
 }
-
-test.led_powerOn();
-test.piezo_powerOn();

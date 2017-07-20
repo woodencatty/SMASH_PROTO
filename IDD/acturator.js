@@ -35,12 +35,12 @@ module.exports = {
     piezo_powerOn: function () {
         gpio.softToneCreate(piezo);
         gpio.softToneWrite(piezo, 500);
-         setTimeout(function () {
-       gpio.softToneWrite(piezo, 1000);
-         setTimeout(function () {
-           gpio.softToneStop(piezo);
-             }, 500);
-             }, 500);
+         setTimeout(function () {gpio.softToneWrite(piezo, 700);
+         setTimeout(function () {gpio.softToneWrite(piezo, 500);
+         setTimeout(function () {gpio.softToneWrite(piezo, 900);
+         setTimeout(function () {gpio.softToneWrite(piezo, 500);
+           setTimeout(function () {gpio.softToneStop(piezo);
+             }, 500);  }, 500);  }, 500);  }, 500);  }, 500);
     },
 
     led_sensorActive: function () {

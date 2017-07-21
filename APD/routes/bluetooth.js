@@ -10,12 +10,6 @@ let step_count = 0;
 
 
 
-noble.on('discover', function (peripheral) {
-  console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
-  ID = peripheral.advertisement.localName;
-  //connectAndSetUp(peripheral);
-  // TODO should stop scanning otherwise we connect to ALL the thermometers
-});
 
 function connectAndSetUp(peripheral) {
 
@@ -59,7 +53,15 @@ module.exports = {
         noble.stopScanning();
       }
     });
-  },
+  
+noble.on('discover', function (peripheral) {
+  console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
+  ID = peripheral.advertisement.localName;
+  //connectAndSetUp(peripheral);
+  // TODO should stop scanning otherwise we connect to ALL the thermometers
+});
+
+},
 
   stopSearch: () => {
     noble.stopScanning();

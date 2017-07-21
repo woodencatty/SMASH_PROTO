@@ -40,7 +40,7 @@ browser = exec('chromium-browser --kiosk --no-sandbox',
 
 
 acturator.led_powerOn();
-//acturator.piezo_powerOn();
+acturator.piezo_powerOn();
 
 
 function startSense() {
@@ -79,7 +79,7 @@ router.get('/main', (req, res, next) => {
 
   if (distance < 50) {
     acturator.led_detectActivity();
-    //acturator.piezo_detectActivity();
+    acturator.piezo_detectActivity();
     
     stopSense();
     console.log('\t' + distance);

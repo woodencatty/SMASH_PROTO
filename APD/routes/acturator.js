@@ -64,7 +64,8 @@ module.exports = {
     },
 
     led_detectActivity: () => {
-
+        gpio.digitalWrite(ledR, 1);
+        setTimeout(() => { gpio.digitalWrite(ledR, 0); }, 1000);
     },
 
     led_normal: () => {

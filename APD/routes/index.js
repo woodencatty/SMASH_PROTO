@@ -78,6 +78,7 @@ router.get('/main', (req, res, next) => {
 
   //거리가 50cm 이하일 경우 try페이지로 전환하고, 아닐 경우 대기화면을 표시
   if (sensor.distance < 50) {
+    acturator.led_detectActivity();
     stopSense();
     console.log('\t' + sensor.distance);
     res.redirect('/try');

@@ -9,9 +9,7 @@ let gender = 0;
 module.exports = {
 
   setupSession: (valueName, valueAge, valueHeight, valueWeight, valueExercise, valueGender) => {
-
-        console.log(name, age, height, weight, exercise, gender);
-
+        console.log(valueName, valueAge, valueHeight, valueWeight, valueExercise, valueGender);
 
     name = valueName;
     age = valueAge;
@@ -26,7 +24,6 @@ module.exports = {
   },
 
   getExercise: (callback) => {
-    console.log(exercise);
 
     callback(exercise)
   },

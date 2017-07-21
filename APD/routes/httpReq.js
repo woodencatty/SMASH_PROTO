@@ -52,7 +52,6 @@ module.exports = {
 					height = serverdata.patient_Height;
 					weight = serverdata.patient_Weight;
 					gender = serverdata.patient_Gender;
-        console.log(name, age, height, weight, exercise, gender);
 
 				});
 			}
@@ -91,8 +90,6 @@ module.exports = {
 	},
 
 	getInfo: (callback) => {
-		        console.log(name, age, height, weight, exercise, gender);
-
 		callback(name, age, height, weight, exercise, gender);
 	},
 

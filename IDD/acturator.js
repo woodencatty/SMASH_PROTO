@@ -55,7 +55,7 @@ module.exports = {
         gpio.digitalWrite(ledB, 1);
         setTimeout(() => { gpio.digitalWrite(ledB, 0); }, 10);
     },
-    
+
     led_dataSaved: () => {
         gpio.digitalWrite(ledR, 1);
         setTimeout(() => { gpio.digitalWrite(ledR, 0); }, 1000);

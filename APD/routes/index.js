@@ -124,7 +124,6 @@ router.get('/welcome', (req, res, next) => {
 
     IDCallback = (ID) => {
       if (ID == 'noname') {
-        bluetooth.stopSearch();
         console.log('user not found')
         res.redirect('/identify');
       } else {
@@ -149,6 +148,8 @@ router.get('/welcome', (req, res, next) => {
 });
 
 router.get('/exercise', (req, res, next) => {
+  
+        bluetooth.stopSearch();
   ExerciseCallback = (exercise) => {
 
     let nextExercise = '/' + exercise[1];

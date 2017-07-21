@@ -13,7 +13,6 @@ let step_count = 0;
 noble.on('discover', function (peripheral) {
   console.log('Discovered', peripheral.advertisement.localName, peripheral.address);
   ID = peripheral.advertisement.localName;
-  console.log(peripheral.advertisement.localName);
   //connectAndSetUp(peripheral);
   // TODO should stop scanning otherwise we connect to ALL the thermometers
 });
@@ -48,6 +47,15 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
   }, 1000);  //값 확인을 위해 간격 짧게 잡음.
 }
 
+
+noble.on('stateChange', function (state) {
+  if (state === 'poweredOn') {
+    this.try_count++;
+    noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
+  } else {
+    noble.stopScanning();
+  }
+});
 
 module.exports = {
   startSearch: () => {

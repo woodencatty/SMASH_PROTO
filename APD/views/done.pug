@@ -1,12 +1,21 @@
 extends layout
 
 block content
-  h1  본 운동(팔 비대칭 올리기)
-  h2  #{name}님!
+  h1  수고하셨어요 #{name}님!
+  h2  이제 푹 쉬세요!
 
-  input#btnGo(name='btnGo', type='button', value='Good-bye', onclick="location.href='/main'")
+  p  자동으로 메인 화면으로 돌아갑니다...
+
   script(type='text/javascript').
     document.oncontextmenu=function(){return false;} // 우클릭 방지
     document.onselectstart=function(){return false;} // 드래그 방지 
     document.ondragstart=function(){return false;} // 선택 방지
     document.onmousedown=function(){return false;}
+    
+    var SetTime = 10;
+    function msg_time() {
+    m = Math.floor(SetTime % 60);
+    SetTime--;
+    if (SetTime < 0) { clearInterval(tid); location.replace('/main'); }
+    }
+    window.onload = function TimerStart(){ tid=setInterval('msg_time()',2000) };

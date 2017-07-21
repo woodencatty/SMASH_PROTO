@@ -70,3 +70,13 @@ h2 {
 	font-size: 40px;
 	font-weight: bolder;
 }
+
+
+#ViewTimer {
+	color: rgba(255, 255, 255, 1.00);
+	font-size: 40px;
+	position: absolute;
+	font-weight: bolder;
+	top: 50%;
+	right: 10%;
+}

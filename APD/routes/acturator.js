@@ -67,6 +67,17 @@ module.exports = {
         gpio.digitalWrite(ledR, 1);
         setTimeout(() => { gpio.digitalWrite(ledR, 0); }, 1000);
     },
+    
+    piezo_detectActivity: () => {
+          gpio.softToneWrite(piezo, 50);
+        setTimeout(() => {
+            gpio.softToneWrite(piezo, 70);
+            setTimeout(() => {
+                gpio.softToneStop(piezo);
+            }, 50);
+        }, 50);
+    },
+
 
     led_normal: () => {
         gpio.digitalWrite(ledG, 1);

@@ -58,6 +58,7 @@ noble.on('discover', function (peripheral) {
 },
 
   stopSearch: () => {
+    console.log('stop scanning');
     noble.stopScanning();
   },
 

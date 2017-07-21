@@ -157,8 +157,6 @@ router.get('/exercise', (req, res, next) => {
   
         bluetooth.stopSearch();
   ExerciseCallback = (exercise) => {
-
-    let nextExercise = '/' + exercise[1];
     res.render(exercise[0]);
   }
   session.getExercise(ExerciseCallback);

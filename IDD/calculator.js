@@ -26,9 +26,9 @@ module.exports = {
             let changeY = Math.abs(Math.abs(AccelY_1) - Math.abs(AccelY_2));
             let changeZ = Math.abs(Math.abs(AccelZ_1) - Math.abs(AccelZ_2));
 
-            let force = (changeX + changeY + changeZ) * 10000
+            let force = (changeX + changeY + changeZ) * 1000
             // console.log(force);
-            if (force > 10000) {
+            if (force > 8000) {
                 WalkCount++;
                 console.log('Step detected' + WalkCount);
             }

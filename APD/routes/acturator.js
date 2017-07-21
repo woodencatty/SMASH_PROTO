@@ -22,6 +22,7 @@ module.exports = {
             setTimeout(() => {
                 setTimeout(() => {
                     gpio.digitalWrite(ledB, 0);
+                    gpio.digitalWrite(ledG, 1);
                 }, 50);
                 gpio.digitalWrite(ledG, 0);
                 gpio.digitalWrite(ledB, 1);
@@ -29,6 +30,8 @@ module.exports = {
             gpio.digitalWrite(ledR, 0);
             gpio.digitalWrite(ledG, 1);
         }, 50);
+
+
     },
     piezo_powerOn: () => {
         gpio.softToneWrite(piezo, 500);

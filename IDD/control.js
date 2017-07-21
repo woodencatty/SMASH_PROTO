@@ -41,7 +41,7 @@ this.loggingInterval = setInterval(() => {
     //bluetooth.SetStepValue(WalkCount);
   }
   move.getWalkCount(WalkCallback);
-  acturator.piezo_dataSaved();
+  acturator.led_dataSaved();
 
 }, 5000);
 

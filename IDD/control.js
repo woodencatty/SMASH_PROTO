@@ -12,7 +12,7 @@ let dateTime = new Date();
 
 
 acturator.led_powerOn();
-//acturator.piezo_powerOn();
+acturator.piezo_powerOn();
 
 this.statusInterval = setInterval(() => {
   acturator.led_normal();

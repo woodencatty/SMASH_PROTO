@@ -40,7 +40,7 @@ browser = exec('chromium-browser --kiosk --no-sandbox',
 
 
 acturator.led_powerOn();
-acturator.piezo_powerOn();
+//acturator.piezo_powerOn();
 
 
 function startSense() {

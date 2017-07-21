@@ -22,6 +22,8 @@ module.exports = {
   },
 
   getExercise: (callback) => {
+    console.log(exercise);
+
     callback(exercise)
   },
 

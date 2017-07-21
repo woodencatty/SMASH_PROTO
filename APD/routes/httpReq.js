@@ -91,6 +91,8 @@ module.exports = {
 	},
 
 	getInfo: (callback) => {
+		        console.log(name, age, height, weight, exercise, gender);
+
 		callback(name, age, height, weight, exercise, gender);
 	},
 

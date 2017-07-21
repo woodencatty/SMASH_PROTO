@@ -46,4 +46,4 @@ this.loggingInterval = setInterval(() => {
 }, 5000);
 
 
-//bluetooth.AdvertisingDevice('P0001'); //Bluetooth 탐색 모듈 실행 
+bluetooth.AdvertisingDevice('P0001'); //Bluetooth 탐색 모듈 실행 

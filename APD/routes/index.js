@@ -45,11 +45,11 @@ acturator.piezo_powerOn();
 
 function startSense() {
   this.SensorInterval = setInterval(() => {
-    sensor.getDHT22();
-    sensor.getAdcAudio();
-    sensor.getAdcEnv();
-    sensor.getAdcLight();
-    sensor.getDist();
+    sensor.senseDHT22();
+    sensor.senseAdcAudio();
+    sensor.senseAdcEnv();
+    sensor.senseAdcLight();
+    sensor.senseDist();
     acturator.led_sensorActive();
     acturator.piezo_dataSaved();
 
@@ -75,17 +75,23 @@ startSense();
 //대기화면. 센서값 갱신을 위해 2초에 한번씩 갱신한다.
 router.get('/main', (req, res, next) => {
   console.log("Directed to Main Page");
-
   //거리가 50cm 이하일 경우 try페이지로 전환하고, 아닐 경우 대기화면을 표시
-  if (sensor.distance < 50) {
+  SensorDataCallback = (distance,temperature,humidity,audio,envelope,light)=>{
+
+  if (distance < 50) {
     acturator.led_detectActivity();
     acturator.piezo_detectActivity();
+    
     stopSense();
-    console.log('\t' + sensor.distance);
+    console.log('\t' + distance);
     res.redirect('/try');
   } else {
-    res.render('index', { title: '대기화면', temp: sensor.temperature, humi: sensor.humidity });
+    res.render('index', { title: '대기화면', temp: temperature, humi: humidity });
   }
+  }
+
+    sensor.getData(SensorDataCallback);
+
 });
 
 //운동 권유 화면 

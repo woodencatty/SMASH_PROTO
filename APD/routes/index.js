@@ -168,7 +168,10 @@ router.get('/exercise_done', (req, res, next) => {
 });
 
 router.get('/done', (req, res, next) => {
-  res.render('done');
+    DoneCallback = (name)=>{
+  res.render('done', { name: name });
+    }
+  session.getName(DoneCallback);
 });
 
 

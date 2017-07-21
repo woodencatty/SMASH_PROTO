@@ -9,6 +9,10 @@ let gender = 0;
 module.exports = {
 
   setupSession: (valueName, valueAge, valueHeight, valueWeight, valueExercise, valueGender) => {
+
+        console.log(name, age, height, weight, exercise, gender);
+
+
     name = valueName;
     age = valueAge;
     height = valueHeight;

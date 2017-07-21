@@ -47,11 +47,11 @@ module.exports = {
 					console.log(serverdata);
 					console.log(serverdata.patient_name);
 					name = serverdata.patient_name;
-					exercise = serverdata.patient_exercise;
-					age = serverdata.patient_age;
-					height = serverdata.patient_height;
-					weight = serverdata.patient_weight;
-					gender = serverdata.patient_gender;
+					exercise = serverdata.patient_Exercise;
+					age = serverdata.patient_Age;
+					height = serverdata.patient_Height;
+					weight = serverdata.patient_Weight;
+					gender = serverdata.patient_Gender;
 
 				});
 			}

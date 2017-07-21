@@ -1,23 +1,8 @@
 extends layout
 
 block content
-  p#TryMessage
-        | 수고하셨어요! 
-        br
-        |  
-        br
-        | #{name}님!
-        br
-        | 
-        br
-        |  
-        br
-        |  
-        |             
-        br
-        br
-        br
-
+  h1  본 운동(팔 비대칭 올리기)
+  h2  #{name}님!
 
   input#btnGo(name='btnGo', type='button', value='Good-bye', onclick="location.href='/main'")
   script(type='text/javascript').

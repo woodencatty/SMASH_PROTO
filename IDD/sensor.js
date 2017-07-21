@@ -14,7 +14,7 @@ module.exports = {
   AccelY: 0.0,
   AccelZ: 0.0,
 
-  getAccel: function () {
+  getAccel: () => {
     adxl345.getAcceleration(true) // true for g-force units, else false for m/s²
       .then((acceleration) => {
         //가속도값(X, Y, Z) 반환

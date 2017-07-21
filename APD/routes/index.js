@@ -7,7 +7,7 @@ const sensor = require('./sensor.js')
 const bluetooth = require('./bluetooth.js');
 const http = require('./httpReq.js');
 
-const acturator = require('./acturator.js');                      
+const acturator = require('./acturator.js');
 
 //noble의 상태를 poweredOn으로 변경하기 위한 조치
 const noble = require('noble');
@@ -50,18 +50,18 @@ function startSense() {
     sensor.getAdcEnv();
     sensor.getAdcLight();
     sensor.getDist();
-         acturator.led_sensorActive();
- acturator.piezo_dataSaved();
+    acturator.led_sensorActive();
+    acturator.piezo_dataSaved();
 
     //console.log(sensor.distance, sensor.temperature, sensor.humidity, sensor.audio);
   }, 1000);  //값 확인을 위해 간격 짧게 잡음.
 }
 
 
-this.statusInterval = setInterval(function () {
-      acturator.led_normal();
+this.statusInterval = setInterval(() => {
+  acturator.led_normal();
   //console.log('Walk count : ' + move.WalkCount);
-}.bind(this), 1200);
+}, 1200);
 
 
 function stopSense() {
@@ -112,9 +112,9 @@ router.get('/welcome', (req, res, next) => {
   //식별기기 탐색을 시작한다.
   bluetooth.startSearch();
   //탐색이 종료될 즈음 생성된 값을 받아와 http요청을 전송하고, 이름을 받아 welcome화면을 표시한다.
-  setTimeout(function () {
+  setTimeout(() => {
 
-    IDCallback = function (ID) {
+    IDCallback = (ID) => {
       if (ID == 'noname') {
         bluetooth.stopSearch();
         console.log('user not found')
@@ -122,28 +122,27 @@ router.get('/welcome', (req, res, next) => {
       } else {
         http.http_getInfo(ID);
       }
-      setTimeout(function () {
+      setTimeout(() => {
         bluetooth.stopSearch();
-        SessionCallback = function (name, age, height, weight, exercise) {
-          session.setupSession(name, age, height, weight, exercise);
+        SessionCallback = (name, age, height, weight, exercise, gender) => {
+          session.setupSession(name, age, height, weight, exercise, gender);
           res.render('welcome', { name: name });
         }
         http.getInfo(SessionCallback);
       }, 500);
     }
 
-   /* StepCallback = function(ID, Steps){
-      http.http_putInfo(ID, Steps);
-    }*/
+    /* StepCallback = function(ID, Steps){
+       http.http_putInfo(ID, Steps);
+     }*/
     bluetooth.getSearchedID(IDCallback);
     //bluetooth.getStepCount(StepCallback);
   }, 2000);
-
 });
 
 router.get('/exercise', (req, res, next) => {
-  ExerciseCallback = function (exercise) {
-    
+  ExerciseCallback = (exercise) => {
+
     let nextExercise = '/' + exercise[1];
     res.render(exercise[0]);
   }
@@ -155,17 +154,8 @@ router.get('/exercise_done', (req, res, next) => {
   res.redirect('/exercise');
 });
 
-router.get('/undefined', (req, res, next) => {
-  res.redirect('/done');
-});
-
 router.get('/done', (req, res, next) => {
   res.render('done');
-});
-
-
-router.get('/bletest', (req, res, next) => {
-  bluetooth.startSearch();
 });
 
 

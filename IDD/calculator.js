@@ -8,15 +8,15 @@ console.log('calculating..');
 let WalkCount = 0;
 
 module.exports = {
-    setWalkCount: function () {
+    setWalkCount: () => {
 
         Accel.getAccel();
 
         let AccelX_1 = Accel.AccelX;
         let AccelY_1 = Accel.AccelY;
         let AccelZ_1 = Accel.AccelZ;
-       // console.log(AccelX_1);
-        setTimeout(function () {
+        // console.log(AccelX_1);
+        setTimeout(() => {
             Accel.getAccel();
             let AccelX_2 = Accel.AccelX;
             let AccelY_2 = Accel.AccelY;
@@ -27,14 +27,14 @@ module.exports = {
             let changeZ = Math.abs(Math.abs(AccelZ_1) - Math.abs(AccelZ_2));
 
             let force = (changeX + changeY + changeZ) * 10000
-           // console.log(force);
+            // console.log(force);
             if (force > 10000) {
                 WalkCount++;
                 console.log('Step detected' + WalkCount);
             }
         }, 10);
     },
-    getWalkCount: function (callback) {
+    getWalkCount: (callback) => {
         callback(WalkCount);
     }
 }

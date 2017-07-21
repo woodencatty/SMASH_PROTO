@@ -18,59 +18,59 @@ const adcLight = 2;                                    //ADC Channel 2
 
 //각 센서값을 받을 변수 정의
 module.exports = {
- distance : 2.0,
- temperature : 2.0,
- humidity : 2.0,
- audio : 2.0,
- envelope : 2.0,
- light : 2.0,
+    distance: 2.0,
+    temperature: 2.0,
+    humidity: 2.0,
+    audio: 2.0,
+    envelope: 2.0,
+    light: 2.0,
 
-//온습도측정 함수화
- getDHT22 : function () {
-    temp.read(22, DHT22, (err, temp, humi) => {
-        if (!err) {
-            this.temperature = temp.toFixed(1);
-            this.humidity = humi.toFixed(1);
+    //온습도측정 함수화
+    getDHT22: () => {
+        temp.read(22, DHT22, (err, temp, humi) => {
+            if (!err) {
+                this.temperature = temp.toFixed(1);
+                this.humidity = humi.toFixed(1);
 
-        } else { console.log("Error detected in DHT22 sensor"); }
-    });
-},
+            } else { console.log("Error detected in DHT22 sensor"); }
+        });
+    },
 
-//거리측정 함수화
- getDist : function() {
-    let pulse = 0;
-    gpio.digitalWrite(ultraTRIG, 0);
-    sleep.msleep(2);
-    gpio.digitalWrite(ultraTRIG, 1);
-    sleep.msleep(20);
-    gpio.digitalWrite(ultraTRIG, 0);
-    while (gpio.digitalRead(ultraECHO) == 0);
-    let startTime = microt.now();
-    while (gpio.digitalRead(ultraECHO) == 1);
-    let travelTime = microt.now();
-    this.distance = (travelTime - startTime) / 58;
-},
+    //거리측정 함수화
+    getDist: () => {
+        let pulse = 0;
+        gpio.digitalWrite(ultraTRIG, 0);
+        sleep.msleep(2);
+        gpio.digitalWrite(ultraTRIG, 1);
+        sleep.msleep(20);
+        gpio.digitalWrite(ultraTRIG, 0);
+        while (gpio.digitalRead(ultraECHO) == 0);
+        let startTime = microt.now();
+        while (gpio.digitalRead(ultraECHO) == 1);
+        let travelTime = microt.now();
+        this.distance = (travelTime - startTime) / 58;
+    },
 
-//소음측정 함수화
- getAdcAudio : function() {
-    adc.readRawValue(adcAudio, (value) => {
-        this.audio = value;
-    });
-},
+    //소음측정 함수화
+    getAdcAudio: () => {
+        adc.readRawValue(adcAudio, (value) => {
+            this.audio = value;
+        });
+    },
 
-//(대략적)소음측정 함수화
- getAdcEnv : function() {
-    adc.readRawValue(adcEnv, (value) => {
-        this.envelope = value;
-    });
-},
+    //(대략적)소음측정 함수화
+    getAdcEnv: () => {
+        adc.readRawValue(adcEnv, (value) => {
+            this.envelope = value;
+        });
+    },
 
-//조도측정 함수화
- getAdcLight : function() {
-    adc.readRawValue(adcLight, (value) => {
-        this.light = value;
-    });
-}
+    //조도측정 함수화
+    getAdcLight: () => {
+        adc.readRawValue(adcLight, (value) => {
+            this.light = value;
+        });
+    }
 }
 
 gpio.wiringPiSetup();                                //wiring-pi 초기화

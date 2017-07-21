@@ -2,9 +2,11 @@ extends layout
 
 block content
   h1  정리운동(등근육펴기)
-  .contents
-  | 동작을 잘 보고 따라해주세요.
-  | (2초씩 10회 반복)
+  .message
+    p#TryMessage
+      br
+      | 동작을 잘 보고 따라해주세요.
+      | (2초씩 10회 반복)
 
   img(src='/images/move3.gif' width='506', height='1400' alt="muk-pa")
   img(src='/images/세부소스/버튼/홈-다운.png', width='152', height='113', onclick="location.href='/exercise'")

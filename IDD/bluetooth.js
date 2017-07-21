@@ -20,9 +20,9 @@ util.inherits(IDDCharacteristic, Characteristic);
 
 IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
   var result = 10.10;
-    var data = new Buffer(4);
-    data.writeFloatLE(result, 0);
-    callback(Characteristic.RESULT_SUCCESS, data);
+  var data = new Buffer(4);
+  data.writeFloatLE(result, 0);
+  callback(Characteristic.RESULT_SUCCESS, data);
 };
 
 var IDDService = new PrimaryService({
@@ -32,16 +32,21 @@ var IDDService = new PrimaryService({
   ]
 });
 
-bleno.on('stateChange', function (state) {
-  console.log('on -> stateChange: ' + state);
 
-  if (state === 'poweredOn') {
-    bleno.startAdvertising('P0001', [IDDService.uuid]);
-  } else {
-    bleno.stopAdvertising();
+module.exports = {
+
+  AdvertisingDevice: function (ID) {
+    bleno.on('stateChange', function (state) {
+      console.log('on -> stateChange: ' + state);
+
+      if (state === 'poweredOn') {
+        bleno.startAdvertising(ID, [IDDService.uuid]);
+      } else {
+        bleno.stopAdvertising();
+      }
+    });
   }
-});
-
+}
 bleno.on('advertisingStart', function (error) {
   console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
 
@@ -50,11 +55,11 @@ bleno.on('advertisingStart', function (error) {
   }
 });
 
-bleno.on('accept', (clientAddress)=>{
-    console.log('conntected to '+ clientAddress);
+bleno.on('accept', (clientAddress) => {
+  console.log('conntected to ' + clientAddress);
 });
 
-bleno.on('disconnect', (clientAddress)=>{
-        console.log('disconnect to '+ clientAddress);
+bleno.on('disconnect', (clientAddress) => {
+  console.log('disconnect to ' + clientAddress);
 
 });

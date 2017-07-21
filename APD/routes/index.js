@@ -40,7 +40,7 @@ browser = exec('chromium-browser --kiosk --no-sandbox',
 
 
 acturator.led_powerOn();
-acturator.piezo_powerOn();
+//acturator.piezo_powerOn();
 
 
 function startSense() {
@@ -51,7 +51,7 @@ function startSense() {
     sensor.senseAdcLight();
     sensor.senseDist();
     acturator.led_sensorActive();
-    acturator.piezo_dataSaved();
+    //acturator.piezo_dataSaved();
 
     //console.log(sensor.distance, sensor.temperature, sensor.humidity, sensor.audio);
   }, 1000);  //값 확인을 위해 간격 짧게 잡음.
@@ -80,7 +80,7 @@ router.get('/main', (req, res, next) => {
 
   if (distance < 50) {
     acturator.led_detectActivity();
-    acturator.piezo_detectActivity();
+    //acturator.piezo_detectActivity();
     
     stopSense();
     console.log('\t' + distance);

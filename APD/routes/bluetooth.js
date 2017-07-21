@@ -44,15 +44,9 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
 
 module.exports = {
   startSearch: () => {
-    noble.on('stateChange', function (state) {
-      if (state === 'poweredOn') {
         console.log('scanning');
         this.try_count++;
         noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
-      } else {
-        noble.stopScanning();
-      }
-    });
   
 noble.on('discover', function (peripheral) {
   console.log('Discovered', peripheral.advertisement.localName, peripheral.address);

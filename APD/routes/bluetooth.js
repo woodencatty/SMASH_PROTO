@@ -47,16 +47,6 @@ function onServicesAndCharacteristicsDiscovered(error, services, characteristics
   }, 1000);  //값 확인을 위해 간격 짧게 잡음.
 }
 
-
-noble.on('stateChange', function (state) {
-  if (state === 'poweredOn') {
-    this.try_count++;
-    noble.startScanning(['bbb0', 'B6FD7210-32D4-4427-ACA7-99DF89E10380']);
-  } else {
-    noble.stopScanning();
-  }
-});
-
 module.exports = {
   startSearch: () => {
     noble.on('stateChange', function (state) {

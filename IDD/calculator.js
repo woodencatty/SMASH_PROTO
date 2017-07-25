@@ -36,6 +36,9 @@ module.exports = {
     },
     getWalkCount: (callback) => {
         callback(WalkCount);
+    },
+    resetWalkCount: ()=>{
+        WalkCount = 0;
     }
 }
 //운동량 측정 모듈화

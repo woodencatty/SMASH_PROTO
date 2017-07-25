@@ -11,19 +11,12 @@ noble.on('scanStart', () => {
 noble.on('scanStop', () => {
     console.log('status : scan stop');
 });
-/*
+
 module.exports = {
     startScanning: () => {
         noble.state = 'poweredOn';
-*/
-        noble.on('stateChange', function (state) {
-            if (state == 'poweredOn') {
-                noble.startScanning(['fff0'], true);
-                  console.log("scanning now");
-            } else {
-                noble.stopScanning();
-            }
-        });
+        noble.startScanning(['fff0'], true);
+
 
         noble.on('discover', (peripheral) => {
             console.log('find : ' + peripheral.advertisement.localName + "(" + peripheral.address + ")");
@@ -49,11 +42,11 @@ module.exports = {
 
             });
         });
-/*    },
+   },
     getTryCount: (callback) => {
         callback(try_count);
     },
     getIDDData:(callback) => {
         callback(ID, steps_data);
     }
-}*/
+}

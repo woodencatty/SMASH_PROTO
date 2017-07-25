@@ -113,11 +113,8 @@ router.get('/identify', (req, res, next) => {
 
 //환영 화면
 router.get('/welcome', (req, res, next) => {
-  console.log("Directed to welcome Page");
+  console.log("Directed to welcome Page");=
 
-tempcallback = (data)=>{
-  console.log(data);
-}
 var bluetooth = require('./bluetooth.js');
 
   //탐색이 종료될 즈음 생성된 값을 받아와 http요청을 전송하고, 이름을 받아 welcome화면을 표시한다.
@@ -139,7 +136,7 @@ var bluetooth = require('./bluetooth.js');
           res.render('welcome', { name: name });
         }
         http.getInfo(SessionCallback);
-      }, 500);
+      }, 200);
     }
 
     /* StepCallback = function(ID, Steps){
@@ -149,7 +146,7 @@ var bluetooth = require('./bluetooth.js');
     console.log("gettingID");
 
     //bluetooth.getStepCount(StepCallback);
-  }, 50);
+  }, 5000);
 });
 
 router.get('/exercise', (req, res, next) => {

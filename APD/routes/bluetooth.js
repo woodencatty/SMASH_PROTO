@@ -11,10 +11,11 @@ noble.on('scanStart', () => {
 noble.on('scanStop', () => {
     console.log('status : scan stop');
 });
-
+/*
 module.exports = {
     startScanning: () => {
         noble.state = 'poweredOn';
+*/
         noble.on('stateChange', function (state) {
             if (state == 'poweredOn') {
                 noble.startScanning(['fff0'], true);
@@ -48,11 +49,11 @@ module.exports = {
 
             });
         });
-    },
+/*    },
     getTryCount: (callback) => {
         callback(try_count);
     },
     getIDDData:(callback) => {
         callback(ID, steps_data);
     }
-}
+}*/

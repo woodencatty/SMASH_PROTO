@@ -12,11 +12,15 @@ noble.on('scanStop', () => {
     console.log('status : scan stop');
 });
 
-module.exports = {
-    startScanning: () => {
-        noble.state = 'poweredOn';
-        noble.startScanning(['fff0'], true);
-
+ noble.state = 'poweredOff';
+        noble.on('stateChange', function (state) {
+            if (state == 'poweredOn') {
+                noble.startScanning(['fff0'], true);
+                  console.log("scanning now");
+            } else {
+                noble.stopScanning();
+            }
+        });
 
         noble.on('discover', (peripheral) => {
             console.log('find : ' + peripheral.advertisement.localName + "(" + peripheral.address + ")");
@@ -42,6 +46,11 @@ module.exports = {
 
             });
         });
+
+
+module.exports = {
+    startScanning: () => {
+        noble.state = 'poweredOn';
    },
     getTryCount: (callback) => {
         callback(try_count);

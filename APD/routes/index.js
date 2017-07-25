@@ -134,6 +134,7 @@ router.get('/welcome', (req, res, next) => {
       }
       setTimeout(() => {
         session.setStepsData(steps_data);
+        console.log(steps_data);
         SessionCallback = (name, age, height, weight, exercise, gender) => {
           session.setupSession(name, age, height, weight, exercise, gender);
           res.render('welcome', { name: name });

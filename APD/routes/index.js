@@ -133,7 +133,6 @@ router.get('/welcome', (req, res, next) => {
         http.requestUserInfo(ID);
       }
       setTimeout(() => {
-        bluetooth.stopScanning();
         session.setStepsData(steps_data);
         SessionCallback = (name, age, height, weight, exercise, gender) => {
           session.setupSession(name, age, height, weight, exercise, gender);
@@ -155,7 +154,6 @@ router.get('/welcome', (req, res, next) => {
 
 router.get('/exercise', (req, res, next) => {
 
-  bluetooth.stopSearch();
   ExerciseCallback = (exercise) => {
     res.render(exercise[0]);
   }
@@ -174,6 +172,21 @@ router.get('/done', (req, res, next) => {
     res.render('done', { name: name });
   }
   session.getName(DoneCallback);
+});
+
+
+router.get('/exercise_try', (req, res, next) => {
+
+  ExerciseCallback = (exercise) => {
+    http.requestExercise(exercise);
+    setTimeout(() => {
+      ExerciseDataCallback = (image, count, comment) => {
+        res.render('/exercise', { image: image, count: count, comment: comment });
+      }
+      http.getExercise(ExerciseDataCallback);
+    }, 500);
+  }
+  session.getExercise(ExerciseCallback);
 });
 
 

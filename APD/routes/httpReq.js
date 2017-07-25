@@ -11,16 +11,29 @@ let height = 0;
 let age = 0;
 let gender = 0;
 
+let image;
+let count = 0;
+let comment;
+
+let serverIP = '127.0.0.1';
+
 getUserInfoRequest = {														//GET요청 JSON데이터 정의
-	host: '127.0.0.1',
+	host: serverIP,
 	port: 60001,
 	path: '/requestUserInfo',
 	method: 'GET'
 };
 
 
+getUserInfoRequest = {														//GET요청 JSON데이터 정의
+	host: serverIP,
+	port: 60001,
+	path: '/requestExercise',
+	method: 'GET'
+};
+
 submitUserSteps = {														//GET요청 JSON데이터 정의
-	host: '127.0.0.1',
+	host: serverIP,
 	port: 60001,
 	path: '/submitUserSteps',
 	method: 'POST'
@@ -33,7 +46,7 @@ console.log('HTTP module OK');
 module.exports = {
 	requestUserInfo: (ID) => {
 		//요청 데이터 수신 콜백함수
-		getcallback = function (response) {
+		getUserInfocallback = function (response) {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
 			if (response.statusCode != 200) {
 				console.log('Error Response!');
@@ -51,14 +64,42 @@ module.exports = {
 					height = serverdata.patient_Height;
 					weight = serverdata.patient_Weight;
 					gender = serverdata.patient_Gender;
-
 				});
 			}
 		}
 
-		let req = http.request(getUserInfoRequest, getcallback);						//GET요청 전송
+		let req = http.request(getUserInfoRequest, getUserInfocallback);						//GET요청 전송
 
 		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
+
+		req.end();
+
+	},
+
+	requestExercise: (exercise) => {
+		//요청 데이터 수신 콜백함수
+		getExerciseInfocallback = function (response) {
+			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
+			if (response.statusCode != 200) {
+				console.log('Error Response!');
+			} else {
+				let serverdata = '';
+				response.on('data', function (chunk) {							//응답 데이터를 JSON형태로 파싱함
+					serverdata = JSON.parse(chunk);
+				});
+				response.on('end', function () {									//응답이 끝났을 시 데이터 추출
+					console.log(serverdata);
+					console.log(serverdata.patient_name);
+					image = '/images/' + serverdata.exercise_image;
+					count = serverdata.exercise_count;
+					comment = serverdata.exercise_comment
+				});
+			}
+		}
+
+		let req = http.request(requestExercise, getExerciseInfocallback);						//GET요청 전송
+
+		req.setHeader("exercise", exercise);											//헤더에 요청 데이터 첨부
 
 		req.end();
 
@@ -97,7 +138,7 @@ module.exports = {
 	},
 
 	getExercise: (callback) => {
-		callback(exercise);
+		callback(image, count, comment);
 	}
 }
 

@@ -48,9 +48,6 @@ module.exports = {
             });
         });
     },
-    stopScanning: () => {
-        noble.stopScanning();
-    },
     getTryCount: (callback) => {
         callback(try_count);
     },

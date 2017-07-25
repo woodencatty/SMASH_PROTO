@@ -113,7 +113,7 @@ router.get('/identify', (req, res, next) => {
 
 //환영 화면
 router.get('/welcome', (req, res, next) => {
-  console.log("Directed to welcome Page");=
+  console.log("Directed to welcome Page");
 
 var bluetooth = require('./bluetooth.js');
 

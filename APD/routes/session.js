@@ -6,6 +6,8 @@ let weight = 0;
 let exercise;
 let gender = 0;
 
+let steps_data;
+
 module.exports = {
 
   setupSession: (valueName, valueAge, valueHeight, valueWeight, valueExercise, valueGender) => {

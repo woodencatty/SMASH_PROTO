@@ -1,4 +1,8 @@
-var noble = require('noble');
+const noble = require('noble');
+
+let try_count = 0;
+let Steps_data;
+let ID;
 
 noble.on('scanStart', () => {
     console.log('status : scanning');
@@ -8,34 +12,52 @@ noble.on('scanStop', () => {
     console.log('status : scan stop');
 });
 
-noble.on('stateChange', function (state) {
-    if (state === 'poweredOn') {
-        noble.startScanning(['fff0'], true);
-    } else {
-        noble.stopScanning();
-    }
-});
+module.exports = {
+    startScanning: () => {
 
-noble.on('discover', (peripheral) => {
-    console.log('find : ' + peripheral.advertisement.localName + "(" + peripheral.address + ")");
-  
-        peripheral.connect((error) => {
-            peripheral.updateRssi((error, rssi) => {
-                console.log('rssi : ' + rssi);
-            });
-peripheral.discoverSomeServicesAndCharacteristics(["fff0"], ["fff1"], (error, services, characteristics)=>{
-    console.log('discovered');
-console.log(services);
-console.log(characteristics);
-                    console.log('error : '+ error);
-                characteristics[0].subscribe();
-                characteristics[0].read();
+        noble.on('stateChange', function (state) {
+            if (state === 'poweredOn') {
+                noble.startScanning(['fff0'], true);
+            } else {
+                noble.stopScanning();
+            }
+        });
 
-                characteristics[0].on('data', (data, isNotification)=>{
-                    console.log('data : '+ data.toString('utf8'));
+        noble.on('discover', (peripheral) => {
+            console.log('find : ' + peripheral.advertisement.localName + "(" + peripheral.address + ")");
+                ID = peripheral.advertisement.localName;
+            peripheral.connect((error) => {
+                peripheral.updateRssi((error, rssi) => {
+                    console.log('rssi : ' + rssi);
                 });
+                peripheral.discoverSomeServicesAndCharacteristics(["fff0"], ["fff1"], (error, services, characteristics) => {
+                    console.log('discovered');
+                    console.log(services);
+                    console.log(characteristics);
+                    console.log('error : ' + error);
+                    characteristics[0].subscribe();
+                    characteristics[0].read();
+
+                    characteristics[0].on('data', (data, isNotification) => {
+                        console.log('data : ' + data.toString('utf8'));
+                        Steps_data = data.toString('utf8');
+                    });
                 });
 
-               
+
             });
         });
+    },
+    stopScanning: () => {
+        noble.stopScanning();
+    },
+    getTryCount: (callback) => {
+        callback(try_count);
+    },
+    getTryCount: (callback) => {
+        callback(Steps_data);
+    },
+    getSearchedID:(callback) => {
+        callback(ID);
+    }
+}

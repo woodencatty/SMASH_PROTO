@@ -118,7 +118,7 @@ router.get('/welcome', (req, res, next) => {
   console.log("Directed to welcome Page");
 
   //식별기기 탐색을 시작한다. 
-    bluetooth.startSearch();
+    bluetooth.startScanning();
    
     console.log("scanning now");
  
@@ -133,7 +133,7 @@ router.get('/welcome', (req, res, next) => {
         http.http_getInfo(ID);
       }
       setTimeout(() => {
-        bluetooth.stopSearch();
+        bluetooth.stopScanning();
         SessionCallback = (name, age, height, weight, exercise, gender) => {
           session.setupSession(name, age, height, weight, exercise, gender);
           res.render('welcome', { name: name });

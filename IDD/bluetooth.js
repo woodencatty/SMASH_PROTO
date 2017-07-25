@@ -1,9 +1,9 @@
-var bleno = require('bleno');
-var fs = require('fs');
+const bleno = require('bleno');
+const fs = require('fs');
 
 
-var name = 'IDD';
-var serviceUuids = ['fff0']
+let name = 'P0001';
+let serviceUuids = ['fff0']
 
 
 var PrimaryService = bleno.PrimaryService;
@@ -29,16 +29,13 @@ var primaryService = new PrimaryService({
       onSubscribe: function (maxValueSize, updateValueCallback) {
 
 
-        fs.readFile('./test.txt', 'utf8', function (err, data) {
+        fs.readFile('./steps.log', 'utf8', function (err, data) {
           // the data is passed to the callback in the second argument
           var sending = new Buffer(data);
           updateValueCallback(sending);
           console.log('send data');
         });
       },
-
-
-      
       onUnsubscribe: function () {
         console.log('onUnsubscribe')
       }
@@ -46,7 +43,8 @@ var primaryService = new PrimaryService({
   ]
 });
 
-
+module.exports = {
+     startAdvertising:()=>{
 bleno.on('stateChange', function (state) {
   console.log('on -> stateChange: ' + state);
 
@@ -71,4 +69,5 @@ bleno.on('disconnect', (clientAddress) => {
 
 bleno.on('rssiUpdate', (rssi) => {
   console.log('rssi update to : ' + rssi);
-});
+});}
+}

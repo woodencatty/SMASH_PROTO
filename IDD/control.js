@@ -27,7 +27,7 @@ this.valueInterval = setInterval(() => {
 
 this.loggingInterval = setInterval(() => {
   WalkCallback = function (WalkCount) {
-    fs.open('./log.txt', 'w', function (err, fd) {
+    fs.open('./steps.log', 'a+', function (err, fd) {
       if (err) throw err;
       var buf = new Buffer(WalkCount + 'Steps Walked.       ' + dateTime.toFormat('YYYY-MM-DD HH24:MI:SS'));
       fs.write(fd, buf, 0, buf.length, null, function (err, written, buffer) {
@@ -46,4 +46,4 @@ this.loggingInterval = setInterval(() => {
 }, 5000);
 
 
-bluetooth.AdvertisingDevice('P0001'); //Bluetooth 탐색 모듈 실행 
+bluetooth.AdvertisingDevice(); //Bluetooth 탐색 모듈 실행 

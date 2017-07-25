@@ -114,13 +114,13 @@ router.get('/identify', (req, res, next) => {
 });
 
 
-tempcallback = (data)=>{
-  console.log(data);
-}
-
 //환영 화면
 router.get('/welcome', (req, res, next) => {
   console.log("Directed to welcome Page");
+
+tempcallback = (data)=>{
+  console.log(data);
+}
 
   //식별기기 탐색을 시작한다. 
   bluetooth.startScanning(tempcallback);

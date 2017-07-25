@@ -1,65 +1,74 @@
-const bleno = require('bleno');
-const util = require('util');
+var bleno = require('bleno');
+var fs = require('fs');
 
+
+var name = 'IDD';
+var serviceUuids = ['fff0']
+
+
+var PrimaryService = bleno.PrimaryService;
 var Characteristic = bleno.Characteristic;
 var Descriptor = bleno.Descriptor;
-var PrimaryService = bleno.PrimaryService;
 
-var IDDCharacteristic = function () {
-  IDDCharacteristic.super_.call(this, {
-    uuid: 'bbb1',
-    properties: ['read', 'notify'],
-    descriptors: [
-      new Descriptor({
-        uuid: '2901',
-        value: 'IDD Device'
-      })]
-  });
-};
-util.inherits(IDDCharacteristic, Characteristic);
-
-IDDCharacteristic.prototype.onReadRequest = function (offset, callback) {
-  var result = 10.10;
-  var data = new Buffer(4);
-  data.writeFloatLE(result, 0);
-  callback(Characteristic.RESULT_SUCCESS, data);
-};
-
-var IDDService = new PrimaryService({
-  uuid: 'bbb0',
+var primaryService = new PrimaryService({
+  uuid: 'fff0', // or 'fff0' for 16-bit
   characteristics: [
-    new IDDCharacteristic()
+    new Characteristic({
+      uuid: 'fff1', // or 'fff1' for 16-bit
+      properties: ['notify'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'  
+      descriptor: [
+        new Descriptor({
+          uuid: '2901',
+          value: 'value' // static value, must be of type Buffer or string if set
+        })
+      ],
+      onReadRequest: function (offset, callback) {
+        var data = new Buffer('Readtest');
+        callback(data);
+      },
+      onSubscribe: function (maxValueSize, updateValueCallback) {
+
+
+        fs.readFile('./test.txt', 'utf8', function (err, data) {
+          // the data is passed to the callback in the second argument
+          var sending = new Buffer(data);
+          updateValueCallback(sending);
+          console.log('send data');
+        });
+      },
+
+
+      
+      onUnsubscribe: function () {
+        console.log('onUnsubscribe')
+      }
+    })
   ]
 });
 
 
-module.exports = {
+bleno.on('stateChange', function (state) {
+  console.log('on -> stateChange: ' + state);
 
-  AdvertisingDevice: function (ID) {
-    bleno.on('stateChange', function (state) {
-      console.log('on -> stateChange: ' + state);
+  bleno.setServices(primaryService);
 
-      if (state === 'poweredOn') {
-        bleno.startAdvertising(ID, [IDDService.uuid]);
-      } else {
-        bleno.stopAdvertising();
-      }
+  if (state === 'poweredOn') {
+    bleno.startAdvertising(name, serviceUuids, (error) => {
+      console.log(error);
     });
-  }
-}
-bleno.on('advertisingStart', function (error) {
-  console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
-
-  if (!error) {
-    bleno.setServices([IDDService]);
+  } else {
+    bleno.stopAdvertising();
   }
 });
 
 bleno.on('accept', (clientAddress) => {
-  console.log('conntected to ' + clientAddress);
+  console.log('connected:' + clientAddress);
 });
 
 bleno.on('disconnect', (clientAddress) => {
-  console.log('disconnect to ' + clientAddress);
+  console.log('disconnected:' + clientAddress);
+});
 
+bleno.on('rssiUpdate', (rssi) => {
+  console.log('rssi update to : ' + rssi);
 });

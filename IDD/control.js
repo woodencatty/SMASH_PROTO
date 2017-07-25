@@ -29,7 +29,7 @@ this.loggingInterval = setInterval(() => {
   WalkCallback = function (WalkCount) {
     fs.open('./steps.log', 'a+', function (err, fd) {
       if (err) throw err;
-      var buf = new Buffer(WalkCount + 'Steps Walked.       ' + dateTime.toFormat('YYYY-MM-DD HH24:MI:SS'));
+      var buf = new Buffer(WalkCount + 'Steps Walked.       ' + dateTime.toFormat('YYYY-MM-DD HH24:MI:SS') + '\n');
       fs.write(fd, buf, 0, buf.length, null, function (err, written, buffer) {
         if (err) throw err;
         //console.log(err, written, buffer);

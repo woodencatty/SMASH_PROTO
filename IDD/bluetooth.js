@@ -1,5 +1,5 @@
-const bleno = require('bleno');
-const fs = require('fs');
+var bleno = require('bleno');
+var fs = require('fs');
 
 
 let name = 'P0001';

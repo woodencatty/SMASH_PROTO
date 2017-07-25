@@ -15,14 +15,10 @@ noble.on('scanStop', () => {
 
 
 module.exports = {
-    startScanning: () => {noble.on('stateChange', function (state) {
-            if (state == 'poweredOn') {
+    startScanning: () => {
+        
                 noble.startScanning(['fff0'], true);
                   console.log("scanning now");
-            } else {
-                noble.stopScanning();
-            }
-        });
 
         noble.on('discover', (peripheral) => {
             console.log('find : ' + peripheral.advertisement.localName + "(" + peripheral.address + ")");

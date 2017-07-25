@@ -13,10 +13,9 @@ noble.on('scanStop', () => {
 });
 
 
-
 module.exports = {
-    startScanning: () => {
-        
+    startScanning: (callback) => {
+
                 noble.startScanning(['fff0'], true);
                   console.log("scanning now");
 
@@ -27,19 +26,18 @@ module.exports = {
 
                 peripheral.discoverSomeServicesAndCharacteristics(["fff0"], ["fff1"], (error, services, characteristics) => {
                     console.log('discovered');
-                    console.log(services);
-                    console.log(characteristics);
                     console.log('error : ' + error);
                     characteristics[0].subscribe();
                     characteristics[0].read();
 
                     characteristics[0].on('data', (data, isNotification) => {
                         console.log('data : ' + data.toString('utf8'));
-                        Steps_data = data.toString('utf8');
+                        callback(data.toString('utf8'));
                     });
                 });
-
-
+            setTimeout(function(){
+                peripheral.disconnect();
+            }, 1000);
             });
         });
    },

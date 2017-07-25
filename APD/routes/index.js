@@ -148,7 +148,7 @@ router.get('/welcome', (req, res, next) => {
     console.log("gettingID");
 
     //bluetooth.getStepCount(StepCallback);
-  }, 2000);
+  }, 5000);
 });
 
 router.get('/exercise', (req, res, next) => {

@@ -9,7 +9,7 @@ app.listen(60001, () => {
 
 app.get('/requestUserInfo', (req, res) => {
 
-    console.log('data get!');
+    console.log('User data get!');
 
     res.set('Content-Format', 'application/json');
     var json_array = JSON.stringify({
@@ -29,7 +29,7 @@ app.get('/requestUserInfo', (req, res) => {
 
 app.get('/requestExercise', (req, res) => {
 
-    console.log('data get!');
+    console.log('Exercise data get!');
     var imagefile = '';
     var comment = '';
     if (req.header('exercise') = 'exercise1') {

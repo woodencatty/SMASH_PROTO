@@ -1,4 +1,5 @@
 const noble = require('noble');
+const bluetooth = require('./bluetooth.js');
 
 let try_count = 0;
 let steps_data;
@@ -56,3 +57,5 @@ module.exports = {
         callback(ID, steps_data);
     }
 }
+
+  bluetooth.startScanning();

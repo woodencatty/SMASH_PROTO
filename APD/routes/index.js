@@ -75,21 +75,21 @@ startSense();
 router.get('/main', (req, res, next) => {
   console.log("Directed to Main Page");
   //거리가 50cm 이하일 경우 try페이지로 전환하고, 아닐 경우 대기화면을 표시
-  SensorDataCallback = (distance,temperature,humidity,audio,envelope,light)=>{
+  SensorDataCallback = (distance, temperature, humidity, audio, envelope, light) => {
 
-  if (distance < 50) {
-    acturator.led_detectActivity();
-    acturator.piezo_detectActivity();
-    
-    stopSense();
-    console.log('\t' + distance);
-    res.redirect('/try');
-  } else {
-    res.render('index', { title: '대기화면', temp: temperature, humi: humidity });
-  }
+    if (distance < 50) {
+      acturator.led_detectActivity();
+      acturator.piezo_detectActivity();
+
+      stopSense();
+      console.log('\t' + distance);
+      res.redirect('/try');
+    } else {
+      res.render('index', { title: '대기화면', temp: temperature, humi: humidity });
+    }
   }
 
-    sensor.getData(SensorDataCallback);
+  sensor.getData(SensorDataCallback);
 
 });
 
@@ -118,22 +118,23 @@ router.get('/welcome', (req, res, next) => {
   console.log("Directed to welcome Page");
 
   //식별기기 탐색을 시작한다. 
-    bluetooth.startScanning();
-   
-    console.log("scanning now");
- 
+  bluetooth.startScanning();
+
+  console.log("scanning now");
+
   //탐색이 종료될 즈음 생성된 값을 받아와 http요청을 전송하고, 이름을 받아 welcome화면을 표시한다.
   setTimeout(() => {
 
-    IDCallback = (ID) => {
+    IDDDataCallback = (ID, steps_data) => {
       if (ID === 'noname') {
         console.log('user not found')
         res.redirect('/identify');
       } else {
-        http.http_getInfo(ID);
+        http.requestUserInfo(ID);
       }
       setTimeout(() => {
         bluetooth.stopScanning();
+        session.setStepsData(steps_data);
         SessionCallback = (name, age, height, weight, exercise, gender) => {
           session.setupSession(name, age, height, weight, exercise, gender);
           res.render('welcome', { name: name });
@@ -145,16 +146,16 @@ router.get('/welcome', (req, res, next) => {
     /* StepCallback = function(ID, Steps){
        http.http_putInfo(ID, Steps);
      }*/
-    bluetooth.getSearchedID(IDCallback);
-        console.log("gettingID");
+    bluetooth.getIDDData(IDDDataCallback);
+    console.log("gettingID");
 
     //bluetooth.getStepCount(StepCallback);
   }, 2000);
 });
 
 router.get('/exercise', (req, res, next) => {
-  
-        bluetooth.stopSearch();
+
+  bluetooth.stopSearch();
   ExerciseCallback = (exercise) => {
     res.render(exercise[0]);
   }
@@ -169,9 +170,9 @@ router.get('/exercise_done', (req, res, next) => {
 router.get('/done', (req, res, next) => {
   startSense();
 
-    DoneCallback = (name)=>{
-  res.render('done', { name: name });
-    }
+  DoneCallback = (name) => {
+    res.render('done', { name: name });
+  }
   session.getName(DoneCallback);
 });
 

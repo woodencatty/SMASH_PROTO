@@ -11,15 +11,15 @@ let height = 0;
 let age = 0;
 let gender = 0;
 
-getRequest = {														//GET요청 JSON데이터 정의
+getUserInfoRequest = {														//GET요청 JSON데이터 정의
 	host: '127.0.0.1',
 	port: 60001,
-	path: '/requestName',
+	path: '/requestUserInfo',
 	method: 'GET'
 };
 
 
-postRequest = {														//GET요청 JSON데이터 정의
+submitUserSteps = {														//GET요청 JSON데이터 정의
 	host: '127.0.0.1',
 	port: 60001,
 	path: '/submitUserSteps',
@@ -31,8 +31,7 @@ console.log('HTTP module OK');
 
 
 module.exports = {
-	http_getInfo: (ID) => {
-
+	requestUserInfo: (ID) => {
 		//요청 데이터 수신 콜백함수
 		getcallback = function (response) {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
@@ -57,7 +56,7 @@ module.exports = {
 			}
 		}
 
-		let req = http.request(getRequest, getcallback);						//GET요청 전송
+		let req = http.request(getUserInfoRequest, getcallback);						//GET요청 전송
 
 		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
 
@@ -65,7 +64,7 @@ module.exports = {
 
 	},
 
-	http_putInfo: (ID, Steps) => {
+	submitUserSteps: (ID, Steps) => {
 		postcallback = function (response) {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
 			if (response.statusCode != 200) {
@@ -81,7 +80,7 @@ module.exports = {
 			}
 		}
 
-		let req = http.request(postRequest, postcallback);						//GET요청 전송
+		let req = http.request(submitUserSteps, postcallback);						//GET요청 전송
 
 		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
 		req.setHeader("ID", Steps);

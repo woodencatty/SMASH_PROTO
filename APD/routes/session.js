@@ -21,6 +21,10 @@ module.exports = {
     gender = valueGender;
   },
 
+  setStepsData:(data)=>{
+    steps_data = data;
+  },
+
   getName: (callback) => {
     callback(name)
   },

@@ -1,7 +1,7 @@
 const noble = require('noble');
 
 let try_count = 0;
-let Steps_data;
+let steps_data;
 let ID;
 
 noble.on('scanStart', () => {
@@ -54,10 +54,7 @@ module.exports = {
     getTryCount: (callback) => {
         callback(try_count);
     },
-    getTryCount: (callback) => {
-        callback(Steps_data);
-    },
-    getSearchedID:(callback) => {
-        callback(ID);
+    getIDDData:(callback) => {
+        callback(ID, steps_data);
     }
 }

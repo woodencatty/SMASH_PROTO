@@ -14,9 +14,9 @@ noble.on('scanStop', () => {
 
 module.exports = {
     startScanning: () => {
-
+        noble.state = 'poweredOn';
         noble.on('stateChange', function (state) {
-            if (state === 'poweredOn') {
+            if (state == 'poweredOn') {
                 noble.startScanning(['fff0'], true);
                   console.log("scanning now");
             } else {

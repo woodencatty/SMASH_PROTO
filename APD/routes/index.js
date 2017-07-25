@@ -129,6 +129,7 @@ router.get('/welcome', (req, res, next) => {
         console.log('user not found')
         res.redirect('/identify');
       } else {
+        console.log(ID);
         http.requestUserInfo(ID);
       }
       setTimeout(() => {

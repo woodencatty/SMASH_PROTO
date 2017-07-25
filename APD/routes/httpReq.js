@@ -25,7 +25,7 @@ getUserInfoRequest = {														//GET요청 JSON데이터 정의
 };
 
 
-getUserInfoRequest = {														//GET요청 JSON데이터 정의
+getExerciseInfoRequest = {														//GET요청 JSON데이터 정의
 	host: serverIP,
 	port: 60001,
 	path: '/requestExercise',
@@ -97,7 +97,7 @@ module.exports = {
 			}
 		}
 
-		let req = http.request(requestExercise, getExerciseInfocallback);						//GET요청 전송
+		let req = http.request(getExerciseInfoRequest, getExerciseInfocallback);						//GET요청 전송
 
 		req.setHeader("exercise", exercise);											//헤더에 요청 데이터 첨부
 

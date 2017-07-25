@@ -6,11 +6,11 @@ block content
   h2  (2초씩 10회 반복)
   p#ViewTimer
 
-  img(src= #{image}, width='426', height='1400' alt="muk-pa")
+  img(src= '#{image}' , width='426', height='1400' alt="muk-pa")
   img(src='/images/세부소스/버튼/홈-다운.png', width='152', height='113', onclick="location.href='/exercise'")
   
   script(type='text/javascript').
-    var SetTime = #{count};
+    var SetTime = '#{count}';
     function msg_time() {
     m = Math.floor(SetTime % 60);
     var msg =  m ;

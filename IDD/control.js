@@ -47,4 +47,4 @@ this.loggingInterval = setInterval(() => {
 }, 5000);
 
 
-bluetooth.AdvertisingDevice(); //Bluetooth 탐색 모듈 실행 
+bluetooth.startAdvertising(); //Bluetooth 탐색 모듈 실행 

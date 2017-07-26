@@ -21,6 +21,8 @@ module.exports = {
         this.AccelX = acceleration.x;
         this.AccelY = acceleration.y;
         this.AccelZ = acceleration.z;
+
+                    console.log(AccelZ, AccelY, AccelX);
       })
       .catch((err) => {
         console.log(`ADXL345 read error: ${err}`);

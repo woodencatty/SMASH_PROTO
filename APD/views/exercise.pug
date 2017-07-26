@@ -10,16 +10,15 @@ block content
   img(src='/images/세부소스/버튼/홈-다운.png', width='152', height='113', onclick="location.href='/exercise'")
   
   script(type='text/javascript').
-    
+    document.getElementById("title").innerHTML = "#{title}"
+    document.getElementById("comment").innerHTML = "#{comment}"
+    document.getElementById("discription").innerHTML = "#{discription}" 
+    document.getElementById("img").src = "#{image}"
     var SetTime = "#{count}";
     function msg_time() {
     m = Math.floor(SetTime % 60);
     var msg =  m ;
-    document.getElementById("title").innerHTML = "#{title}"
-    document.getElementById("comment").innerHTML = "#{comment}"
-    document.getElementById("discription").innerHTML = "#{discription}" 
     document.all.ViewTimer.innerHTML = msg;
-    document.getElementById("img").src = "#{image}"
     SetTime--;
     if (SetTime < 0) { clearInterval(tid); location.replace('/exercise_done'); }
     }

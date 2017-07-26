@@ -25,7 +25,6 @@ let light = 20;
 
 //각 센서값을 받을 변수 정의
 module.exports = {
-
     //온습도측정 함수화
     senseDHT22: () => {
         temp.read(22, DHT22, (err, temp, humi) => {
@@ -80,9 +79,7 @@ module.exports = {
     getDistanceData: (callback) => {
         callback(distance)
     }
-
 }
-
 gpio.wiringPiSetup();                                //wiring-pi 초기화
 gpio.pinMode(ultraTRIG, gpio.OUTPUT);                // 근접센서 트리거핀 초기화
 gpio.pinMode(ultraECHO, gpio.INPUT);                 // 근접센서 에코핀 초기화

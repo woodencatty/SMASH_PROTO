@@ -44,7 +44,7 @@ module.exports = {
                 setTimeout(() => {
                     gpio.softToneWrite(piezo, 700);
                     setTimeout(() => {
-                        gpio.softToneWrite(piezo, 599000);
+                        gpio.softToneWrite(piezo, 990);
                         setTimeout(() => {
                             gpio.softToneStop(piezo);
                         }, 50);
@@ -60,7 +60,7 @@ module.exports = {
         setTimeout(() => { gpio.digitalWrite(ledB, 0); }, 10);
     },
 
-//데이터 저장시 작동음
+//데이터 저장시 작동LED
     led_dataSaved: () => {
         gpio.digitalWrite(ledR, 1);
         setTimeout(() => { gpio.digitalWrite(ledR, 0); }, 1000);

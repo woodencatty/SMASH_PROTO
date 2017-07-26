@@ -14,26 +14,23 @@ noble.on('scanStop', () => {
 
 module.exports = {
     startScanning: () => {
-       try_count ++;
-                noble.startScanning(['fff0'], false);
-
+        try_count++;
+        noble.startScanning(['fff0'], false);
         noble.on('discover', (peripheral) => {
             console.log('find : ' + peripheral.advertisement.localName + "(" + peripheral.address + ")");
-             ID = peripheral.advertisement.localName;
-
-    peripheral.connect((error) => { 
-
-        peripheral.discoverSomeServicesAndCharacteristics(['fff0'], ['fff1'], (error, services, characteristics) => {
-
-            characteristics[0].subscribe();
-            characteristics[0].read();
-            characteristics[0].on('data', (data, isNotification) => {
-               
-                step_data = data.toString('utf8');
+            ID = peripheral.advertisement.localName;
+            peripheral.connect((error) => {
+                peripheral.discoverSomeServicesAndCharacteristics(['fff0'], ['fff1'], (error, services, characteristics) => {
+                    characteristics[0].subscribe();
+                    characteristics[0].read();
+                    characteristics[0].on('data', (data, isNotification) => {
+                        step_data = data.toString('utf8');
+                    });
+                });
             });
-        });
-
-});
+            setTimeout(() => {
+                peripheral.disconnect
+            }, 2000);
 
         });
     },
@@ -41,8 +38,10 @@ module.exports = {
     getTryCount: (callback) => {
         callback(try_count);
     },
+
     getIDDData: (callback) => {
         console.log(ID);
-        callback(ID);
+        console.log(step_data);
+        callback(ID, step_data);
     }
 }

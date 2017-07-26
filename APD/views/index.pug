@@ -8,7 +8,7 @@ block content
         document.write(d.getHours() + " : " + m);
       |     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       |     
-      a#TmpHmi  #{temp}C #{humi}
+      a#TmpHmi  #{temp}℃  / #{humi}
       |     
       script(type='text/javascript').
         var d = new Date();
@@ -19,7 +19,7 @@ block content
         m = d.getMinutes().toString();
         }
         document.write("<a id='Time'>" + d.getHours() + ":" + m + "</a>");
-        setTimeout("history.go(0);", 2000);
+        setTimeout("history.go(0);", 1000);
 
       |     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
       |     

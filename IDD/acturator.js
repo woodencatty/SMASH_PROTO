@@ -36,15 +36,15 @@ module.exports = {
 
     //전원 인가시 작동음
     piezo_powerOn: () => {
-        gpio.softToneWrite(piezo, 500);
+        gpio.softToneWrite(piezo, 262);
         setTimeout(() => {
-            gpio.softToneWrite(piezo, 700);
+            gpio.softToneWrite(piezo, 393);
             setTimeout(() => {
-                gpio.softToneWrite(piezo, 500);
+                gpio.softToneWrite(piezo, 525);
                 setTimeout(() => {
-                    gpio.softToneWrite(piezo, 900);
+                    gpio.softToneWrite(piezo, 700);
                     setTimeout(() => {
-                        gpio.softToneWrite(piezo, 500);
+                        gpio.softToneWrite(piezo, 599000);
                         setTimeout(() => {
                             gpio.softToneStop(piezo);
                         }, 50);

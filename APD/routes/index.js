@@ -15,9 +15,6 @@ const session = require('./session.js');
 
 var bluetooth = require('./bluetooth.js');
 
-var exec = require('child_process').exec,
-  child;
-
 
 //터치 센서 보정과 브라우저 자동 실행 코드. 테스트중엔 사용하지 않음.
 /*
@@ -44,7 +41,7 @@ browser = exec('chromium-browser --kiosk --no-sandbox',
 
 
 acturator.led_powerOn();
-//acturator.piezo_powerOn();
+acturator.piezo_powerOn();
 
 
 function startSense() {
@@ -53,17 +50,18 @@ function startSense() {
     sensor.senseAdcAudio();
     sensor.senseAdcEnv();
     sensor.senseAdcLight();
-    sensor.senseDist();
-    //acturator.led_sensorActive();
-
+    acturator.led_sensorActive();
     //console.log(sensor.distance, sensor.temperature, sensor.humidity, sensor.audio);
-  }, 1000);  //값 확인을 위해 간격 짧게 잡음.
+  }, 300000);  //값 확인을 위해 간격 짧게 잡음.
 }
+
+this.DistanceInterval = setInterval(() => {
+  sensor.senseDist();
+}, 1000);  //값 확인을 위해 간격 짧게 잡음.
 
 
 this.statusInterval = setInterval(() => {
-  //acturator.led_normal();
-  //console.log('Walk count : ' + move.WalkCount);
+  acturator.led_normal();
 }, 1200);
 
 
@@ -73,6 +71,7 @@ function stopSense() {
     this.SensorInterval = null;
   }
 }
+
 startSense();
 
 //대기화면. 센서값 갱신을 위해 2초에 한번씩 갱신한다.
@@ -84,17 +83,14 @@ router.get('/main', (req, res, next) => {
     if (distance < 50) {
       acturator.led_detectActivity();
       acturator.piezo_detectActivity();
-
       stopSense();
-      console.log('\t' + distance);
+      console.log('dtected : \t' + distance);
       res.redirect('/try');
     } else {
       res.render('index', { title: '대기화면', temp: temperature, humi: humidity });
     }
   }
-
   sensor.getData(SensorDataCallback);
-
 });
 
 //운동 권유 화면 
@@ -106,7 +102,6 @@ router.get('/try', (req, res, next) => {
 //환자 인식 화면
 router.get('/identify', (req, res, next) => {
   console.log("Directed to identify Page");
-
   if (bluetooth.try_count > 10) {
     res.render('failed');
   } else {
@@ -117,21 +112,20 @@ router.get('/identify', (req, res, next) => {
   }
 });
 
-
 //환영 화면
 router.get('/welcome', (req, res, next) => {
   console.log("Directed to welcome Page");
   bluetooth.startScanning();
   //탐색이 종료될 즈음 생성된 값을 받아와 http요청을 전송하고, 이름을 받아 welcome화면을 표시한다.
-  setTimeout(() => {
 
-    IDDDataCallback = (ID) => {
+  setTimeout(() => {
+    IDDDataCallback = (ID, try_count) => {
       if (ID == 'noname') {
         console.log('user not found')
         res.redirect('/identify');
       } else {
-        console.log(ID);
-       // console.log(step_data);
+        console.log('identify patient : ' + ID);
+        console.log('data got : ' + step_data);
         http.requestUserInfo(ID);
       }
       setTimeout(() => {
@@ -142,42 +136,11 @@ router.get('/welcome', (req, res, next) => {
         http.getInfo(SessionCallback);
       }, 200);
     }
-    /* StepCallback = function(ID, Steps){
-       http.http_putInfo(ID, Steps);
-     }*/
     bluetooth.getIDDData(IDDDataCallback);
-    console.log("gettingID");
-
-
-    //bluetooth.getStepCount(StepCallback);
+    console.log("gettingIDD Data");
   }, 5000);
 
 });
-
-
-
-//환영 화면
-router.get('/uploadSteps', (req, res, next) => {
-
-  this.thisInterval = setInterval(() => {
-    console.log('do something');
-    child = exec("sudo NOBLE_MULTI_ROLE=1 node dataLoader.js", function (error, stdout, stderr) {
-      if (stdout != "") {
-        console.log('done!');
-        res.redirect('/done');
-      }
-      console.log('stdout: ' + stdout);
-      console.log('stderr: ' + stderr);
-
-      session.setStepsData(stdout);
-      if (error !== null) {
-        console.log('exec error: ' + error);
-      }
-    });
-  }, 5000);
-
-});
-
 
 router.get('/exercise', (req, res, next) => {
 
@@ -194,7 +157,6 @@ router.get('/exercise_done', (req, res, next) => {
 
 router.get('/done', (req, res, next) => {
   startSense();
-
   DoneCallback = (name) => {
     res.render('done', { name: name });
   }

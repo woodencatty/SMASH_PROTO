@@ -16,29 +16,29 @@ const adcEnv = 1;                                      //ADC Channel 1
 const adcLight = 2;                                    //ADC Channel 2
 
 
-   let distance = 70.0;
-   let temperature = 25.0;
-   let humidity = 50.0;
-   let audio = 20;
-   let envelope = 20;
-   let light = 20;
+let distance = 99.2;
+let temperature = 23.5;
+let humidity = 56.2;
+let audio = 20;
+let envelope = 20;
+let light = 20;
 
 //각 센서값을 받을 변수 정의
 module.exports = {
 
     //온습도측정 함수화
-     senseDHT22: () => {
+    senseDHT22: () => {
         temp.read(22, DHT22, (err, temp, humi) => {
             if (!err) {
-                 temperature = temp.toFixed(1);
-                 humidity = humi.toFixed(1);
+                temperature = temp.toFixed(1);
+                humidity = humi.toFixed(1);
 
             } else { console.log("Error detected in DHT22 sensor"); }
         });
     },
 
     //거리측정 함수화
-     senseDist: () => {
+    senseDist: () => {
         let pulse = 0;
         gpio.digitalWrite(ultraTRIG, 0);
         sleep.msleep(2);
@@ -49,35 +49,35 @@ module.exports = {
         let startTime = microt.now();
         while (gpio.digitalRead(ultraECHO) == 1);
         let travelTime = microt.now();
-         distance = (travelTime - startTime) / 58;
+        distance = (travelTime - startTime) / 58;
     },
 
     //소음측정 함수화
-     senseAdcAudio: () => {
+    senseAdcAudio: () => {
         adc.readRawValue(adcAudio, (value) => {
-             audio = value;
+            audio = value;
         });
     },
 
     //(대략적)소음측정 함수화
-     senseAdcEnv: () => {
+    senseAdcEnv: () => {
         adc.readRawValue(adcEnv, (value) => {
-             envelope = value;
+            envelope = value;
         });
     },
 
     //조도측정 함수화
     senseAdcLight: () => {
         adc.readRawValue(adcLight, (value) => {
-             light = value;
+            light = value;
         });
     },
 
-    getData: (callback)=>{
-        callback(distance,temperature,humidity,audio,envelope,light);
+    getData: (callback) => {
+        callback(distance, temperature, humidity, audio, envelope, light);
     },
 
-    getDistanceData: (callback)=>{
+    getDistanceData: (callback) => {
         callback(distance)
     }
 

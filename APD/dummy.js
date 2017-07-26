@@ -27,7 +27,7 @@ app.get('/requestUserInfo', (req, res) => {
 
 });
 
-app.get('/requestExercise', (req, res) => {
+app.get('/requestExercise', (req, res) => {  
 
     console.log('Exercise data get!' + req.headers('exercise'));
     var imagefile = '';

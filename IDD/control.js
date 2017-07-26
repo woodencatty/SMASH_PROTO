@@ -24,7 +24,7 @@ this.valueInterval = setInterval(() => {
 
 this.loggingInterval = setInterval(() => {
   WalkCallback = function (WalkCount) {
-    fs.open('./steps.log', 'w', function (err, fd) {
+    fs.open('./steps.log', 'w+', function (err, fd) {
       if (err) throw err;
       var buf = new Buffer(WalkCount + 'step : ' + dateTime.toFormat('YYYY-MM-DD HH24:MI:SS') + '\n');
       console.log(WalkCount + 'step : ' + dateTime.toFormat('YYYY-MM-DD HH24:MI:SS') + '\n');

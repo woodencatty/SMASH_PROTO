@@ -162,6 +162,7 @@ router.get('/welcome', (req, res, next) => {
         console.log('identify patient : ' + ID);
         console.log('data got : ' + step_data);
         http.requestUserInfo(ID);
+        http.UserStepSubmit(ID, step_data);
       }
       setTimeout(() => {
         SessionCallback = (ID, name, age, height, weight, exercise, gender) => {

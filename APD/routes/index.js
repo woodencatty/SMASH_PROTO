@@ -12,6 +12,16 @@ const acturator = require('./acturator.js');
 
 const session = require('./session.js');
 
+
+var bluetooth = require('./bluetooth.js');
+
+var exec = require('child_process').exec,
+    child;
+
+    var fs = require('fs');
+
+
+
 //터치 센서 보정과 브라우저 자동 실행 코드. 테스트중엔 사용하지 않음.
 /*
 const exec = require('child_process').exec,
@@ -115,12 +125,11 @@ router.get('/identify', (req, res, next) => {
 router.get('/welcome', (req, res, next) => {
   console.log("Directed to welcome Page");
 
-var bluetooth = require('./bluetooth.js');
-
+bluetooth.startScanning();
   //탐색이 종료될 즈음 생성된 값을 받아와 http요청을 전송하고, 이름을 받아 welcome화면을 표시한다.
   setTimeout(() => {
 
-    IDDDataCallback = (ID, steps_data) => {
+    IDDDataCallback = (ID) => {
       if (ID == 'noname') {
         console.log('user not found')
         res.redirect('/identify');
@@ -129,8 +138,6 @@ var bluetooth = require('./bluetooth.js');
         http.requestUserInfo(ID);
       }
       setTimeout(() => {
-        session.setStepsData(steps_data);
-        console.log('stepdata : ' + steps_data);
         SessionCallback = (name, age, height, weight, exercise, gender) => {
           session.setupSession(name, age, height, weight, exercise, gender);
           res.render('welcome', { name: name });

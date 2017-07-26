@@ -131,7 +131,7 @@ router.get('/welcome', (req, res, next) => {
         res.redirect('/identify');
       } else {
         console.log(ID);
-        console.log(step_data);
+       // console.log(step_data);
         http.requestUserInfo(ID);
       }
       setTimeout(() => {

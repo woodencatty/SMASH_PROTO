@@ -177,7 +177,7 @@ router.get('/uploadSteps', (req, res, next) => {
         console.log('exec error: ' + error);
       }
     });
-  }, 3000);
+  }, 5000);
 
 });
 

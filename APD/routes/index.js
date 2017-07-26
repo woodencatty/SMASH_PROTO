@@ -60,7 +60,7 @@ this.DistanceInterval = setInterval(() => {
 }, 1000);  //값 확인을 위해 간격 짧게 잡음.
 
       setTimeout(() => {
-  router.move('/try', (req, res, next)=>{
+  router.route('/welcome', (req, res, next)=>{
     console.log('what?!');
   });
       }, 5000);

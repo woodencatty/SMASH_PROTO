@@ -32,7 +32,9 @@ module.exports = {
                 step_data = data.toString('utf8');
             });
         });
-
+  setTimeout(() => {
+peripheral.disconnect();
+  }, 1000);
 
 });
 

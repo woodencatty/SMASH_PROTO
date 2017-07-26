@@ -10,7 +10,7 @@ app.listen(60001, () => {
 
 app.get('/requestIsOpen', (req, res) => {
 
-    console.log('User data get!');
+    console.log('Opened data Requested!');
 
     res.set('Content-Format', 'application/json');
     var json_array = JSON.stringify({
@@ -25,7 +25,7 @@ app.get('/requestIsOpen', (req, res) => {
 
 app.get('/requestUserInfo', (req, res) => {
 
-    console.log('User data get!');
+    console.log('User data Requested!');
 
     res.set('Content-Format', 'application/json');
     var json_array = JSON.stringify({
@@ -45,7 +45,7 @@ app.get('/requestUserInfo', (req, res) => {
 
 app.get('/requestExercise', (req, res) => {
 
-    console.log('Exercise data get!' + req.headers.exercise);
+    console.log('Exercise data Requested!' + req.headers.exercise);
     var imagefile = '';
     var comment = '';
     if (req.headers.exercise == 'exercise1') {
@@ -81,12 +81,10 @@ app.get('/requestExercise', (req, res) => {
 });
 
 app.post('/submitUserSteps', (req, res) => {
-    console.log(req.headers.ID);
-    console.log(req.headers.Steps);
+    console.log('Data submitted : '+req.headers.ID + '  /  '+ req.headers.Steps);
 });
 
 
 app.post('/submitUserExercise', (req, res) => {
-    console.log(req.headers.ID);
-    console.log(req.headers.exercise);
+    console.log('Data submitted : '+req.headers.ID+ '  /  '+req.headers.exercise);
 });

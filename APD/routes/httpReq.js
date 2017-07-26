@@ -90,7 +90,7 @@ module.exports = {
 				response.on('end', function () {									//응답이 끝났을 시 데이터 추출
 					console.log(serverdata);
 					console.log(serverdata.patient_name);
-					image = '/images/' + serverdata.exercise_image;
+					image = serverdata.exercise_image;
 					count = serverdata.exercise_count;
 					comment = serverdata.exercise_comment
 				});

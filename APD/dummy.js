@@ -48,9 +48,9 @@ app.get('/requestExercise', (req, res) => {
         content_type: "Application/json",
         result_code: 200,
         result_req: "",
-        image: imagefile,
-        count: 10,
-        comment: comment
+        exercise_image: imagefile,
+        exercise_count: 10,
+        exercise_comment: comment
     });
     res.end(json_array);
 

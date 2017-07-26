@@ -29,16 +29,16 @@ app.get('/requestUserInfo', (req, res) => {
 
 app.get('/requestExercise', (req, res) => {
 
-    console.log('Exercise data get!');
+    console.log('Exercise data get!' + req.headers('exercise'));
     var imagefile = '';
     var comment = '';
-    if (req.headers('exercise') = 'exercise1') {
+    if (req.headers('exercise') == 'exercise1') {
         imagefile = '/images/트레이너/1-1준비운동(어깨)-묵.gif';
         comment = '준비운동(묵빠운동) <br /> 동작을 잘 보고 따라해주세요.<br /> (2초씩 10회 반복)';
-    } else if (req.headers('exercise') = 'exercise2') {
+    } else if (req.headers('exercise') == 'exercise2') {
         imagefile = '/images/트레이너/2-2본운동(팔비대칭올리기).gif';
         comment = '본 운동(팔 비대칭 올리기) <br /> 동작을 잘 보고 따라해주세요.<br /> (2초씩 10회 반복)';
-    } else if (req.headers('exercise') = 'exercise3') {
+    } else if (req.headers('exercise') == 'exercise3') {
         imagefile = '/images/트레이너/3-1정리운동(등근육펴기).gif';
         comment = '정리운동(등근육펴기) <br /> 동작을 잘 보고 따라해주세요.<br /> (2초씩 10회 반복)';
     }

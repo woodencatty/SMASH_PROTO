@@ -81,18 +81,20 @@ router.get('/main_not_opened', (req, res, next) => {
   setTimeout(() => {
     getOpenStatusCallback = (is_opened) => {
           if (is_opened == true) {
-      res.render('/main');
-    }
-    }
-    http.getIsOpened(getOpenStatusCallback)
-  }, 50);
-
-  console.log("Directed to Main Page");
+      res.redirect('/main');
+    }else{
+      console.log("Directed to Main Page");
   //거리가 50cm 이하일 경우 try페이지로 전환하고, 아닐 경우 대기화면을 표시
   SensorDataCallback = (distance, temperature, humidity, audio, envelope, light) => {
     res.render('index_not_opened', { title: '대기화면', temp: temperature, humi: humidity });
   }
   sensor.getData(SensorDataCallback);
+    }
+    }
+    http.getIsOpened(getOpenStatusCallback)
+  }, 50);
+
+  
 });
 
 
@@ -101,13 +103,9 @@ router.get('/main', (req, res, next) => {
   setTimeout(() => {
     getOpenStatusCallback = (is_opened) => {
           if (is_opened == false) {
-      res.render('/main_not_opened');
-    }
-    }
-    http.getIsOpened(getOpenStatusCallback)
-  }, 50);
-
-  console.log("Directed to Main Page");
+      res.redirect('/main_not_opened');
+    }else {
+console.log("Directed to Main Page");
   //거리가 50cm 이하일 경우 try페이지로 전환하고, 아닐 경우 대기화면을 표시
   SensorDataCallback = (distance, temperature, humidity, audio, envelope, light) => {
 
@@ -122,6 +120,11 @@ router.get('/main', (req, res, next) => {
     }
   }
   sensor.getData(SensorDataCallback);
+    }
+    }
+    http.getIsOpened(getOpenStatusCallback)
+  }, 50);
+
 });
 
 

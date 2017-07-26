@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  h2  #{comment} 
+  h2#comment
   
   p#ViewTimer
   img(src="",id='img' width='736', height='900', alt="muk-pa")
@@ -13,6 +13,7 @@ block content
     function msg_time() {
     m = Math.floor(SetTime % 60);
     var msg =  m ;
+    document.getElementById("comment").innerHTML = "#{comment}" 
     document.all.ViewTimer.innerHTML = msg;
     document.getElementById("img").src = "#{image}"
     SetTime--;

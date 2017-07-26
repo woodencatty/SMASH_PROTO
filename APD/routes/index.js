@@ -73,7 +73,6 @@ function stopSense() {
 }
 
 startSense();
-
 //대기화면. 센서값 갱신을 위해 2초에 한번씩 갱신한다.
 router.get('/main', (req, res, next) => {
   console.log("Directed to Main Page");
@@ -156,7 +155,6 @@ router.get('/exercise_done', (req, res, next) => {
 });
 
 router.get('/done', (req, res, next) => {
-  startSense();
   DoneCallback = (name) => {
     res.render('done', { name: name });
   }
@@ -164,6 +162,19 @@ router.get('/done', (req, res, next) => {
 });
 
 
+router.get('/return2main', (req, res, next) => {
+  startSense();
+   res.redirect('/main');
+
+});
+
+
+
+
+
+
+
+//테스트페이지
 router.get('/exercise_try', (req, res, next) => {
 
   ExerciseCallback = (exercise) => {

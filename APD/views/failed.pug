@@ -13,13 +13,13 @@ block content
         |  
         br
         |  다시 시도해주세요!
-        |             
+        |  (잠시 후 메인 페이지로 돌아갑니다.) 
         br
         br
         br
 
   script(type='text/javascript').
-    setTimeout("location.replace('/main');", 5000);
+    setTimeout("location.replace('/return2main');", 5000);
     document.oncontextmenu=function(){return false;} // 우클릭 방지
     document.onselectstart=function(){return false;} // 드래그 방지 
     document.ondragstart=function(){return false;} // 선택 방지

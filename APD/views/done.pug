@@ -18,6 +18,6 @@ block content
     function msg_time() {
     m = Math.floor(SetTime % 60);
     SetTime--;
-    if (SetTime < 0) { clearInterval(tid); location.replace('/main'); }
+    if (SetTime < 0) { clearInterval(tid); location.replace('/return2main'); }
     }
     window.onload = function TimerStart(){ tid=setInterval('msg_time()',2000) };

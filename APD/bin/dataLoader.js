@@ -1,7 +1,7 @@
 var noble = require('noble');
 var fs = require('fs');
 
-
+console.log('data Loading..');
 noble.on('scanStart', () => {
 });
 

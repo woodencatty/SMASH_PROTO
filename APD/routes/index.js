@@ -59,13 +59,12 @@ this.DistanceInterval = setInterval(() => {
   sensor.senseDist();
 }, 1000);  //값 확인을 위해 간격 짧게 잡음.
 
-this.TestIntervalInterval = setInterval(() => {
-      console.log('Testing');
-
+      setTimeout(() => {
   router.move('/try', (req, res, next)=>{
     console.log('what?!');
-  })
-  }, 1000);  //값 확인을 위해 간격 짧게 잡음.
+  });
+      }, 5000);
+
 this.statusInterval = setInterval(() => {
   acturator.led_normal();
 }, 1200);

@@ -30,6 +30,7 @@ this.loggingInterval = setInterval(() => {
     fs.open('./steps.log', 'w', function (err, fd) {
       if (err) throw err;
       var buf = new Buffer(WalkCount + 'step : ' + dateTime.toFormat('YYYY-MM-DD HH24:MI:SS') + '\n');
+      console.log(WalkCount + 'step : ' + dateTime.toFormat('YYYY-MM-DD HH24:MI:SS') + '\n');
       fs.write(fd, buf, 0, buf.length, null, function (err, written, buffer) {
         if (err) throw err;
         //console.log(err, written, buffer);

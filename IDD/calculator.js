@@ -35,6 +35,7 @@ module.exports = {
         }, 10);
     },
     getWalkCount: (callback) => {
+        console.log(WalkCount);
         callback(WalkCount);
     },
     resetWalkCount: ()=>{

@@ -17,7 +17,7 @@ app.get('/requestIsOpen', (req, res) => {
         content_type: "Application/json",
         result_code: 200,
         result_req: "",
-        is_opened: false
+        is_opened: true
     });
     res.end(json_array);
 });

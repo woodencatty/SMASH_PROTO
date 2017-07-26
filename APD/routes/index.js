@@ -158,16 +158,12 @@ router.get('/welcome', (req, res, next) => {
 //환영 화면
 router.get('/uploadSteps', (req, res, next) => {
 
-  this.SensorInterval = setInterval(() => {
+  this.thisInterval = setInterval(() => {
     console.log('do something');
     child = exec("sudo NOBLE_MULTI_ROLE=1 node dataLoader.js", function (error, stdout, stderr) {
       if (stdout != "") {
-        if (this.SensorInterval) {
-          clearInterval(this.SensorInterval);
-          this.SensorInterval = null;
-        }
         console.log('done!');
-        res.render('done', { name: '정보전송완료' });
+        res.redirect('/done');
       }
       console.log('stdout: ' + stdout);
       console.log('stderr: ' + stderr);

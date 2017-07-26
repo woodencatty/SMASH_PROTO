@@ -30,7 +30,7 @@ noble.on('discover', (peripheral) => {
         setTimeout(function () {
             peripheral.disconnect();
             process.exit(0);
-        }, 1000);
+        }, 2000);
     });
 
 });

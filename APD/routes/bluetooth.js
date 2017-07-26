@@ -2,7 +2,7 @@ var noble = require('noble');
 
 let try_count = 0;
 let ID;
-
+let step_data;
 
 noble.on('scanStart', () => {
     console.log('status : scanning');
@@ -29,7 +29,7 @@ module.exports = {
             characteristics[0].read();
             characteristics[0].on('data', (data, isNotification) => {
                 ID = peripheral.advertisement.localName;
-                console.log(data.toString('utf8'));
+                step_data = data;
             });
         });
 
@@ -44,7 +44,6 @@ module.exports = {
     },
     getIDDData: (callback) => {
         console.log(ID);
-        callback(ID);
-
+        callback(ID, step_data);
     }
 }

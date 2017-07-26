@@ -125,12 +125,13 @@ router.get('/welcome', (req, res, next) => {
   //탐색이 종료될 즈음 생성된 값을 받아와 http요청을 전송하고, 이름을 받아 welcome화면을 표시한다.
   setTimeout(() => {
 
-    IDDDataCallback = (ID) => {
+    IDDDataCallback = (ID, step_data) => {
       if (ID == 'noname') {
         console.log('user not found')
         res.redirect('/identify');
       } else {
         console.log(ID);
+        console.log(step_data);
         http.requestUserInfo(ID);
       }
       setTimeout(() => {

@@ -15,7 +15,7 @@ noble.on('scanStop', () => {
 module.exports = {
     startScanning: () => {
        
-                noble.startScanning(['fff0'], true);
+                noble.startScanning(['fff0'], false);
 
         noble.on('discover', (peripheral) => {
             console.log('find : ' + peripheral.advertisement.localName + "(" + peripheral.address + ")");

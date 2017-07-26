@@ -12,17 +12,13 @@ noble.on('scanStop', () => {
     console.log('status : scan stop');
 });
 
+noble.on('')
 
 module.exports = {
 
     startScanning: () => {
-        noble.on('stateChange', function (state) {
-            if (state === 'poweredOn') {
+       
                 noble.startScanning(['fff0'], true);
-            } else {
-                noble.stopScanning();
-            }
-        });
 
         noble.on('discover', (peripheral) => {
             console.log('find : ' + peripheral.advertisement.localName + "(" + peripheral.address + ")");

@@ -12,8 +12,6 @@ const acturator = require('./acturator.js');
 
 const session = require('./session.js');
 
-var noble = require('noble');
-noble.state = 'poweredOn'
 
 const bluetooth = require('./bluetooth.js');
 

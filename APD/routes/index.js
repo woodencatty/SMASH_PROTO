@@ -151,7 +151,7 @@ router.get('/exercise', (req, res, next) => {
 
 router.get('/exercise_done', (req, res, next) => {
   session.clearExercise();
-  res.redirect('/exercise');
+  res.redirect('/exercise_try');
 });
 
 router.get('/done', (req, res, next) => {
@@ -173,7 +173,7 @@ router.get('/return2main', (req, res, next) => {
 router.get('/exercise_try', (req, res, next) => {
 
   ExerciseCallback = (exercise) => {
-    http.requestExercise(exercise);
+    http.requestExercise(exercise[0]);
     setTimeout(() => {
       ExerciseDataCallback = (image, count, comment) => {
         res.render('exercise', { image: image, count: count, comment: comment });

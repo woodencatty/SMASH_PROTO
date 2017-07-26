@@ -34,7 +34,7 @@ console.log('connected');
         setTimeout(function () {
             peripheral.disconnect();
             process.exit(0);
-        }, 3000);
+        }, 1000);
     });
 
 });

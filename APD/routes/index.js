@@ -147,23 +147,39 @@ router.get('/welcome', (req, res, next) => {
     bluetooth.getIDDData(IDDDataCallback);
     console.log("gettingID");
 
-    child = exec("sudo NOBLE_MULTI_ROLE=1 node dataLoader.js", function (error, stdout, stderr) {
-      console.log('stdout: ' + stdout);
-      console.log('stderr: ' + stderr);
-
-      session.setStepsData(stdout);
-
-      if (error !== null) {
-        console.log('exec error: ' + error);
-      }
-    });
 
     //bluetooth.getStepCount(StepCallback);
   }, 5000);
 
+});
 
+
+
+//환영 화면
+router.get('/uploadSteps', (req, res, next) => {
+
+  this.SensorInterval = setInterval(() => {
+    console.log('do something');
+    child = exec("sudo NOBLE_MULTI_ROLE=1 node dataLoader.js", function (error, stdout, stderr) {
+      if (stdout != "") {
+        if (this.SensorInterval) {
+          clearInterval(this.SensorInterval);
+          this.SensorInterval = null;
+        }
+        res.render('done', { name: '정보전송완료' });
+      }
+      console.log('stdout: ' + stdout);
+      console.log('stderr: ' + stderr);
+
+      session.setStepsData(stdout);
+      if (error !== null) {
+        console.log('exec error: ' + error);
+      }
+    });
+  }, 3000);
 
 });
+
 
 router.get('/exercise', (req, res, next) => {
 

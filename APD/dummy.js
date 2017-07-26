@@ -43,9 +43,9 @@ app.get('/requestUserInfo', (req, res) => {
 
 });
 
-app.get('/requestExercise', (req, res) => {  
+app.get('/requestExercise', (req, res) => {
 
-    console.log('Exercise data get!' +req.headers.exercise);
+    console.log('Exercise data get!' + req.headers.exercise);
     var imagefile = '';
     var comment = '';
     if (req.headers.exercise == 'exercise1') {
@@ -81,6 +81,12 @@ app.get('/requestExercise', (req, res) => {
 });
 
 app.post('/submitUserSteps', (req, res) => {
-    console.log(req);
+    console.log(req.headers.ID);
+    console.log(req.headers.Steps);
+});
 
+
+app.post('/submitUserExercise', (req, res) => {
+    console.log(req.headers.ID);
+    console.log(req.headers.exercise);
 });

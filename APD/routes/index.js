@@ -80,21 +80,21 @@ router.get('/main_not_opened', (req, res, next) => {
   http.requestIsOpened('APD0001');
   setTimeout(() => {
     getOpenStatusCallback = (is_opened) => {
-          if (is_opened == true) {
-      res.redirect('/main');
-    }else{
-      console.log("Directed to Main Page");
-  //거리가 50cm 이하일 경우 try페이지로 전환하고, 아닐 경우 대기화면을 표시
-  SensorDataCallback = (distance, temperature, humidity, audio, envelope, light) => {
-    res.render('index_not_opened', { title: '대기화면', temp: temperature, humi: humidity });
-  }
-  sensor.getData(SensorDataCallback);
-    }
+      if (is_opened == true) {
+        res.redirect('/main');
+      } else {
+        console.log("Directed to Main Page");
+        //거리가 50cm 이하일 경우 try페이지로 전환하고, 아닐 경우 대기화면을 표시
+        SensorDataCallback = (distance, temperature, humidity, audio, envelope, light) => {
+          res.render('index_not_opened', { title: '대기화면', temp: temperature, humi: humidity });
+        }
+        sensor.getData(SensorDataCallback);
+      }
     }
     http.getIsOpened(getOpenStatusCallback)
   }, 50);
 
-  
+
 });
 
 
@@ -102,25 +102,25 @@ router.get('/main', (req, res, next) => {
   http.requestIsOpened('APD0001');
   setTimeout(() => {
     getOpenStatusCallback = (is_opened) => {
-          if (is_opened == false) {
-      res.redirect('/main_not_opened');
-    }else {
-console.log("Directed to Main Page");
-  //거리가 50cm 이하일 경우 try페이지로 전환하고, 아닐 경우 대기화면을 표시
-  SensorDataCallback = (distance, temperature, humidity, audio, envelope, light) => {
+      if (is_opened == false) {
+        res.redirect('/main_not_opened');
+      } else {
+        console.log("Directed to Main Page");
+        //거리가 50cm 이하일 경우 try페이지로 전환하고, 아닐 경우 대기화면을 표시
+        SensorDataCallback = (distance, temperature, humidity, audio, envelope, light) => {
 
-    if (distance < 50) {
-      acturator.led_detectActivity();
-      acturator.piezo_detectActivity();
-      stopSense();
-      console.log('dtected : \t' + distance);
-      res.redirect('/try');
-    } else {
-      res.render('index', { title: '대기화면', temp: temperature, humi: humidity });
-    }
-  }
-  sensor.getData(SensorDataCallback);
-    }
+          if (distance < 50) {
+            acturator.led_detectActivity();
+            acturator.piezo_detectActivity();
+            stopSense();
+            console.log('dtected : \t' + distance);
+            res.redirect('/try');
+          } else {
+            res.render('index', { title: '대기화면', temp: temperature, humi: humidity });
+          }
+        }
+        sensor.getData(SensorDataCallback);
+      }
     }
     http.getIsOpened(getOpenStatusCallback)
   }, 50);
@@ -204,6 +204,23 @@ router.get('/exercise_done', (req, res, next) => {
   session.clearExercise();
   res.redirect('/exercise');
 });
+
+router.get('/pause', (req, res, next) => {
+  res.render('pause');
+});
+
+
+router.get('/pause_end', (req, res, next) => {
+  PauseExerciseCallback = (exercise) => {
+    NameCallback = (ID, step_data) => {
+      http.UserExerciseSubmit(ID, exercise);
+      res.render('pause_end');
+    }
+    bluetooth.getIDDData(NameCallback);
+  }
+  session.getExercise(PauseExerciseCallback);
+});
+
 
 router.get('/return2main', (req, res, next) => {
   startSense();

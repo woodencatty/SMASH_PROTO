@@ -51,6 +51,12 @@ submitUserSteps = {														//GET요청 JSON데이터 정의
 	method: 'POST'
 };
 
+submitUserExercise = {														//GET요청 JSON데이터 정의
+	host: serverIP,
+	port: 60001,
+	path: '/submitUserExercise',
+	method: 'POST'
+};
 
 console.log('HTTP module OK');
 
@@ -146,7 +152,7 @@ requestIsOpened: (ID) => {
 
 	},
 
-	submitUserSteps: (ID, Steps) => {
+	UserStepSubmit: (ID, Steps) => {
 		postcallback = function (response) {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
 			if (response.statusCode != 200) {
@@ -165,7 +171,32 @@ requestIsOpened: (ID) => {
 		let req = http.request(submitUserSteps, postcallback);						//GET요청 전송
 
 		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
-		req.setHeader("ID", Steps);
+		req.setHeader("Steps", Steps);
+
+		req.end();
+	},
+
+
+	UserExerciseSubmit: (ID, exercise) => {
+		postcallback = function (response) {
+			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
+			if (response.statusCode != 200) {
+				console.log('Error Response!');
+			} else {
+				let serverdata = '';
+				response.on('data', function (chunk) {							//응답 데이터를 JSON형태로 파싱함
+					serverdata = JSON.parse(chunk);
+				});
+				response.on('end', function () {									//응답이 끝났을 시 데이터 추출
+					console.log(serverdata);
+				});
+			}
+		}
+
+		let req = http.request(submitUserExercise, postcallback);						//GET요청 전송
+
+		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
+		req.setHeader("exercise", exercise);
 
 		req.end();
 	},

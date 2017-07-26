@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  .message
+      p#TryMessage
+        |  
+        br
+        |  
+        br
+        | 일시정지 하였습니다! 
+        br
+        | 무엇을 하시겠어요?
+        br
+        |  
+        br
+        |  
+        |             
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        |  계속하기
+        |             &nbsp; &nbsp; &nbsp;중단하기
+        br         
+        img(src='/images/세부소스/버튼/뒤로-다운.png', width='152', height='113', onclick="location.href='/exercise'")
+        |  &nbsp; &nbsp; &nbsp;
+        |         &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        |         
+        img(src='/images/세부소스/버튼/일시정지-다운.png', width='152', height='113', onclick="location.href='/pause_end'")
+      script(type='text/javascript').
+        document.oncontextmenu=function(){return false;} // 우클릭 방지
+        document.onselectstart=function(){return false;} // 드래그 방지 
+        document.ondragstart=function(){return false;} // 선택 방지
+        document.onmousedown=function(){return false;}

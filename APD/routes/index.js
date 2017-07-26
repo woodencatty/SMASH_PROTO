@@ -166,6 +166,7 @@ router.get('/uploadSteps', (req, res, next) => {
           clearInterval(this.SensorInterval);
           this.SensorInterval = null;
         }
+        console.log('done!');
         res.render('done', { name: '정보전송완료' });
       }
       console.log('stdout: ' + stdout);

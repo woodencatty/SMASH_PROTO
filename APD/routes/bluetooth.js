@@ -1,7 +1,7 @@
 var noble = require('noble');
 
 let try_count = 0;
-let ID;
+let ID = 'noname';
 let step_data;
 
 noble.on('scanStart', () => {

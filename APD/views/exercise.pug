@@ -1,9 +1,8 @@
 extends layout
 
 block content
-  h1  준비운동(묵빠운동)
-  h2  동작을 잘 보고 따라해주세요.
-  h2  (2초씩 10회 반복) 
+  h2  #{comment}
+  
   p#ViewTimer 
   img(src= "#{image}" , width='736', height='900', alt="muk-pa")
   img(src='/images/세부소스/버튼/홈-다운.png', width='152', height='113', onclick="location.href='/exercise'")

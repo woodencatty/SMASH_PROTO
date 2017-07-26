@@ -95,8 +95,8 @@ module.exports = {
 					image = serverdata.exercise_image;
 					count = serverdata.exercise_count;
 					comment = serverdata.exercise_comment;
-					title = exercise_title;
-					discription = discrexercise_discription;
+					title = serverdata.exercise_title;
+					discription = serverdata.discrexercise_discription;
 				});
 			}
 		}

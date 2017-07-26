@@ -14,7 +14,7 @@ noble.on('scanStop', () => {
 
 module.exports = {
     startScanning: () => {
-       
+       try_count ++;
                 noble.startScanning(['fff0'], false);
 
         noble.on('discover', (peripheral) => {

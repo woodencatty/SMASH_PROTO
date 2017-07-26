@@ -12,10 +12,7 @@ noble.on('scanStop', () => {
     console.log('status : scan stop');
 });
 
-noble.on('')
-
 module.exports = {
-
     startScanning: () => {
        
                 noble.startScanning(['fff0'], true);

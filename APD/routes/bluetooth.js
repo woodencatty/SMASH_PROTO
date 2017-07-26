@@ -2,7 +2,7 @@ var noble = require('noble');
 
 let try_count = 0;
 let ID = 'noname';
-let step_data;
+let step_data = '';
 
 noble.on('scanStart', () => {
     console.log('status : scanning');

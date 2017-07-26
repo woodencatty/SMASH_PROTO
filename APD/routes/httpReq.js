@@ -17,6 +17,8 @@ let comment;
 let title;
 let discription;
 
+let is_opened = false;
+
 let serverIP = '127.0.0.1';
 
 getUserInfoRequest = {														//GET요청 JSON데이터 정의
@@ -33,6 +35,14 @@ getExerciseInfoRequest = {														//GET요청 JSON데이터 정의
 	path: '/requestExercise',
 	method: 'GET'
 };
+
+getIsOpenedRequest = {														//GET요청 JSON데이터 정의
+	host: serverIP,
+	port: 60001,
+	path: '/requestIsOpen',
+	method: 'GET'
+};
+
 
 submitUserSteps = {														//GET요청 JSON데이터 정의
 	host: serverIP,
@@ -109,6 +119,33 @@ module.exports = {
 
 	},
 
+requestIsOpened: (ID) => {
+		//요청 데이터 수신 콜백함수
+		getIsOpenedcallback = function (response) {
+			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
+			if (response.statusCode != 200) {
+				console.log('Error Response!');
+			} else {
+				let serverdata = '';
+				response.on('data', function (chunk) {							//응답 데이터를 JSON형태로 파싱함
+					serverdata = JSON.parse(chunk);
+				});
+				response.on('end', function () {									//응답이 끝났을 시 데이터 추출
+					console.log(serverdata);
+					console.log(serverdata.patient_name);
+					is_opened = serverdata.is_opened;
+				});
+			}
+		}
+
+		let req = http.request(getIsOpenedRequest, getIsOpenedcallback);						//GET요청 전송
+
+		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
+
+		req.end();
+
+	},
+
 	submitUserSteps: (ID, Steps) => {
 		postcallback = function (response) {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
@@ -143,6 +180,10 @@ module.exports = {
 
 	getExercise: (callback) => {
 		callback(image, count, comment, title, discription);
+	},
+
+	getIsOpened: (callback) => {
+		callback(is_opened);
 	}
 }
 

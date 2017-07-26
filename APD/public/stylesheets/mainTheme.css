@@ -23,12 +23,20 @@ h2 {
   color: #FFFFFF;
 }
 
-h2 {
+h3 {
   align-content:center;
   font-weight: bold;
   font-size: 25px;
   color: #FFFFFF;
 }
+
+h4 {
+  align-content:center;
+  font-weight: bold;
+  font-size: 15px;
+  color: #FFFFFF;
+}
+
 
 
 .contents {

@@ -25,7 +25,6 @@ module.exports = {
     steps_data = data;
   },
 
-
   getStepsData:(callback)=>{
     callback(steps_data);
   },

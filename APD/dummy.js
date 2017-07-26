@@ -7,6 +7,22 @@ app.listen(60001, () => {
     console.log("dummy server2 enable");
 });
 
+
+app.get('/requestIsOpen', (req, res) => {
+
+    console.log('User data get!');
+
+    res.set('Content-Format', 'application/json');
+    var json_array = JSON.stringify({
+        content_type: "Application/json",
+        result_code: 200,
+        result_req: "",
+        is_opened: true
+    });
+    res.end(json_array);
+});
+
+
 app.get('/requestUserInfo', (req, res) => {
 
     console.log('User data get!');

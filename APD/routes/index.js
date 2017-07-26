@@ -145,20 +145,27 @@ router.get('/welcome', (req, res, next) => {
 router.get('/exercise', (req, res, next) => {
 
   ExerciseCallback = (exercise) => {
-    http.requestExercise(exercise[0]);
-    setTimeout(() => {
-      ExerciseDataCallback = (image, count, comment, title, discription, is_end) => {
-        if(is_end == true){
+        if(exercise == 'done'){
           GetNameCallback = (name) => {
           res.render('done', { name: name });
           }
           session.getName(GetNameCallback);
         }else {
+    http.requestExercise(exercise[0]);
+    setTimeout(() => {
+      ExerciseDataCallback = (image, count, comment, title, discription) => {
+        if(is_end == true){
+          GetNameCallback = (name) => {
+          res.render('done', { name: name });
+          }
+          session.getName(GetNameCallback);
+        }else {}
         res.render('exercise', { image: image, count: count, comment: comment, title: title, discription: discription});
-        }
+        
       }
       http.getExercise(ExerciseDataCallback);
     }, 500);
+        }
   }
   session.getExercise(ExerciseCallback);
 });

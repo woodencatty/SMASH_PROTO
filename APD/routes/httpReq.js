@@ -16,7 +16,6 @@ let count = 1000;
 let comment;
 let title;
 let discription;
-let is_end = false;
 
 let serverIP = '127.0.0.1';
 
@@ -98,7 +97,6 @@ module.exports = {
 					comment = serverdata.exercise_comment;
 					title = serverdata.exercise_title;
 					discription = serverdata.discrexercise_discription;
-					is_end = serverdata.is_end;
 				});
 			}
 		}
@@ -144,7 +142,7 @@ module.exports = {
 	},
 
 	getExercise: (callback) => {
-		callback(image, count, comment, title, discription, is_end);
+		callback(image, count, comment, title, discription);
 	}
 }
 

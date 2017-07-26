@@ -12,16 +12,16 @@ let dateTime = new Date();
 
 
 acturator.led_powerOn();
-acturator.piezo_powerOn();
+//acturator.piezo_powerOn();
 
 this.statusInterval = setInterval(() => {
-  acturator.led_normal();
+  //acturator.led_normal();
   //console.log('Walk count : ' + move.WalkCount);
 }, 1000);
 
 this.valueInterval = setInterval(() => {
   move.setWalkCount();
-  acturator.led_sensorActive();
+  //acturator.led_sensorActive();
   //console.log('Walk count : ' + move.WalkCount);
 }, 200);
 

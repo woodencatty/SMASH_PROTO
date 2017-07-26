@@ -29,7 +29,7 @@ module.exports = {
             characteristics[0].read();
             characteristics[0].on('data', (data, isNotification) => {
                 ID = peripheral.advertisement.localName;
-                step_data = data;
+                step_data = data.toString('utf8');
             });
         });
 

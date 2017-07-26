@@ -16,6 +16,12 @@ var primaryService = new PrimaryService({
     new Characteristic({
       uuid: 'fff1', // or 'fff1' for 16-bit
       properties: ['notify'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'  
+       descriptor: [		
+        new Descriptor({		
+          uuid: '2901',		
+          value: 'IDD' // static value, must be of type Buffer or string if set		
+        })		
+      ],
       onReadRequest: function (offset, callback) {
         var data = new Buffer('Readtest');
         callback(data);

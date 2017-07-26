@@ -16,7 +16,7 @@ noble.on('stateChange', function (state) {
 
 noble.on('discover', (peripheral) => {
 
-    peripheral.connect((error) => {
+    peripheral.connect((error) => { 
 
         peripheral.discoverSomeServicesAndCharacteristics(['fff0'], ['fff1'], (error, services, characteristics) => {
 

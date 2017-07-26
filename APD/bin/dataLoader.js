@@ -17,12 +17,9 @@ noble.on('stateChange', function (state) {
 });
 
 noble.on('discover', (peripheral) => {
-console.log(peripheral);
     peripheral.connect((error) => {
-console.log('connected');
 
         peripheral.discoverSomeServicesAndCharacteristics(["fff0"], ["fff1"], (error, services, characteristics) => {
-            console.log('find');
 
             characteristics[0].subscribe();
             characteristics[0].read();

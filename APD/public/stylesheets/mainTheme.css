@@ -49,32 +49,32 @@ h2 {
 }
 
 #Date {
-	font-size: 40px;
+	font-size: 30px;
 	text-align: left;
 	font-weight: bolder;
 }
 
 #Time {
 	font-weight: bolder;
-	font-size: 125px;
+	font-size: 100px;
 	text-align: left;
 }
 
 #TmpHmi {
-	font-size: 40px;
+	font-size: 30px;
 	font-weight: bolder;
 }
 
 #TryMessage {
 	align-self: center;
-	font-size: 40px;
+	font-size: 30px;
 	font-weight: bolder;
 }
 
 
 #ViewTimer {
 	color: rgba(255, 255, 255, 1.00);
-	font-size: 40px;
+	font-size: 70px;
 	position: absolute;
 	font-weight: bolder;
 	top: 50%;

@@ -7,7 +7,7 @@ block content
         var d = new Date();
         document.write("<a id='Date'>" + d.getFullYear() + "년 " + (d.getMonth() + 1) + "월 " + d.getDate() + "일 </a>");
         document.write(d.getHours() + " : " + m);
-      |     &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      |     &nbsp; &nbsp;&nbsp;&nbsp;
       |     
       a#TmpHmi  #{temp}℃  / #{humi}
       |     
@@ -22,7 +22,7 @@ block content
         document.write("<a id='Time'>" + d.getHours() + ":" + m + "</a>");
         setTimeout("history.go(0);", 1000);
 
-      |     &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+      |     &nbsp; &nbsp;&nbsp;
       |     
       img(src='/images/세부소스/날씨/맑음.png', width='70', height='76', alt='')
       |  &nbsp; /&nbsp; 

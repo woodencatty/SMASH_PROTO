@@ -54,7 +54,7 @@ function startSense() {
     sensor.senseAdcEnv();
     sensor.senseAdcLight();
     sensor.senseDist();
-    acturator.led_sensorActive();
+    //acturator.led_sensorActive();
 
     //console.log(sensor.distance, sensor.temperature, sensor.humidity, sensor.audio);
   }, 1000);  //값 확인을 위해 간격 짧게 잡음.
@@ -62,7 +62,7 @@ function startSense() {
 
 
 this.statusInterval = setInterval(() => {
-  acturator.led_normal();
+  //acturator.led_normal();
   //console.log('Walk count : ' + move.WalkCount);
 }, 1200);
 

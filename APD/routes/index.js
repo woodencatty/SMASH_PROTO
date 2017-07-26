@@ -16,10 +16,7 @@ const session = require('./session.js');
 const bluetooth = require('./bluetooth.js');
 
 var exec = require('child_process').exec,
-    child;
-
-    var fs = require('fs');
-
+  child;
 
 
 //터치 센서 보정과 브라우저 자동 실행 코드. 테스트중엔 사용하지 않음.
@@ -124,7 +121,7 @@ router.get('/identify', (req, res, next) => {
 //환영 화면
 router.get('/welcome', (req, res, next) => {
   console.log("Directed to welcome Page");
-bluetooth.startScanning();
+  bluetooth.startScanning();
   //탐색이 종료될 즈음 생성된 값을 받아와 http요청을 전송하고, 이름을 받아 welcome화면을 표시한다.
   setTimeout(() => {
 
@@ -144,15 +141,28 @@ bluetooth.startScanning();
         http.getInfo(SessionCallback);
       }, 200);
     }
-
     /* StepCallback = function(ID, Steps){
        http.http_putInfo(ID, Steps);
      }*/
     bluetooth.getIDDData(IDDDataCallback);
     console.log("gettingID");
 
+    child = exec("sudo NOBLE_MULTI_ROLE=1 node dataLoader.js", function (error, stdout, stderr) {
+      console.log('stdout: ' + stdout);
+      console.log('stderr: ' + stderr);
+
+      session.setStepsData(stdout);
+
+      if (error !== null) {
+        console.log('exec error: ' + error);
+      }
+    });
+
     //bluetooth.getStepCount(StepCallback);
   }, 5000);
+
+
+
 });
 
 router.get('/exercise', (req, res, next) => {

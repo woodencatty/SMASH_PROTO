@@ -175,9 +175,8 @@ router.get('/exercise_try', (req, res, next) => {
   ExerciseCallback = (exercise) => {
     http.requestExercise(exercise[0]);
     setTimeout(() => {
-      ExerciseDataCallback = (image, count, comment) => {
-        console.log(image, count, comment);
-        res.render('exercise', { image: image, count: count, comment: comment });
+      ExerciseDataCallback = (image, count, comment, title, discription) => {
+        res.render('exercise', { image: image, count: count, comment: comment, title: title, discription: discription});
       }
       http.getExercise(ExerciseDataCallback);
     }, 500);

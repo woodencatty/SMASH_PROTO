@@ -1,9 +1,11 @@
 extends layout
 
 block content
+  h1#title
   h2#comment
+  h2#discription
   
-  p#ViewTimer
+  p#counter
   img(src="",id='img' width='736', height='900', alt="muk-pa")
   img(src='/images/세부소스/버튼/홈-다운.png', width='152', height='113', onclick="location.href='/exercise'")
   
@@ -13,8 +15,10 @@ block content
     function msg_time() {
     m = Math.floor(SetTime % 60);
     var msg =  m ;
-    document.getElementById("comment").innerHTML = "#{comment}" 
-    document.all.ViewTimer.innerHTML = msg;
+    document.getElementById("title").innerHTML = "#{title}"
+    document.getElementById("comment").innerHTML = "#{comment}"
+    document.getElementById("discription").innerHTML = "#{discription}" 
+    document.all.counter.innerHTML = '남은 횟수 : ' + msg + '번';
     document.getElementById("img").src = "#{image}"
     SetTime--;
     if (SetTime < 0) { clearInterval(tid); location.replace('/exercise_done'); }

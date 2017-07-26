@@ -34,13 +34,19 @@ app.get('/requestExercise', (req, res) => {
     var comment = '';
     if (req.headers.exercise == 'exercise1') {
         imagefile = '/images/트레이너/1-1준비운동(어깨)-묵.gif';
-        comment = '준비운동(묵빠운동) <br /> 동작을 잘 보고 따라해주세요.<br /> (2초씩 10회 반복)';
+        title = '준비운동(묵빠운동)';
+        comment = ' 동작을 잘 보고 따라해주세요.';
+        discription = '(2초씩 10회 반복)';
     } else if (req.headers.exercise == 'exercise2') {
         imagefile = '/images/트레이너/2-2본운동(팔비대칭올리기).gif';
-        comment = '본 운동(팔 비대칭 올리기) <br /> 동작을 잘 보고 따라해주세요.<br /> (2초씩 10회 반복)';
+        title = '본 운동(팔 비대칭 올리기)';
+        comment = ' 동작을 잘 보고 따라해주세요.';
+        discription = '(2초씩 10회 반복)';
     } else if (req.headers.exercise == 'exercise3') {
         imagefile = '/images/트레이너/3-1정리운동(등근육펴기).gif';
-        comment = '정리운동(등근육펴기) <br /> 동작을 잘 보고 따라해주세요.<br /> (2초씩 10회 반복)';
+        title = '정리운동(등근육펴기)';
+        comment = ' 동작을 잘 보고 따라해주세요.';
+        discription = '(2초씩 10회 반복)';
     }
 
     res.set('Content-Format', 'application/json');
@@ -50,7 +56,9 @@ app.get('/requestExercise', (req, res) => {
         result_req: "",
         exercise_image: imagefile,
         exercise_count: 10,
-        exercise_comment: comment
+        exercise_comment: comment,
+        exercise_title: title,
+        exercise_discription: discription,
     });
     res.end(json_array);
 

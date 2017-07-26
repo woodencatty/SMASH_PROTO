@@ -14,6 +14,8 @@ let gender = 0;
 let image;
 let count = 1000;
 let comment;
+let title;
+let discription;
 
 let serverIP = '127.0.0.1';
 
@@ -92,7 +94,9 @@ module.exports = {
 					console.log(serverdata.patient_name);
 					image = serverdata.exercise_image;
 					count = serverdata.exercise_count;
-					comment = serverdata.exercise_comment
+					comment = serverdata.exercise_comment;
+					title = exercise_title;
+					discription = discrexercise_discription;
 				});
 			}
 		}
@@ -138,7 +142,7 @@ module.exports = {
 	},
 
 	getExercise: (callback) => {
-		callback(image, count, comment);
+		callback(image, count, comment, title, discription);
 	}
 }
 

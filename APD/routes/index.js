@@ -161,7 +161,6 @@ router.get('/done', (req, res, next) => {
   session.getName(DoneCallback);
 });
 
-
 router.get('/return2main', (req, res, next) => {
   startSense();
    res.redirect('/main');
@@ -170,11 +169,7 @@ router.get('/return2main', (req, res, next) => {
 
 
 
-
-
-
-
-//테스트페이지
+//테스트페이지----------------------------------------------------------------------------------------------------
 router.get('/exercise_try', (req, res, next) => {
 
   ExerciseCallback = (exercise) => {

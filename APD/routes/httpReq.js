@@ -12,7 +12,7 @@ let age = 0;
 let gender = 0;
 
 let image;
-let count = 0;
+let count = 1000;
 let comment;
 
 let serverIP = '127.0.0.1';

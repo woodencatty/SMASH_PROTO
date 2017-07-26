@@ -1,4 +1,4 @@
-const bluetooth = require('./bluetooth.js') // Bluetooth 모듈 import
+var bluetooth = require('./bluetooth.js') // Bluetooth 모듈 import
 const move = require('./calculator.js')   //운동량 측정 모듈 import
 const acturator = require('./acturator.js');
 

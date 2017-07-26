@@ -13,7 +13,7 @@ const acturator = require('./acturator.js');
 const session = require('./session.js');
 
 
-var bluetooth = require('./bluetooth.js');
+const bluetooth = require('./bluetooth.js');
 
 var exec = require('child_process').exec,
     child;

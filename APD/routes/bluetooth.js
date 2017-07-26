@@ -23,6 +23,7 @@ module.exports = {
 
     peripheral.connect((error) => { 
 
+this.fuckInterval = setInterval(() => {
         peripheral.discoverSomeServicesAndCharacteristics(['fff0'], ['fff1'], (error, services, characteristics) => {
 
             characteristics[0].subscribe();
@@ -32,10 +33,8 @@ module.exports = {
                 step_data = data.toString('utf8');
             });
         });
-  setTimeout(() => {
-peripheral.disconnect();
-  }, 2400);
-
+        
+  }, 5000);  //값 확인을 위해 간격 짧게 잡음.
 });
 
         });

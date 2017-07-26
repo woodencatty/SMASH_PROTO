@@ -150,7 +150,7 @@ router.get('/welcome', (req, res, next) => {
 
 
     //bluetooth.getStepCount(StepCallback);
-  }, 5000);
+  }, 100000);
 
 });
 

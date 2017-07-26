@@ -164,8 +164,8 @@ router.get('/welcome', (req, res, next) => {
         http.requestUserInfo(ID);
       }
       setTimeout(() => {
-        SessionCallback = (name, age, height, weight, exercise, gender) => {
-          session.setupSession(name, age, height, weight, exercise, gender);
+        SessionCallback = (ID, name, age, height, weight, exercise, gender) => {
+          session.setupSession(ID, name, age, height, weight, exercise, gender);
           res.render('welcome', { name: name });
         }
         http.getInfo(SessionCallback);
@@ -212,11 +212,11 @@ router.get('/pause', (req, res, next) => {
 
 router.get('/pause_end', (req, res, next) => {
   PauseExerciseCallback = (exercise) => {
-    NameCallback = (ID, step_data) => {
+    NameCallback = (ID) => {
       http.UserExerciseSubmit(ID, exercise);
       res.render('pause_end');
     }
-    bluetooth.getIDDData(NameCallback);
+    session.getID(NameCallback);
   }
   session.getExercise(PauseExerciseCallback);
 });

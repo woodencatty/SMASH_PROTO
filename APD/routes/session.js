@@ -1,4 +1,4 @@
-
+let userID;
 let name = '';
 let age = 0;
 let height = 0;
@@ -10,9 +10,9 @@ let steps_data;
 
 module.exports = {
 
-  setupSession: (valueName, valueAge, valueHeight, valueWeight, valueExercise, valueGender) => {
-        console.log(valueName, valueAge, valueHeight, valueWeight, valueExercise, valueGender);
-
+  setupSession: (valueID, valueName, valueAge, valueHeight, valueWeight, valueExercise, valueGender) => {
+        console.log(valueID, valueName, valueAge, valueHeight, valueWeight, valueExercise, valueGender);
+    userID = valueID;
     name = valueName;
     age = valueAge;
     height = valueHeight;
@@ -35,8 +35,11 @@ module.exports = {
   },
 
   getExercise: (callback) => {
-
     callback(exercise)
+  },
+  
+  getID: (callback) => {
+    callback(userID)
   },
 
   clearExercise: () => {

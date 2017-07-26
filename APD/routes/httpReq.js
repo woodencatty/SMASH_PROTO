@@ -4,6 +4,7 @@ const http = require('http');										//http 요청 모듈
 //리턴값 저장 변수
 let getRequest;														//GET요청 JSON데이터
 
+let userID;
 let name = '';
 let exercise = '';
 let weight = 0;
@@ -76,6 +77,7 @@ module.exports = {
 				response.on('end', function () {									//응답이 끝났을 시 데이터 추출
 					console.log(serverdata);
 					console.log(serverdata.patient_name);
+					userID = ID;
 					name = serverdata.patient_name;
 					exercise = serverdata.patient_Exercise;
 					age = serverdata.patient_Age;
@@ -202,7 +204,7 @@ requestIsOpened: (ID) => {
 	},
 
 	getInfo: (callback) => {
-		callback(name, age, height, weight, exercise, gender);
+		callback(userID, name, age, height, weight, exercise, gender);
 	},
 
 	getName: (callback) => {

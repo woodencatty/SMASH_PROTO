@@ -107,7 +107,7 @@ router.get('/try', (req, res, next) => {
 router.get('/identify', (req, res, next) => {
   console.log("Directed to identify Page");
 
-  if (bluetooth.try_count > 3) {
+  if (bluetooth.try_count > 10) {
     res.render('failed');
   } else {
     TryCallback = function (try_count) {

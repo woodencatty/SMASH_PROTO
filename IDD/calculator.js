@@ -27,6 +27,8 @@ module.exports = {
             let changeZ = Math.abs(Math.abs(AccelZ_1) - Math.abs(AccelZ_2));
 
             let force = (changeX + changeY + changeZ) * 1000
+
+            console.log(changeX, changeY, changeZ);
             // console.log(force);
             if (force > 8000) {
                 WalkCount++;

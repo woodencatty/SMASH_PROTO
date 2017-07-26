@@ -43,6 +43,6 @@ module.exports = {
     },
     getIDDData: (callback) => {
         console.log(ID);
-        callback(ID, step_data);
+        callback(ID);
     }
 }

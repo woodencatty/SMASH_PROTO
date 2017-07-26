@@ -14,7 +14,7 @@ block content
     m = Math.floor(SetTime % 60);
     var msg =  m ;
     document.all.ViewTimer.innerHTML = msg;
-    document.getElementById("img").src = "#{count}"
+    document.getElementById("img").src = "#{image}"
     SetTime--;
     if (SetTime < 0) { clearInterval(tid); location.replace('/exercise_done'); }
     }

@@ -16,6 +16,7 @@ noble.on('scanStop', () => {
 module.exports = {
 
     startScanning: () => {
+        noble.state = 'poweredOn';
         noble.on('stateChange', function (state) {
             if (state === 'poweredOn') {
                 noble.startScanning(['fff0'], true);
@@ -35,6 +36,8 @@ module.exports = {
         callback(try_count);
     },
     getIDDData: (callback) => {
+        console.log(ID);
         callback(ID);
+
     }
 }

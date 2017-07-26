@@ -34,7 +34,6 @@ module.exports = {
         Accel.getAccel(GetAccelCallback_1);
 
         setTimeout(() => {
-console.log(AccelX_1);
             GetAccelCallback_2 = (AccelX, AccelY, AccelZ) => {
 
                 AccelX_2 = AccelX;
@@ -49,8 +48,6 @@ console.log(AccelX_1);
             changeZ = Math.abs(Math.abs(AccelZ_1) - Math.abs(AccelZ_2));
 
             let force = (changeX + changeY + changeZ) * 10000
-console.log(AccelX_2);
-console.log(force);
 
             // console.log(force);
             if (force > 8000) {

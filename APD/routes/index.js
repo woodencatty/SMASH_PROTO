@@ -12,6 +12,7 @@ const acturator = require('./acturator.js');
 
 const session = require('./session.js');
 
+var noble = require('noble');
 
 const bluetooth = require('./bluetooth.js');
 

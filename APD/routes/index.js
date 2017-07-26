@@ -59,7 +59,13 @@ this.DistanceInterval = setInterval(() => {
   sensor.senseDist();
 }, 1000);  //값 확인을 위해 간격 짧게 잡음.
 
+this.TestIntervalInterval = setInterval(() => {
+      console.log('Testing');
 
+  router.move('/try', (req, res, next)=>{
+    console.log('what?!');
+  })
+  }, 1000);  //값 확인을 위해 간격 짧게 잡음.
 this.statusInterval = setInterval(() => {
   acturator.led_normal();
 }, 1200);
@@ -209,7 +215,6 @@ router.get('/exercise_done', (req, res, next) => {
 router.get('/pause', (req, res, next) => {
   res.render('pause');
 });
-
 
 router.get('/pause_end', (req, res, next) => {
   PauseExerciseCallback = (exercise) => {

@@ -38,7 +38,6 @@ this.loggingInterval = setInterval(() => {
           //console.log('Done');
         });
       });
-      move.resetWalkCount();
     });
     //bluetooth.SetStepValue(WalkCount);
   }

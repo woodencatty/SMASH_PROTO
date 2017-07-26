@@ -21,7 +21,7 @@ app.get('/requestUserInfo', (req, res) => {
         patient_Height: '160',
         patient_Weight: '52',
         patient_Gender: 'f',
-        patient_Exercise: ['exercise1', 'exercise2', 'exercise3', 'done']
+        patient_Exercise: ['exercise1', 'exercise2', 'exercise3']
     });
     res.end(json_array);
 
@@ -37,16 +37,20 @@ app.get('/requestExercise', (req, res) => {
         title = '준비운동(묵빠운동)';
         comment = ' 동작을 잘 보고 따라해주세요.';
         discription = '(2초씩 10회 반복)';
+        is_end = false;
     } else if (req.headers.exercise == 'exercise2') {
         imagefile = '/images/트레이너/2-2본운동(팔비대칭올리기).gif';
         title = '본 운동(팔 비대칭 올리기)';
         comment = ' 동작을 잘 보고 따라해주세요.';
         discription = '(2초씩 10회 반복)';
+                is_end = false;
+
     } else if (req.headers.exercise == 'exercise3') {
         imagefile = '/images/트레이너/3-1정리운동(등근육펴기).gif';
         title = '정리운동(등근육펴기)';
         comment = ' 동작을 잘 보고 따라해주세요.';
         discription = '(2초씩 10회 반복)';
+                is_end = true;
     }
 
     res.set('Content-Format', 'application/json');

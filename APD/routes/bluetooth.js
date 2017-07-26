@@ -34,7 +34,7 @@ module.exports = {
         });
   setTimeout(() => {
 peripheral.disconnect();
-  }, 1000);
+  }, 2400);
 
 });
 

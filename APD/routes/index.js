@@ -145,27 +145,20 @@ router.get('/welcome', (req, res, next) => {
 router.get('/exercise', (req, res, next) => {
 
   ExerciseCallback = (exercise) => {
-        if(exercise == 'done'){
-          GetNameCallback = (name) => {
-          res.render('done', { name: name });
-          }
-          session.getName(GetNameCallback);
-        }else {
-    http.requestExercise(exercise[0]);
-    setTimeout(() => {
-      ExerciseDataCallback = (image, count, comment, title, discription) => {
-        if(is_end == true){
-          GetNameCallback = (name) => {
-          res.render('done', { name: name });
-          }
-          session.getName(GetNameCallback);
-        }else {}
-        res.render('exercise', { image: image, count: count, comment: comment, title: title, discription: discription});
-        
+    if (exercise == 'done') {
+      GetNameCallback = (name) => {
+        res.render('done', { name: name });
       }
-      http.getExercise(ExerciseDataCallback);
-    }, 500);
+      session.getName(GetNameCallback);
+    } else {
+      http.requestExercise(exercise[0]);
+      setTimeout(() => {
+        ExerciseDataCallback = (image, count, comment, title, discription) => {
+          res.render('exercise', { image: image, count: count, comment: comment, title: title, discription: discription });
         }
+        http.getExercise(ExerciseDataCallback);
+      }, 500);
+    }
   }
   session.getExercise(ExerciseCallback);
 });
@@ -178,12 +171,9 @@ router.get('/exercise_done', (req, res, next) => {
 
 router.get('/return2main', (req, res, next) => {
   startSense();
-   res.redirect('/main');
+  res.redirect('/main');
 
 });
-
-
-
 
 module.exports = router;
 

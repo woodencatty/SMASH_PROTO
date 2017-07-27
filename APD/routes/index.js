@@ -245,7 +245,7 @@ router.post('/SWserver/metadata/APDUpdate', (req, res, next) => {
 
 
   const exec = require('child_process').exec,
-    patch
+    patch;
 
   fs.readFile(req.files.uploadFile.path, (error, data) => {
     var filePath = __dirname + "\\files\\" + req.files.uploadFile.name;

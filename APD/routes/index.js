@@ -181,9 +181,12 @@ router.get('/exercise', (req, res, next) => {
 
   ExerciseCallback = (exercise) => {
     if (exercise == 'done') {
+      
       GetNameCallback = (name) => {
+    session.clearSession();
         res.render('done', { name: name });
-      }
+      
+    }
       session.getName(GetNameCallback);
     } else {
       http.requestExercise(exercise[0]);

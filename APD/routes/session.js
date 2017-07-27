@@ -47,6 +47,19 @@ module.exports = {
 
   clearExercise: () => {
     exercise.splice(0, 1);
+  },
+  clearSession:()=>{
+
+ userID = null;
+ name = '';
+ age = 0;
+ height = 0;
+ weight = 0;
+ exercise= null;
+ gender = 0;
+
+ steps= 0;
+ step_date= null;
   }
 }
 

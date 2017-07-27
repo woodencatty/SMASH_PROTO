@@ -158,9 +158,9 @@ router.get('/welcome', (req, res, next) => {
         res.redirect('/identify');
       } else {
         console.log('identify patient : ' + ID);
-        console.log('data got : ' + step_data);
+        //console.log('data got : ' + step_data);
         http.requestUserInfo(ID);
-        http.UserStepSubmit(ID, steps, step_date);
+        //http.UserStepSubmit(ID, steps, step_date);
       }
       setTimeout(() => {
         SessionCallback = (ID, name, age, height, weight, exercise, gender) => {

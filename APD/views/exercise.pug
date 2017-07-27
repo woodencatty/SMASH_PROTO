@@ -4,7 +4,6 @@ block content
   h1#title
   h2#comment
   
-  h3#discription
   
   p#ViewTimer
   img(src="",id='img' width='736', height='900', alt="muk-pa")
@@ -13,7 +12,6 @@ block content
   script(type='text/javascript').
     document.getElementById("title").innerHTML="#{title}"
     document.getElementById("comment").innerHTML="#{comment}"
-    document.getElementById("discription").innerHTML="#{discription}" 
     document.getElementById("img").src = "#{image}"
     var SetTime = "#{count}";
     function msg_time() {

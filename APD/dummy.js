@@ -51,18 +51,15 @@ app.get('/APD/userdata/Exercise', (req, res) => {
     if (req.headers.program_id == 'exercise1') {
         imagefile = '/images/트레이너/1-1준비운동(어깨)-묵.gif';
         title = '준비운동(묵빠운동)';
-        comment = ' 동작을 잘 보고 따라해주세요.';
-        discription = '(2초씩 10회 반복)';
+        comment = ' 동작을 잘 보고 따라해주세요.(2초씩 10회 반복)';
     } else if (req.headers.program_id == 'exercise2') {
         imagefile = '/images/트레이너/2-2본운동(팔비대칭올리기).gif';
         title = '본 운동(팔 비대칭 올리기)';
-        comment = ' 동작을 잘 보고 따라해주세요.';
-        discription = '(2초씩 10회 반복)';
+        comment = ' 동작을 잘 보고 따라해주세요.(2초씩 10회 반복)';
     } else if (req.headers.program_id == 'exercise3') {
         imagefile = '/images/트레이너/3-1정리운동(등근육펴기).gif';
         title = '정리운동(등근육펴기)';
-        comment = ' 동작을 잘 보고 따라해주세요.';
-        discription = '(2초씩 10회 반복)';
+        comment = ' 동작을 잘 보고 따라해주세요.(2초씩 10회 반복)';
     }
 
     res.set('Content-Format', 'application/json');

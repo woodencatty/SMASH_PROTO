@@ -135,14 +135,14 @@ router.get('/try', (req, res, next) => {
 //환자 인식 화면
 router.get('/identify', (req, res, next) => {
   console.log("Directed to identify Page");
-  if (bluetooth.try_count > 10) {
+   TryCallback = function (try_count) {
+  if (try_count > 10) {
     res.render('failed');
   } else {
-    TryCallback = function (try_count) {
       res.render('identify', { retry: try_count });
     }
-    bluetooth.getTryCount(TryCallback);
   }
+   bluetooth.getTryCount(TryCallback);
 });
 
 //환영 화면

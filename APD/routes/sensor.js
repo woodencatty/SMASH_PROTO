@@ -49,7 +49,6 @@ module.exports = {
         while (gpio.digitalRead(ultraECHO) == 1);
         let travelTime = microt.now();
         distance = (travelTime - startTime) / 58;
-        console.log(distance);
     },
 
     //소음측정 함수화

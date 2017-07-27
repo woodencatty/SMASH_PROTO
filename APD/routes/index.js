@@ -231,5 +231,34 @@ router.get('/return2main', (req, res, next) => {
 
 });
 
+
+app.use(express.bodyParser());
+router.post('/SWserver/metadata/APDUpdate', (req, res, next) => {
+
+
+  const exec = require('child_process').exec,
+    patch
+
+  fs.readFile(req.files.uploadFile.path, (error, data) => {
+    var filePath = __dirname + "\\files\\" + req.files.uploadFile.name;
+    fs.writeFile(filePath, data, (error) => {
+      if (error) {
+        throw err;
+      } else {
+        patch = exec('sudo' + req.files.uploadFile.name,
+          function (error, stdout, stderr) {
+            console.log('stdout: ' + stdout);
+            console.log('stderr: ' + stderr);
+            if (error !== null) {
+              console.log('exec error: ' + error);
+            }
+          });
+      }
+    })
+  })
+
+});
+
+
 module.exports = router;
 

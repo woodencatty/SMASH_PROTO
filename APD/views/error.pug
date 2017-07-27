@@ -1,8 +1,9 @@
 extends layout
 
 block content
-  .contents
-  a#TmpHmi  기기에 장애가 발생했습니다..
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  .message
+      p#TryMessage
+        | 기기에 장애가 발생했습니다..
+        h1= message
+        h2= error.status
+        pre #{error.stack}

@@ -1,12 +1,21 @@
 extends layout
 
 block content
-  h1  수고하셨어요 #{name}님!
-  h2  이제 푹 쉬세요!
-  br
-  br
-  br
-  h2  자동으로 메인 화면으로 돌아갑니다...
+  .message
+      p#TryMessage
+        | 수고하셨어요 #{name}님!
+        br
+        | 이제 푹 쉬세요!
+        br
+        |  
+        br
+        |             
+        br
+        br
+        | 자동으로 메인 화면으로 돌아갑니다...
+        br
+        |             
+        br
 
   script(type='text/javascript').
     document.oncontextmenu=function(){return false;} // 우클릭 방지
@@ -14,7 +23,7 @@ block content
     document.ondragstart=function(){return false;} // 선택 방지
     document.onmousedown=function(){return false;}
     
-    var SetTime = 10;
+    var SetTime = 2;
     function msg_time() {
     m = Math.floor(SetTime % 60);
     SetTime--;

@@ -1,10 +1,10 @@
-var bleno = require('bleno');
-var fs = require('fs');
+var bleno = require('bleno'); // Bluetooth pheriphal 모듈
+var fs = require('fs'); //파일 로드를 위한 함수
 
 
+//ID : P0001
 let name = 'P0001';
 let serviceUuids = ['fff0']
-
 
 var PrimaryService = bleno.PrimaryService;
 var Characteristic = bleno.Characteristic;
@@ -28,7 +28,7 @@ var primaryService = new PrimaryService({
       },
       onSubscribe: function (maxValueSize, updateValueCallback) {
         fs.readFile('./steps.log', 'utf8', function (err, data) {
-          // the data is passed to the callback in the second argument
+          //저장한 활동량 로그에서 데이터를 읽어 전송한다.
           var sending = new Buffer(data);
           updateValueCallback(sending);
           console.log('send data');
@@ -42,6 +42,7 @@ var primaryService = new PrimaryService({
 });
 
 module.exports = {
+  //Advertising 함수
   startAdvertising: () => {
     bleno.on('stateChange', function (state) {
       console.log('on -> stateChange: ' + state);

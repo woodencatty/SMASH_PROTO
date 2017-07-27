@@ -13,15 +13,14 @@ acturator.piezo_powerOn();
 
 this.statusInterval = setInterval(() => {
   acturator.led_normal();
-  //console.log('Walk count : ' + move.WalkCount);
 }, 1000);
 
 this.valueInterval = setInterval(() => {
   move.setWalkCount();
   acturator.led_sensorActive();
-  //console.log('Walk count : ' + move.WalkCount);
 }, 500);
 
+//5초에 한번 걸음 수를 업데이트하여 로그에 저장함.
 this.loggingInterval = setInterval(() => {
   WalkCallback = function (WalkCount) {
     fs.open('./steps.log', 'w+', function (err, fd) {
@@ -30,9 +29,7 @@ this.loggingInterval = setInterval(() => {
       console.log(WalkCount + ',' + dateTime.toFormat('YYYY,MM,DD,HH24,MI,SS') + '\n');
       fs.write(fd, buf, 0, buf.length, null, function (err, written, buffer) {
         if (err) throw err;
-        //console.log(err, written, buffer);
         fs.close(fd, () => {
-          //console.log('Done');
         });
       });
     });

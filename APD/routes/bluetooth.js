@@ -1,14 +1,16 @@
-var noble = require('noble');
-require('date-utils');
-
-let try_count = 0;
-let ID = 'noname';
+var noble = require('noble');       //Bluetooth Central모듈(noble). 값을 받아오기 위해 var로 설정..
+require('date-utils');              //시간 변환을 위한 모듈
 
 
-let steps = 0;
-let step_date;
+let try_count = 0;                  //시도 횟수 변수
+let ID = 'noname';                  //ID 저장 변수
 
 
+let steps = 0;                      //걸음 수 변수
+let step_date;                      //측정 날짜
+
+
+//상태 표시 로그
 noble.on('scanStart', () => {
     console.log('status : scanning');
 });
@@ -18,6 +20,8 @@ noble.on('scanStop', () => {
 });
 
 module.exports = {
+
+    //탐색 및 데이터 수집 모듈
     startScanning: () => {
         try_count++;
         noble.startScanning(['fff0'], false);
@@ -43,6 +47,7 @@ module.exports = {
         });
     },
 
+//데이터 반환 콜백
     getTryCount: (callback) => {
         callback(try_count);
     },
@@ -53,6 +58,8 @@ module.exports = {
         console.log(step_date);
         callback(ID, steps, step_date);
     },
+
+    //초기화
     resetBLE: () => {
         try_count = 0;
         ID = 'noname';

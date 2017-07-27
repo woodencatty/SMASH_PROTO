@@ -20,6 +20,7 @@ let discription;
 
 let is_opened = false;
 
+//서버 IP
 let serverIP = '127.0.0.1';
 
 getUserInfoRequest = {														//GET요청 JSON데이터 정의
@@ -45,21 +46,21 @@ getIsOpenedRequest = {														//GET요청 JSON데이터 정의
 };
 
 
-submitUserSteps = {														//GET요청 JSON데이터 정의
+submitUserSteps = {														//POST요청 JSON데이터 정의
 	host: serverIP,
 	port: 60001,
 	path: '/APD/userdata/UserSteps',
 	method: 'POST'
 };
 
-submitUserExercise = {														//GET요청 JSON데이터 정의
+submitUserExercise = {														//POST요청 JSON데이터 정의
 	host: serverIP,
 	port: 60001,
 	path: '/APD/userdata/Exercise',
 	method: 'POST'
 };
 
-submitError = {														//GET요청 JSON데이터 정의
+submitError = {														//POST요청 JSON데이터 정의
 	host: serverIP,
 	port: 60001,
 	path: '/APD/metadata/Error',
@@ -177,7 +178,7 @@ module.exports = {
 			}
 		}
 
-		let req = http.request(submitUserSteps, UserStepSubmitback);						//GET요청 전송
+		let req = http.request(submitUserSteps, UserStepSubmitback);						//POST요청 전송
 
 		req.setHeader("idd_id", ID);											//헤더에 요청 데이터 첨부
 		req.setHeader("steps", steps);
@@ -203,7 +204,7 @@ module.exports = {
 			}
 		}
 
-		let req = http.request(submitUserExercise, UserExerciseSubmitcallback);						//GET요청 전송
+		let req = http.request(submitUserExercise, UserExerciseSubmitcallback);						//POST요청 전송
 
 		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
 		req.setHeader("exercise", exercise);
@@ -227,7 +228,7 @@ module.exports = {
 			}
 		}
 
-		let req = http.request(submitError, ErrorSubmitcallback);						//GET요청 전송
+		let req = http.request(submitError, ErrorSubmitcallback);						//POST요청 전송
 
 		req.setHeader("error_log", error);											//헤더에 요청 데이터 첨부
 

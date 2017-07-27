@@ -7,7 +7,7 @@ const ledB = 29;
 const piezo = 25;
 
 gpio.wiringPiSetup();                                //wiring-pi 초기화
-gpio.pinMode(ledR, gpio.OUTPUT);
+gpio.pinMode(ledR, gpio.OUTPUT);                    //각 액츄레이터 핀 초기화
 gpio.pinMode(ledG, gpio.OUTPUT);
 gpio.pinMode(ledB, gpio.OUTPUT);
 gpio.pinMode(piezo, gpio.OUTPUT);

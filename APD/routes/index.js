@@ -137,6 +137,7 @@ router.get('/try', (req, res, next) => {
 router.get('/identify', (req, res, next) => {
   console.log("Directed to identify Page");
   TryCallback = function (try_count) {
+    //재시도 횟수를 체크하며, 3회 이상 시 인식 실패 화면을 보여준다.
     if (try_count > 3) {
       res.render('failed');
     } else {
@@ -150,13 +151,15 @@ router.get('/identify', (req, res, next) => {
 router.get('/welcome', (req, res, next) => {
   console.log("Directed to welcome Page");
   bluetooth.startScanning();
-  //탐색이 종료될 즈음 생성된 값을 받아와 http요청을 전송하고, 이름을 받아 welcome화면을 표시한다.
 
   setTimeout(() => {
+    //탐색이 종료될 즈음 bluetooth 모듈에서 값을 받아와 http요청을 전송하고, 이름을 받아 welcome화면을 표시한다.
     IDDDataCallback = (ID, steps, step_date) => {
+      //데이터를 못받았을 시 재시도를 수행한다.
       if (ID == 'noname') {
-        console.log('user not found')
+        console.log('user not found');
         res.redirect('/identify');
+        //데이터 수락시 ID를 이용하여 환자 이름을 받아오고, 서버에 활동량 데이터를 전송한다.
       } else {
         console.log('identify patient : ' + ID);
         //console.log('data got : ' + step_data);
@@ -164,6 +167,7 @@ router.get('/welcome', (req, res, next) => {
         //http.UserStepSubmit(ID, steps, step_date);
       }
       setTimeout(() => {
+        //서버에서 받아온 데이터를 이용하여 환자 세션을 설정한다.
         SessionCallback = (ID, name, age, height, weight, exercise, gender) => {
           session.setupSession(ID, name, age, height, weight, exercise, gender);
           res.render('welcome', { name: name });
@@ -177,22 +181,23 @@ router.get('/welcome', (req, res, next) => {
 
 });
 
-
+//운동 프로그램 진행 화면
 router.get('/exercise', (req, res, next) => {
 
+  //세션에서 환자에게 할당된 운동 프로그램을 가져온다.
   ExerciseCallback = (exercise) => {
+    //운동 프로그램이 없다면 운동을 종료한다.
     if (exercise == 'done') {
-
       GetNameCallback = (name) => {
-        session.clearSession();
         res.render('done', { name: name });
-
       }
       session.getName(GetNameCallback);
     } else {
+      //운동 프로그램 ID를 이용하여 서버에 운동 프로그램 정보를 받아온다.
       http.requestExercise(exercise[0]);
       setTimeout(() => {
         ExerciseDataCallback = (image, count, comment, title) => {
+          //받아온 정보를 이용하여 화면에 운동 이미지와 운동 프로그램 내용을 출력하여 진행한다.
           res.render('exercise', { image: image, count: count, comment: comment, title: title });
         }
         http.getExercise(ExerciseDataCallback);
@@ -202,36 +207,39 @@ router.get('/exercise', (req, res, next) => {
   session.getExercise(ExerciseCallback);
 });
 
-
+//운동 프로그램 완료시 작동 로직.(운동 프로그램 하나 완료)
 router.get('/exercise_done', (req, res, next) => {
-  session.clearExercise();
-  res.redirect('/exercise');
-});
-
-router.get('/pause', (req, res, next) => {
-  res.render('pause');
-});
-
-router.get('/pause_end', (req, res, next) => {
+  //환자 세션에서 운동 프로그램을 하나 빼고, 서버에 완료한 운동 프로그램 ID를 전송한다.
   PauseExerciseCallback = (exercise) => {
     NameCallback = (ID) => {
-      http.UserExerciseSubmit(ID, exercise);
-      res.render('pause_end');
+      http.UserExerciseSubmit(ID, exercise[0]);
+      setTimeout(() => { session.clearExercise(); }, 500);
     }
     session.getID(NameCallback);
   }
   session.getExercise(PauseExerciseCallback);
+  res.redirect('/exercise');
 });
 
+//일시정지 메뉴를 표시한다.
+router.get('/pause', (req, res, next) => {
+  res.render('pause');
+});
 
+//중단 메뉴를 표시한다.
+router.get('/pause_end', (req, res, next) => {
+  res.render('pause_end');
+});
+
+//메인 화면으로 가기 위한 경유지. 세션을 초기화한다.
 router.get('/return2main', (req, res, next) => {
   startSense();
   bluetooth.resetBLE();
+  session.clearSession();
   res.redirect('/main');
-
 });
 
-
+//업데이트 파일 전송시 수행하는 모듈.
 app.use(express.bodyParser());
 router.post('/SWserver/metadata/APDUpdate', (req, res, next) => {
 

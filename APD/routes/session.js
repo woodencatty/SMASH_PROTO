@@ -1,4 +1,4 @@
-
+//세션 정보 변수
 let userID;
 let name = '';
 let age = 0;
@@ -7,11 +7,8 @@ let weight = 0;
 let exercise;
 let gender = 0;
 
-let steps = 0;
-let step_date;
-
 module.exports = {
-
+//세션 설정 함수
   setupSession: (valueID, valueName, valueAge, valueHeight, valueWeight, valueExercise, valueGender) => {
     console.log(valueID, valueName, valueAge, valueHeight, valueWeight, valueExercise, valueGender);
     userID = valueID;
@@ -23,31 +20,25 @@ module.exports = {
     gender = valueGender;
   },
 
-  setStepsData: (valueSteps, valueStepDate) => {
-    steps = valueSteps;
-    steps_date = valueStepDate;
-  },
-
-  getStepsData: (callback) => {
-    callback(steps, step_date);
-  },
-
-
+  //이름 반환 함수
   getName: (callback) => {
     callback(name)
   },
-
+//운동 프로그램 ID 반환 함수
   getExercise: (callback) => {
     callback(exercise)
   },
 
+//유저ID 반환함수
   getID: (callback) => {
     callback(userID)
   },
-
+//운동 프로그램 완료 함수
   clearExercise: () => {
     exercise.splice(0, 1);
   },
+
+  //세션 초기화 함수
   clearSession: () => {
 
     userID = null;

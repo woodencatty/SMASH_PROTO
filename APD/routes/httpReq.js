@@ -53,11 +53,11 @@ submitUserSteps = {														//POST요청 JSON데이터 정의
 	method: 'POST'
 };
 
-submitUserExercise = {														//POST요청 JSON데이터 정의
+submitDoneUserExercise = {														//POST요청 JSON데이터 정의
 	host: serverIP,
 	port: 60001,
 	path: '/APD/userdata/Exercise',
-	method: 'POST'
+	method: 'DELETE'
 };
 
 submitError = {														//POST요청 JSON데이터 정의
@@ -205,7 +205,7 @@ module.exports = {
 			}
 		}
 
-		let req = http.request(submitUserExercise, UserExerciseSubmitcallback);						//POST요청 전송
+		let req = http.request(submitDoneUserExercise, UserExerciseSubmitcallback);						//POST요청 전송
 
 		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
 		req.setHeader("exercise", exercise);

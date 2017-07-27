@@ -122,7 +122,6 @@ module.exports = {
 					count = serverdata.exercise_count;
 					comment = serverdata.exercise_comment;
 					title = serverdata.exercise_title;
-					discription = serverdata.discrexercise_discription;
 				});
 			}
 		}
@@ -244,7 +243,7 @@ requestIsOpened: (ID) => {
 	},
 
 	getExercise: (callback) => {
-		callback(image, count, comment, title, discription);
+		callback(image, count, comment, title);
 	},
 
 	getIsOpened: (callback) => {

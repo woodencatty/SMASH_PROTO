@@ -190,8 +190,8 @@ router.get('/exercise', (req, res, next) => {
     } else {
       http.requestExercise(exercise[0]);
       setTimeout(() => {
-        ExerciseDataCallback = (image, count, comment, title, discription) => {
-          res.render('exercise', { image: image, count: count, comment: comment, title: title, discription: discription });
+        ExerciseDataCallback = (image, count, comment, title) => {
+          res.render('exercise', { image: image, count: count, comment: comment, title: title });
         }
         http.getExercise(ExerciseDataCallback);
       }, 500);

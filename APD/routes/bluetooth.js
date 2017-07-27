@@ -29,7 +29,8 @@ module.exports = {
                     characteristics[0].subscribe();
                     characteristics[0].read();
                     characteristics[0].on('data', (data, isNotification) => {
-                        let data_array = data.split(',');
+                        let data_String = data.toString('utf8');
+                        let data_array = data_String.split(',');
                         steps = data_array[0];
                         step_date = new Date(data_array[1], data_array[2], data_array[3], data_array[4], data_array[5], data_array[6], 0);
                     });

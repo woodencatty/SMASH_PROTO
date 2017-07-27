@@ -17,8 +17,8 @@ block content
     function msg_time() {
     m=Math.floor(SetTime % 60);
     var msg=m ;
-    document.all.ViewTimer.innerHTML='남은 횟수 : '+msg;
+    document.all.ViewTimer.innerHTML=msg;
     SetTime--;
     if (SetTime < 0) { clearInterval(tid); location.replace('/exercise_done'); }
     }
-    window.onload = function TimerStart(){ tid=setInterval('msg_time()',2000) };
+    window.onload = function TimerStart(){ tid=setInterval('msg_time()',1000) };

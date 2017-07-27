@@ -136,7 +136,7 @@ router.get('/try', (req, res, next) => {
 router.get('/identify', (req, res, next) => {
   console.log("Directed to identify Page");
    TryCallback = function (try_count) {
-  if (try_count > 10) {
+  if (try_count > 3) {
     res.render('failed');
   } else {
       res.render('identify', { retry: try_count });

@@ -38,7 +38,7 @@ module.exports = {
             });
             setTimeout(() => {
                 peripheral.disconnect();
-            }, 2000);
+            }, 4000);
 
         });
     },
@@ -52,5 +52,13 @@ module.exports = {
         console.log(steps);
         console.log(step_date);
         callback(ID, steps, step_date);
+    },
+    resetBLE:()=>{
+         try_count = 0;
+ ID = 'noname';
+
+
+ steps = 0;
+ step_date = null;
     }
 }

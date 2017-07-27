@@ -57,6 +57,7 @@ function startSense() {
 
 this.DistanceInterval = setInterval(() => {
   sensor.senseDist();
+  
 }, 1000);  //값 확인을 위해 간격 짧게 잡음.
 
 
@@ -225,6 +226,7 @@ router.get('/pause_end', (req, res, next) => {
 
 router.get('/return2main', (req, res, next) => {
   startSense();
+bluetooth.resetBLE();
   res.redirect('/main');
 
 });

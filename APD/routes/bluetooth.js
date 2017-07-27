@@ -23,12 +23,12 @@ module.exports = {
         noble.startScanning(['fff0'], false);
         noble.on('discover', (peripheral) => {
             console.log('find : ' + peripheral.advertisement.localName + "(" + peripheral.address + ")");
-            ID = peripheral.advertisement.localName;
             peripheral.connect((error) => {
                 peripheral.discoverSomeServicesAndCharacteristics(['fff0'], ['fff1'], (error, services, characteristics) => {
                     characteristics[0].subscribe();
                     characteristics[0].read();
                     characteristics[0].on('data', (data, isNotification) => {
+                                    ID = peripheral.advertisement.localName;
                         let data_String = data.toString('utf8');
                         let data_array = data_String.split(',');
                         steps = data_array[0];

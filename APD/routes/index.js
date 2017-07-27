@@ -241,7 +241,7 @@ router.get('/return2main', (req, res, next) => {
 });
 
 //업데이트 파일 전송시 수행하는 모듈.
-app.use(express.bodyParser());
+router.use(express.bodyParser());
 router.post('/SWserver/metadata/APDUpdate', (req, res, next) => {
 
 

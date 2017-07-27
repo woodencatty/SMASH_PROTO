@@ -24,6 +24,12 @@ h2 {
 }
 
 
+#errorMsg {
+  align-content:center;
+  font-weight: bold;
+  font-size: 50px;
+  color: #FFFFFF;
+}
 
 
 .contents {

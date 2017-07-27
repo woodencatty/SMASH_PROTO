@@ -13,10 +13,26 @@ h1 {
   align-content:center;
   font-weight: bold;
   font-size: 50px;
-  color: #000000;
+  color: #FFFFFF;
 }
 
 h2 {
+  align-content:center;
+  font-weight: bold;
+  font-size: 25px;
+  color: #FFFFFF;
+}
+
+
+h3 {
+  align-content:center;
+  font-weight: bold;
+  font-size: 25px;
+  color: #000000;
+}
+
+
+h4 {
   align-content:center;
   font-weight: bold;
   font-size: 25px;

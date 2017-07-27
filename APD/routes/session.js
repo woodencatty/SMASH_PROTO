@@ -1,4 +1,3 @@
-require('date-utils');
 
 let userID;
 let name = '';

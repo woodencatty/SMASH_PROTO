@@ -55,7 +55,7 @@ submitUserSteps = {														//GET요청 JSON데이터 정의
 submitUserExercise = {														//GET요청 JSON데이터 정의
 	host: serverIP,
 	port: 60001,
-	path: '/submitUserExercise',
+	path: '/APD/userdata/Exercise',
 	method: 'POST'
 };
 

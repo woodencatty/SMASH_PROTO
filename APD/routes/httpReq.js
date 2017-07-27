@@ -111,6 +111,7 @@ module.exports = {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
 			if (response.statusCode != 200) {
 				console.log('Error Response!');
+				
 			} else {
 				let serverdata = '';
 				response.on('data', function (chunk) {							//응답 데이터를 JSON형태로 파싱함

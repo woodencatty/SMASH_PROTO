@@ -93,8 +93,6 @@ router.get('/main_not_opened', (req, res, next) => {
     }
     http.getIsOpened(getOpenStatusCallback)
   }, 50);
-
-
 });
 
 
@@ -227,8 +225,6 @@ router.get('/return2main', (req, res, next) => {
   res.redirect('/main');
 
 });
-
-router.put()
 
 module.exports = router;
 

@@ -17,7 +17,7 @@ app.get('/APD/metadata/IsOpen', (req, res) => {
         content_type: "Application/json",
         result_code: 200,
         result_req: "",
-        is_opened: true
+        is_opened: false
     });
     res.end(json_array);
 });

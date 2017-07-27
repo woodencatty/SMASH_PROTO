@@ -2,7 +2,11 @@ var noble = require('noble');
 
 let try_count = 0;
 let ID = 'noname';
-let step_data = '';
+
+
+let steps = 0;
+let step_date;
+
 
 noble.on('scanStart', () => {
     console.log('status : scanning');
@@ -24,7 +28,9 @@ module.exports = {
                     characteristics[0].subscribe();
                     characteristics[0].read();
                     characteristics[0].on('data', (data, isNotification) => {
-                        step_data = data.toString('utf8');
+                        let data_array = data.split(',');
+                        steps = data_array[0];
+                        step_date = new Date(data_array[1], data_array[2], data_array[3], data_array[4], data_array[5], data_array[6], 0);
                     });
                 });
             });
@@ -41,7 +47,8 @@ module.exports = {
 
     getIDDData: (callback) => {
         console.log(ID);
-        console.log(step_data);
-        callback(ID, step_data);
+        console.log(steps);
+        console.log(step_date);
+        callback(ID, steps, step_date);
     }
 }

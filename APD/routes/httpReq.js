@@ -161,7 +161,7 @@ requestIsOpened: (ID) => {
 
 	},
 
-	UserStepSubmit: (ID, Steps) => {
+	UserStepSubmit: (ID, steps, step_date) => {
 		UserStepSubmitback = function (response) {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
 			if (response.statusCode != 200) {
@@ -180,7 +180,8 @@ requestIsOpened: (ID) => {
 		let req = http.request(submitUserSteps, UserStepSubmitback);						//GET요청 전송
 
 		req.setHeader("idd_id", ID);											//헤더에 요청 데이터 첨부
-		req.setHeader("step_data" , Steps);
+		req.setHeader("steps" , steps);
+		req.setHeader("step_date" , step_date);
 
 		req.end();
 	},

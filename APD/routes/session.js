@@ -1,3 +1,5 @@
+require('date-utils');
+
 let userID;
 let name = '';
 let age = 0;
@@ -6,7 +8,8 @@ let weight = 0;
 let exercise;
 let gender = 0;
 
-let steps_data;
+let steps= 0;
+let step_date;
 
 module.exports = {
 
@@ -21,12 +24,13 @@ module.exports = {
     gender = valueGender;
   },
 
-  setStepsData:(data)=>{
-    steps_data = data;
+  setStepsData:(valueSteps, valueStepDate)=>{
+    steps = valueSteps;
+    steps_date = valueStepDate;
   },
 
   getStepsData:(callback)=>{
-    callback(steps_data);
+    callback(steps, step_date);
   },
 
 

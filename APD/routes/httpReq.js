@@ -25,7 +25,7 @@ let serverIP = '127.0.0.1';
 getUserInfoRequest = {														//GET요청 JSON데이터 정의
 	host: serverIP,
 	port: 60001,
-	path: '/requestUserInfo',
+	path: '/APD/userdata/UserInfo',
 	method: 'GET'
 };
 
@@ -33,14 +33,14 @@ getUserInfoRequest = {														//GET요청 JSON데이터 정의
 getExerciseInfoRequest = {														//GET요청 JSON데이터 정의
 	host: serverIP,
 	port: 60001,
-	path: '/requestExercise',
+	path: '/APD/userdata/Exercise',
 	method: 'GET'
 };
 
 getIsOpenedRequest = {														//GET요청 JSON데이터 정의
 	host: serverIP,
 	port: 60001,
-	path: '/requestIsOpen',
+	path: '/APD/metadata/IsOpen',
 	method: 'GET'
 };
 
@@ -48,7 +48,7 @@ getIsOpenedRequest = {														//GET요청 JSON데이터 정의
 submitUserSteps = {														//GET요청 JSON데이터 정의
 	host: serverIP,
 	port: 60001,
-	path: '/submitUserSteps',
+	path: '/APD/userdata/UserSteps',
 	method: 'POST'
 };
 
@@ -56,6 +56,13 @@ submitUserExercise = {														//GET요청 JSON데이터 정의
 	host: serverIP,
 	port: 60001,
 	path: '/submitUserExercise',
+	method: 'POST'
+};
+
+submitError = {														//GET요청 JSON데이터 정의
+	host: serverIP,
+	port: 60001,
+	path: '/APD/metadata/Error',
 	method: 'POST'
 };
 
@@ -79,18 +86,19 @@ module.exports = {
 					console.log(serverdata.patient_name);
 					userID = ID;
 					name = serverdata.patient_name;
-					exercise = serverdata.patient_Exercise;
 					age = serverdata.patient_Age;
 					height = serverdata.patient_Height;
 					weight = serverdata.patient_Weight;
 					gender = serverdata.patient_Gender;
+					exercise = serverdata.patient_Exercise;
+
 				});
 			}
 		}
 
 		let req = http.request(getUserInfoRequest, getUserInfocallback);						//GET요청 전송
 
-		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
+		req.setHeader("idd_id" , ID);											//헤더에 요청 데이터 첨부
 
 		req.end();
 
@@ -121,7 +129,7 @@ module.exports = {
 
 		let req = http.request(getExerciseInfoRequest, getExerciseInfocallback);						//GET요청 전송
 
-		req.setHeader("exercise", exercise);											//헤더에 요청 데이터 첨부
+		req.setHeader("program_id", exercise);											//헤더에 요청 데이터 첨부
 
 		req.end();
 
@@ -148,14 +156,14 @@ requestIsOpened: (ID) => {
 
 		let req = http.request(getIsOpenedRequest, getIsOpenedcallback);						//GET요청 전송
 
-		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
+		req.setHeader("apd_id", ID);											//헤더에 요청 데이터 첨부
 
 		req.end();
 
 	},
 
 	UserStepSubmit: (ID, Steps) => {
-		postcallback = function (response) {
+		UserStepSubmitback = function (response) {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
 			if (response.statusCode != 200) {
 				console.log('Error Response!');
@@ -170,17 +178,17 @@ requestIsOpened: (ID) => {
 			}
 		}
 
-		let req = http.request(submitUserSteps, postcallback);						//GET요청 전송
+		let req = http.request(submitUserSteps, UserStepSubmitback);						//GET요청 전송
 
-		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
-		req.setHeader("Steps", Steps);
+		req.setHeader("idd_id", ID);											//헤더에 요청 데이터 첨부
+		req.setHeader("step_data" , Steps);
 
 		req.end();
 	},
 
 
 	UserExerciseSubmit: (ID, exercise) => {
-		postcallback = function (response) {
+		UserExerciseSubmitcallback = function (response) {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
 			if (response.statusCode != 200) {
 				console.log('Error Response!');
@@ -195,13 +203,37 @@ requestIsOpened: (ID) => {
 			}
 		}
 
-		let req = http.request(submitUserExercise, postcallback);						//GET요청 전송
+		let req = http.request(submitUserExercise, UserExerciseSubmitcallback);						//GET요청 전송
 
 		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
 		req.setHeader("exercise", exercise);
 
 		req.end();
 	},
+
+		ErrorSubmit: (error) => {
+		ErrorSubmitcallback = function (response) {
+			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
+			if (response.statusCode != 200) {
+				console.log('Error Response!');
+			} else {
+				let serverdata = '';
+				response.on('data', function (chunk) {							//응답 데이터를 JSON형태로 파싱함
+					serverdata = JSON.parse(chunk);
+				});
+				response.on('end', function () {									//응답이 끝났을 시 데이터 추출
+					console.log(serverdata);
+				});
+			}
+		}
+
+		let req = http.request(submitError, ErrorSubmitcallback);						//GET요청 전송
+
+		req.setHeader("error_log", error);											//헤더에 요청 데이터 첨부
+
+		req.end();
+	},
+
 
 	getInfo: (callback) => {
 		callback(userID, name, age, height, weight, exercise, gender);

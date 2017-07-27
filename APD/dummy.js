@@ -71,7 +71,6 @@ app.get('/APD/userdata/Exercise', (req, res) => {
         exercise_count: 10,
         exercise_comment: comment,
         exercise_title: title,
-        exercise_discription: discription,
     });
     res.end(json_array);
 

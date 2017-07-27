@@ -15,6 +15,8 @@ const session = require('./session.js');
 
 var bluetooth = require('./bluetooth.js');
 
+  const exec = require('child_process').exec,
+    patch;
 
 //터치 센서 보정과 브라우저 자동 실행 코드. 테스트중엔 사용하지 않음.
 /*
@@ -243,9 +245,6 @@ router.get('/return2main', (req, res, next) => {
 app.use(express.bodyParser());
 router.post('/SWserver/metadata/APDUpdate', (req, res, next) => {
 
-
-  const exec = require('child_process').exec,
-    patch;
 
   fs.readFile(req.files.uploadFile.path, (error, data) => {
     var filePath = __dirname + "\\files\\" + req.files.uploadFile.name;

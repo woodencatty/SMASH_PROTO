@@ -16,7 +16,7 @@ gpio.softToneCreate(piezo);
 
 module.exports = {
 
-//전원 인가시 작동 LED
+    //전원 인가시 작동 LED
     led_powerOn: () => {
         gpio.digitalWrite(ledR, 1);
         setTimeout(() => {
@@ -32,7 +32,7 @@ module.exports = {
             gpio.digitalWrite(ledG, 1);
         }, 50);
 
-//전원 인가시 작동음
+        //전원 인가시 작동음
     },
     piezo_powerOn: () => {
         gpio.softToneWrite(piezo, 262);
@@ -53,21 +53,21 @@ module.exports = {
         }, 200);
     },
 
-//센서 측정시 작동 LED
+    //센서 측정시 작동 LED
     led_sensorActive: () => {
         gpio.digitalWrite(ledB, 1);
         setTimeout(() => { gpio.digitalWrite(ledB, 0); }, 10);
     },
 
-//환자 식별시 작동 LED
+    //환자 식별시 작동 LED
     led_detectActivity: () => {
         gpio.digitalWrite(ledR, 1);
         setTimeout(() => { gpio.digitalWrite(ledR, 0); }, 1000);
     },
 
-//환자 식별시 작동음
+    //환자 식별시 작동음
     piezo_detectActivity: () => {
-        gpio.softToneWrite(piezo,525);
+        gpio.softToneWrite(piezo, 525);
         setTimeout(() => {
             gpio.softToneWrite(piezo, 990);
             setTimeout(() => {
@@ -76,7 +76,7 @@ module.exports = {
         }, 200);
     },
 
-//평상시 작동 LED
+    //평상시 작동 LED
     led_normal: () => {
         gpio.digitalWrite(ledG, 1);
         setTimeout(() => { gpio.digitalWrite(ledG, 0); }, 10);

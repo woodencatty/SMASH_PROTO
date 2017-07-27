@@ -28,7 +28,7 @@ module.exports = {
                     characteristics[0].subscribe();
                     characteristics[0].read();
                     characteristics[0].on('data', (data, isNotification) => {
-                                    ID = peripheral.advertisement.localName;
+                        ID = peripheral.advertisement.localName;
                         let data_String = data.toString('utf8');
                         let data_array = data_String.split(',');
                         steps = data_array[0];
@@ -39,7 +39,6 @@ module.exports = {
             setTimeout(() => {
                 peripheral.disconnect();
             }, 4000);
-
         });
     },
 
@@ -53,12 +52,10 @@ module.exports = {
         console.log(step_date);
         callback(ID, steps, step_date);
     },
-    resetBLE:()=>{
-         try_count = 0;
- ID = 'noname';
-
-
- steps = 0;
- step_date = null;
+    resetBLE: () => {
+        try_count = 0;
+        ID = 'noname';
+        steps = 0;
+        step_date = null;
     }
 }

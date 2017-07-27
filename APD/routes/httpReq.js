@@ -98,7 +98,7 @@ module.exports = {
 
 		let req = http.request(getUserInfoRequest, getUserInfocallback);						//GET요청 전송
 
-		req.setHeader("idd_id" , ID);											//헤더에 요청 데이터 첨부
+		req.setHeader("idd_id", ID);											//헤더에 요청 데이터 첨부
 
 		req.end();
 
@@ -134,7 +134,7 @@ module.exports = {
 
 	},
 
-requestIsOpened: (ID) => {
+	requestIsOpened: (ID) => {
 		//요청 데이터 수신 콜백함수
 		getIsOpenedcallback = function (response) {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
@@ -180,8 +180,8 @@ requestIsOpened: (ID) => {
 		let req = http.request(submitUserSteps, UserStepSubmitback);						//GET요청 전송
 
 		req.setHeader("idd_id", ID);											//헤더에 요청 데이터 첨부
-		req.setHeader("steps" , steps);
-		req.setHeader("step_date" , step_date);
+		req.setHeader("steps", steps);
+		req.setHeader("step_date", step_date);
 
 		req.end();
 	},
@@ -211,7 +211,7 @@ requestIsOpened: (ID) => {
 		req.end();
 	},
 
-		ErrorSubmit: (error) => {
+	ErrorSubmit: (error) => {
 		ErrorSubmitcallback = function (response) {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
 			if (response.statusCode != 200) {

@@ -57,7 +57,7 @@ function startSense() {
 
 this.DistanceInterval = setInterval(() => {
   sensor.senseDist();
-  
+
 }, 1000);  //값 확인을 위해 간격 짧게 잡음.
 
 
@@ -136,14 +136,14 @@ router.get('/try', (req, res, next) => {
 //환자 인식 화면
 router.get('/identify', (req, res, next) => {
   console.log("Directed to identify Page");
-   TryCallback = function (try_count) {
-  if (try_count > 3) {
-    res.render('failed');
-  } else {
+  TryCallback = function (try_count) {
+    if (try_count > 3) {
+      res.render('failed');
+    } else {
       res.render('identify', { retry: try_count });
     }
   }
-   bluetooth.getTryCount(TryCallback);
+  bluetooth.getTryCount(TryCallback);
 });
 
 //환영 화면
@@ -182,12 +182,12 @@ router.get('/exercise', (req, res, next) => {
 
   ExerciseCallback = (exercise) => {
     if (exercise == 'done') {
-      
+
       GetNameCallback = (name) => {
-    session.clearSession();
+        session.clearSession();
         res.render('done', { name: name });
-      
-    }
+
+      }
       session.getName(GetNameCallback);
     } else {
       http.requestExercise(exercise[0]);
@@ -226,7 +226,7 @@ router.get('/pause_end', (req, res, next) => {
 
 router.get('/return2main', (req, res, next) => {
   startSense();
-bluetooth.resetBLE();
+  bluetooth.resetBLE();
   res.redirect('/main');
 
 });

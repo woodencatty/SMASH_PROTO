@@ -7,13 +7,13 @@ let weight = 0;
 let exercise;
 let gender = 0;
 
-let steps= 0;
+let steps = 0;
 let step_date;
 
 module.exports = {
 
   setupSession: (valueID, valueName, valueAge, valueHeight, valueWeight, valueExercise, valueGender) => {
-        console.log(valueID, valueName, valueAge, valueHeight, valueWeight, valueExercise, valueGender);
+    console.log(valueID, valueName, valueAge, valueHeight, valueWeight, valueExercise, valueGender);
     userID = valueID;
     name = valueName;
     age = valueAge;
@@ -23,12 +23,12 @@ module.exports = {
     gender = valueGender;
   },
 
-  setStepsData:(valueSteps, valueStepDate)=>{
+  setStepsData: (valueSteps, valueStepDate) => {
     steps = valueSteps;
     steps_date = valueStepDate;
   },
 
-  getStepsData:(callback)=>{
+  getStepsData: (callback) => {
     callback(steps, step_date);
   },
 
@@ -40,7 +40,7 @@ module.exports = {
   getExercise: (callback) => {
     callback(exercise)
   },
-  
+
   getID: (callback) => {
     callback(userID)
   },
@@ -48,18 +48,18 @@ module.exports = {
   clearExercise: () => {
     exercise.splice(0, 1);
   },
-  clearSession:()=>{
+  clearSession: () => {
 
- userID = null;
- name = '';
- age = 0;
- height = 0;
- weight = 0;
- exercise= null;
- gender = 0;
+    userID = null;
+    name = '';
+    age = 0;
+    height = 0;
+    weight = 0;
+    exercise = null;
+    gender = 0;
 
- steps= 0;
- step_date= null;
+    steps = 0;
+    step_date = null;
   }
 }
 

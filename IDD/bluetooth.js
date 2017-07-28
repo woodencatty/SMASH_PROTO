@@ -69,7 +69,7 @@ module.exports = {
     bleno.on('rssiUpdate', (rssi) => {
       console.log('rssi update to : ' + rssi);
     });
-  }
+  },
 
   setName: (deviceName){
     advertiseName = deviceName;

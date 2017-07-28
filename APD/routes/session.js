@@ -37,7 +37,6 @@ module.exports = {
 
   },
   setupSettings: (_serverIP, _port, _version, _deviceName) => {
-    console.log(_serverIP + _port);
     serverIP = _serverIP;
     port = _port;
     version = _version;

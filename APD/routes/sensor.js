@@ -43,7 +43,7 @@ let lgtinterval = 0;
                 temperature = temp.toFixed(1);
                 humidity = humi.toFixed(1);
 
-            } else { console.log("Error detected in DHT22 sensor"); }
+            } else {  }
         });
 }, dhtinterval);}
 

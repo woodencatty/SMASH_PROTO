@@ -12,11 +12,9 @@ let step_date = null;                      //측정 날짜
 
 //상태 표시 로그
 noble.on('scanStart', () => {
-    console.log('status : scanning');
 });
 
 noble.on('scanStop', () => {
-    console.log('status : scan stop');
 });
 
 module.exports = {
@@ -26,7 +24,6 @@ module.exports = {
         try_count++;
         noble.startScanning(['fff0'], false);
         noble.on('discover', (peripheral) => {
-            console.log('find : ' + peripheral.advertisement.localName + "(" + peripheral.address + ")");
             peripheral.connect((error) => {
                                         ID = peripheral.advertisement.localName;
 
@@ -53,9 +50,6 @@ module.exports = {
     },
 
     getIDDData: (callback) => {
-        console.log(ID);
-        console.log(steps);
-        console.log(step_date);
         callback(ID, steps, step_date);
     },
 

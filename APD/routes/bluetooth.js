@@ -7,7 +7,7 @@ let ID = 'noname';                  //ID 저장 변수
 
 
 let steps = 0;                      //걸음 수 변수
-let step_date;                      //측정 날짜
+let step_date = null;                      //측정 날짜
 
 
 //상태 표시 로그

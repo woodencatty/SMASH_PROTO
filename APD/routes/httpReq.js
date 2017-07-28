@@ -148,10 +148,23 @@ process.on('uncaughtException', function (err) {
 	requestIsOpened: (ID) => {
 		//요청 데이터 수신 콜백함수
 		getIsOpenedcallback = function (response) {
+
+
+				req.on('error', (e) => {
+  console.error(`problem with request: ${e.message}`);
+});
+
+process.on('uncaughtException', function (err) {
+    console.log(err);
+}); 
+
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
 			if (response.statusCode != 200) {
 				console.log('Error Response!');
 			} else {
+
+
+
 				let serverdata = '';
 				response.on('data', function (chunk) {							//응답 데이터를 JSON형태로 파싱함
 					serverdata = JSON.parse(chunk);

@@ -163,8 +163,6 @@ router.get('/welcome', (req, res, next) => {
         res.redirect('/identify');
         //데이터 수락시 ID를 이용하여 환자 이름을 받아오고, 서버에 활동량 데이터를 전송한다.
       } else {
-        console.log('identify patient : ' + ID);
-        console.log('data got : ' + step_data);
         http.requestUserInfo(ID);
         http.UserStepSubmit(ID, steps, step_date);
       }

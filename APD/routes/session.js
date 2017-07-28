@@ -2,7 +2,7 @@
 const SWserver = require('./SWserverReq.js');
 
 
-let userID;
+let userID='';
 let name = '';
 let age = 0;
 let height = 0;

@@ -71,7 +71,7 @@ module.exports = {
     });
   },
 
-  setName: (deviceName){
+  setName: (deviceName)=>{
     advertiseName = deviceName;
   }
 }

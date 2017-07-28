@@ -103,7 +103,11 @@ module.exports = {
 		}
 
 		let req = http.request(getUserInfoRequest, getUserInfocallback);						//GET요청 전송
+req.on('error', function(error) {
 
+	console.log('관리서버와 연결할 수 없습니다.');
+
+});
 		req.setHeader("idd_id", ID);											//헤더에 요청 데이터 첨부
 
 		req.end();
@@ -138,7 +142,11 @@ module.exports = {
 		}
 
 		let req = http.request(getExerciseInfoRequest, getExerciseInfocallback);						//GET요청 전송
+req.on('error', function(error) {
 
+	console.log('관리서버와 연결할 수 없습니다.');
+
+});
 		req.setHeader("program_id", exercise);											//헤더에 요청 데이터 첨부
 
 		req.end();
@@ -174,7 +182,7 @@ module.exports = {
 
 req.on('error', function(error) {
 
-	throw new Error('관리서버와 연결할 수 없습니다.');
+	console.log('관리서버와 연결할 수 없습니다.');
 
 });
 
@@ -208,7 +216,11 @@ req.on('error', function(error) {
 		}
 
 		let req = http.request(submitUserSteps, UserStepSubmitback);						//POST요청 전송
+req.on('error', function(error) {
 
+	console.log('관리서버와 연결할 수 없습니다.');
+
+});
 		req.setHeader("idd_id", ID);											//헤더에 요청 데이터 첨부
 		req.setHeader("steps", steps);
 		req.setHeader("step_date", step_date);
@@ -239,7 +251,11 @@ req.on('error', function(error) {
 		}
 
 		let req = http.request(submitDoneUserExercise, UserExerciseSubmitcallback);						//POST요청 전송
+req.on('error', function(error) {
 
+	console.log('관리서버와 연결할 수 없습니다.');
+
+});
 		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
 		req.setHeader("exercise", exercise);
 
@@ -268,7 +284,11 @@ req.on('error', function(error) {
 		}
 
 		let req = http.request(submitError, ErrorSubmitcallback);						//POST요청 전송
+req.on('error', function(error) {
 
+	console.log('관리서버와 연결할 수 없습니다.');
+
+});
 		req.setHeader("error_log", error);											//헤더에 요청 데이터 첨부
 
 		req.end();

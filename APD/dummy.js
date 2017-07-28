@@ -62,6 +62,10 @@ app.get('/APD/userdata/Exercise', (req, res) => {
         imagefile = '/images/트레이너/3-1정리운동(등근육펴기).gif';
         title = '정리운동(등근육펴기)';
         comment = ' 동작을 잘 보고 따라해주세요.(2초씩 10회 반복)';
+    }else if (req.headers.program_id == 'done') {
+        imagefile = '';
+        title = '';
+        comment = '';
     }
 
     res.set('Content-Format', 'application/json');

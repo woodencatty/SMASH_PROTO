@@ -24,17 +24,20 @@ block content
 
       |     &nbsp; 
       |     
-      img(src='/images/세부소스/날씨/맑음.png', width='70', height='76', alt='')
+      img(src='',id='sunny', width='70', height='76', alt='')
       |  &nbsp; /&nbsp; 
-      img(src='/images/세부소스/날씨/맑음.png', width='70', height='76', alt='')
+      img(src='',id='sunny', width='70', height='76', alt='')
       |     
       br
       |     
-      img(src='/images/SCAN_20170717_120222551.jpg', width='546', height='772', alt='')
+      img(src='',id='poseter', width='546', height='772', alt='')
 
       script(type='text/javascript').
         document.oncontextmenu=function(){return false;} // 우클릭 방지
         document.onselectstart=function(){return false;} // 드래그 방지 
         document.ondragstart=function(){return false;} // 선택 방지
         document.onmousedown=function(){return false;}
+        document.getElementById("img").src = "#{image}"
+        document.getElementById("poseter").src = "#{poseter}"
+        document.getElementById("sunny").src = "#{sunny}"
 

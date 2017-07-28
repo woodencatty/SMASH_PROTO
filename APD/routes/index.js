@@ -44,35 +44,6 @@ acturator.led_powerOn();
 acturator.piezo_powerOn();
 
 
-function startSense(senseInterval) {
-  this.SensorInterval = setInterval(() => {
-    sensor.senseDHT22();
-    sensor.senseAdcAudio();
-    sensor.senseAdcEnv();
-    sensor.senseAdcLight();
-    acturator.led_sensorActive();
-
-    SensorDataCallback = (distance, temperature, humidity, audio, envelope, light) => {
-      DeviceNameCallback = (DeviceName) => {
-        SWserver.EnviormentSubmit(DeviceName, temperature, humidity)
-      }
-      session.getDeviceName(DeviceNameCallback)
-    }
-    sensor.getData(SensorDataCallback);
-    //console.log(sensor.distance, sensor.temperature, sensor.humidity, sensor.audio);
-  }, senseInterval);  //값 확인을 위해 간격 짧게 잡음.
-}
-
-this.DistanceInterval = setInterval(() => {
-  sensor.senseDist();
-}, 1000);  //값 확인을 위해 간격 짧게 잡음.
-
-
-this.statusInterval = setInterval(() => {
-  acturator.led_normal();
-}, 1200);
-
-
 function stopSense() {
   if (this.SensorInterval) {
     clearInterval(this.SensorInterval);
@@ -84,59 +55,66 @@ function initialize() {
   fs.readFile('./config', 'utf8', function (err, data) {
     //저장한 활동량 로그에서 데이터를 읽어 전송한다.
     var config = JSON.parse(data);
-    session.setupSettings(config.senseInterval, config.serverIP, config.deviceName, config.version);
-    startSense(config.senseInterval);
-    SWserver.setIP(config.serverIP);
+    session.setupSettings(config.serverIP, config.deviceName, config.version);
+    sensor.setInterval(dhtinterval, distinterval, audiointerval, envinterval, lgtinterval, ledinterval);
+    SWserver.setIP(config.SWserverIPv4,config.port);
+
+this.statusInterval = setInterval(() => {
+  acturator.led_normal();
+}, config.ledinterval);
+
+
   });
   session.clearSession();
   bluetooth.resetBLE();
   SWserver.clearSWserver();
 }
 
-
-
 //대기화면. 센서값 갱신을 위해 2초에 한번씩 갱신한다.
 initialize();
 
 router.get('/main_not_opened', (req, res, next) => {
+let poster = '/images/SCAN_20170717_120222551.jpg'
 
-  SWserver.requestIsOpened('APD0001');
+ DeviceNameCallback = (DeviceName) => {
+  SWserver.requestIsOpened(DeviceName);
   setTimeout(() => {
     getOpenStatusCallback = (is_opened) => {
       if (is_opened == true) {
         res.redirect('/main');
       } else {
-        console.log("Directed to Main Page");
-        //거리가 50cm 이하일 경우 try페이지로 전환하고, 아닐 경우 대기화면을 표시
-        SensorDataCallback = (distance, temperature, humidity, audio, envelope, light) => {
-          res.render('index_not_opened', { title: '대기화면', temp: temperature, humi: humidity });
+        SensorDataCallback = (patientDetected, temperature, humidity, audio, envelope, light) => {
+          res.render('index_not_opened', { title: '대기화면', temp: temperature, humi: humidity, poseter:poseter });
         }
         sensor.getData(SensorDataCallback);
       }
     }
     SWserver.getIsOpened(getOpenStatusCallback)
   }, 50);
+ }
+  session.getDeviceName(DeviceNameCallback)
 });
 
 
 router.get('/main', (req, res, next) => {
-  SWserver.requestIsOpened('APD0001');
+  let poster = '/images/SCAN_20170717_120222551.jpg'
+  let sunny = '/images/세부소스/날씨/맑음.png'
+ DeviceNameCallback = (DeviceName) => {
+  SWserver.requestIsOpened(DeviceName);
   setTimeout(() => {
     getOpenStatusCallback = (is_opened) => {
       if (is_opened == false) {
         res.redirect('/main_not_opened');
       } else {
-        console.log("Directed to Main Page");
         //거리가 50cm 이하일 경우 try페이지로 전환하고, 아닐 경우 대기화면을 표시
-        SensorDataCallback = (distance, temperature, humidity, audio, envelope, light) => {
-          if (distance < 50) {
+        SensorDataCallback = (patientDetected, temperature, humidity, audio, envelope, light) => {
+          if (patientDetected == true) {
             acturator.led_detectActivity();
             acturator.piezo_detectActivity();
             stopSense();
-            console.log('dtected : \t' + distance);
             res.redirect('/try');
           } else {
-            res.render('index', { title: '대기화면', temp: temperature, humi: humidity });
+            res.render('index', { title: '대기화면', temp: temperature, humi: humidity,  poseter:poseter, sunny:sunny});
           }
         }
         sensor.getData(SensorDataCallback);
@@ -144,14 +122,18 @@ router.get('/main', (req, res, next) => {
     }
     SWserver.getIsOpened(getOpenStatusCallback)
   }, 50);
+ }
+  session.getDeviceName(DeviceNameCallback)
 
 });
 
 
 //운동 권유 화면 
 router.get('/try', (req, res, next) => {
+   let pause = '/images/세부소스/버튼/뒤로-다운.png';
+  let foward = '/images/세부소스/버튼/앞으로-다운.png';
   console.log("Directed to try Page");
-  res.render('try');
+  res.render('try',  {pause:pause, foward:foward});
 });
 
 //환자 인식 화면
@@ -170,6 +152,9 @@ router.get('/identify', (req, res, next) => {
 
 //환영 화면
 router.get('/welcome', (req, res, next) => {
+  
+   let pause = '/images/세부소스/버튼/뒤로-다운.png';
+  let foward = '/images/세부소스/버튼/앞으로-다운.png';
   console.log("Directed to welcome Page");
   bluetooth.SearchNconnect();
 
@@ -193,7 +178,7 @@ router.get('/welcome', (req, res, next) => {
             res.render('error');
           }
           session.setupUser(ID, name, age, height, weight, exercise, gender, exercise_done, stepcount);
-          res.render('welcome', { name: name , exercise_done: exercise_done, stepcount: stepcount});
+          res.render('welcome', { name: name , exercise_done: exercise_done, stepcount: stepcount, pause:pause, foward:foward});
         }
         SWserver.getInfo(SessionCallback);
       }, 200);
@@ -206,28 +191,22 @@ router.get('/welcome', (req, res, next) => {
 
 //운동 프로그램 진행 화면
 router.get('/exercise', (req, res, next) => {
-
+  let pause = '/images/세부소스/버튼/일시정지-다운.png'
   //세션에서 환자에게 할당된 운동 프로그램을 가져온다.
   ExerciseCallback = (exercise) => {
     //운동 프로그램이 없다면 운동을 종료한다.
-    if (exercise == 'done') {
+    if (exercise[0].id == 'done') {
       GetNameCallback = (name) => {
         res.render('done', { name: name });
       }
       session.getName(GetNameCallback);
     } else {
       //운동 프로그램 ID를 이용하여 서버에 운동 프로그램 정보를 받아온다.
-      SWserver.requestExercise(exercise[0]);
-      setTimeout(() => {
-        ExerciseDataCallback = (image, count, comment, title) => {
           if (image == '') {
             res.render('error');
           }
           //받아온 정보를 이용하여 화면에 운동 이미지와 운동 프로그램 내용을 출력하여 진행한다.
-          res.render('exercise', { image: image, count: count, comment: comment, title: title });
-        }
-        SWserver.getExercise(ExerciseDataCallback);
-      }, 500);
+          res.render('exercise', { image: exercise[0].image, count: exercise[0].count, comment: exercise[0].comment, title: exercise[0].title, pause: pause });
     }
   }
   session.getExercise(ExerciseCallback);
@@ -249,7 +228,9 @@ router.get('/exercise_done', (req, res, next) => {
 
 //일시정지 메뉴를 표시한다.
 router.get('/pause', (req, res, next) => {
-  res.render('pause');
+  let pause = '/images/세부소스/버튼/뒤로-다운.png';
+  let back = '/images/세부소스/버튼/일시정지-다운.png';
+  res.render('pause', {pause:pause, back:back});
 });
 
 //중단 메뉴를 표시한다.

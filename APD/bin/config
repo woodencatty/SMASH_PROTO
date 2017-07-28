@@ -1,6 +1,13 @@
 {
     "version":1.0,
     "deviceName":"APD0001",
-    "senseInterval":300000, 
-    "serverIP":"127.0.0.1" 
+"dhtinterval":2000,
+"distinterval":300, 
+"audiointerval":1000,
+"envinterval":1000,
+"lgtinterval":1000,
+"ledinterval":2000,
+    "SWserverIPv4":"127.0.0.1:" ,
+    "port":'60001'
+
 }

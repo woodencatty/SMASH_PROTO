@@ -16,29 +16,40 @@ const adcEnv = 1;                                      //ADC Channel 1
 const adcLight = 2;                                    //ADC Channel 2
 
 
-let distance = 99.2;
-let temperature = 23.5;
-let humidity = 56.2;
-let audio = 20;
-let envelope = 20;
-let light = 20;
+
 
 //각 센서값을 받을 변수 정의
-module.exports = {
-    //온습도측정 함수화
-    senseDHT22: () => {
-        temp.read(22, DHT22, (err, temp, humi) => {
+let distance = 0.0;
+let temperature =  0.0;
+let humidity =  0.0;
+let audio =  0.0;
+let envelope =  0.0;
+let light =  0.0;
+
+let patientDetected = false;
+let detectCount = 0;
+
+let dhtinterval = 0;
+let distinterval = 0;
+let audiointerval = 0;
+let envinterval = 0;
+let lgtinterval = 0;
+
+
+    
+  this.DHT22Interval = setInterval(() => {
+  temp.read(22, DHT22, (err, temp, humi) => {
             if (!err) {
                 temperature = temp.toFixed(1);
                 humidity = humi.toFixed(1);
 
             } else { console.log("Error detected in DHT22 sensor"); }
         });
-    },
+}, dhtinterval);
 
-    //거리측정 함수화
-    senseDist: () => {
-        let pulse = 0;
+
+  this.distanceInterval = setInterval(() => {
+ let pulse = 0;
         gpio.digitalWrite(ultraTRIG, 0);
         sleep.msleep(2);
         gpio.digitalWrite(ultraTRIG, 1);
@@ -49,37 +60,62 @@ module.exports = {
         while (gpio.digitalRead(ultraECHO) == 1);
         let travelTime = microt.now();
         distance = (travelTime - startTime) / 58;
-    },
 
-    //소음측정 함수화
-    senseAdcAudio: () => {
+        if(distance < 50){
+            detectCount++;
+            if(detectCount > 7){
+                patientDetected = true;
+            }
+        }else {detectCount = 0;
+            patientDetected = false;}
+
+}, distinterval);
+
+  this.audioInterval = setInterval(() => {
+
         adc.readRawValue(adcAudio, (value) => {
             audio = value;
         });
-    },
+},audiointerval);
 
-    //(대략적)소음측정 함수화
-    senseAdcEnv: () => {
+
+  this.envelopeInterval = setInterval(() => {
+
         adc.readRawValue(adcEnv, (value) => {
             envelope = value;
         });
-    },
+}, envinterval);
 
-    //조도측정 함수화
-    senseAdcLight: () => {
+
+  this.lightInterval = setInterval(() => {
+
         adc.readRawValue(adcLight, (value) => {
             light = value;
         });
+}, lgtinterval);
+
+
+
+
+module.exports = {
+
+    setInterval:(_dhtinterval, _distinterval, _audiointerval, _envinterval, _lgtinterval)=>{
+dhtinterval = _dhtinterval;
+distinterval = _distinterval;
+audiointerval = _audiointerval;
+envinterval = _envinterval;
+lgtinterval = _lgtinterval;
     },
 
     getData: (callback) => {
-        callback(distance, temperature, humidity, audio, envelope, light);
+        callback(patientDetected, temperature, humidity, audio, envelope, light);
     },
 
     getDistanceData: (callback) => {
         callback(distance)
     }
 }
+
 gpio.wiringPiSetup();                                //wiring-pi 초기화
 gpio.pinMode(ultraTRIG, gpio.OUTPUT);                // 근접센서 트리거핀 초기화
 gpio.pinMode(ultraECHO, gpio.INPUT);                 // 근접센서 에코핀 초기화

@@ -22,55 +22,48 @@ let exercise_done = 0;
 let stepcount = 0;
 
 //서버 IP
-let serverIP = '127.0.0.1';
-
+let serverIP = '127.0.0.1:';
+let serverPort = '60001';
 getUserInfoRequest = {														//GET요청 JSON데이터 정의
-	host: serverIP,
+	host: serverIP+serverPort,
 	port: 60001,
-	path: '/APD/userdata/UserInfo',
+	path: '/apd/userdata/userinfo',
 	method: 'GET'
 };
 
 
 getExerciseInfoRequest = {														//GET요청 JSON데이터 정의
-	host: serverIP,
+	host: serverIP+serverPort,
 	port: 60001,
-	path: '/APD/userdata/Exercise',
+	path: '/apd/userdata/exercise',
 	method: 'GET'
 };
 
 getIsOpenedRequest = {														//GET요청 JSON데이터 정의
-	host: serverIP,
+	host: serverIP+serverPort,
 	port: 60001,
-	path: '/APD/metadata/IsOpen',
+	path: '/apd/metadata/isopen',
 	method: 'GET'
 };
 
 
 submitUserSteps = {														//POST요청 JSON데이터 정의
-	host: serverIP,
+	host: serverIP+serverPort,
 	port: 60001,
-	path: '/APD/userdata/UserSteps',
+	path: '/apd/userdata/usersteps',
 	method: 'POST'
 };
 
 submitDoneUserExercise = {														//POST요청 JSON데이터 정의
-	host: serverIP,
+	host: serverIP+serverPort,
 	port: 60001,
-	path: '/APD/userdata/Exercise',
+	path: '/apd/userdata/exercise',
 	method: 'DELETE'
 };
-
-submitEnviorment = {														//POST요청 JSON데이터 정의
-	host: serverIP,
-	port: 60001,
-	path: '/APD/metadata/Enviorment',
-	method: 'POST'
-};
 submitError = {														//POST요청 JSON데이터 정의
-	host: serverIP,
+	host: serverIP+serverPort,
 	port: 60001,
-	path: '/APD/metadata/Error',
+	path: '/apd/metadata/error',
 	method: 'POST'
 };
 
@@ -123,7 +116,7 @@ module.exports = {
 
 	},
 
-	requestExercise: (exercise) => {
+	requestExercise: (exercise, callback) => {
 		//요청 데이터 수신 콜백함수
 		getExerciseInfocallback = function (response) {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
@@ -146,6 +139,7 @@ module.exports = {
 					count = serverdata.exercise_count;
 					comment = serverdata.exercise_comment;
 					title = serverdata.exercise_title;
+					callback(serverdata.exercise_image, serverdata.exercise_count, serverdata.exercise_comment, serverdata.exercise_title);
 				});
 			}
 		}
@@ -271,42 +265,6 @@ module.exports = {
 		req.end();
 	},
 
-	EnviormentSubmit: (ID, temperature, humidity) => {
-		EnviormentSubmitcallback = function (response) {
-			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
-			if (response.statusCode != 200) {
-				console.log('Error Response!');
-				console.log('Error Response!');
-
-				req.on('error', (e) => {
-					console.error(`problem with request: ${e.message}`);
-				});
-			} else {
-				let serverdata = '';
-				response.on('data', function (chunk) {							//응답 데이터를 JSON형태로 파싱함
-					serverdata = JSON.parse(chunk);
-				});
-				response.on('end', function () {									//응답이 끝났을 시 데이터 추출
-					console.log(serverdata);
-				});
-			}
-		}
-
-		let req = http.request(submitEnviorment, EnviormentSubmitcallback);						//POST요청 전송
-		req.on('error', function (error) {
-
-			console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
-
-		});
-		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
-		req.setHeader("temperature", temperature);
-		req.setHeader("humidity", humidityHumi);
-
-
-		req.end();
-	},
-
-
 	ErrorSubmit: (error) => {
 		ErrorSubmitcallback = function (response) {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
@@ -360,8 +318,9 @@ module.exports = {
 		callback(is_opened);
 	},
 
-	setIP: (IP) => {
+	setIP: (IP, port) => {
 		serverIP = IP;
+		serverPort = port;
 	},
 
 	clearSWserver: () => {

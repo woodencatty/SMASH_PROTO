@@ -10,17 +10,16 @@ block content
         |  #{name}님!           
         br
         br
+        |  
+        |  
         |  #{exercise_done}%만큼 운동하셨고,
         |  #{stepcount}걸음 걸으셨어요!
         br
+        |  
+        |  
         |  꾸준히 열심히 하셨네요!
         br
         |  같이 운동을 시작해볼까요?
-        br
-        br
-        | 
-        br
-        br
         br
         br
         br
@@ -28,14 +27,16 @@ block content
         |  돌아가기
         |             &nbsp; &nbsp; &nbsp;운동하기
         br         
-        img(src='/images/세부소스/버튼/뒤로-다운.png', width='152', height='113', onclick="location.href='/return2main'")
+        img(src='',id='back', height='113', onclick="location.href='/return2main'")
         |  &nbsp; &nbsp; &nbsp;
         |         &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         |         
-        img(src='/images/세부소스/버튼/앞으로-다운.png', width='152', height='113', onclick="location.href='/exercise'")
+        img(src='',id='foward', width='152', height='113', onclick="location.href='/exercise'")
 
       script(type='text/javascript').
         document.oncontextmenu=function(){return false;} // 우클릭 방지
         document.onselectstart=function(){return false;} // 드래그 방지 
         document.ondragstart=function(){return false;} // 선택 방지
         document.onmousedown=function(){return false;}
+        document.getElementById("back").src = "#{back}"
+        document.getElementById("foward").src = "#{foward}"        

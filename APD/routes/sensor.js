@@ -36,7 +36,7 @@ let envinterval = 0;
 let lgtinterval = 0;
 
 
-    
+    function senseDHT(dhtinterval){
   this.DHT22Interval = setInterval(() => {
   temp.read(22, DHT22, (err, temp, humi) => {
             if (!err) {
@@ -45,8 +45,9 @@ let lgtinterval = 0;
 
             } else { console.log("Error detected in DHT22 sensor"); }
         });
-}, dhtinterval);
+}, dhtinterval);}
 
+    function sensedist(distinterval){
 
   this.distanceInterval = setInterval(() => {
  let pulse = 0;
@@ -69,30 +70,33 @@ let lgtinterval = 0;
         }else {detectCount = 0;
             patientDetected = false;}
 
-}, distinterval);
+}, distinterval);}
+    function senseaud(audiointerval){
 
   this.audioInterval = setInterval(() => {
 
         adc.readRawValue(adcAudio, (value) => {
             audio = value;
         });
-},audiointerval);
+},audiointerval);}
 
+    function senseenv(envinterval){
 
   this.envelopeInterval = setInterval(() => {
 
         adc.readRawValue(adcEnv, (value) => {
             envelope = value;
         });
-}, envinterval);
+}, envinterval);}
 
+    function senselgt(lgtinterval){
 
   this.lightInterval = setInterval(() => {
 
         adc.readRawValue(adcLight, (value) => {
             light = value;
         });
-}, lgtinterval);
+}, lgtinterval);}
 
 
 
@@ -100,11 +104,11 @@ let lgtinterval = 0;
 module.exports = {
 
     setInterval:(_dhtinterval, _distinterval, _audiointerval, _envinterval, _lgtinterval)=>{
-dhtinterval = _dhtinterval;
-distinterval = _distinterval;
-audiointerval = _audiointerval;
-envinterval = _envinterval;
-lgtinterval = _lgtinterval;
+senseDHT(_dhtinterval);
+sensedist(_distinterval);
+senseaud(_audiointerval);
+senseenv(_envinterval);
+senselgt(_lgtinterval);
     },
 
     getData: (callback) => {

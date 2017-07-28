@@ -17,8 +17,8 @@
 
 
     "SWserverIPv4": "127.0.0.1",
+    "SWserverIPv6": "0.0.0.0.0.0.1",
     "port": "60001",
-
 
     "loglevel": "debug"
 

@@ -405,7 +405,7 @@ req.on('error', function(error) {
 serverIP = IP;
 	},
 
-	clearHttp:() => {
+	clearSWserver:() => {
 
  userID = 'noname';
  name = '';

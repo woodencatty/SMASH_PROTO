@@ -76,6 +76,12 @@ module.exports = {
         }, 200);
     },
 
+//데이터 수신시 작동LED
+    led_dataSaved: () => {
+        gpio.digitalWrite(ledR, 1);
+        setTimeout(() => { gpio.digitalWrite(ledR, 0); }, 1000);
+    },
+
     //평상시 작동 LED
     led_normal: () => {
         gpio.digitalWrite(ledG, 1);

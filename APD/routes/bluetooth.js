@@ -22,7 +22,7 @@ noble.on('scanStop', () => {
 module.exports = {
 
     //탐색 및 데이터 수집 모듈
-    startScanning: () => {
+    SearchNconnect: () => {
         try_count++;
         noble.startScanning(['fff0'], false);
         noble.on('discover', (peripheral) => {

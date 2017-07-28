@@ -151,7 +151,7 @@ router.get('/identify', (req, res, next) => {
 //환영 화면
 router.get('/welcome', (req, res, next) => {
   console.log("Directed to welcome Page");
-  bluetooth.startScanning();
+  bluetooth.SearchNconnect();
 
   setTimeout(() => {
     //탐색이 종료될 즈음 bluetooth 모듈에서 값을 받아와 http요청을 전송하고, 이름을 받아 welcome화면을 표시한다.
@@ -168,6 +168,7 @@ router.get('/welcome', (req, res, next) => {
         //http.UserStepSubmit(ID, steps, step_date);
       }
       setTimeout(() => {
+        acturator.led_dataSaved();
         //서버에서 받아온 데이터를 이용하여 환자 세션을 설정한다.
         SessionCallback = (ID, name, age, height, weight, exercise, gender) => {
           session.setupSession(ID, name, age, height, weight, exercise, gender);

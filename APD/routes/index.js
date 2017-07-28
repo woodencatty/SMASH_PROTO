@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const fs = require('fs');
+
 //센서모듈, bluetooth모듈, SWserver모듈 import
 const sensor = require('./sensor.js')
 

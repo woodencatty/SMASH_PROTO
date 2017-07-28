@@ -79,13 +79,8 @@ startSense();
 
 
 router.get('/main_not_opened', (req, res, next) => {
-try {
     http.requestIsOpened('APD0001');
-}
-catch (exception) {
-	console.log(exception);
-  res.render('error');
-}
+
 
   setTimeout(() => {
     getOpenStatusCallback = (is_opened) => {
@@ -106,13 +101,8 @@ catch (exception) {
 
 
 router.get('/main', (req, res, next) => {
-  try {
     http.requestIsOpened('APD0001');
-}
-catch (exception) {
-	console.log(exception);
-  res.render('error');
-}
+
   setTimeout(() => {
     getOpenStatusCallback = (is_opened) => {
       if (is_opened == false) {

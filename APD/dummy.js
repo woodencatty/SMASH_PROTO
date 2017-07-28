@@ -43,6 +43,22 @@ app.get('/APD/userdata/UserInfo', (req, res) => {
 
 });
 
+app.get('/APD/userdata/Achievement', (req, res) => {
+
+    console.log('User data Requested!');
+
+    res.set('Content-Format', 'application/json');
+    var json_array = JSON.stringify({
+        content_type: "Application/json",
+        result_code: 200,
+        result_req: "",
+        exercise_done: 40,
+        move_done: 40
+    });
+    res.end(json_array);
+
+});
+
 app.get('/APD/userdata/Exercise', (req, res) => {
 
     console.log('Exercise data Requested!' + req.headers.program_id);
@@ -87,4 +103,8 @@ app.post('/APD/userdata/Exercise', (req, res) => {
 
 app.post('/APD/metadata/Error', (req, res) => {
     console.log('Data submitted : '+req.headers.error_log);
+});
+
+app.post('/APD/metadata/Enviorment', (req, res) => {
+    console.log('Data submitted : '+req.headers);
 });

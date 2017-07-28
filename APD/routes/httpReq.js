@@ -18,6 +18,9 @@ let title = '';
 
 let is_opened = false;
 
+let exercise_done = 0;
+let move_done = 0;
+
 //서버 IP
 let serverIP = '127.0.0.1';
 
@@ -33,6 +36,13 @@ getExerciseInfoRequest = {														//GET요청 JSON데이터 정의
 	host: serverIP,
 	port: 60001,
 	path: '/APD/userdata/Exercise',
+	method: 'GET'
+};
+
+getAchievementRequest = {														//GET요청 JSON데이터 정의
+	host: serverIP,
+	port: 60001,
+	path: '/APD/userdata/Achievement',
 	method: 'GET'
 };
 
@@ -152,6 +162,43 @@ req.on('error', function(error) {
 
 });
 		req.setHeader("program_id", exercise);											//헤더에 요청 데이터 첨부
+
+		req.end();
+
+	},
+
+requestAchievement: (ID) => {
+		//요청 데이터 수신 콜백함수
+		requestAchievementcallback = function (response) {
+			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
+			if (response.statusCode != 200) {
+				console.log('Error Response!');
+				console.log('Error Response!');
+
+				req.on('error', (e) => {
+					console.error(`problem with request: ${e.message}`);
+				});
+			} else {
+				let serverdata = '';
+				response.on('data', function (chunk) {							//응답 데이터를 JSON형태로 파싱함
+					serverdata = JSON.parse(chunk);
+				});
+				response.on('end', function () {									//응답이 끝났을 시 데이터 추출
+					console.log(serverdata);
+					console.log(serverdata.patient_name);
+					exercise_done = serverdata.exercise_done;
+					move_done = serverdata.move_done;
+				});
+			}
+		}
+
+		let req = http.request(getAchievementRequest, requestAchievementcallback);						//GET요청 전송
+req.on('error', function(error) {
+
+	console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
+
+});
+		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
 
 		req.end();
 

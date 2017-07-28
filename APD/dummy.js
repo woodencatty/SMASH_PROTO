@@ -37,9 +37,9 @@ app.get('/APD/userdata/UserInfo', (req, res) => {
         patient_Height: '160',
         patient_Weight: '52',
         patient_Gender: 'f',
-        exercise_done: 40,
-        stepcount: 67,
-        patient_Exercise: ['exercise1', 'exercise2', 'exercise3', 'done']
+        patient_exercise_done: 40,
+        patient_stepcount: 67,
+        patient_Exercise: [{id: 'exercise1',count: 20, imagefile:'/images/트레이너/1-1준비운동(어깨)-묵.gif' , title:'준비운동(묵빠운동)' , comment:' 동작을 잘 보고 따라해주세요.(2초씩 10회 반복)' }, {id: 'exercise2', count: 20,imagefile:'/images/트레이너/2-2본운동(팔비대칭올리기).gif' , title:'본 운동(팔 비대칭 올리기)' , comment:' 동작을 잘 보고 따라해주세요.(2초씩 10회 반복)' }, {id: 'exercise3', count: 20,imagefile: '/images/트레이너/3-1정리운동(등근육펴기).gif' , title:'정리운동(등근육펴기)' , comment:' 동작을 잘 보고 따라해주세요.(2초씩 10회 반복)' }, {id: 'done',count: 0, imagefile: '' , title:'' , comment:'' }]
     });
     res.end(json_array);
 

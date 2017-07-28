@@ -7,7 +7,8 @@ let name = '';
 let age = 0;
 let height = 0;
 let weight = 0;
-let exercise = new Array();
+let exercise = [];
+
 
 let gender = 0;
 let exercise_done = 0;
@@ -21,7 +22,7 @@ let version = 0.0;
 let deviceName = '';
 
 module.exports = {
-//세션 설정 함수
+  //세션 설정 함수
   setupUser: (_ID, _Name, _Age, _Height, _Weight, _Exercise, _Gender, _Exercise_done, _Stepcount) => {
     let i = 0;
     userID = _ID;
@@ -32,25 +33,14 @@ module.exports = {
     gender = _Gender;
     exercise_done = _Exercise_done;
     stepcount = _Stepcount;
-    _Exercise.forEach(function(element) {
-      if(element == 'done'){}else{      
-        ExerciseCallback = (_image, _count, _comment, _title)=>{
-            setTimeout(() => {
-
-        exercise[i] = {id:element, image:_image, count:_count, comment:_comment, title:_title};
-        i++;
-      console.log("exercise : "+exercise[i]);  }, 100);
-
-      }
-            SWserver.requestExercise(element, ExerciseCallback);}
-
-    }, this);
+    exercise = _Exercise;
+    
   },
-  setupSettings:( _serverIP, _port, _version, _deviceName)=>{
+  setupSettings: (_serverIP, _port, _version, _deviceName) => {
     console.log(_serverIP + _port);
     serverIP = _serverIP;
-    port=_port;
-version = _version;
+    port = _port;
+    version = _version;
     deviceName = _deviceName;
   },
 
@@ -62,16 +52,16 @@ version = _version;
   getDeviceName: (callback) => {
     callback(deviceName)
   },
-//운동 프로그램 ID 반환 함수
+  //운동 프로그램 ID 반환 함수
   getExercise: (callback) => {
     callback(exercise)
   },
 
-//유저ID 반환함수
+  //유저ID 반환함수
   getID: (callback) => {
     callback(userID)
   },
-//운동 프로그램 완료 함수
+  //운동 프로그램 완료 함수
   clearExercise: () => {
     exercise.splice(0, 1);
   },

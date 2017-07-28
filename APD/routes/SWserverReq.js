@@ -5,7 +5,7 @@ const http = require('http');										//http 요청 모듈
 
 let userID = 'noname';
 let name = '';
-let exercise = '';
+let exercise = [];
 let weight = 0;
 let height = 0;
 let age = 0;
@@ -97,8 +97,8 @@ module.exports = {
 					height = serverdata.patient_Height;
 					weight = serverdata.patient_Weight;
 					gender = serverdata.patient_Gender;
-					exercise_done = serverdata.exercise_done;
-					stepcount = serverdata.stepcount;
+					exercise_done = serverdata.patient_exercise_done;
+					stepcount = serverdata.patient_stepcount;
 					exercise = serverdata.patient_Exercise;
 
 				});

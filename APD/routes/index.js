@@ -213,7 +213,7 @@ router.get('/exercise', (req, res, next) => {
             res.render('error');
           }
           //받아온 정보를 이용하여 화면에 운동 이미지와 운동 프로그램 내용을 출력하여 진행한다.
-          res.render('exercise', { image: exercise[0].image, count: exercise[0].count, comment: exercise[0].comment, title: exercise[0].title, pause: pause });
+          res.render('exercise', { image: exercise[0].imagefile, count: exercise[0].count, comment: exercise[0].comment, title: exercise[0].title, pause: pause });
     }
   }
   session.getExercise(ExerciseCallback);
@@ -224,7 +224,7 @@ router.get('/exercise_done', (req, res, next) => {
   //환자 세션에서 운동 프로그램을 하나 빼고, 서버에 완료한 운동 프로그램 ID를 전송한다.
   PauseExerciseCallback = (exercise) => {
     NameCallback = (ID) => {
-      SWserver.UserExerciseSubmit(ID, exercise[0]);
+      SWserver.UserExerciseSubmit(ID, exercise[0].id);
       setTimeout(() => { session.clearExercise(); }, 500);
     }
     session.getID(NameCallback);

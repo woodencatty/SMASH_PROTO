@@ -90,7 +90,6 @@ module.exports = {
 				});
 				response.on('end', function () {									//응답이 끝났을 시 데이터 추출
 					console.log(serverdata);
-					console.log(serverdata.patient_name);
 					userID = ID;
 					name = serverdata.patient_name;
 					age = serverdata.patient_Age;
@@ -123,7 +122,6 @@ module.exports = {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
 			if (response.statusCode != 200) {
 				console.log('Error Response!');
-				console.log('Error Response!');
 
 				req.on('error', (e) => {
 					console.error(`problem with request: ${e.message}`);
@@ -135,7 +133,6 @@ module.exports = {
 				});
 				response.on('end', function () {									//응답이 끝났을 시 데이터 추출
 					console.log(serverdata);
-					console.log(serverdata.patient_name);
 					image = serverdata.exercise_image;
 					count = serverdata.exercise_count;
 					comment = serverdata.exercise_comment;
@@ -164,7 +161,6 @@ module.exports = {
 
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
 			if (response.statusCode != 200) {
-				console.log('Error Response!');
 				console.log('Error Response!');
 
 				req.on('error', (e) => {
@@ -203,7 +199,6 @@ module.exports = {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
 			if (response.statusCode != 200) {
 				console.log('Error Response!');
-				console.log('Error Response!');
 
 				req.on('error', (e) => {
 					console.error(`problem with request: ${e.message}`);
@@ -238,7 +233,6 @@ module.exports = {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
 			if (response.statusCode != 200) {
 				console.log('Error Response!');
-				console.log('Error Response!');
 
 				req.on('error', (e) => {
 					console.error(`problem with request: ${e.message}`);
@@ -270,7 +264,6 @@ module.exports = {
 		ErrorSubmitcallback = function (response) {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
 			if (response.statusCode != 200) {
-				console.log('Error Response!');
 				console.log('Error Response!');
 
 				req.on('error', (e) => {
@@ -320,8 +313,6 @@ module.exports = {
 	},
 
 	setIP: (IP, port) => {
-		    console.log(IP + port);
-
 		serverIP = IP;
 		serverPort = port;
 	},

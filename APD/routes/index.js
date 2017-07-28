@@ -210,9 +210,6 @@ router.get('/exercise', (req, res, next) => {
       session.getName(GetNameCallback);
     } else {
       //운동 프로그램 ID를 이용하여 서버에 운동 프로그램 정보를 받아온다.
-          if (image == '') {
-            res.render('error');
-          }
           //받아온 정보를 이용하여 화면에 운동 이미지와 운동 프로그램 내용을 출력하여 진행한다.
           res.render('exercise', {image:exercise.count, count:exercise.count, comment:exercise.comment, title:exercise.title, pause:pause });
     }

@@ -170,13 +170,11 @@ module.exports = {
 				});
 			}
 		}
-try {
    let req = http.request(getIsOpenedRequest, getIsOpenedcallback);	
-}
-catch (exception) {
-	console.log(exception);
-  
-}
+
+req.on('error', function(error) {
+  // Error handling here
+});
 
 							//GET요청 전송
 

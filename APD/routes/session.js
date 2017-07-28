@@ -15,6 +15,7 @@ let stepcount = 0;
 
 let senseInterval = 0;
 let serverIP = 0;
+let port = 0;
 
 let version = 0.0;
 let deviceName = '';
@@ -40,8 +41,10 @@ module.exports = {
 
     }, this);
   },
-  setupSettings:( _serverIP, _version, _deviceName)=>{
+  setupSettings:( _serverIP, _port, _version, _deviceName)=>{
+    console.log(_serverIP + _port);
     serverIP = _serverIP;
+    port=_port;
 version = _version;
     deviceName = _deviceName;
   },

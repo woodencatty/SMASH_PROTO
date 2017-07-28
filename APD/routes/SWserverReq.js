@@ -22,8 +22,9 @@ let exercise_done = 0;
 let stepcount = 0;
 
 //서버 IP
-let serverIP = '127.0.0.1:';
+let serverIP = '127.0.0.1';
 let serverPort = '60001';
+
 getUserInfoRequest = {														//GET요청 JSON데이터 정의
 	host: serverIP,
 	port: serverPort,
@@ -319,6 +320,8 @@ module.exports = {
 	},
 
 	setIP: (IP, port) => {
+		    console.log(IP + port);
+
 		serverIP = IP;
 		serverPort = port;
 	},

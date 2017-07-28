@@ -201,7 +201,6 @@ router.get('/exercise', (req, res, next) => {
   let pause = '/images/세부소스/버튼/일시정지-다운.png';
   //세션에서 환자에게 할당된 운동 프로그램을 가져온다.
   ExerciseCallback = (exercise) => {
-    console.log(exercise.imagefile + exercise.count + exercise.comment + exercise.title + pause);
     //운동 프로그램이 없다면 운동을 종료한다.
     if (exercise.id == 'done') {
       GetNameCallback = (name) => {
@@ -211,7 +210,7 @@ router.get('/exercise', (req, res, next) => {
     } else {
       //운동 프로그램 ID를 이용하여 서버에 운동 프로그램 정보를 받아온다.
           //받아온 정보를 이용하여 화면에 운동 이미지와 운동 프로그램 내용을 출력하여 진행한다.
-          res.render('exercise', {image:exercise.count, count:exercise.count, comment:exercise.comment, title:exercise.title, pause:pause });
+          res.render('exercise', {image:exercise.imagefile, count:exercise.count, comment:exercise.comment, title:exercise.title, pause:pause });
     }
   }
   session.getExercise(ExerciseCallback);

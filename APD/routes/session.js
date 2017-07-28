@@ -6,6 +6,8 @@ let height = 0;
 let weight = 0;
 let exercise;
 let gender = 0;
+let exercise_done = 0;
+let stepcount = 0;
 
 let senseInterval = 0;
 let serverIP = 0;
@@ -15,7 +17,7 @@ let deviceName = '';
 
 module.exports = {
 //세션 설정 함수
-  setupUser: (valueID, valueName, valueAge, valueHeight, valueWeight, valueExercise, valueGender) => {
+  setupUser: (valueID, valueName, valueAge, valueHeight, valueWeight, valueExercise, valueGender, valueExercise_done, valueStepcount) => {
     console.log(valueID, valueName, valueAge, valueHeight, valueWeight, valueExercise, valueGender);
     userID = valueID;
     name = valueName;
@@ -24,6 +26,8 @@ module.exports = {
     weight = valueWeight;
     exercise = valueExercise;
     gender = valueGender;
+    exercise_done = valueExercise_done;
+    stepcount = valueStepcount;
   },
   setupSettings:(_senseInterval, _serverIP, _version, _deviceName)=>{
     senseInterval = _senseInterval;

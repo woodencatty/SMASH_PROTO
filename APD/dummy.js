@@ -37,23 +37,9 @@ app.get('/APD/userdata/UserInfo', (req, res) => {
         patient_Height: '160',
         patient_Weight: '52',
         patient_Gender: 'f',
-        patient_Exercise: ['exercise1', 'exercise2', 'exercise3', 'done']
-    });
-    res.end(json_array);
-
-});
-
-app.get('/APD/userdata/Achievement', (req, res) => {
-
-    console.log('User data Requested!');
-
-    res.set('Content-Format', 'application/json');
-    var json_array = JSON.stringify({
-        content_type: "Application/json",
-        result_code: 200,
-        result_req: "",
         exercise_done: 40,
-        move_done: 40
+        stepcount: 67,
+        patient_Exercise: ['exercise1', 'exercise2', 'exercise3', 'done']
     });
     res.end(json_array);
 
@@ -93,18 +79,18 @@ app.get('/APD/userdata/Exercise', (req, res) => {
 });
 
 app.post('/APD/userdata/UserSteps', (req, res) => {
-    console.log('Data submitted : '+req.headers.idd_id + '  /  '+ req.headers.step_data);
+    console.log('Data submitted : ' + req.headers.idd_id + '  /  ' + req.headers.step_data);
 });
 
 
 app.post('/APD/userdata/Exercise', (req, res) => {
-    console.log('Data submitted : '+req.headers.idd_id+ '  /  '+req.headers.program_id);
+    console.log('Data submitted : ' + req.headers.idd_id + '  /  ' + req.headers.program_id);
 });
 
 app.post('/APD/metadata/Error', (req, res) => {
-    console.log('Data submitted : '+req.headers.error_log);
+    console.log('Data submitted : ' + req.headers.error_log);
 });
 
 app.post('/APD/metadata/Enviorment', (req, res) => {
-    console.log('Data submitted : '+req.headers);
+    console.log('Data submitted : ' + req.headers);
 });

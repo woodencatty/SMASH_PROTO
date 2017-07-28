@@ -19,7 +19,7 @@ let title = '';
 let is_opened = false;
 
 let exercise_done = 0;
-let move_done = 0;
+let stepcount = 0;
 
 //서버 IP
 let serverIP = '127.0.0.1';
@@ -36,13 +36,6 @@ getExerciseInfoRequest = {														//GET요청 JSON데이터 정의
 	host: serverIP,
 	port: 60001,
 	path: '/APD/userdata/Exercise',
-	method: 'GET'
-};
-
-getAchievementRequest = {														//GET요청 JSON데이터 정의
-	host: serverIP,
-	port: 60001,
-	path: '/APD/userdata/Achievement',
 	method: 'GET'
 };
 
@@ -72,7 +65,7 @@ submitEnviorment = {														//POST요청 JSON데이터 정의
 	host: serverIP,
 	port: 60001,
 	path: '/APD/metadata/Enviorment',
-	method: 'DELETE'
+	method: 'POST'
 };
 submitError = {														//POST요청 JSON데이터 정의
 	host: serverIP,
@@ -110,6 +103,8 @@ module.exports = {
 					height = serverdata.patient_Height;
 					weight = serverdata.patient_Weight;
 					gender = serverdata.patient_Gender;
+					exercise_done = serverdata.exercise_done;
+					stepcount = serverdata.stepcount;
 					exercise = serverdata.patient_Exercise;
 
 				});
@@ -117,11 +112,11 @@ module.exports = {
 		}
 
 		let req = http.request(getUserInfoRequest, getUserInfocallback);						//GET요청 전송
-req.on('error', function(error) {
+		req.on('error', function (error) {
 
-	console.log('관리서버와 연결할 수 없습니다.'); 								// 관리서버와 연결 불가능할 때에 오류 체크
+			console.log('관리서버와 연결할 수 없습니다.'); 								// 관리서버와 연결 불가능할 때에 오류 체크
 
-});
+		});
 		req.setHeader("idd_id", ID);											//헤더에 요청 데이터 첨부
 
 		req.end();
@@ -156,49 +151,12 @@ req.on('error', function(error) {
 		}
 
 		let req = http.request(getExerciseInfoRequest, getExerciseInfocallback);						//GET요청 전송
-req.on('error', function(error) {
+		req.on('error', function (error) {
 
-	console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
+			console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
 
-});
+		});
 		req.setHeader("program_id", exercise);											//헤더에 요청 데이터 첨부
-
-		req.end();
-
-	},
-
-requestAchievement: (ID) => {
-		//요청 데이터 수신 콜백함수
-		requestAchievementcallback = function (response) {
-			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
-			if (response.statusCode != 200) {
-				console.log('Error Response!');
-				console.log('Error Response!');
-
-				req.on('error', (e) => {
-					console.error(`problem with request: ${e.message}`);
-				});
-			} else {
-				let serverdata = '';
-				response.on('data', function (chunk) {							//응답 데이터를 JSON형태로 파싱함
-					serverdata = JSON.parse(chunk);
-				});
-				response.on('end', function () {									//응답이 끝났을 시 데이터 추출
-					console.log(serverdata);
-					console.log(serverdata.patient_name);
-					exercise_done = serverdata.exercise_done;
-					move_done = serverdata.move_done;
-				});
-			}
-		}
-
-		let req = http.request(getAchievementRequest, requestAchievementcallback);						//GET요청 전송
-req.on('error', function(error) {
-
-	console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
-
-});
-		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
 
 		req.end();
 
@@ -229,15 +187,15 @@ req.on('error', function(error) {
 				});
 			}
 		}
-   let req = http.request(getIsOpenedRequest, getIsOpenedcallback);	
+		let req = http.request(getIsOpenedRequest, getIsOpenedcallback);
 
-req.on('error', function(error) {
+		req.on('error', function (error) {
 
-	console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
+			console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
 
-});
+		});
 
-							//GET요청 전송
+		//GET요청 전송
 
 		req.setHeader("apd_id", ID);											//헤더에 요청 데이터 첨부
 
@@ -267,11 +225,11 @@ req.on('error', function(error) {
 		}
 
 		let req = http.request(submitUserSteps, UserStepSubmitback);						//POST요청 전송
-req.on('error', function(error) {
+		req.on('error', function (error) {
 
-	console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
+			console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
 
-});
+		});
 		req.setHeader("idd_id", ID);											//헤더에 요청 데이터 첨부
 		req.setHeader("steps", steps);
 		req.setHeader("step_date", step_date);
@@ -302,18 +260,18 @@ req.on('error', function(error) {
 		}
 
 		let req = http.request(submitDoneUserExercise, UserExerciseSubmitcallback);						//POST요청 전송
-req.on('error', function(error) {
+		req.on('error', function (error) {
 
-	console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
+			console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
 
-});
+		});
 		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
 		req.setHeader("exercise", exercise);
 
 		req.end();
 	},
 
-	EnviormentSubmit: (ID, temperature, humidity, audio, envelope, light) => {
+	EnviormentSubmit: (ID, temperature, humidity) => {
 		EnviormentSubmitcallback = function (response) {
 			console.log('HTTP Response Code : ' + response.statusCode);		//리턴코드를 분석하여 상태 확인
 			if (response.statusCode != 200) {
@@ -335,17 +293,14 @@ req.on('error', function(error) {
 		}
 
 		let req = http.request(submitEnviorment, EnviormentSubmitcallback);						//POST요청 전송
-req.on('error', function(error) {
+		req.on('error', function (error) {
 
-	console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
+			console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
 
-});
+		});
 		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
 		req.setHeader("temperature", temperature);
-		req.setHeader("humidity",humidityHumi);
-			req.setHeader("audio", audio);
-		req.setHeader("envelope", envelope);
-			req.setHeader("light", light);
+		req.setHeader("humidity", humidityHumi);
 
 
 		req.end();
@@ -374,11 +329,11 @@ req.on('error', function(error) {
 		}
 
 		let req = http.request(submitError, ErrorSubmitcallback);						//POST요청 전송
-req.on('error', function(error) {
+		req.on('error', function (error) {
 
-	console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
+			console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
 
-});
+		});
 		req.setHeader("error_log", error);											//헤더에 요청 데이터 첨부
 
 		req.end();
@@ -386,11 +341,15 @@ req.on('error', function(error) {
 
 
 	getInfo: (callback) => {
-		callback(userID, name, age, height, weight, exercise, gender);
+		callback(userID, name, age, height, weight, exercise, gender, exercise_done, stepcount);
 	},
 
 	getName: (callback) => {
 		callback(name);
+	},
+
+	Achievement: (callback) => {
+		callback(exercise_done, stepcount);
 	},
 
 	getExercise: (callback) => {
@@ -401,25 +360,25 @@ req.on('error', function(error) {
 		callback(is_opened);
 	},
 
-	setIP:(IP)=>{
-serverIP = IP;
+	setIP: (IP) => {
+		serverIP = IP;
 	},
 
-	clearSWserver:() => {
+	clearSWserver: () => {
 
- userID = 'noname';
- name = '';
- exercise = '';
- weight = 0;
- height = 0;
- age = 0;
- gender = 0;
- image = '';
- count = 1000;
- comment = '';
- title = '';
+		userID = 'noname';
+		name = '';
+		exercise = '';
+		weight = 0;
+		height = 0;
+		age = 0;
+		gender = 0;
+		image = '';
+		count = 1000;
+		comment = '';
+		title = '';
 
- is_opened = false;
+		is_opened = false;
 	}
 }
 

@@ -54,7 +54,7 @@ function startSense(senseInterval) {
 
     SensorDataCallback = (distance, temperature, humidity, audio, envelope, light) => {
       DeviceNameCallback = (DeviceName) => {
-        SWserver.EnviormentSubmit(DeviceName, temperature, humidity, audio, envelope, light)
+        SWserver.EnviormentSubmit(DeviceName, temperature, humidity)
       }
       session.getDeviceName(DeviceNameCallback)
     }
@@ -83,12 +83,8 @@ function stopSense() {
 function initialize() {
   fs.readFile('./config', 'utf8', function (err, data) {
     //저장한 활동량 로그에서 데이터를 읽어 전송한다.
-    console.log(data);
     var config = JSON.parse(data);
     session.setupSettings(config.senseInterval, config.serverIP, config.deviceName, config.version);
-    console.log(config.senseInterval);
-    console.log(config.serverIP);
-    console.log(config.deviceName);
     startSense(config.senseInterval);
     SWserver.setIP(config.serverIP);
   });
@@ -192,11 +188,11 @@ router.get('/welcome', (req, res, next) => {
       setTimeout(() => {
         acturator.led_dataSaved();
         //서버에서 받아온 데이터를 이용하여 환자 세션을 설정한다.
-        SessionCallback = (ID, name, age, height, weight, exercise, gender) => {
+        SessionCallback = (ID, name, age, height, weight, exercise, gender, exercise_done, stepcount) => {
           if (name == '') {
             res.render('error');
           }
-          session.setupUser(ID, name, age, height, weight, exercise, gender);
+          session.setupUser(ID, name, age, height, weight, exercise, gender, exercise_done, stepcount);
           res.render('welcome', { name: name });
         }
         SWserver.getInfo(SessionCallback);

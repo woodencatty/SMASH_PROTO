@@ -17,33 +17,32 @@ this.statusInterval = setInterval(() => {
   acturator.led_normal();
 }, 1000);
 
-function moveInterval(AccelInterval) {
+function moveInterval(AccelInterval, walkThreadhold, forceSenseTime) {
   this.valueInterval = setInterval(() => {
-    move.setWalkCount();
+    move.setWalkCount(walkThreadhold, forceSenseTime);
     acturator.led_sensorActive();
   }, AccelInterval);
 }
 
 function initialize() {
              winston.log('debug', "IDD initialized");
-
   fs.readFile('./config', 'utf8', function (err, data) {
     //저장한 활동량 로그에서 데이터를 읽어 전송한다.
     var config = JSON.parse(data);
-    moveInterval(config.AccelInterval);
-    loggingInterval(config.loggingInterval);
+    moveInterval(config.AccelInterval, config.walkThreadhold, confing.forceSenseTime);
+    loggingInterval(config.loggingInterval, config.WalkDataFileName, config.fsOption);
      winston.level = config.loglevel;
-
+    bluetooth.startAdvertising(config.deviceName, config.serviceUuids, config.characteristicsUuids, config.bluetoothDescription, config.WalkDataFileName, config.fileFormat); //Bluetooth 탐색 모듈 실행 
   });
 }
 
 
-function loggingInterval(loggingInterval) {
+function loggingInterval(loggingInterval, filename,fsOption) {
 
   //5초에 한번 걸음 수를 업데이트하여 로그에 저장함.
   this.loggingInterval = setInterval(() => {
     WalkCallback = function (WalkCount) {
-      fs.open('./steps.log', 'w+', function (err, fd) {
+      fs.open(filename, fsOption, function (err, fd) {
         if (err) throw err;
         var buf = new Buffer(WalkCount + ',' + dateTime.toFormat('YYYY,MM,DD,HH24,MI,SS') + '\n');
            winston.log('debug', WalkCount + ',' + dateTime.toFormat('YYYY,MM,DD,HH24,MI,SS') + '\n');
@@ -61,4 +60,3 @@ function loggingInterval(loggingInterval) {
   }, loggingInterval);
 }
 
-bluetooth.startAdvertising(); //Bluetooth 탐색 모듈 실행 

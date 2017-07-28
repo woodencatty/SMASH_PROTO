@@ -71,6 +71,7 @@ function initialize() {
 
     SWserver.setIP(config.SWserverIPv4,config.port);
 
+    bluetooth.setParameter(config.IDDdeviceName, config.serviceUuids,config.characteristicsUuids,config.dataFileFormat);
      winston.level = config.loglevel;
 
 
@@ -123,6 +124,7 @@ router.get('/main', (req, res, next) => {
 
   let poster = '/images/SCAN_20170717_120222551.jpg'
   let sunny = '/images/세부소스/날씨/맑음.png'
+
  DeviceNameCallback = (DeviceName) => {
   SWserver.requestIsOpened(DeviceName);
   setTimeout(() => {

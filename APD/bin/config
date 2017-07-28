@@ -1,14 +1,25 @@
 {
-    "version":1.0,
-    "deviceName":"APD0001",
-"dhtinterval":2000,
-"distinterval":300, 
-"audiointerval":1000,
-"envinterval":1000,
-"lgtinterval":1000,
-"ledinterval":2000,
-    "SWserverIPv4":"127.0.0.1",
-    "port":"60001",
+    "version": 1.0,
+    "deviceName": "APD0001",
+
+
+    "IDDdeviceName": "P0001",
+    "serviceUuids": "fff0",
+    "characteristicsUuids": "fff1",
+    "dataFileFormat": "utf8",
+
+    "dhtinterval": 2000,
+    "distinterval": 300,
+    "audiointerval": 1000,
+    "envinterval": 1000,
+    "lgtinterval": 1000,
+    "ledinterval": 2000,
+
+
+    "SWserverIPv4": "127.0.0.1",
+    "port": "60001",
+
+
     "loglevel": "debug"
 
 }

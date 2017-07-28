@@ -9,6 +9,10 @@ let ID = 'noname';                  //ID 저장 변수
 let steps = 0;                      //걸음 수 변수
 let step_date = null;                      //측정 날짜
 
+let IDDdeviceName = '';
+let serviceUuids = '';
+let characteristicsUuids = '';
+let dataFileFormat = '';
 
 //상태 표시 로그
 noble.on('scanStart', () => {
@@ -22,16 +26,16 @@ module.exports = {
     //탐색 및 데이터 수집 모듈
     SearchNconnect: () => {
         try_count++;
-        noble.startScanning(['fff0'], false);
+        noble.startScanning(serviceUuids, false);
         noble.on('discover', (peripheral) => {
             peripheral.connect((error) => {
                                         ID = peripheral.advertisement.localName;
 
-                peripheral.discoverSomeServicesAndCharacteristics(['fff0'], ['fff1'], (error, services, characteristics) => {
+                peripheral.discoverSomeServicesAndCharacteristics(serviceUuids, characteristicsUuids, (error, services, characteristics) => {
                     characteristics[0].subscribe();
                     characteristics[0].read();
                     characteristics[0].on('data', (data, isNotification) => {
-                        let data_String = data.toString('utf8');
+                        let data_String = data.toString(dataFileFormat);
                         let data_array = data_String.split(',');
                         steps = data_array[0];
                         step_date = new Date(data_array[1], data_array[2], data_array[3], data_array[4], data_array[5], data_array[6], 0);
@@ -51,6 +55,13 @@ module.exports = {
 
     getIDDData: (callback) => {
         callback(ID, steps, step_date);
+    },
+
+    setParameter:(_IDDdeviceName, _serviceUuids,_characteristicsUuids,_dataFileFormat)=>{
+        IDDdeviceName = _IDDdeviceName;
+        serviceUuids = _serviceUuids;
+        characteristicsUuids = _characteristicsUuids;
+        dataFileFormat = _dataFileFormat;
     },
 
     //초기화

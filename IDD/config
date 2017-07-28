@@ -1,8 +1,21 @@
 {
-    "version":1.0,
-    "deviceName":"P0001",
-    "AccelInterval":300 
-    "LoggingInterval":5000 
-    "loglevel": "error"
+    "version": 1.0,
+    "deviceName": "P0001",
 
+    "serviceUuids": "fff0",
+    "characteristicsUuids": "fff1",
+    "bluetoothDescription": "IDD",
+
+
+    "AccelInterval": 300,
+    "LoggingInterval": 5000,
+    
+    "loglevel": "error",
+    
+    "WalkDataFileName": "./steps.log",
+    "fsOption":"w+",
+    "fileFormat": "utf8",
+
+    "walkThreadhold": 8000,
+    "forceSenseTime": 10
 }

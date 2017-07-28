@@ -22,7 +22,7 @@ let changeZ = 0.0;
 let count_flag  = false;
 
 module.exports = {
-    setWalkCount: () => {
+    setWalkCount: (walkThreadhold, forceSenseTime) => {
         GetAccelCallback_1 = (AccelX, AccelY, AccelZ) => {
 
 
@@ -51,7 +51,7 @@ module.exports = {
             let force = (changeX + changeY + changeZ) * 10000
 
             
-            if (force > 8000) {
+            if (force > walkThreadhold) {
                 if(!count_flag){
                 WalkCount++;
                 count_flag = true;
@@ -59,7 +59,7 @@ module.exports = {
         }else {
                 count_flag = false;
             }
-        }, 10);
+        }, forceSenseTime);
     },
     getWalkCount: (callback) => {
         callback(WalkCount);

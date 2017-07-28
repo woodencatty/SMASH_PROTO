@@ -50,8 +50,8 @@ function stopSense() {
     this.SensorInterval = null;
   }
 }
-
-function initialize() {/*
+/*
+function initialize() {
   fs.readFile('./config', 'utf8', function (err, data) {
     //저장한 활동량 로그에서 데이터를 읽어 전송한다.
     var config = JSON.parse(data);
@@ -64,12 +64,12 @@ this.statusInterval = setInterval(() => {
 }, config.ledinterval);
 
 
-  });*/
+  });
   session.clearSession();
   bluetooth.resetBLE();
   SWserver.clearSWserver();
 }
-
+*/
 //대기화면. 센서값 갱신을 위해 2초에 한번씩 갱신한다.
 initialize();
 

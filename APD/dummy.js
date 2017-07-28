@@ -68,7 +68,7 @@ app.get('/APD/userdata/Exercise', (req, res) => {
         result_code: 200,
         result_req: "",
         exercise_image: imagefile,
-        exercise_count: 10,
+        exercise_count: 20,
         exercise_comment: comment,
         exercise_title: title,
     });

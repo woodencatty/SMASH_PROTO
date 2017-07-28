@@ -38,7 +38,8 @@ module.exports = {
             setTimeout(() => {
 
         exercise[i] = {id:element, image:_image, count:_count, comment:_comment, title:_title};
-        i++;  }, 100);
+        i++;
+      console.log("exercise : "+exercise[i]);  }, 100);
 
       }
             SWserver.requestExercise(element, ExerciseCallback);}

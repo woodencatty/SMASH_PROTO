@@ -1,8 +1,6 @@
-
-//Settings config
 {
     "version":1.0,
     "deviceName":"APD0001",
-    "senseInterval":300000, // 환경 측정 주기
-    "serverIP":"127.0.0.1" // 관리SW서버 IP
+    "senseInterval":300000, 
+    "serverIP":"127.0.0.1" 
 }

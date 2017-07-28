@@ -1,9 +1,8 @@
 
-//Settings config
 {
     "version":1.0,
     "deviceName":"P0001",
-    "AccelInterval":500 // 가속도 측정 주기
-    "LoggingInterval":5000 // 가속도 측정 주기
+    "AccelInterval":500 
+    "LoggingInterval":5000 
 
 }

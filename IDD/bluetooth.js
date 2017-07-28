@@ -31,11 +31,9 @@ var primaryService = new PrimaryService({
           //저장한 활동량 로그에서 데이터를 읽어 전송한다.
           var sending = new Buffer(data);
           updateValueCallback(sending);
-          console.log('send data');
         });
       },
       onUnsubscribe: function () {
-        console.log('onUnsubscribe')
       }
     })
   ]
@@ -45,32 +43,21 @@ module.exports = {
   //Advertising 함수
   startAdvertising: () => {
     bleno.on('stateChange', function (state) {
-      console.log('on -> stateChange: ' + state);
-
       bleno.setServices(primaryService);
-
       if (state === 'poweredOn') {
         bleno.startAdvertising(advertiseName, serviceUuids, (error) => {
-          console.log(error);
         });
       } else {
         bleno.stopAdvertising();
       }
     });
-
     bleno.on('accept', (clientAddress) => {
-      console.log('connected:' + clientAddress);
     });
-
     bleno.on('disconnect', (clientAddress) => {
-      console.log('disconnected:' + clientAddress);
     });
-
     bleno.on('rssiUpdate', (rssi) => {
-      console.log('rssi update to : ' + rssi);
     });
   },
-
   setName: (deviceName)=>{
     advertiseName = deviceName;
   }

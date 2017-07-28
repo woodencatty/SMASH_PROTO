@@ -4,6 +4,8 @@ const acturator = require('./acturator.js');
 
 const fs = require('fs');
 
+const winston = require('winston');
+
 require('date-utils');
 
 let dateTime = new Date();
@@ -23,11 +25,14 @@ function moveInterval(AccelInterval) {
 }
 
 function initialize() {
+             winston.log('debug', "IDD initialized");
+
   fs.readFile('./config', 'utf8', function (err, data) {
     //저장한 활동량 로그에서 데이터를 읽어 전송한다.
     var config = JSON.parse(data);
     moveInterval(config.AccelInterval);
     loggingInterval(config.loggingInterval);
+     winston.level = config.loglevel;
 
   });
 }
@@ -41,7 +46,8 @@ function loggingInterval(loggingInterval) {
       fs.open('./steps.log', 'w+', function (err, fd) {
         if (err) throw err;
         var buf = new Buffer(WalkCount + ',' + dateTime.toFormat('YYYY,MM,DD,HH24,MI,SS') + '\n');
-        console.log(WalkCount + ',' + dateTime.toFormat('YYYY,MM,DD,HH24,MI,SS') + '\n');
+           winston.log('debug', WalkCount + ',' + dateTime.toFormat('YYYY,MM,DD,HH24,MI,SS') + '\n');
+
         fs.write(fd, buf, 0, buf.length, null, function (err, written, buffer) {
           if (err) throw err;
           fs.close(fd, () => {
@@ -55,4 +61,4 @@ function loggingInterval(loggingInterval) {
   }, loggingInterval);
 }
 
-            bluetooth.startAdvertising(); //Bluetooth 탐색 모듈 실행 
+bluetooth.startAdvertising(); //Bluetooth 탐색 모듈 실행 

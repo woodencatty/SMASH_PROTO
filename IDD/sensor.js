@@ -4,7 +4,6 @@ const adxl345 = new ADXL345();              //가속도 센서 정의
 // 가속도 센서 초기화
 adxl345.init()
   .then(() => {
-    console.log('ADXL345 initialization succeeded');
   })
   .catch((err) => console.error(`ADXL345 initialization failed: ${err} `));
 

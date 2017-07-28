@@ -19,9 +19,10 @@ let changeX = 0.0;
 let changeY = 0.0;
 let changeZ = 0.0;
 
+let count_flag  = false;
+
 module.exports = {
     setWalkCount: () => {
-
         GetAccelCallback_1 = (AccelX, AccelY, AccelZ) => {
 
 
@@ -49,15 +50,18 @@ module.exports = {
 
             let force = (changeX + changeY + changeZ) * 10000
 
-            // console.log(force);
+            
             if (force > 8000) {
+                if(!count_flag){
                 WalkCount++;
-                console.log('Step detected' + WalkCount);
+                count_flag = true;
+                }          
+        }else {
+                count_flag = false;
             }
         }, 10);
     },
     getWalkCount: (callback) => {
-        console.log(WalkCount);
         callback(WalkCount);
     },
     resetWalkCount: () => {

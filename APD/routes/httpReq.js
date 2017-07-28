@@ -84,6 +84,10 @@ module.exports = {
   console.error(`problem with request: ${e.message}`);
 });
 
+process.on('uncaughtException', function (err) {
+    console.log(err);
+}); 
+
 				response.on('data', function (chunk) {							//응답 데이터를 JSON형태로 파싱함
 					serverdata = JSON.parse(chunk);
 				});

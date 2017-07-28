@@ -3,7 +3,7 @@ var fs = require('fs'); //파일 로드를 위한 함수
 
 
 //ID : P0001
-let advertiseName = '';
+let advertiseName = 'P0001';
 let serviceUuids = ['fff0']
 
 var PrimaryService = bleno.PrimaryService;

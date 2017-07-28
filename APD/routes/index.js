@@ -120,7 +120,7 @@ router.get('/main', (req, res, next) => {
             stopSense();
             res.redirect('/try');
           } else {
-            res.render('index', { title: '대기화면', temp: temperature, humi: humidity,  poster:poster, sunny:sunny});
+            res.render('index', { title: '대기화면', temp: temperature, humi: humidity,  poster:poster, sunny1:sunny, sunny:sunny});
           }
         }
         sensor.getData(SensorDataCallback);

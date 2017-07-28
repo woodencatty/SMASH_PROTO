@@ -2,9 +2,8 @@
 const http = require('http');										//http 요청 모듈
 
 //리턴값 저장 변수
-let getRequest;														//GET요청 JSON데이터
 
-let userID;
+let userID = 'noname';
 let name = '';
 let exercise = '';
 let weight = 0;
@@ -12,11 +11,10 @@ let height = 0;
 let age = 0;
 let gender = 0;
 
-let image;
+let image = '';
 let count = 1000;
-let comment;
-let title;
-let discription;
+let comment = '';
+let title = '';
 
 let is_opened = false;
 
@@ -105,7 +103,7 @@ module.exports = {
 		let req = http.request(getUserInfoRequest, getUserInfocallback);						//GET요청 전송
 req.on('error', function(error) {
 
-	console.log('관리서버와 연결할 수 없습니다.');
+	console.log('관리서버와 연결할 수 없습니다.'); 								// 관리서버와 연결 불가능할 때에 오류 체크
 
 });
 		req.setHeader("idd_id", ID);											//헤더에 요청 데이터 첨부
@@ -144,7 +142,7 @@ req.on('error', function(error) {
 		let req = http.request(getExerciseInfoRequest, getExerciseInfocallback);						//GET요청 전송
 req.on('error', function(error) {
 
-	console.log('관리서버와 연결할 수 없습니다.');
+	console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
 
 });
 		req.setHeader("program_id", exercise);											//헤더에 요청 데이터 첨부
@@ -182,7 +180,7 @@ req.on('error', function(error) {
 
 req.on('error', function(error) {
 
-	console.log('관리서버와 연결할 수 없습니다.');
+	console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
 
 });
 
@@ -218,7 +216,7 @@ req.on('error', function(error) {
 		let req = http.request(submitUserSteps, UserStepSubmitback);						//POST요청 전송
 req.on('error', function(error) {
 
-	console.log('관리서버와 연결할 수 없습니다.');
+	console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
 
 });
 		req.setHeader("idd_id", ID);											//헤더에 요청 데이터 첨부
@@ -253,7 +251,7 @@ req.on('error', function(error) {
 		let req = http.request(submitDoneUserExercise, UserExerciseSubmitcallback);						//POST요청 전송
 req.on('error', function(error) {
 
-	console.log('관리서버와 연결할 수 없습니다.');
+	console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
 
 });
 		req.setHeader("ID", ID);											//헤더에 요청 데이터 첨부
@@ -286,7 +284,7 @@ req.on('error', function(error) {
 		let req = http.request(submitError, ErrorSubmitcallback);						//POST요청 전송
 req.on('error', function(error) {
 
-	console.log('관리서버와 연결할 수 없습니다.');
+	console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크
 
 });
 		req.setHeader("error_log", error);											//헤더에 요청 데이터 첨부
@@ -309,6 +307,23 @@ req.on('error', function(error) {
 
 	getIsOpened: (callback) => {
 		callback(is_opened);
+	},
+
+	clearHttp:() => {
+
+ userID = 'noname';
+ name = '';
+ exercise = '';
+ weight = 0;
+ height = 0;
+ age = 0;
+ gender = 0;
+ image = '';
+ count = 1000;
+ comment = '';
+ title = '';
+
+ is_opened = false;
 	}
 }
 

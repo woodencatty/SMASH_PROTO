@@ -172,6 +172,10 @@ router.get('/welcome', (req, res, next) => {
         acturator.led_dataSaved();
         //서버에서 받아온 데이터를 이용하여 환자 세션을 설정한다.
         SessionCallback = (ID, name, age, height, weight, exercise, gender) => {
+          if(name == '' ){
+              res.status(err.status || 503);
+              res.render('error');
+          }
           session.setupSession(ID, name, age, height, weight, exercise, gender);
           res.render('welcome', { name: name });
         }
@@ -200,6 +204,10 @@ router.get('/exercise', (req, res, next) => {
       http.requestExercise(exercise[0]);
       setTimeout(() => {
         ExerciseDataCallback = (image, count, comment, title) => {
+                    if(image == '' ){
+              res.status(err.status || 503);
+              res.render('error');
+          }
           //받아온 정보를 이용하여 화면에 운동 이미지와 운동 프로그램 내용을 출력하여 진행한다.
           res.render('exercise', { image: image, count: count, comment: comment, title: title });
         }
@@ -239,6 +247,7 @@ router.get('/return2main', (req, res, next) => {
   startSense();
   bluetooth.resetBLE();
   session.clearSession();
+  http.clearHttp();
   res.redirect('/main');
 });
 

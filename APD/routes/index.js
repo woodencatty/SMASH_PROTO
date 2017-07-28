@@ -86,6 +86,9 @@ function initialize() {
     console.log(data);
     var config = JSON.parse(data);
     session.setupSettings(config.senseInterval, config.serverIP, config.deviceName, config.version);
+    console.log(config.senseInterval);
+    console.log(config.serverIP);
+    console.log(config.deviceName);
     startSense(config.senseInterval);
     SWserver.setIP(config.serverIP);
   });

@@ -90,7 +90,7 @@ let poster = '/images/SCAN_20170717_120222551.jpg'
         res.redirect('/main');
       } else {
         SensorDataCallback = (patientDetected, temperature, humidity, audio, envelope, light) => {
-          res.render('index_not_opened', { title: '대기화면', temp: temperature, humi: humidity, poster:poster });
+          res.render('index_not_opened', { title: '대기화면', temp: temperature, humi: humidity,  poster:poster, sunny1:sunny, sunny:sunny});
         }
         sensor.getData(SensorDataCallback);
       }

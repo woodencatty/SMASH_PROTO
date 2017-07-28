@@ -185,7 +185,7 @@ router.get('/welcome', (req, res, next) => {
             res.render('error');
           }
           session.setupUser(ID, name, age, height, weight, exercise, gender, exercise_done, stepcount);
-          res.render('welcome', { name: name , exercise_done: exercise_done, stepcount: stepcount, pause:pause, foward:foward});
+          res.render('welcome', { name: name , exercise_done: exercise_done, stepcount: stepcount, back:back, foward:foward});
         }
         SWserver.getInfo(SessionCallback);
       }, 200);

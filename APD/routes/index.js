@@ -69,10 +69,10 @@ this.statusInterval = setInterval(() => {
   bluetooth.resetBLE();
   SWserver.clearSWserver();
 }
-*/
+
 //대기화면. 센서값 갱신을 위해 2초에 한번씩 갱신한다.
 initialize();
-
+*/
 router.get('/main_not_opened', (req, res, next) => {
 let poster = '/images/SCAN_20170717_120222551.jpg'
 

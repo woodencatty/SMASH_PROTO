@@ -215,7 +215,7 @@ router.get('/exercise', (req, res, next) => {
           }
           //받아온 정보를 이용하여 화면에 운동 이미지와 운동 프로그램 내용을 출력하여 진행한다.
           
-          res.render('exercise', { image: exercise[0].imagefile, count: exercise[0].count, comment: exercise[0].comment, title: exercise[0].title, pause: pause });
+          res.render('exercise', {image:'/images/트레이너/1-1준비운동(어깨)-묵.gif', count:exercise[0].count, comment:exercise[0].comment, title:exercise[0].title, pause:pause });
     }
   }
   session.getExercise(ExerciseCallback);

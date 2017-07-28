@@ -81,7 +81,7 @@ function stopSense() {
 }
 
 function initialize() {
-  fs.readFile('./config', 'utf8', function (err, data) {
+  fs.readFile('./config.txt', 'utf8', function (err, data) {
     //저장한 활동량 로그에서 데이터를 읽어 전송한다.
     console.log(data);
    /* var config = JSON.parse(data);

@@ -173,7 +173,9 @@ module.exports = {
    let req = http.request(getIsOpenedRequest, getIsOpenedcallback);	
 
 req.on('error', function(error) {
-  // Error handling here
+
+	throw new Error('관리서버와 연결할 수 없습니다.');
+
 });
 
 							//GET요청 전송

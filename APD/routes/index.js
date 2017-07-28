@@ -56,7 +56,7 @@ function initialize() {
     //저장한 활동량 로그에서 데이터를 읽어 전송한다.
     var config = JSON.parse(data);
     session.setupSettings(config.serverIP, config.deviceName, config.version);
-    sensor.setInterval(dhtinterval, distinterval, audiointerval, envinterval, lgtinterval, ledinterval);
+    sensor.setInterval(config.dhtinterval, config.distinterval, config.audiointerval, config.envinterval, config.lgtinterval, config.ledinterval);
     SWserver.setIP(config.SWserverIPv4,config.port);
 
 this.statusInterval = setInterval(() => {

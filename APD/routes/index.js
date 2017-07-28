@@ -193,7 +193,7 @@ router.get('/welcome', (req, res, next) => {
             res.render('error');
           }
           session.setupUser(ID, name, age, height, weight, exercise, gender, exercise_done, stepcount);
-          res.render('welcome', { name: name });
+          res.render('welcome', { name: name , exercise_done: exercise_done, stepcount: stepcount});
         }
         SWserver.getInfo(SessionCallback);
       }, 200);

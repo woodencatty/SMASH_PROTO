@@ -79,6 +79,11 @@ module.exports = {
 				console.log('Error Response!');
 			} else {
 				let serverdata = '';
+
+				req.on('error', (e) => {
+  console.error(`problem with request: ${e.message}`);
+});
+
 				response.on('data', function (chunk) {							//응답 데이터를 JSON형태로 파싱함
 					serverdata = JSON.parse(chunk);
 				});

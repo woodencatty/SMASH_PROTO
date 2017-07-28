@@ -34,7 +34,7 @@ module.exports = {
     exercise_done = _Exercise_done;
     stepcount = _Stepcount;
     exercise = _Exercise;
-    
+
   },
   setupSettings: (_serverIP, _port, _version, _deviceName) => {
     console.log(_serverIP + _port);
@@ -54,7 +54,7 @@ module.exports = {
   },
   //운동 프로그램 ID 반환 함수
   getExercise: (callback) => {
-    callback(exercise)
+    callback(exercise[0])
   },
 
   //유저ID 반환함수

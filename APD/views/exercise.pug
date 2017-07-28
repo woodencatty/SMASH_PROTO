@@ -6,13 +6,13 @@ block content
   
   
   p#ViewTimer
-  img(src="",id='img' width='736', height='900', alt="muk-pa")
+  img(src="",id='image' width='736', height='900', alt="muk-pa")
   img(src="",id='pause', width='152', height='113', onclick="location.href='/pause'")
 
   script(type='text/javascript').
     document.getElementById("title").innerHTML="#{title}"
     document.getElementById("comment").innerHTML="#{comment}"
-    document.getElementById("img").src = "#{image}"
+    document.getElementById("image").src = "#{image}"
     document.getElementById("pause").src = "#{pause}"
     var SetTime = "#{count}";
     function msg_time() {

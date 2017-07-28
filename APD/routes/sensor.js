@@ -111,6 +111,29 @@ senseenv(_envinterval);
 senselgt(_lgtinterval);
     },
 
+clearinterval:()=>{
+ if (this.DHT22Interval) {
+    clearInterval(this.DHT22Interval);
+    this.DHT22Interval = null; }
+    
+     if (this.distanceInterval) {
+    clearInterval(this.distanceInterval);
+    this.distanceInterval = null; }
+
+     if (this.audioInterval) {
+    clearInterval(this.audioInterval);
+    this.audioInterval = null; }
+
+     if (this.envelopeInterval) {
+    clearInterval(this.envelopeInterval);
+    this.envelopeInterval = null; }
+
+     if (this.lightInterval) {
+    clearInterval(this.lightInterval);
+    this.lightInterval = null; }
+
+},
+
     getData: (callback) => {
         callback(patientDetected, temperature, humidity, audio, envelope, light);
     },

@@ -55,6 +55,4 @@ function loggingInterval(loggingInterval) {
   }, loggingInterval);
 }
 
-    setTimeout(() => {
             bluetooth.startAdvertising(); //Bluetooth 탐색 모듈 실행 
-    }, 500);

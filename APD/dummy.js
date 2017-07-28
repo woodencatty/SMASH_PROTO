@@ -8,7 +8,7 @@ app.listen(60001, () => {
 });
 
 
-app.get('/APD/metadata/IsOpen', (req, res) => {
+app.get('/apd/metadata/isopen', (req, res) => {
 
     console.log('Opened data Requested!');
 
@@ -23,7 +23,7 @@ app.get('/APD/metadata/IsOpen', (req, res) => {
 });
 
 
-app.get('/APD/userdata/UserInfo', (req, res) => {
+app.get('/apd/userdata/userinfo', (req, res) => {
 
     console.log('User data Requested!');
 
@@ -45,7 +45,7 @@ app.get('/APD/userdata/UserInfo', (req, res) => {
 
 });
 
-app.get('/APD/userdata/Exercise', (req, res) => {
+app.get('/apd/userdata/exercise', (req, res) => {
 
     console.log('Exercise data Requested!' + req.headers.program_id);
     var imagefile = '';
@@ -82,19 +82,19 @@ app.get('/APD/userdata/Exercise', (req, res) => {
 
 });
 
-app.post('/APD/userdata/UserSteps', (req, res) => {
+app.post('/apd/userdata/usersteps', (req, res) => {
     console.log('Data submitted : ' + req.headers.idd_id + '  /  ' + req.headers.step_data);
 });
 
 
-app.post('/APD/userdata/Exercise', (req, res) => {
+app.delete('/apd/userdata/exercise', (req, res) => {
     console.log('Data submitted : ' + req.headers.idd_id + '  /  ' + req.headers.program_id);
 });
 
-app.post('/APD/metadata/Error', (req, res) => {
+app.post('/apd/metadata/error', (req, res) => {
     console.log('Data submitted : ' + req.headers.error_log);
 });
 
-app.post('/APD/metadata/Enviorment', (req, res) => {
+app.post('/apd/metadata/enviorment', (req, res) => {
     console.log('Data submitted : ' + req.headers);
 });

@@ -221,7 +221,7 @@ router.get('/exercise_done', (req, res, next) => {
   //환자 세션에서 운동 프로그램을 하나 빼고, 서버에 완료한 운동 프로그램 ID를 전송한다.
   PauseExerciseCallback = (exercise) => {
     NameCallback = (ID) => {
-      SWserver.UserExerciseSubmit(ID, exercise[0].id);
+      SWserver.UserExerciseSubmit(ID, exercise.id);
       setTimeout(() => { session.clearExercise(); }, 500);
     }
     session.getID(NameCallback);

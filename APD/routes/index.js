@@ -247,9 +247,8 @@ router.get('/exercise_done', (req, res, next) => {
   PauseExerciseCallback = (exercise) => {
     NameCallback = (ID) => {
        winston.log('debug', "remove exercise_done");
-
       SWserver.UserExerciseSubmit(ID, exercise.id);
-      setTimeout(() => { session.clearExercise(); }, 500);
+      session.clearExercise(); 
     }
     session.getID(NameCallback);
   }
@@ -279,7 +278,7 @@ router.get('/return2main', (req, res, next) => {
 });
 
 //업데이트 파일 전송시 수행하는 모듈.
-router.post('/SWserver/metadata/APDUpdate', (req, res, next) => {
+router.post('/swserver/metadata/apdupdate', (req, res, next) => {
   winston.log('info', "update file recieved");
   fs.readFile(req.files.uploadFile.path, (error, data) => {
     var filePath = __dirname + "\\files\\" + req.files.uploadFile.name;

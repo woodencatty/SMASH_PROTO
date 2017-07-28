@@ -50,34 +50,26 @@ function stopSense() {
     this.SensorInterval = null;
   }
 }
-console.log('1');
 function initialize() {
-  console.log('2');
 
   fs.readFile('./config', 'utf8', function (err, data) {
-    console.log('3');
 
     //저장한 활동량 로그에서 데이터를 읽어 전송한다.
     var config = JSON.parse(data);
-    console.log('5');
 
     session.setupSettings(config.serverIP, config.deviceName, config.version);
-    console.log('6');
 
     sensor.setInterval(config.dhtinterval, config.distinterval, config.audiointerval, config.envinterval, config.lgtinterval, config.ledinterval);
-    console.log('7');
 
     SWserver.setIP(config.SWserverIPv4,config.port);
 
 this.statusInterval = setInterval(() => {
-  console.log('8');
 
   acturator.led_normal();
 }, config.ledinterval);
 
 
   });
-  console.log('4');
 
   session.clearSession();
   bluetooth.resetBLE();
@@ -98,7 +90,7 @@ let poster = '/images/SCAN_20170717_120222551.jpg'
         res.redirect('/main');
       } else {
         SensorDataCallback = (patientDetected, temperature, humidity, audio, envelope, light) => {
-          res.render('index_not_opened', { title: '대기화면', temp: temperature, humi: humidity, poseter:poseter });
+          res.render('index_not_opened', { title: '대기화면', temp: temperature, humi: humidity, poster:poster });
         }
         sensor.getData(SensorDataCallback);
       }
@@ -128,7 +120,7 @@ router.get('/main', (req, res, next) => {
             stopSense();
             res.redirect('/try');
           } else {
-            res.render('index', { title: '대기화면', temp: temperature, humi: humidity,  poseter:poseter, sunny:sunny});
+            res.render('index', { title: '대기화면', temp: temperature, humi: humidity,  poster:poster, sunny:sunny});
           }
         }
         sensor.getData(SensorDataCallback);
@@ -144,10 +136,10 @@ router.get('/main', (req, res, next) => {
 
 //운동 권유 화면 
 router.get('/try', (req, res, next) => {
-   let pause = '/images/세부소스/버튼/뒤로-다운.png';
+   let back = '/images/세부소스/버튼/뒤로-다운.png';
   let foward = '/images/세부소스/버튼/앞으로-다운.png';
   console.log("Directed to try Page");
-  res.render('try',  {pause:pause, foward:foward});
+  res.render('try',  {back:back, foward:foward});
 });
 
 //환자 인식 화면

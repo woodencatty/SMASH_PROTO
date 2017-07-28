@@ -25,44 +25,44 @@ let stepcount = 0;
 let serverIP = '127.0.0.1:';
 let serverPort = '60001';
 getUserInfoRequest = {														//GET요청 JSON데이터 정의
-	host: serverIP+serverPort,
-	port: 60001,
+	host: serverIP,
+	port: serverPort,
 	path: '/apd/userdata/userinfo',
 	method: 'GET'
 };
 
 
 getExerciseInfoRequest = {														//GET요청 JSON데이터 정의
-	host: serverIP+serverPort,
-	port: 60001,
+	host: serverIP,
+	port: serverPort,
 	path: '/apd/userdata/exercise',
 	method: 'GET'
 };
 
 getIsOpenedRequest = {														//GET요청 JSON데이터 정의
-	host: serverIP+serverPort,
-	port: 60001,
+	host: serverIP,
+	port: serverPort,
 	path: '/apd/metadata/isopen',
 	method: 'GET'
 };
 
 
 submitUserSteps = {														//POST요청 JSON데이터 정의
-	host: serverIP+serverPort,
-	port: 60001,
+	host: serverIP,
+	port: serverPort,
 	path: '/apd/userdata/usersteps',
 	method: 'POST'
 };
 
 submitDoneUserExercise = {														//POST요청 JSON데이터 정의
-	host: serverIP+serverPort,
-	port: 60001,
+	host: serverIP,
+	port: serverPort,
 	path: '/apd/userdata/exercise',
 	method: 'DELETE'
 };
 submitError = {														//POST요청 JSON데이터 정의
-	host: serverIP+serverPort,
-	port: 60001,
+	host: serverIP,
+	port: serverPort,
 	path: '/apd/metadata/error',
 	method: 'POST'
 };

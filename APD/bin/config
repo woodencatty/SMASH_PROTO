@@ -7,6 +7,6 @@
 "envinterval":1000,
 "lgtinterval":1000,
 "ledinterval":2000,
-    "SWserverIPv4":"127.0.0.1:",
+    "SWserverIPv4":"127.0.0.1",
     "port":"60001"
 }

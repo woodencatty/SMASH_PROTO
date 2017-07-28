@@ -51,10 +51,10 @@ function stopSense() {
   }
 }
 
-function initialize() {
+function initialize() {/*
   fs.readFile('./config', 'utf8', function (err, data) {
     //저장한 활동량 로그에서 데이터를 읽어 전송한다.
-  /*  var config = JSON.parse(data);
+    var config = JSON.parse(data);
     session.setupSettings(config.serverIP, config.deviceName, config.version);
     sensor.setInterval(config.dhtinterval, config.distinterval, config.audiointerval, config.envinterval, config.lgtinterval, config.ledinterval);
     SWserver.setIP(config.SWserverIPv4,config.port);
@@ -63,8 +63,8 @@ this.statusInterval = setInterval(() => {
   acturator.led_normal();
 }, config.ledinterval);
 
-*/
-  });
+
+  });*/
   session.clearSession();
   bluetooth.resetBLE();
   SWserver.clearSWserver();

@@ -170,8 +170,15 @@ module.exports = {
 				});
 			}
 		}
+try {
+   let req = http.request(getIsOpenedRequest, getIsOpenedcallback);	
+}
+catch (exception) {
+	console.log(exception);
+  
+}
 
-		let req = http.request(getIsOpenedRequest, getIsOpenedcallback);						//GET요청 전송
+							//GET요청 전송
 
 		req.setHeader("apd_id", ID);											//헤더에 요청 데이터 첨부
 

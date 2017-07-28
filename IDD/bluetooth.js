@@ -3,7 +3,7 @@ var fs = require('fs'); //파일 로드를 위한 함수
 
 
 //ID : P0001
-let name = 'P0001';
+let advertiseName = '';
 let serviceUuids = ['fff0']
 
 var PrimaryService = bleno.PrimaryService;
@@ -50,7 +50,7 @@ module.exports = {
       bleno.setServices(primaryService);
 
       if (state === 'poweredOn') {
-        bleno.startAdvertising(name, serviceUuids, (error) => {
+        bleno.startAdvertising(advertiseName, serviceUuids, (error) => {
           console.log(error);
         });
       } else {
@@ -69,5 +69,9 @@ module.exports = {
     bleno.on('rssiUpdate', (rssi) => {
       console.log('rssi update to : ' + rssi);
     });
+  }
+
+  setName: (deviceName){
+    advertiseName = deviceName;
   }
 }

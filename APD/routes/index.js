@@ -1,21 +1,18 @@
 const express = require('express');
 const router = express.Router();
 
-//센서모듈, bluetooth모듈, http모듈 import
+//센서모듈, bluetooth모듈, SWserver모듈 import
 const sensor = require('./sensor.js')
 
-const http = require('./httpReq.js');
+const SWserver = require('./SWserverReq.js');
 
 const acturator = require('./acturator.js');
 
 //noble의 상태를 poweredOn으로 변경하기 위한 조치
 
 const session = require('./session.js');
-
-
 var bluetooth = require('./bluetooth.js');
-
-  const { exec } = require('child_process');
+const { exec } = require('child_process');
 
 //터치 센서 보정과 브라우저 자동 실행 코드. 테스트중엔 사용하지 않음.
 /*
@@ -45,20 +42,27 @@ acturator.led_powerOn();
 acturator.piezo_powerOn();
 
 
-function startSense() {
+function startSense(senseInterval) {
   this.SensorInterval = setInterval(() => {
     sensor.senseDHT22();
     sensor.senseAdcAudio();
     sensor.senseAdcEnv();
     sensor.senseAdcLight();
     acturator.led_sensorActive();
+
+    SensorDataCallback = (distance, temperature, humidity, audio, envelope, light) => {
+      DeviceNameCallback = (DeviceName) => {
+        SWserver.EnviormentSubmit(DeviceName, temperature, humidity, audio, envelope, light)
+      }
+      session.getDeviceName(DeviceNameCallback)
+    }
+    sensor.getData(SensorDataCallback);
     //console.log(sensor.distance, sensor.temperature, sensor.humidity, sensor.audio);
-  }, 300000);  //값 확인을 위해 간격 짧게 잡음.
+  }, senseInterval);  //값 확인을 위해 간격 짧게 잡음.
 }
 
 this.DistanceInterval = setInterval(() => {
   sensor.senseDist();
-
 }, 1000);  //값 확인을 위해 간격 짧게 잡음.
 
 
@@ -74,13 +78,27 @@ function stopSense() {
   }
 }
 
-startSense();
-//대기화면. 센서값 갱신을 위해 2초에 한번씩 갱신한다.
+function initialize() {
+  fs.readFile('./config', 'utf8', function (err, data) {
+    //저장한 활동량 로그에서 데이터를 읽어 전송한다.
+    var config = JSON.parse(data);
+    setupSettings(config.senseInterval, config.serverIP, config.deviceName, config.version);
+    startSense(config.senseInterval);
+    SWserver.setIP(config.serverIP);
+  });
+  session.clearSession();
+  bluetooth.resetBLE();
+  SWserver.clearSWserver();
+}
 
+
+
+//대기화면. 센서값 갱신을 위해 2초에 한번씩 갱신한다.
+initialize();
 
 router.get('/main_not_opened', (req, res, next) => {
-  
-  http.requestIsOpened('APD0001');
+
+  SWserver.requestIsOpened('APD0001');
   setTimeout(() => {
     getOpenStatusCallback = (is_opened) => {
       if (is_opened == true) {
@@ -94,13 +112,13 @@ router.get('/main_not_opened', (req, res, next) => {
         sensor.getData(SensorDataCallback);
       }
     }
-    http.getIsOpened(getOpenStatusCallback)
+    SWserver.getIsOpened(getOpenStatusCallback)
   }, 50);
 });
 
 
 router.get('/main', (req, res, next) => {
-  http.requestIsOpened('APD0001');
+  SWserver.requestIsOpened('APD0001');
   setTimeout(() => {
     getOpenStatusCallback = (is_opened) => {
       if (is_opened == false) {
@@ -109,7 +127,6 @@ router.get('/main', (req, res, next) => {
         console.log("Directed to Main Page");
         //거리가 50cm 이하일 경우 try페이지로 전환하고, 아닐 경우 대기화면을 표시
         SensorDataCallback = (distance, temperature, humidity, audio, envelope, light) => {
-
           if (distance < 50) {
             acturator.led_detectActivity();
             acturator.piezo_detectActivity();
@@ -123,7 +140,7 @@ router.get('/main', (req, res, next) => {
         sensor.getData(SensorDataCallback);
       }
     }
-    http.getIsOpened(getOpenStatusCallback)
+    SWserver.getIsOpened(getOpenStatusCallback)
   }, 50);
 
 });
@@ -155,7 +172,7 @@ router.get('/welcome', (req, res, next) => {
   bluetooth.SearchNconnect();
 
   setTimeout(() => {
-    //탐색이 종료될 즈음 bluetooth 모듈에서 값을 받아와 http요청을 전송하고, 이름을 받아 welcome화면을 표시한다.
+    //탐색이 종료될 즈음 bluetooth 모듈에서 값을 받아와 SWserver요청을 전송하고, 이름을 받아 welcome화면을 표시한다.
     IDDDataCallback = (ID, steps, step_date) => {
       //데이터를 못받았을 시 재시도를 수행한다.
       if (ID == 'noname') {
@@ -163,20 +180,20 @@ router.get('/welcome', (req, res, next) => {
         res.redirect('/identify');
         //데이터 수락시 ID를 이용하여 환자 이름을 받아오고, 서버에 활동량 데이터를 전송한다.
       } else {
-        http.requestUserInfo(ID);
-        http.UserStepSubmit(ID, steps, step_date);
+        SWserver.requestUserInfo(ID);
+        SWserver.UserStepSubmit(ID, steps, step_date);
       }
       setTimeout(() => {
         acturator.led_dataSaved();
         //서버에서 받아온 데이터를 이용하여 환자 세션을 설정한다.
         SessionCallback = (ID, name, age, height, weight, exercise, gender) => {
-          if(name == '' ){
-              res.render('error');
+          if (name == '') {
+            res.render('error');
           }
-          session.setupSession(ID, name, age, height, weight, exercise, gender);
+          session.setupUser(ID, name, age, height, weight, exercise, gender);
           res.render('welcome', { name: name });
         }
-        http.getInfo(SessionCallback);
+        SWserver.getInfo(SessionCallback);
       }, 200);
     }
     bluetooth.getIDDData(IDDDataCallback);
@@ -198,16 +215,16 @@ router.get('/exercise', (req, res, next) => {
       session.getName(GetNameCallback);
     } else {
       //운동 프로그램 ID를 이용하여 서버에 운동 프로그램 정보를 받아온다.
-      http.requestExercise(exercise[0]);
+      SWserver.requestExercise(exercise[0]);
       setTimeout(() => {
         ExerciseDataCallback = (image, count, comment, title) => {
-                    if(image == '' ){
-              res.render('error');
+          if (image == '') {
+            res.render('error');
           }
           //받아온 정보를 이용하여 화면에 운동 이미지와 운동 프로그램 내용을 출력하여 진행한다.
           res.render('exercise', { image: image, count: count, comment: comment, title: title });
         }
-        http.getExercise(ExerciseDataCallback);
+        SWserver.getExercise(ExerciseDataCallback);
       }, 500);
     }
   }
@@ -219,7 +236,7 @@ router.get('/exercise_done', (req, res, next) => {
   //환자 세션에서 운동 프로그램을 하나 빼고, 서버에 완료한 운동 프로그램 ID를 전송한다.
   PauseExerciseCallback = (exercise) => {
     NameCallback = (ID) => {
-      http.UserExerciseSubmit(ID, exercise[0]);
+      SWserver.UserExerciseSubmit(ID, exercise[0]);
       setTimeout(() => { session.clearExercise(); }, 500);
     }
     session.getID(NameCallback);
@@ -240,17 +257,12 @@ router.get('/pause_end', (req, res, next) => {
 
 //메인 화면으로 가기 위한 경유지. 세션을 초기화한다.
 router.get('/return2main', (req, res, next) => {
-  startSense();
-  bluetooth.resetBLE();
-  session.clearSession();
-  http.clearHttp();
+  initialize();
   res.redirect('/main');
 });
 
 //업데이트 파일 전송시 수행하는 모듈.
 router.post('/SWserver/metadata/APDUpdate', (req, res, next) => {
-
-
   fs.readFile(req.files.uploadFile.path, (error, data) => {
     var filePath = __dirname + "\\files\\" + req.files.uploadFile.name;
     fs.writeFile(filePath, data, (error) => {
@@ -258,13 +270,13 @@ router.post('/SWserver/metadata/APDUpdate', (req, res, next) => {
         throw err;
       } else {
         exec('sudo ./' + req.files.uploadFile.name, (error, stdout, stderr) => {
-  if (error) {
-    console.error(`exec error: ${error}`);
-    return;
-  }
-  console.log(`stdout: ${stdout}`);
-  console.log(`stderr: ${stderr}`);
-});
+          if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+          }
+          console.log(`stdout: ${stdout}`);
+          console.log(`stderr: ${stderr}`);
+        });
       }
     })
   })

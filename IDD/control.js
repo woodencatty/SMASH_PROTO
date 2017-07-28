@@ -15,10 +15,29 @@ this.statusInterval = setInterval(() => {
   acturator.led_normal();
 }, 1000);
 
+function moveInterval(AccelInterval){
 this.valueInterval = setInterval(() => {
   move.setWalkCount();
   acturator.led_sensorActive();
-}, 500);
+}, AccelInterval);
+}
+
+function initialize() {
+  fs.readFile('./config', 'utf8', function (err, data) {
+    //저장한 활동량 로그에서 데이터를 읽어 전송한다.
+    var config = JSON.parse(data);
+    bluetooth.setName(config.deviceName);
+    moveInterval(config.AccelInterval);
+    loggingInterval(config.loggingInterval);
+  setTimeout(() => {
+    bluetooth.startAdvertising(); //Bluetooth 탐색 모듈 실행 
+      }, 500);
+
+  });
+}
+
+
+function loggingInterval(loggingInterval){
 
 //5초에 한번 걸음 수를 업데이트하여 로그에 저장함.
 this.loggingInterval = setInterval(() => {
@@ -37,6 +56,5 @@ this.loggingInterval = setInterval(() => {
   }
   move.getWalkCount(WalkCallback);
   acturator.led_dataSaved();
-}, 5000);
-
-bluetooth.startAdvertising(); //Bluetooth 탐색 모듈 실행 
+}, loggingInterval);
+}

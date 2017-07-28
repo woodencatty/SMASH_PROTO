@@ -29,9 +29,6 @@ function initialize() {
     bluetooth.setName(config.deviceName);
     moveInterval(config.AccelInterval);
     loggingInterval(config.loggingInterval);
-    setTimeout(() => {
-      bluetooth.startAdvertising(); //Bluetooth 탐색 모듈 실행 
-    }, 500);
 
   });
 }
@@ -58,3 +55,7 @@ function loggingInterval(loggingInterval) {
     acturator.led_dataSaved();
   }, loggingInterval);
 }
+
+    setTimeout(() => {
+            bluetooth.startAdvertising(); //Bluetooth 탐색 모듈 실행 
+    }, 500);

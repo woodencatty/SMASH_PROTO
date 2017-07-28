@@ -35,8 +35,11 @@ module.exports = {
     _Exercise.forEach(function(element) {
       if(element == 'done'){}else{      
         ExerciseCallback = (_image, _count, _comment, _title)=>{
-        exercise[i] = {image:_image, count:_count, comment:_comment, title:_title};
-        i++;
+            setTimeout(() => {
+
+        exercise[i] = {id:element, image:_image, count:_count, comment:_comment, title:_title};
+        i++;  }, 50);
+
       }
             SWserver.requestExercise(element, ExerciseCallback);}
 

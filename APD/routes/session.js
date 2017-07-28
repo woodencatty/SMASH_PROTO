@@ -33,9 +33,10 @@ module.exports = {
     exercise_done = _Exercise_done;
     stepcount = _Stepcount;
     _Exercise.forEach(function(element) {
-      if(element == 'done'){}else{      ExerciseCallback = (_image, _count, _comment, _title)=>{
-        exercise[i] = {id:element, image:_image, count:_count, comment:_comment, title:_title};
-        i++
+      if(element == 'done'){}else{      
+        ExerciseCallback = (_image, _count, _comment, _title)=>{
+        exercise[i] = {image:_image, count:_count, comment:_comment, title:_title};
+        i++;
       }
             SWserver.requestExercise(element, ExerciseCallback);}
 

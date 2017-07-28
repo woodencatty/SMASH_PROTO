@@ -50,21 +50,35 @@ function stopSense() {
     this.SensorInterval = null;
   }
 }
-/*
+console.log('1');
 function initialize() {
+  console.log('2');
+
   fs.readFile('./config', 'utf8', function (err, data) {
+    console.log('3');
+
     //저장한 활동량 로그에서 데이터를 읽어 전송한다.
     var config = JSON.parse(data);
+    console.log('5');
+
     session.setupSettings(config.serverIP, config.deviceName, config.version);
+    console.log('6');
+
     sensor.setInterval(config.dhtinterval, config.distinterval, config.audiointerval, config.envinterval, config.lgtinterval, config.ledinterval);
+    console.log('7');
+
     SWserver.setIP(config.SWserverIPv4,config.port);
 
 this.statusInterval = setInterval(() => {
+  console.log('8');
+
   acturator.led_normal();
 }, config.ledinterval);
 
 
   });
+  console.log('4');
+
   session.clearSession();
   bluetooth.resetBLE();
   SWserver.clearSWserver();
@@ -72,7 +86,7 @@ this.statusInterval = setInterval(() => {
 
 //대기화면. 센서값 갱신을 위해 2초에 한번씩 갱신한다.
 initialize();
-*/
+
 router.get('/main_not_opened', (req, res, next) => {
 let poster = '/images/SCAN_20170717_120222551.jpg'
 

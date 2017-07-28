@@ -173,7 +173,6 @@ router.get('/welcome', (req, res, next) => {
         //서버에서 받아온 데이터를 이용하여 환자 세션을 설정한다.
         SessionCallback = (ID, name, age, height, weight, exercise, gender) => {
           if(name == '' ){
-              res.status(err.status || 503);
               res.render('error');
           }
           session.setupSession(ID, name, age, height, weight, exercise, gender);
@@ -205,7 +204,6 @@ router.get('/exercise', (req, res, next) => {
       setTimeout(() => {
         ExerciseDataCallback = (image, count, comment, title) => {
                     if(image == '' ){
-              res.status(err.status || 503);
               res.render('error');
           }
           //받아온 정보를 이용하여 화면에 운동 이미지와 운동 프로그램 내용을 출력하여 진행한다.

@@ -2,8 +2,8 @@
     "version": 1.0,
     "deviceName": "P0001",
 
-    "serviceUuids": fff0,
-    "characteristicsUuids": fff1,
+    "serviceUuids": "fff0",
+    "characteristicsUuids": "fff1",
     "bluetoothDescription": "IDD",
 
 

@@ -2,6 +2,10 @@
 
 /* CSS Document */
 
+html { 
+          cursor: none; 
+	}
+
 body {
 	background-image: url(/images/전체배경_레이어_무지.png);
 	background-size: cover;

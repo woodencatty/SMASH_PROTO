@@ -32,7 +32,7 @@ function initialize() {
     moveInterval(config.AccelInterval, config.walkThreadhold, config.forceSenseTime);
     loggingInterval(config.loggingInterval, config.WalkDataFileName, config.fsOption);
      winston.level = config.loglevel;
-    bluetooth.startAdvertising(config.deviceName, config.serviceUuids, config.characteristicsUuids, config.bluetoothDescription, config.WalkDataFileName, config.fileFormat); //Bluetooth 탐색 모듈 실행 
+    bluetooth.startAdvertising(config.deviceName, config.bluetoothDescription, config.WalkDataFileName, config.fileFormat); //Bluetooth 탐색 모듈 실행 
   });
 }
 

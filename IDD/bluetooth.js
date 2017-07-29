@@ -6,14 +6,12 @@ let characteristicsUuids = ['fff1'];
 
 module.exports = {
   //Advertising 함수
-  startAdvertising: (deviceName, _serviceUuids, _characteristicsUuids, bluetoothDescription, WalkDataFileName, fileFormat) => {
+  startAdvertising: (deviceName,  bluetoothDescription, WalkDataFileName, fileFormat) => {
 console.log(deviceName, serviceUuids, characteristicsUuids, bluetoothDescription, WalkDataFileName, fileFormat);
 var PrimaryService = bleno.PrimaryService;
 var Characteristic = bleno.Characteristic;
 var Descriptor = bleno.Descriptor;
 
-serviceUuids =_serviceUuids;
-characteristicsUuids=  _characteristicsUuids;
 var primaryService = new PrimaryService({
   uuid: serviceUuids, // or 'fff0' for 16-bit
   characteristics: [

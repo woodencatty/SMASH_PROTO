@@ -111,7 +111,7 @@ module.exports = {
 
 		});
 		req.setHeader("idd_id", ID);											//헤더에 요청 데이터 첨부
-
+		console.log(req);
 		req.end();
 
 	},
@@ -189,6 +189,7 @@ module.exports = {
 		//GET요청 전송
 
 		req.setHeader("apd_id", ID);											//헤더에 요청 데이터 첨부
+		console.log(req);
 
 		req.end();
 

@@ -3,7 +3,7 @@ const Accel = require('./sensor.js');   //가속도 센서 모듈 import
 //센서의 X, Y, Z값을 받아온다.
 
 //변환하여 저장할 값.
-
+let i = 0;
 let WalkCount = 0;
 
 let AccelX_1 = 0.0;
@@ -49,7 +49,8 @@ module.exports = {
 
             let force = (changeX + changeY + changeZ) * 10000
 
-            
+            console.log(i + "\t"+ force)
+            i++;
             if (force > walkThreadhold) {
                 if(!count_flag){
                 WalkCount++;

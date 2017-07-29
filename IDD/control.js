@@ -57,7 +57,7 @@ function loggingInterval(loggingInterval, filename,fsOption) {
       });
       //bluetooth.SetStepValue(WalkCount);
     }
-    //move.getWalkCount(WalkCallback);
+    move.getWalkCount(WalkCallback);
   }, loggingInterval);
 }
 

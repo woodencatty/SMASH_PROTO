@@ -54,10 +54,11 @@ var primaryService = new PrimaryService({
       }
     });
     bleno.on('accept', (clientAddress) => {
-     acturator.piezo_connected();
-     acturator.led_connected();
     });
     bleno.on('disconnect', (clientAddress) => {
+      
+     acturator.piezo_connected();
+     acturator.led_connected();
     });
     bleno.on('rssiUpdate', (rssi) => {
     });

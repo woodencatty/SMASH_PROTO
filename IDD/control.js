@@ -13,25 +13,25 @@ let dateTime = new Date();
 acturator.led_powerOn();
 acturator.piezo_powerOn();
 
-/*
+
 function moveInterval(AccelInterval, walkThreadhold, forceSenseTime) {
   this.valueInterval = setInterval(() => {
     move.setWalkCount(walkThreadhold, forceSenseTime);
     acturator.led_sensorActive();
   }, AccelInterval);
-}*/
+}
 
 function initialize() {
              winston.log('debug', "IDD initialized");
   fs.readFile('./config', 'utf8', function (err, data) {
     //저장한 활동량 로그에서 데이터를 읽어 전송한다.
     var config = JSON.parse(data);
-/*
+
 this.statusInterval = setInterval(() => {
   acturator.led_normal();
 }, config.ledStatusInterval);
-*/
-   // moveInterval(config.AccelInterval, config.walkThreadhold, config.forceSenseTime);
+
+   moveInterval(config.AccelInterval, config.walkThreadhold, config.forceSenseTime);
     loggingInterval(config.loggingInterval, config.WalkDataFileName, config.fsOption);
      winston.level = config.loglevel;
     bluetooth.startAdvertising(config.deviceName, config.bluetoothDescription, config.WalkDataFileName, config.fileFormat); //Bluetooth 탐색 모듈 실행 
@@ -58,7 +58,7 @@ function loggingInterval(loggingInterval, filename,fsOption) {
       //bluetooth.SetStepValue(WalkCount);
     }
     move.getWalkCount(WalkCallback);
-  //  acturator.led_dataSaved();
+    acturator.led_dataSaved();
   }, loggingInterval);
 }
 

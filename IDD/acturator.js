@@ -55,15 +55,15 @@ module.exports = {
 
     
     piezo_connected: () => {
-        gpio.softToneWrite(piezo, 525);
+        gpio.softToneWrite(piezo, 990);
         setTimeout(() => {
-            gpio.softToneWrite(piezo, 525);
+            gpio.softToneWrite(piezo, 262);
             setTimeout(() => {
-                gpio.softToneWrite(piezo, 262);
+                gpio.softToneWrite(piezo, 990);
                 setTimeout(() => {
-                    gpio.softToneWrite(piezo, 700);
+                    gpio.softToneWrite(piezo, 262);
                     setTimeout(() => {
-                        gpio.softToneWrite(piezo, 990);
+                        gpio.softToneWrite(piezo, 262);
                         setTimeout(() => {
                         gpio.softToneWrite(piezo, 0);
                         }, 100);

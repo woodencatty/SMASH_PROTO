@@ -93,22 +93,13 @@ h4 {
 }
 
 .h_graph ul {
-			align-self: left;
-
-	margin: 0 0px 0 0px;
+	margin: 0 50px 0 50px;
 	padding: 1px 0 0 0;
-	border: 1px solid #ddd;
-	border-top: 0;
-	border-right: 0;
-	color: black;
-	font-size: 30px;
-	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 11px;
 	list-style: none
 }
 
 .h_graph li {
-			align-self: left;
-
 	position: relative;
 	margin: 10px 0;
 	vertical-align: top;
@@ -116,11 +107,11 @@ h4 {
 }
 
 .h_graph .g_term {
-			align-self: left;
-
-	position: absolute;
+	font-size: 30px;
+	text-align: right;
+	position: relative;
 	top: 0;
-	left: 0px;
+	left: -50px;
 	width: 40px;
 	font-weight: bold;
 	color: black;
@@ -129,22 +120,20 @@ h4 {
 }
 
 .h_graph .g_bar {
-		align-self: left;
 	display: inline-block;
-	position: relative;
+	position: absolute;
+	left: 10%;
 	height: 20px;
-	border: 1px solid #107636;
+	border: 1px solid #ccc;
 	border-left: 0;
 	background: #107636
 }
 
 .h_graph .g_bar span {
-			align-self: left;
-
 	position: absolute;
 	top: 0;
 	right: -50px;
 	width: 40px;
-	color: black;
+	color: #767676;
 	line-height: 20px
 }

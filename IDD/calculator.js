@@ -49,7 +49,6 @@ module.exports = {
 
             let force = (changeX + changeY + changeZ) * 10000
 
-            console.log(i + "\t"+ force)
             i++;
             if (force > walkThreadhold) {
                 if(!count_flag){

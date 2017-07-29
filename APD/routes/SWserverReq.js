@@ -23,7 +23,7 @@ let stepcount = 0;
 
 //서버 IP
 let serverIP = "192.9.44.52";
-let serverPort = "60001";
+let serverPort = "3000";
 
 getUserInfoRequest = {														//GET요청 JSON데이터 정의
 	host: serverIP,

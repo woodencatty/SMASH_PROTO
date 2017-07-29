@@ -93,6 +93,8 @@ h4 {
 }
 
 .h_graph ul {
+		text-align: left;
+
 	margin: 0 50px 0 50px;
 	padding: 1px 0 0 0;
 	font-size: 11px;
@@ -100,6 +102,8 @@ h4 {
 }
 
 .h_graph li {
+		text-align: left;
+
 	position: relative;
 	margin: 10px 0;
 	vertical-align: top;
@@ -108,21 +112,21 @@ h4 {
 
 .h_graph .g_term {
 	font-size: 30px;
-	text-align: right;
+	text-align: left;
 	position: relative;
+		left: 10%;
 	top: 0;
 	left: -50px;
 	width: 40px;
 	font-weight: bold;
 	color: black;
 	line-height: 20px;
-	text-align: right
 }
 
 .h_graph .g_bar {
 	display: inline-block;
 	position: absolute;
-	left: 10%;
+	left: 30%;
 	height: 20px;
 	border: 1px solid #ccc;
 	border-left: 0;

@@ -6,7 +6,7 @@ var fs = require('fs'); //파일 로드를 위한 함수
 module.exports = {
   //Advertising 함수
   startAdvertising: (deviceName, serviceUuids, characteristicsUuids, bluetoothDescription, WalkDataFileName, fileFormat) => {
-
+console.log(deviceName, serviceUuids, characteristicsUuids, bluetoothDescription, WalkDataFileName, fileFormat);
 var PrimaryService = bleno.PrimaryService;
 var Characteristic = bleno.Characteristic;
 var Descriptor = bleno.Descriptor;

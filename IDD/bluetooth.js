@@ -13,10 +13,10 @@ var Characteristic = bleno.Characteristic;
 var Descriptor = bleno.Descriptor;
 
 var primaryService = new PrimaryService({
-  uuid: serviceUuids, // or 'fff0' for 16-bit
+  uuid: ['fff0'], // or 'fff0' for 16-bit
   characteristics: [
     new Characteristic({
-      uuid: characteristicsUuids, // or 'fff1' for 16-bit
+      uuid: ['fff1'], // or 'fff1' for 16-bit
       properties: ['notify'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'  
       descriptor: [
         new Descriptor({
@@ -44,7 +44,7 @@ var primaryService = new PrimaryService({
     bleno.on('stateChange', function (state) {
       bleno.setServices(primaryService);
       if (state === 'poweredOn') {
-        bleno.startAdvertising(deviceName, serviceUuids, (error) => {
+        bleno.startAdvertising(deviceName, ['fff0'], (error) => {
         });
       } else {
         bleno.stopAdvertising();

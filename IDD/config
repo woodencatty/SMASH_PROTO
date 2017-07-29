@@ -5,7 +5,7 @@
     "bluetoothDescription": "IDD",
 
 
-    "AccelInterval": 20,
+    "AccelInterval": 100,
     "LoggingInterval": 5000,
     "ledStatusInterval": 1200,
 

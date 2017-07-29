@@ -73,13 +73,10 @@ let distanceDetect = 0;
         }
         if(distance < distanceDetect){
             detectCount++;
-            console.log('someone is  here' + distance);
             if(detectCount > 3){
                 patientDetected = true;
-                            console.log('ok,you are there' + distance);
             }
         }else {
-                        console.log('Nah, nvm.' + distance);
             detectCount = 0;
             patientDetected = false;}
 

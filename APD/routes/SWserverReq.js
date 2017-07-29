@@ -22,7 +22,7 @@ let exercise_done = 0;
 let stepcount = 0;
 
 //서버 IP
-let serverIP = "127.0.0.1";
+let serverIP = "192.9.44.52";
 let serverPort = "60001";
 
 getUserInfoRequest = {														//GET요청 JSON데이터 정의

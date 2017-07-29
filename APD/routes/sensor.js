@@ -62,7 +62,7 @@ let lgtinterval = 0;
         let travelTime = microt.now();
         distance = (travelTime - startTime) / 58;
 
-        if(distance < 50){
+        if(distance < 100){
             detectCount++;
             console.log('someone is  here');
             if(detectCount > 7){

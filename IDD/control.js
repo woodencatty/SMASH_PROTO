@@ -17,7 +17,6 @@ acturator.piezo_powerOn();
 function moveInterval(AccelInterval, walkThreadhold, forceSenseTime) {
   this.valueInterval = setInterval(() => {
     move.setWalkCount(walkThreadhold, forceSenseTime);
-    acturator.led_sensorActive();
   }, AccelInterval);
 }
 

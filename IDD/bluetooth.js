@@ -1,9 +1,6 @@
 var bleno = require('bleno'); // Bluetooth pheriphal 모듈
 var fs = require('fs'); //파일 로드를 위한 함수
 
-let serviceUuids = ['fff0'];
-let characteristicsUuids = ['fff1'];
-
 module.exports = {
   //Advertising 함수
   startAdvertising: (deviceName,  bluetoothDescription, WalkDataFileName, fileFormat) => {

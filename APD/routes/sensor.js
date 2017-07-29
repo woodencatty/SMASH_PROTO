@@ -64,13 +64,13 @@ let lgtinterval = 0;
 
         if(distance < 100){
             detectCount++;
-            console.log('someone is  here');
+            console.log('someone is  here' + distance);
             if(detectCount > 3){
                 patientDetected = true;
-                            console.log('ok,you are there');
+                            console.log('ok,you are there' + distance);
             }
         }else {
-                        console.log('Nah, nvm.');
+                        console.log('Nah, nvm.' + distance);
             detectCount = 0;
             patientDetected = false;}
 

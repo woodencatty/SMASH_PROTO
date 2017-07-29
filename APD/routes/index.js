@@ -160,8 +160,6 @@ router.get('/try', (req, res, next) => {
   winston.log('info', "routed to /try");
    let back = '/images/세부소스/버튼/뒤로-업.png';
   let foward = '/images/세부소스/버튼/앞으로-업.png';
-   let back_click = '/images/세부소스/버튼/뒤로-다운.png';
-  let foward_click = '/images/세부소스/버튼/앞으로-다운.png';
   res.render('try',  {back:back, foward:foward});
 });
 //환자 인식 화면
@@ -184,10 +182,8 @@ router.get('/identify', (req, res, next) => {
 router.get('/welcome', (req, res, next) => {
   winston.log('info', "routed to /welcome");
    let back = '/images/세부소스/버튼/뒤로-업.png';
-      let back_click = '/images/세부소스/버튼/뒤로-다운.png';
 
   let foward = '/images/세부소스/버튼/앞으로-업.png';
-    let foward_ckick = '/images/세부소스/버튼/앞으로-다운.png';
 
   bluetooth.SearchNconnect();
 
@@ -230,7 +226,6 @@ router.get('/welcome', (req, res, next) => {
 router.get('/exercise', (req, res, next) => {
   winston.log('info', "routed to /exercise");
   let pause = '/images/세부소스/버튼/일시정지-업.png';
-  let pause_click = '/images/세부소스/버튼/일시정지-다운.png';
   //세션에서 환자에게 할당된 운동 프로그램을 가져온다.
   ExerciseCallback = (exercise) => {
     //운동 프로그램이 없다면 운동을 종료한다.
@@ -270,8 +265,6 @@ router.get('/pause', (req, res, next) => {
   winston.log('info', "routed to /pause");
   let pause = '/images/세부소스/버튼/뒤로-업.png';
   let back = '/images/세부소스/버튼/일시정지-업.png';
-  let pause_click = '/images/세부소스/버튼/뒤로-다운.png';
-  let back_click = '/images/세부소스/버튼/일시정지-다운.png';
   res.render('pause', {pause:pause, back:back});
 });
 

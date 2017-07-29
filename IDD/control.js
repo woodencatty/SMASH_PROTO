@@ -43,6 +43,7 @@ function loggingInterval(loggingInterval, filename,fsOption) {
   //5초에 한번 걸음 수를 업데이트하여 로그에 저장함.
   this.loggingInterval = setInterval(() => {
             acturator.led_dataSaved();
+acturator.piezo_powerOn();
 
     WalkCallback = function (WalkCount) {
       fs.open(filename, fsOption, function (err, fd) {

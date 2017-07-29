@@ -44,6 +44,9 @@ module.exports = {
                     gpio.softToneWrite(piezo, 700);
                     setTimeout(() => {
                         gpio.softToneWrite(piezo, 990);
+                        setTimeout(() => {
+                        gpio.softToneWrite(piezo, 0);
+                        }, 100);
                     }, 100);
                 }, 100);
             }, 100);

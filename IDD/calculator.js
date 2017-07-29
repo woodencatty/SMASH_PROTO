@@ -2,7 +2,6 @@ const Accel = require('./sensor.js');   //가속도 센서 모듈 import
 
 //센서의 X, Y, Z값을 받아온다.
 
-console.log('calculating..');
 //변환하여 저장할 값.
 
 let WalkCount = 0;

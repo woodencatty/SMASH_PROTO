@@ -154,7 +154,7 @@ module.exports = {
 
 	},
 
-	requestIsOpened: (ID) => {console.log(serverIP);
+	requestIsOpened: (ID) => {console.log(serverIP + serverPort);
 		//요청 데이터 수신 콜백함수
 		getIsOpenedcallback = function (response) {
 
@@ -189,7 +189,6 @@ module.exports = {
 		//GET요청 전송
 
 		req.setHeader("apd_id", ID);											//헤더에 요청 데이터 첨부
-		console.log(req);
 
 		req.end();
 

@@ -10,8 +10,6 @@ require('date-utils');
 
 let dateTime = new Date();
 
-acturator.led_powerOn();
-acturator.piezo_powerOn();
 
 
 function moveInterval(AccelInterval, walkThreadhold, forceSenseTime) {
@@ -29,6 +27,9 @@ function initialize() {
 
 this.statusInterval = setInterval(() => {
   acturator.led_normal();
+  
+acturator.led_powerOn();
+acturator.piezo_powerOn();
 }, config.ledStatusInterval);
 
     moveInterval(config.AccelInterval, config.walkThreadhold, config.forceSenseTime);

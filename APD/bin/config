@@ -18,7 +18,7 @@
     "distanceMax": 400,
     "distanceDetect": 50,
 
-    "SWserverIPv4": " 192.9.44.52",
+    "SWserverIPv4": "192.9.44.52",
     "SWserverIPv6": "0.0.0.0.0.0.1",
     "port":3000,
 

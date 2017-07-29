@@ -42,15 +42,15 @@ block content
         |  돌아가기
         |             &nbsp; &nbsp; &nbsp;운동하기
         br         
-        img(src='',id='back', height='113', onclick="button1_click();location.href='/return2main'")
+        img(src='',id='back', height='113', onclick="button1_click();")
         |  &nbsp; &nbsp; &nbsp;
         |         &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         |         
-        img(src='',id='foward', width='152', height='113', onclick="button2_click();location.href='/exercise'")
+        img(src='',id='foward', width='152', height='113', onclick="button2_click();")
 
       script(type='text/javascript').
-        function button1_click() {document.getElementById("back").src = "#{back_click}"}
-        function button2_click() {document.getElementById("foward").src = "#{foward_click}"}
+        function button1_click() {document.getElementById("back").src = "#{back_click}" setTimeout("location.href='/return2main'", 3000)}
+        function button2_click() {document.getElementById("foward").src = "#{foward_click}" setTimeout("location.href='/exercise'", 3000)}
         document.oncontextmenu=function(){return false;} // 우클릭 방지
         document.onselectstart=function(){return false;} // 드래그 방지 
         document.ondragstart=function(){return false;} // 선택 방지

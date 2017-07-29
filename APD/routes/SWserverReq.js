@@ -154,7 +154,7 @@ module.exports = {
 
 	},
 
-	requestIsOpened: (ID) => {console.log(IP);
+	requestIsOpened: (ID) => {console.log(serverIP);
 		//요청 데이터 수신 콜백함수
 		getIsOpenedcallback = function (response) {
 

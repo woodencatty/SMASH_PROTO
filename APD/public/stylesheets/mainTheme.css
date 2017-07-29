@@ -123,6 +123,7 @@ h4 {
 }
 
 .h_graph .g_bar {
+		align-self: left;
 	display: inline-block;
 	position: relative;
 	height: 20px;

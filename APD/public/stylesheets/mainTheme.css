@@ -143,5 +143,11 @@ h4 {
 	line-height: 20px
 }
 #back:active{
-	border:5px solid #107636
+	border:5px solid #FF0000
+}
+#foward:active{
+	border:5px solid #FF0000
+}
+#pause:active{
+	border:5px solid #FF0000
 }

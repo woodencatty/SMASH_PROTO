@@ -30,12 +30,14 @@ block content
         |  계속하기
         |             &nbsp; &nbsp; &nbsp;그만하기
         br         
-        img(src='',id='back', width='152', height='113', onclick="location.href='/exercise'")
+        img(src='',id='back', width='152', height='113', onclick="button1_click();location.href='/exercise'")
         |  &nbsp; &nbsp; &nbsp;
         |         &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         |         
-        img(src='',id='pause', width='152', height='113', onclick="location.href='/pause_end'")
+        img(src='',id='pause', width='152', height='113', onclick="button2_click();location.href='/pause_end'")
       script(type='text/javascript').
+        function button1_click() {document.getElementById("back").src = "#{back_click}"}
+        function button2_click() {document.getElementById("pause").src = "#{pause_click}"}
         document.oncontextmenu=function(){return false;} // 우클릭 방지
         document.onselectstart=function(){return false;} // 드래그 방지 
         document.ondragstart=function(){return false;} // 선택 방지

@@ -56,7 +56,6 @@ var primaryService = new PrimaryService({
     bleno.on('accept', (clientAddress) => {
     });
     bleno.on('disconnect', (clientAddress) => {
-      
      acturator.piezo_connected();
      acturator.led_connected();
     });

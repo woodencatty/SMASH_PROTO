@@ -24,13 +24,13 @@ module.exports = {
             setTimeout(() => {
                 setTimeout(() => {
                     gpio.digitalWrite(ledB, 0);
-                }, 50);
+                }, 100);
                 gpio.digitalWrite(ledG, 0);
                 gpio.digitalWrite(ledB, 1);
-            }, 50);
+            }, 100);
             gpio.digitalWrite(ledR, 0);
             gpio.digitalWrite(ledG, 1);
-        }, 50);
+        }, 100);
     },
 
     //전원 인가시 작동음
@@ -46,11 +46,11 @@ module.exports = {
                         gpio.softToneWrite(piezo, 990);
                         setTimeout(() => {
                             gpio.softToneStop(piezo);
-                        }, 50);
-                    }, 50);
-                }, 50);
-            }, 50);
-        }, 50);
+                        }, 100);
+                    }, 100);
+                }, 100);
+            }, 100);
+        }, 100);
     },
 
     
@@ -66,11 +66,11 @@ module.exports = {
                         gpio.softToneWrite(piezo, 990);
                         setTimeout(() => {
                             gpio.softToneStop(piezo);
-                        }, 50);
-                    }, 50);
-                }, 50);
-            }, 50);
-        }, 50);
+                        }, 100);
+                    }, 100);
+                }, 100);
+            }, 100);
+        }, 100);
     },
 
         led_connected: () => {
@@ -79,13 +79,13 @@ module.exports = {
             setTimeout(() => {
                 setTimeout(() => {
                     gpio.digitalWrite(ledB, 0);
-                }, 50);
+                }, 100);
                 gpio.digitalWrite(ledG, 0);
                 gpio.digitalWrite(ledB, 1);
-            }, 50);
+            }, 100);
             gpio.digitalWrite(ledR, 0);
             gpio.digitalWrite(ledG, 1);
-        }, 50);
+        }, 100);
     },
 
 
@@ -98,7 +98,7 @@ module.exports = {
 //데이터 저장시 작동LED
     led_dataSaved: () => {
         gpio.digitalWrite(ledR, 1);
-        setTimeout(() => { gpio.digitalWrite(ledR, 0); }, 1000);
+        setTimeout(() => { gpio.digitalWrite(ledR, 0); }, 100);
     },
     
 //평상시 작동 LED

@@ -101,7 +101,7 @@ let poster = '/images/SCAN_20170717_120222551.jpg'
   SWserver.requestIsOpened(DeviceName);
   setTimeout(() => {
     getOpenStatusCallback = (is_opened) => {
-      if (is_opened == true) {
+      if (is_opened) {
          winston.log('debug', "turn to Opened");
         res.redirect('/main');
       } else {
@@ -129,13 +129,13 @@ router.get('/main', (req, res, next) => {
   SWserver.requestIsOpened(DeviceName);
   setTimeout(() => {
     getOpenStatusCallback = (is_opened) => {
-      if (is_opened == false) {
+      if (!is_opened) {
          winston.log('debug', "turn to not Opened");
         res.redirect('/main_not_opened');
       } else {
         //거리가 50cm 이하일 경우 try페이지로 전환하고, 아닐 경우 대기화면을 표시
         SensorDataCallback = (patientDetected, temperature, humidity, audio, envelope, light) => {
-          if (patientDetected == true) {
+          if (patientDetected) {
             acturator.led_detectActivity();
             acturator.piezo_detectActivity();
             stopSense();

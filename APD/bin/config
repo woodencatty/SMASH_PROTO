@@ -20,6 +20,6 @@
     "SWserverIPv6": "0.0.0.0.0.0.1",
     "port": "60001",
 
-    "loglevel": "debug"
+    "loglevel": "error"
 
 }

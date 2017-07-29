@@ -7,9 +7,10 @@ block content
   
   p#ViewTimer
   img(src="",id='image' width='736', height='900', alt="muk-pa")
-  img(src="",id='pause', width='152', height='113', onclick="button1_click('hello');location.href='/pause'")
+  img(src="",id='pause', width='152', height='113', onclick="button_click();location.href='/pause'")
 
   script(type='text/javascript').
+    function button_click() {document.getElementById("pause").src = "#{pause_click}"}
     document.getElementById("title").innerHTML="#{title}"
     document.getElementById("comment").innerHTML="#{comment}"
     document.getElementById("image").src = "#{image}"

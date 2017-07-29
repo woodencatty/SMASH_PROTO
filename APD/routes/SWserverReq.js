@@ -22,8 +22,8 @@ let exercise_done = 0;
 let stepcount = 0;
 
 //서버 IP
-let serverIP = '127.0.0.1';
-let serverPort = '60001';
+let serverIP = "127.0.0.1";
+let serverPort = "60001";
 
 getUserInfoRequest = {														//GET요청 JSON데이터 정의
 	host: serverIP,
@@ -111,7 +111,6 @@ module.exports = {
 
 		});
 		req.setHeader("idd_id", ID);											//헤더에 요청 데이터 첨부
-		console.log(req);
 		req.end();
 
 	},
@@ -179,7 +178,7 @@ module.exports = {
 			}
 		}
 		let req = http.request(getIsOpenedRequest, getIsOpenedcallback);
-
+console.log(req);
 		req.on('error', function (error) {
 
 			console.log('관리서버와 연결할 수 없습니다.');								// 관리서버와 연결 불가능할 때에 오류 체크

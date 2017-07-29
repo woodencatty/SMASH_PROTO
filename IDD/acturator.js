@@ -79,7 +79,6 @@ module.exports = {
             setTimeout(() => {
                 setTimeout(() => {
                     gpio.digitalWrite(ledB, 0);
-                    gpio.digitalWrite(ledG, 1);
                 }, 50);
                 gpio.digitalWrite(ledG, 0);
                 gpio.digitalWrite(ledB, 1);
@@ -93,7 +92,7 @@ module.exports = {
 //센서 측정시 작동 LED
     led_sensorActive: () => {
         gpio.digitalWrite(ledB, 1);
-        setTimeout(() => { gpio.digitalWrite(ledB, 0); }, 10);
+        setTimeout(() => { gpio.digitalWrite(ledB, 0); }, 100);
     },
 
 //데이터 저장시 작동LED
@@ -105,7 +104,7 @@ module.exports = {
 //평상시 작동 LED
     led_normal: () => {
         gpio.digitalWrite(ledG, 1);
-        setTimeout(() => { gpio.digitalWrite(ledG, 0); }, 10);
+        setTimeout(() => { gpio.digitalWrite(ledG, 0); }, 100);
     }
 
 }

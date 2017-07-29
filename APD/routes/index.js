@@ -67,7 +67,7 @@ function initialize() {
 
     session.setupSettings(config.serverIP, config.port, config.deviceName, config.version);
 
-    sensor.setInterval(config.dhtinterval, config.distinterval, config.audiointerval, config.envinterval, config.lgtinterval, config.ledinterval);
+    sensor.setInterval(config.dhtinterval, config.distinterval,config.distanceMax, config.distanceDetect, config.audiointerval, config.envinterval, config.lgtinterval, config.ledinterval);
 
     SWserver.setIP(config.SWserverIPv4,config.port);
 

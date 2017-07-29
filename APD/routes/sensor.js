@@ -35,6 +35,9 @@ let audiointerval = 0;
 let envinterval = 0;
 let lgtinterval = 0;
 
+let distanceMax = 0;
+let distanceDetect = 0;
+
 
     function senseDHT(dhtinterval){
   this.DHT22Interval = setInterval(() => {
@@ -51,6 +54,8 @@ let lgtinterval = 0;
 
   this.distanceInterval = setInterval(() => {
  let pulse = 0;
+         let sensorValue = 0;
+
         gpio.digitalWrite(ultraTRIG, 0);
         sleep.msleep(2);
         gpio.digitalWrite(ultraTRIG, 1);
@@ -60,9 +65,13 @@ let lgtinterval = 0;
         let startTime = microt.now();
         while (gpio.digitalRead(ultraECHO) == 1);
         let travelTime = microt.now();
-        distance = (travelTime - startTime) / 58;
+        sensorValue = (travelTime - startTime) / 58;
 
-        if(distance < 100){
+
+        if(sensorValue < distanceMax){
+            distance = sensorValue;
+        }
+        if(distance < distanceDetect){
             detectCount++;
             console.log('someone is  here' + distance);
             if(detectCount > 3){
@@ -107,12 +116,14 @@ let lgtinterval = 0;
 
 module.exports = {
 
-    setInterval:(_dhtinterval, _distinterval, _audiointerval, _envinterval, _lgtinterval)=>{
+    setInterval:(_dhtinterval, _distinterval,_distanceMax, _distanceDetect, _audiointerval, _envinterval, _lgtinterval)=>{
 senseDHT(_dhtinterval);
 sensedist(_distinterval);
 senseaud(_audiointerval);
 senseenv(_envinterval);
 senselgt(_lgtinterval);
+distanceMax = _distanceMax;
+distanceDetect = _distanceDetect;
     },
 
 clearinterval:()=>{

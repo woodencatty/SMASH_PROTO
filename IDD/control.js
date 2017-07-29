@@ -29,7 +29,7 @@ function initialize() {
   fs.readFile('./config', 'utf8', function (err, data) {
     //저장한 활동량 로그에서 데이터를 읽어 전송한다.
     var config = JSON.parse(data);
-    moveInterval(config.AccelInterval, config.walkThreadhold, confing.forceSenseTime);
+    moveInterval(config.AccelInterval, config.walkThreadhold, config.forceSenseTime);
     loggingInterval(config.loggingInterval, config.WalkDataFileName, config.fsOption);
      winston.level = config.loglevel;
     bluetooth.startAdvertising(config.deviceName, config.serviceUuids, config.characteristicsUuids, config.bluetoothDescription, config.WalkDataFileName, config.fileFormat); //Bluetooth 탐색 모듈 실행 

@@ -15,7 +15,18 @@ block content
         |  #{exercise_done}%만큼 운동하셨고,
         |  #{stepcount}걸음 걸으셨어요!
         br
-        br          
+        br
+          .h_graph
+                ul
+                  li
+                    span.g_term 운동 프로그램 달성률
+                    span.g_bar(style='width:0%')
+                      span 0%
+                  |             
+                  li
+                    span.g_term 총 누적 걸음 수
+                    span.g_bar(style='width:20%')
+                      span 20%
         br          
         br  
         |  

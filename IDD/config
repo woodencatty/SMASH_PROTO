@@ -5,9 +5,10 @@
     "bluetoothDescription": "IDD",
 
 
-    "AccelInterval": 300,
+    "AccelInterval": 10,
     "LoggingInterval": 5000,
-    
+    "ledStatusInterval": 1200,
+
     "loglevel": "error",
     
     "WalkDataFileName": "./steps.log",

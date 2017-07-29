@@ -1,6 +1,8 @@
 var bleno = require('bleno'); // Bluetooth pheriphal 모듈
 var fs = require('fs'); //파일 로드를 위한 함수
 
+const acturator = require('./acturator.js');
+
 
 let name = 'P0001';
 let serviceUuids = ['fff0']
@@ -52,6 +54,8 @@ var primaryService = new PrimaryService({
       }
     });
     bleno.on('accept', (clientAddress) => {
+     acturator.piezo_connected();
+     acturator.led_connected();
     });
     bleno.on('disconnect', (clientAddress) => {
     });

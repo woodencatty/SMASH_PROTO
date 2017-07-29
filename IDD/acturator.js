@@ -54,6 +54,43 @@ module.exports = {
         }, 50);
     },
 
+    
+    piezo_connected: () => {
+        gpio.softToneWrite(piezo, 525);
+        setTimeout(() => {
+            gpio.softToneWrite(piezo, 525);
+            setTimeout(() => {
+                gpio.softToneWrite(piezo, 262);
+                setTimeout(() => {
+                    gpio.softToneWrite(piezo, 700);
+                    setTimeout(() => {
+                        gpio.softToneWrite(piezo, 990);
+                        setTimeout(() => {
+                            gpio.softToneStop(piezo);
+                        }, 50);
+                    }, 50);
+                }, 50);
+            }, 50);
+        }, 50);
+    },
+
+        led_connected: () => {
+        gpio.digitalWrite(ledR, 1);
+        setTimeout(() => {
+            setTimeout(() => {
+                setTimeout(() => {
+                    gpio.digitalWrite(ledB, 0);
+                    gpio.digitalWrite(ledG, 1);
+                }, 50);
+                gpio.digitalWrite(ledG, 0);
+                gpio.digitalWrite(ledB, 1);
+            }, 50);
+            gpio.digitalWrite(ledR, 0);
+            gpio.digitalWrite(ledG, 1);
+        }, 50);
+    },
+
+
 //센서 측정시 작동 LED
     led_sensorActive: () => {
         gpio.digitalWrite(ledB, 1);

@@ -13,9 +13,6 @@ let dateTime = new Date();
 acturator.led_powerOn();
 acturator.piezo_powerOn();
 
-this.statusInterval = setInterval(() => {
-  acturator.led_normal();
-}, 1000);
 
 function moveInterval(AccelInterval, walkThreadhold, forceSenseTime) {
   this.valueInterval = setInterval(() => {
@@ -29,6 +26,11 @@ function initialize() {
   fs.readFile('./config', 'utf8', function (err, data) {
     //저장한 활동량 로그에서 데이터를 읽어 전송한다.
     var config = JSON.parse(data);
+
+this.statusInterval = setInterval(() => {
+  acturator.led_normal();
+}, config.ledStatusInterval);
+
     moveInterval(config.AccelInterval, config.walkThreadhold, config.forceSenseTime);
     loggingInterval(config.loggingInterval, config.WalkDataFileName, config.fsOption);
      winston.level = config.loglevel;

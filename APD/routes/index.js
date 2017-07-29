@@ -57,8 +57,12 @@ function stopSense() {
 
 
 function initialize() {
-      winston.log('info', "Device Initialized");
+  
+  session.clearSession();
+  bluetooth.resetBLE();
+  SWserver.clearSWserver();
 
+      winston.log('info', "Device Initialized");
   fs.readFile('./config', 'utf8', function (err, data) {
       winston.log('debug', "config file read");
 
@@ -82,10 +86,6 @@ this.statusInterval = setInterval(() => {
 
 
   });
-
-  session.clearSession();
-  bluetooth.resetBLE();
-  SWserver.clearSWserver();
 }
 
 //대기화면. 센서값 갱신을 위해 2초에 한번씩 갱신한다.

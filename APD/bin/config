@@ -15,12 +15,12 @@
     "lgtinterval": 1000,
     "ledinterval": 2000,
 
-    "distanceMax": 2000,
+    "distanceMax": 400,
     "distanceDetect": 50,
 
     "SWserverIPv4": "127.0.0.1",
     "SWserverIPv6": "0.0.0.0.0.0.1",
-    "port": "60001",
+    "port": 60001,
 
     "loglevel": "error"
 

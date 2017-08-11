@@ -1,6 +1,6 @@
 # SMASH_PROTO
 
-Project SMASH - Pilot (DHT22, TSL2591, LIS3DH)(wiringPi, node.js)
+Project SMASH - Prototype (DHT22, TSL2591, LIS3DH)(wiringPi, node.js)
 
 This Pilot is starting test of SMASH project.
 
